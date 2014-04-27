@@ -8,45 +8,42 @@ $(document).ready(function(){
 		<div class="accordion-group">
 	  		<div class="accordion-heading">
 	    		<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseOne">
-	      			Collapsible Group Item #1
+	      			Casos Criminales
 	    		</a>
 	  		</div>
 		  	<div id="collapseOne" class="accordion-body collapse" style="height: 0px;">
 		    	<div class="accordion-inner">
-		     		Crear
+		     		Crear Caso Criminal
 		    	</div>
 		    	<div class="accordion-inner">
-		     		Buscar
+		     		Buscar Caso Criminal
 		    	</div>
 		  	</div>
 		</div>
 		<div class="accordion-group">
 	  		<div class="accordion-heading">
 	    		<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseTwo">
-	      			Collapsible Group Item #2
+	      			Personal Policial
 	    		</a>
 	  		</div>
 	  		<div id="collapseTwo" class="accordion-body collapse" style="height: 0px;">
 	    		<div class="accordion-inner">
-	      			Crear 
-	    		</div>
-	    		<div class="accordion-inner">
-	      			Buscar 
+	      			Buscar Personal Policial 
 	    		</div>
 	  		</div>
 		</div>
 		<div class="accordion-group">
 	  		<div class="accordion-heading">
 	    		<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseThree">
-	      			Collapsible Group Item #3
+	      			Puntos de Acopio
 	    		</a>
 	  		</div>
 	  		<div id="collapseThree" class="accordion-body collapse" style="height: 0px;">
 	      		<div class="accordion-inner">
-		     		Crear
+		     		Crear Punto de Acopio
 		    	</div>
 		    	<div class="accordion-inner">
-		     		Buscar
+		     		Buscar Punto de Acopio
 		    	</div>
 	    	</div>
 	  	</div>

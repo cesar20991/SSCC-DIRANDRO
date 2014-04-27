@@ -103,7 +103,7 @@ $(document).ready(function() {
 			$("#hdnCorreo").val($("#txtCorreo").val());
 			$("#hdnDni").val($("#txtDni").val());
 			
-			$("#formCrearUsuario").submit();
+			form.submit();
 		}
 	});
 });
@@ -241,8 +241,7 @@ $(document).ready(function() {
 		          		</label>
 		       		</div>
 		       		<div class="form-actions">
-			        	<button class="btn btn-success" id="btnGuardar"><i class="icon-ok icon-white"></i> Guardar Usuario</button>
-			            <!-- <span class="btn">Cancel</span> -->
+			        	<button class="btn btn-success" id="btnGuardar" type="submit"><i class="icon-ok icon-white"></i> Guardar Usuario</button>
 			        </div>  
 			</form:form>
 		</fieldset>
