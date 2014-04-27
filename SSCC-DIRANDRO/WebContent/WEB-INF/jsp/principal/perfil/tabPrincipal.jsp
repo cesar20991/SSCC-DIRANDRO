@@ -8,12 +8,14 @@
 </style>
 <script>
 $(document).ready(function(){
+
 	var idPerfil;
 	if($("#hdnIdPerfil").text() != ""){
 		idPerfil = $("#hdnIdPerfil").text();
 	}else{
 		idPerfil = '${pageContext.session.getAttribute("idPerfil")}';
 	}
+	
 		$.ajax({
 	 		url: 'getPerfil-'+idPerfil,
 	 		type: 'post',
@@ -41,6 +43,7 @@ $(document).ready(function(){
 	 			$("#hdrCargo").empty();
 	 			$("#spnNCarnet").empty();
 	 			$("#spnGrado").empty();
+	 			$("#spnRango").empty();
 	 				
 	 			$("#spnPrimerNombe").text(perfil.primerNombre);
 	 			$("#spnSegundoNombe").text(perfil.segundoNombre);
@@ -63,13 +66,25 @@ $(document).ready(function(){
 	 			}
 	 			if(perfil.entidadPerteneciente == 'D'){
 	 				$("#spnEntidad").text("DIRANDRO");
+		 			$("#spnCargo").text(perfil.cargo);
+		 			$("#hdrCargo").text(perfil.cargo);
 	 			}else if(perfil.entidadPerteneciente == 'M'){
 	 				$("#spnEntidad").text("Ministerio Público");
+	 				
+	 				$("#divCargo").hide();
+	 				$("#divGrado").hide();
+	 				$("#divCarnet").hide();
+	 				$("#divRango").hide();
+	 				$("#tdCargo").empty();
+	 				$("#tdCargo").append("Tipo Fiscal");
+	 				
+	 				$("#divFiscal").show();
+	 				$("#hdrCargo").text(perfil.tipoFiscal);
+	 				$("#spnTipoFiscal").text(perfil.tipoFiscal);
 	 			}
-	 			$("#spnCargo").text(perfil.cargo);
-	 			$("#hdrCargo").text(perfil.cargo);
 	 			$("#spnNCarnet").text(perfil.numeroDeCarnet);
 	 			$("#spnGrado").text(perfil.grado);
+	 			$("#spnRango").text(perfil.rango);
 	 		}
 	 	});
 });
@@ -95,24 +110,42 @@ $(document).ready(function(){
 	          		<div class="controls">
 	          			<span id="spnDni">&nbsp;</span>
 	          		</div>
-	       		</div>
+	       		</div>	       		
 	       		<div class="control-group">
+	          		<label class="control-label">Entidad: </label>
+	          		<div class="controls">
+	          			<span id="spnEntidad">&nbsp;</span>
+	          		</div>
+	       		</div> 
+	       		<div class="control-group" id="divRango">
+	          		<label class="control-label">Rango: </label>
+	          		<div class="controls">
+	          			<span id="spnRango">&nbsp;</span>
+	          		</div>
+	       		</div>
+	       		<div class="control-group" id="divCargo">
 	          		<label class="control-label">Cargo: </label>
 	          		<div class="controls">
 	          			<span id="spnCargo">&nbsp;</span>
 	          		</div>
 	       		</div> 
-	       		<div class="control-group">
+	       		<div class="control-group" id="divGrado">
 	          		<label class="control-label">Grado: </label>
 	          		<div class="controls">
 	          			<span id="spnGrado">&nbsp;</span>
 	          		</div>
 	       		</div>
-	       		<div class="control-group">
+	       		<div class="control-group" id="divCarnet">
 	          		<label class="control-label">Numero de Carnet: </label>
 	          		<div class="controls">
 	          			CIP N°<span id="spnNCarnet">&nbsp;</span>
 	          		</div>
+	       		</div>
+	       		<div class="control-group" id="divFiscal" style="display: none;">
+	          		<label class="control-label">Tipo Fiscal: </label>
+	          		<label class="controls">
+	          			<span id="spnTipoFiscal">&nbsp;</span>
+	          		</label>
 	       		</div>
 	       		<div class="control-group">
 	          		<label class="control-label">Telefono: </label>
@@ -131,13 +164,7 @@ $(document).ready(function(){
 	          		<div class="controls">
 	          			<span id="spnSexo">&nbsp;</span>
 	          		</div>
-	       		</div>
-	       		<div class="control-group">
-	          		<label class="control-label">Entidad: </label>
-	          		<div class="controls">
-	          			<span id="spnEntidad">&nbsp;</span>
-	          		</div>
-	       		</div>         
+	       		</div>        
 		</fieldset>
 	</form:form>
 </div>

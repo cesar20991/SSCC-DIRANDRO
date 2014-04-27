@@ -37,6 +37,7 @@
 <div class="container inner_content">
 				<c:forEach items="${perfilList}" var="perfil">
 					<span id="hdnIdPerfil" style="display: none;"><c:out value="${perfil.idPerfil}"/></span>
+					<span id="hdnEntidad" style="display: none;"><c:out value="${perfil.entidadPerteneciente}"/></span>
 				</c:forEach>
 	<section class="span9" style="margin-left: 80px;">
 		<table class="table table-bordered table-condensed">
@@ -47,7 +48,7 @@
 		            <td rowspan="4" align="center"><img src="img/skills.png" alt="logo" style="margin-bottom:7px; margin-top:7px;"/></td>
           		</tr>
 	          	<tr>
-            		<td>Cargo: </td>
+            		<td id="tdCargo">Cargo: </td>
 	            	<td><span id="hdrCargo">&nbsp;</span></td>
 	          	</tr>
        			<tr>

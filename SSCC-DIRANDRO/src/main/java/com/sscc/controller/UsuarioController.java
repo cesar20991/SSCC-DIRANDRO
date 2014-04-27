@@ -12,10 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.sscc.form.PerfilBean;
-import com.sscc.model.Perfil;
 import com.sscc.model.Usuario;
 import com.sscc.service.PerfilService;
 import com.sscc.service.UsuarioService;
@@ -60,21 +57,4 @@ public class UsuarioController {
 
 		return path;
 	}
-	
-	@RequestMapping(value = "crearUsuario", method = RequestMethod.POST)
-	//@ResponseBody
-	public String welcome(@ModelAttribute Perfil perfil, HttpServletRequest req, HttpSession session, Model model){
-		String path = "";
-		
-		String correo = req.getParameter("correo");
-		
-		PerfilBean pf = perfilServ.crearUsuario(perfil, correo);
-		List<PerfilBean> p = new ArrayList<PerfilBean>();
-		p.add(pf);
-		model.addAttribute("perfilList", p);
-		path = "principal/perfilPrincipal";
-
-		return path;
-	}
-
 }

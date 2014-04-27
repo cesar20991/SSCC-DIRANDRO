@@ -42,6 +42,8 @@ public class PerfilServiceImpl implements PerfilService {
 		pf.setNumeroDeCarnet(p.getNumeroDeCarnet());
 		pf.setGrado(p.getGrado());
 		pf.setCargo(p.getCargo());
+		pf.setRango(p.getRango());
+		pf.setTipoFiscal(p.getTipoFiscal());
 		
 		return pf;
 	}
@@ -53,6 +55,11 @@ public class PerfilServiceImpl implements PerfilService {
 		perfil.setEstado("habilitado");
 		DateUtil d = new DateUtil();
 		perfil.setFecCreacion(d.hoyTimestamp());
+
+		if(perfil.getEntidadPerteneciente().equals("M")){
+			perfil.setGrado("");
+		}
+		
 		em.persist(perfil);
 		
 		Usuario us = new Usuario();
@@ -76,6 +83,8 @@ public class PerfilServiceImpl implements PerfilService {
 		pf.setGrado(perfil.getGrado());
 		pf.setCargo(perfil.getCargo());
 		pf.setIdPerfil(perfil.getIdPerfil());
+		pf.setTipoFiscal(perfil.getTipoFiscal());
+		pf.setRango(perfil.getRango());
 		
 		return pf;
 	}

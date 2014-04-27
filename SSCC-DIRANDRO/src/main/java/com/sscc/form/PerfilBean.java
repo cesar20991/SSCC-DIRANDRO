@@ -27,6 +27,7 @@ public class PerfilBean {
 	private String grado;
 	private String cargo;
 	private String rango;
+	private String tipoFiscal;
 	
 	public Integer getIdUsuario() {
 		return idUsuario;
@@ -153,6 +154,12 @@ public class PerfilBean {
 	}
 	public void setRango(String rango) {
 		this.rango = rango;
+	}
+	public String getTipoFiscal() {
+		return tipoFiscal;
+	}
+	public void setTipoFiscal(String tipoFiscal) {
+		this.tipoFiscal = tipoFiscal;
 	}
 	
 }

@@ -52,6 +52,13 @@ $(document).on('click','#radioD', function(e){
 	$("#hrNCarnet").show();
 	$("#divFiscal").hide();
 	$("#hrFiscal").hide();
+	
+	$("#rangoOficial").prop("checked", true);
+	$("#chkFiscal").prop("checked", false);
+	$("#chkFiscalSup").prop("checked", false);
+	$("#sltcGrado").empty();
+	$("#sltcGrado").append('<option>Alfz. PNP</option><option>Tnte. PNP</option><option>Cap. PNP</option>'+
+			'<option>May. PNP</option><option>Cmdte PNP</option><option>Crnel PNP</option><option>Gral. PNP</option>');
 });
 
 $(document).on('click','#radioM', function(e){
@@ -65,13 +72,20 @@ $(document).on('click','#radioM', function(e){
 	$("#hrNCarnet").hide();
 	$("#divFiscal").show();
 	$("#hrFiscal").show();
+	
+	$("#rangoOficial").prop("checked", false);
+	$("#rangoSubOficial").prop("checked", false);
+	$("#chkFiscal").prop("checked", true);
 });
 
 /*$(document).on('click','#btnGuardar', function(e){
 	$("#formCrearUsuario").submit();
 });*/
 
-$(document).ready(function() { 
+$(document).ready(function() {
+	$("#chkFiscal").prop("checked", false);
+	$("#chkFiscalSup").prop("checked", false);
+	
 	$("#formCrearUsuario").validate({
 		rules:{
 			txtNumeroDeCarnet:  {required: true, number: true, minlength: 8, maxlength: 8},
@@ -106,7 +120,7 @@ $(document).ready(function() {
 <div class="container inner_content">
 	<section class="span9" style="margin-left: 80px;">
 		<fieldset class="well">
-			<form:form class="form-horizontal" id="formCrearUsuario" action="crearUsuario">
+			<form:form class="form-horizontal" id="formCrearUsuario" action="crearUsuario" commandName="perfil">
 		       	<legend><span class="colored">///</span> Datos Personales:</legend>
 		       		<div class="control-group">
 		          		<label class="control-label">Primer Nombre: </label>
@@ -155,10 +169,10 @@ $(document).ready(function() {
 		       		<div class="control-group" id="divFiscal" style="display: none;">
 		          		<label class="control-label">Tipo Fiscal: </label>
 		          		<label class="checkbox inline">
-		          			<input type="radio" name="rango" id="rangoOficial" value="Fiscal" checked>Fiscal
+		          			<input type="radio" name="tipoFiscal" id="chkFiscal" value="Fiscal" checked>Fiscal
 		          		</label>
 		          		<label class="checkbox inline">
-		          			<input type="radio" name="rango" id="rangoSubOficial" value="Fiscal Superior">Fiscal Superior
+		          			<input type="radio" name="tipoFiscal" id="chkFiscalSup" value="Fiscal Superior">Fiscal Superior
 		          		</label>
 		       		</div>
 		       		<hr id="hrFiscal" style="display: none;">
