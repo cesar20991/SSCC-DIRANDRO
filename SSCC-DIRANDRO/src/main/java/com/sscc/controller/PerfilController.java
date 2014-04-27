@@ -29,6 +29,7 @@ public class PerfilController {
 	@RequestMapping(value = "getPerfil-{idPerfil}", method = RequestMethod.POST)
 	@ResponseBody
 	public PerfilBean getAllAssetsPropertyAjax(@PathVariable("idPerfil") Integer idperfil){
+		//Changes by Ce
 		PerfilBean perfilbean = new PerfilBean();
 		perfilbean = perfilServ.getPerfil(idperfil);
 		return perfilbean;
