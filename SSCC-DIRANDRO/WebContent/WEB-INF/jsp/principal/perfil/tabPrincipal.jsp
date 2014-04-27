@@ -69,7 +69,7 @@ $(document).ready(function(){
 </script>
 <div id="divMostrarDatos">
 	<form:form class="form-horizontal">
-	   	<fieldset>
+	   	<fieldset><!--  -->
 	       	<legend><span class="span3"><span class="colored">///</span> Datos Personales:</span><span class="span2 offset3"><button class="btn btn-primary btn-small" type="button" ><i class="icon-edit"></i> Editar</button></span></legend>
 	       		<div class="control-group">
 	          		<label class="control-label">Nombres: </label>
