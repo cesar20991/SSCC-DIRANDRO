@@ -18,6 +18,9 @@ $(document).ready(function(){
 		    	<div class="accordion-inner">
 		     		Buscar Caso Criminal
 		    	</div>
+		    	<div class="accordion-inner">
+		     		Asignar Caso Criminal
+		    	</div>
 		  	</div>
 		</div>
 		<div class="accordion-group">
@@ -29,6 +32,9 @@ $(document).ready(function(){
 	  		<div id="collapseTwo" class="accordion-body collapse" style="height: 0px;">
 	    		<div class="accordion-inner">
 	      			Buscar Personal Policial 
+	    		</div>
+	    		<div class="accordion-inner">
+	      			Asignar Personal Policial 
 	    		</div>
 	  		</div>
 		</div>
@@ -44,6 +50,45 @@ $(document).ready(function(){
 		    	</div>
 		    	<div class="accordion-inner">
 		     		Buscar Punto de Acopio
+		    	</div>
+	    	</div>
+	  	</div>
+	  	<div class="accordion-group">
+	  		<div class="accordion-heading">
+	    		<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseFour">
+	      			Rutas
+	    		</a>
+	  		</div>
+	  		<div id="collapseFour" class="accordion-body collapse" style="height: 0px;">
+		    	<div class="accordion-inner">
+		     		Buscar Rutas
+		    	</div>
+	    	</div>
+	  	</div>
+	  	<div class="accordion-group">
+	  		<div class="accordion-heading">
+	    		<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseFive">
+	      			Sospechosos
+	    		</a>
+	  		</div>
+	  		<div id="collapseFive" class="accordion-body collapse" style="height: 0px;">
+		    	<div class="accordion-inner">
+		     		Crear Perfil de Sospechoso
+		    	</div>
+		    	<div class="accordion-inner">
+		     		Buscar Sospechosos
+		    	</div>
+	    	</div>
+	  	</div>
+	  	<div class="accordion-group">
+	  		<div class="accordion-heading">
+	    		<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseSix">
+	      			Graficos Estadisticos
+	    		</a>
+	  		</div>
+	  		<div id="collapseSix" class="accordion-body collapse" style="height: 0px;">
+		    	<div class="accordion-inner">
+		     		Consultar Graficos Estadisticos
 		    	</div>
 	    	</div>
 	  	</div>

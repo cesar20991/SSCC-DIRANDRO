@@ -38,7 +38,7 @@ public class UsuarioServiceImpl implements UsuarioService {
 			Usuario usu = (Usuario) qSesiones.getSingleResult();
 			session.setAttribute("idPerfil", usu.getPerfil().getIdPerfil());
 			session.setAttribute("grado", usu.getPerfil().getGrado());
-			session.setAttribute("nombreDeUuario", usu.getPerfil().getPrimerNombre()+" "+usu.getPerfil().getSegundoNombre()+" "+usu.getPerfil().getApeMaterno()+" "+usu.getPerfil().getApeMaterno());
+			session.setAttribute("nombreDeUuario", usu.getPerfil().getPrimerNombre()+" "+usu.getPerfil().getSegundoNombre()+" "+usu.getPerfil().getApePaterno()+" "+usu.getPerfil().getApeMaterno());
 			
 			result = true;
 

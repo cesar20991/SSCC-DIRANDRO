@@ -179,7 +179,11 @@ $(document).ready(function() {
 		       		<div class="control-group" id="divCargo">
 		          		<label class="control-label">Cargo: </label>
 		          		<div class="controls">
-		          			<input class="span2" type="text" name="cargo" data-rule-required="true" data-msg-required="*">
+		          			<select class="span2" name="cargo" data-rule-required="true" data-msg-required="*">
+		          				<option>Jefe de Unidad</option>
+		          				<option>Superior</option>
+		          				<option>Investigador</option>
+				            </select>
 		          		</div>
 		       		</div>
 		       		<hr id="hrCargo">
