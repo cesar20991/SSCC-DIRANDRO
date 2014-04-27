@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="utf-8">
-<title>SSCC - DIRANDRO - Principal</title>
+<title>SSCC - DIRANDRO - Crear Usuario</title>
 <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -34,11 +34,13 @@ $(document).on('click','#rangoOficial', function(e){
 	$("#sltcGrado").append('<option>Alfz. PNP</option><option>Tnte. PNP</option><option>Cap. PNP</option>'+
 			'<option>May. PNP</option><option>Cmdte PNP</option><option>Crnel PNP</option><option>Gral. PNP</option>');
 });
+
 $(document).on('click','#rangoSubOficial', function(e){
 	$("#sltcGrado").empty();
 	$("#sltcGrado").append('<option>SO3 PNP</option><option>SO2 PNP</option><option>SO1 PNP</option>'+
 	'<option>SOT3 PNP</option><option>SOT2 PNP</option><option>SOT1 PNP</option><option>SOB PNP</option><option>SOS PNP</option>');
 });
+
 $(document).on('click','#radioD', function(e){
 	$("#divCargo").show();
 	$("#divRango").show();
@@ -51,6 +53,7 @@ $(document).on('click','#radioD', function(e){
 	$("#divFiscal").hide();
 	$("#hrFiscal").hide();
 });
+
 $(document).on('click','#radioM', function(e){
 	$("#divCargo").hide();
 	$("#divRango").hide();
@@ -63,9 +66,11 @@ $(document).on('click','#radioM', function(e){
 	$("#divFiscal").show();
 	$("#hrFiscal").show();
 });
-$(document).on('click','#btnGuardar', function(e){
+
+/*$(document).on('click','#btnGuardar', function(e){
 	$("#formCrearUsuario").submit();
-});
+});*/
+
 $(document).ready(function() { 
 	$("#formCrearUsuario").validate({
 		rules:{
@@ -74,7 +79,7 @@ $(document).ready(function() {
 			txtDni: {required: true, number: true, minlength: 8, maxlength: 8}
 		},
 		messages:{
-			txtNumeroDeCarnet : "Solo Números",
+			txtNumeroDeCarnet : "Solo Números, con 8 digitos",
 			txtCorreo : "Debe ser un Correo Electronico",
 			txtDni : "Solo Números"
 		},
@@ -84,15 +89,7 @@ $(document).ready(function() {
 			$("#hdnCorreo").val($("#txtCorreo").val());
 			$("#hdnDni").val($("#txtDni").val());
 			
-			$.ajax({
-				url: 'ajaxCrearNuevoUsuario',
-				type: 'post',
-				dataType: 'json',
-				data:'',
-				success: function(bns){	
-					
-				}
-			});
+			$("#formCrearUsuario").submit();
 		}
 	});
 });
@@ -108,9 +105,9 @@ $(document).ready(function() {
 <!--/MENU-->
 <div class="container inner_content">
 	<section class="span9" style="margin-left: 80px;">
-		<form:form class="form-horizontal" id="formCrearUsuario">
-		   	<fieldset class="well">
-		       	<legend><span class="span3"><span class="colored">///</span> Datos Personales:</span></legend>
+		<fieldset class="well">
+			<form:form class="form-horizontal" id="formCrearUsuario" action="crearUsuario">
+		       	<legend><span class="colored">///</span> Datos Personales:</legend>
 		       		<div class="control-group">
 		          		<label class="control-label">Primer Nombre: </label>
 		          		<div class="controls">
@@ -230,11 +227,11 @@ $(document).ready(function() {
 		          		</label>
 		       		</div>
 		       		<div class="form-actions">
-			        	<span class="btn btn-success" id="btnGuardar"><i class="icon-ok icon-white"></i> Guardar Usuario</span>
+			        	<button class="btn btn-success" id="btnGuardar"><i class="icon-ok icon-white"></i> Guardar Usuario</button>
 			            <!-- <span class="btn">Cancel</span> -->
-			        </div>         
-			</fieldset>
-		</form:form>
+			        </div>  
+			</form:form>
+		</fieldset>
 	</section>
 </div>
 <!--/CENTRO-->

@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.sscc.form.PerfilBean;
 import com.sscc.model.Perfil;
 import com.sscc.model.Usuario;
+import com.sscc.util.DateUtil;
 
 @Service
 public class PerfilServiceImpl implements PerfilService {
@@ -41,6 +42,40 @@ public class PerfilServiceImpl implements PerfilService {
 		pf.setNumeroDeCarnet(p.getNumeroDeCarnet());
 		pf.setGrado(p.getGrado());
 		pf.setCargo(p.getCargo());
+		
+		return pf;
+	}
+
+	@Transactional
+	public PerfilBean crearUsuario(Perfil perfil, String correo) {
+		PerfilBean pf = new PerfilBean();
+		
+		perfil.setEstado("habilitado");
+		DateUtil d = new DateUtil();
+		perfil.setFecCreacion(d.hoyTimestamp());
+		em.persist(perfil);
+		
+		Usuario us = new Usuario();
+		us.setCorreoElectronico(correo);
+		us.setContrasena("pass");
+		us.setEstado("habilitado");
+		us.setFecCreacion(d.hoyTimestamp());
+		us.setPerfil(perfil);
+		em.persist(us);
+		
+		pf.setPrimerNombre(perfil.getPrimerNombre());
+		pf.setSegundoNombre(perfil.getSegundoNombre());
+		pf.setApePaterno(perfil.getApePaterno());
+		pf.setApeMaterno(perfil.getApeMaterno());
+		pf.setDni(perfil.getDni());
+		pf.setSexo(perfil.getSexo());
+		pf.setEntidadPerteneciente(perfil.getEntidadPerteneciente());
+		pf.setCorreoElectronico(us.getCorreoElectronico());
+		pf.setTelefono(perfil.getTelefono());
+		pf.setNumeroDeCarnet(perfil.getNumeroDeCarnet());
+		pf.setGrado(perfil.getGrado());
+		pf.setCargo(perfil.getCargo());
+		pf.setIdPerfil(perfil.getIdPerfil());
 		
 		return pf;
 	}

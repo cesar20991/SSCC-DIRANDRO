@@ -8,7 +8,12 @@
 </style>
 <script>
 $(document).ready(function(){
-	var idPerfil = '${pageContext.session.getAttribute("idPerfil")}';
+	var idPerfil;
+	if($("#hdnIdPerfil").text() != ""){
+		idPerfil = $("#hdnIdPerfil").text();
+	}else{
+		idPerfil = '${pageContext.session.getAttribute("idPerfil")}';
+	}
 		$.ajax({
 	 		url: 'getPerfil-'+idPerfil,
 	 		type: 'post',
@@ -35,6 +40,7 @@ $(document).ready(function(){
 	 			$("#spnCargo").empty();
 	 			$("#hdrCargo").empty();
 	 			$("#spnNCarnet").empty();
+	 			$("#spnGrado").empty();
 	 				
 	 			$("#spnPrimerNombe").text(perfil.primerNombre);
 	 			$("#spnSegundoNombe").text(perfil.segundoNombre);
@@ -47,8 +53,8 @@ $(document).ready(function(){
 	 			$("#spnDni").text(perfil.dni);
 	 			$("#hdrDni").text(perfil.dni);
 	 			$("#spnTelefono").text(perfil.telefono);
-	 			$("#spnCorreo").text(perfil.email);
-	 			$("#hdrCorreo").text(perfil.email);
+	 			$("#spnCorreo").text(perfil.correoElectronico);
+	 			$("#hdrCorreo").text(perfil.correoElectronico);
 	 			$("#spnFecNac").text(perfil.fecNacimiento);
 	 			if(perfil.sexo == 'M'){
 	 				$("#spnSexo").text('Masculino');
@@ -60,9 +66,10 @@ $(document).ready(function(){
 	 			}else if(perfil.entidadPerteneciente == 'M'){
 	 				$("#spnEntidad").text("Ministerio Público");
 	 			}
-	 			$("#spnCargo").text(perfil.Cargo);
-	 			$("#hdrCargo").text(perfil.Cargo);
+	 			$("#spnCargo").text(perfil.cargo);
+	 			$("#hdrCargo").text(perfil.cargo);
 	 			$("#spnNCarnet").text(perfil.numeroDeCarnet);
+	 			$("#spnGrado").text(perfil.grado);
 	 		}
 	 	});
 });

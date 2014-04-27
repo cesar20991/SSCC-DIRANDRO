@@ -11,6 +11,12 @@ $(document).ready(function(){
 			$("#titulo").empty();
 			$("#titulo").append('<h1><span class="colored">///</span> Perfil</h1>');
 		break;
+		case 'usuarioNuevo':
+			$("#rowWelcome").removeClass('welcome');
+			$("#rowWelcome").addClass('welcome_inner');
+			$("#titulo").empty();
+			$("#titulo").append('<h1><span class="colored">///</span> Crear Usuario</h1>');
+		break;
 	}
 });
 </script>
