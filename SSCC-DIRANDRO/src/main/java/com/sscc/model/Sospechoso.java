@@ -125,12 +125,6 @@ public class Sospechoso {
 	public void setGradoDeInstruccion(String gradoDeInstruccion) {
 		this.gradoDeInstruccion = gradoDeInstruccion;
 	}
-	public String getEstadoSoltero() {
-		return estadoSoltero;
-	}
-	public void setEstadoSoltero(String estadoSoltero) {
-		this.estadoSoltero = estadoSoltero;
-	}
 	public Double getEstatura() {
 		return estatura;
 	}
@@ -196,5 +190,11 @@ public class Sospechoso {
 	}
 	public void setMultasElectorales(Integer multasElectorales) {
 		this.multasElectorales = multasElectorales;
+	}
+	public String getEstadoCivil() {
+		return estadoCivil;
+	}
+	public void setEstadoCivil(String estadoCivil) {
+		this.estadoCivil = estadoCivil;
 	}
 }
