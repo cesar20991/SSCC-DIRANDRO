@@ -73,7 +73,7 @@ $(document).ready(function(){
 	  		</div>
 	  		<div id="collapseFive" class="accordion-body collapse" style="height: 0px;">
 		    	<div class="accordion-inner">
-		     		Crear Perfil de Sospechoso
+		     		<a href="toCrearSospechoso">Crear Perfil de Sospechoso</a>
 		    	</div>
 		    	<div class="accordion-inner">
 		     		Buscar Sospechosos
