@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="utf-8">
-<title>SSCC - DIRANDRO - Crear Usuario</title>
+<title>SSCC - DIRANDRO - Crear Sospechoso</title>
 <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -29,7 +29,48 @@
 }
 </style>
 <script>
-
+$(document).ready(function() {
+	$("#formCrearSospechoso").validate({
+		rules:{
+			txtFecNac: {date: true},
+			txtEstatura: {number: true},
+			txtInscripcion: {date: true},
+			txtEmision: {date: true},
+		},
+		messages:{
+			txtFecNac: "Debe tener formato de fecha dd/mm/aaaa",
+			txtEstatura: "Solo números",
+			txtInscripcion: "Debe tener formato de fecha dd/mm/aaaa",
+			txtEmision: "Debe tener formato de fecha dd/mm/aaaa",
+		},
+		submitHandler: function(form){
+			//Se usa 1000-12-12 para que pase de la vista al controlador
+			//y en el implements se seteara como null.
+			if($("#hdnFecNac").val() == ''){
+				$("#hdnFecNac").val('1000-12-12');
+			}else{
+				$("#hdnFecNac").val($("#txtFecNac").val());
+			}
+			
+			if($("#hdnFecIns").val() == ''){
+				$("#hdnFecIns").val('1000-12-12');
+			}else{
+				$("#hdnFecIns").val($("#txtInscripcion").val());
+			}
+			
+			$("#hdnEstatura").val($("#txtEstatura").val());
+			
+			if($("#hdnFecEmi").val() == ''){
+				$("#hdnFecEmi").val('1000-12-12');
+			}else{
+				$("#hdnFecEmi").val($("#txtEmision").val());
+			}
+			//$("#hdnFecEmi").val($("#txtEmision").val());
+			
+			form.submit();
+		}
+	});
+});
 </script>
 </head>
 <body>
@@ -43,7 +84,7 @@
 <div class="container inner_content">
 	<section class="span9" style="margin-left: 80px;">
 		<fieldset class="well">
-			<form:form class="form-horizontal" id="formCrearUsuario" action="crearUsuario" commandName="perfil">
+			<form:form class="form-horizontal" id="formCrearSospechoso" action="crearSospechoso" commandName="sospechoso">
 		       	<legend><span class="colored">///</span> Datos Personales del Sospechoso:</legend>
 		       		<div class="control-group">
 		          		<label class="control-label">Código Único de Identificación: </label>
@@ -62,7 +103,7 @@
 		       		<div class="control-group">
 		          		<label class="control-label">Segundo Apellido: </label>
 		          		<div class="controls">
-		          			<input class="span2" type="text" name="segundoApellido">
+		          			<input class="span2" type="text" name="segundoApellido" data-rule-required="true" data-msg-required="*">
 		          		</div>
 		       		</div>
 		       		<hr>
@@ -75,144 +116,6 @@
 		       		<hr>
 		       		<div class="control-group">
 		          		<label class="control-label">Sexo: </label>
-		          		<div class="controls">
-		          			<input class="span2" type="text" name="sexo" data-rule-required="true" data-msg-required="*">
-		          		</div>
-		       		</div>
-		       		<hr>
-		       		<div class="control-group">
-		          		<label class="control-label">Fecha de Nacimiento: </label>
-		          		<div class="controls">
-		          			<input class="span2" type="text" name="fechaDeNacimiento" data-rule-required="true" data-msg-required="*">
-		          		</div>
-		       		</div>
-		       		<hr>
-		       		<div class="control-group">
-		          		<label class="control-label">Departamento de Nacimiento: </label>
-		          		<div class="controls">
-		          			<input class="span2" type="text" name="departamentoDeNacimiento" data-rule-required="true" data-msg-required="*">
-		          		</div>
-		       		</div>
-		       		<hr>
-		       		<hr>
-		       		<div class="control-group">
-		          		<label class="control-label">Provincia de Nacimiento: </label>
-		          		<div class="controls">
-		          			<input class="span2" type="text" name="provinciaDeNacimiento" data-rule-required="true" data-msg-required="*">
-		          		</div>
-		       		</div>
-		       		<hr>
-		       		<div class="control-group">
-		          		<label class="control-label">Distrito de Nacimiento: </label>
-		          		<div class="controls">
-		          			<input class="span2" type="text" name="distritoDeNacimiento" data-rule-required="true" data-msg-required="*">
-		          		</div>
-		       		</div>
-		       		<hr>
-		       		<div class="control-group">
-		          		<label class="control-label">Grado de Instrucción: </label>
-		          		<div class="controls">
-		          			<input class="span2" type="text" name="gradoDeInstruccion" data-rule-required="true" data-msg-required="*">
-		          		</div>
-		       		</div>
-		       		<hr>
-		       		<div class="control-group">
-		          		<label class="control-label">Estado Civil: </label>
-		          		<div class="controls">
-		          			<input class="span2" type="text" name="estadoCivil" data-rule-required="true" data-msg-required="*">
-		          		</div>
-		       		</div>
-		       		<hr>
-		       		
-		       		<div class="control-group">
-		          		<label class="control-label">DNI: </label>
-		          		<div class="controls">
-		          			<input class="span2" type="text" name="txtDni" id="txtDni">
-		          			<input class="span2" type="hidden" name="dni" id="hdnDni">
-		          		</div>
-		       		</div>
-		       		<hr>
-		       		<div class="control-group">
-		          		<label class="control-label">Entidad: </label>
-		          		<label class="checkbox inline">
-		          			<input type="radio" name="entidadPerteneciente" id="radioD" value="D" checked>DIRANDRO
-		          		</label>
-		          		<label class="checkbox inline">
-		          			<input type="radio" name="entidadPerteneciente" id="radioM" value="M">Ministerio Público
-		          		</label>
-		       		</div>
-		       		<hr>
-		       		<div class="control-group" id="divFiscal" style="display: none;">
-		          		<label class="control-label">Tipo Fiscal: </label>
-		          		<label class="checkbox inline">
-		          			<input type="radio" name="tipoFiscal" id="chkFiscal" value="Fiscal" checked>Fiscal
-		          		</label>
-		          		<label class="checkbox inline">
-		          			<input type="radio" name="tipoFiscal" id="chkFiscalSup" value="Fiscal Superior">Fiscal Superior
-		          		</label>
-		       		</div>
-		       		<hr id="hrFiscal" style="display: none;">
-		       		<div class="control-group" id="divCargo">
-		          		<label class="control-label">Cargo: </label>
-		          		<div class="controls">
-		          			<select class="span2" name="cargo" data-rule-required="true" data-msg-required="*">
-		          				<option>Jefe de Unidad</option>
-		          				<option>Superior</option>
-		          				<option>Investigador</option>
-				            </select>
-		          		</div>
-		       		</div>
-		       		<hr id="hrCargo">
-		       		<div class="control-group" id="divRango">
-		          		<label class="control-label">Rango: </label>
-		          		<label class="checkbox inline">
-		          			<input type="radio" name="rango" id="rangoOficial" value="Oficial" checked>Oficial
-		          		</label>
-		          		<label class="checkbox inline">
-		          			<input type="radio" name="rango" id="rangoSubOficial" value="Sub Oficial">Sub Oficial
-		          		</label>
-		       		</div>
-		       		<hr id="hrRango"> 
-		       		<div class="control-group" id="divGrado">
-		          		<label class="control-label">Grado: </label>
-		          		<div class="controls">
-		          			<select class="span2" name="grado" id="sltcGrado" data-rule-required="true" data-msg-required="*">
-		          				<option>Alfz. PNP</option>
-		          				<option>Tnte. PNP</option>
-		          				<option>Cap. PNP</option>
-								<option>May. PNP</option>
-								<option>Cmdte PNP</option>
-								<option>Crnel PNP</option>
-								<option>Gral. PNP</option>
-				            </select>
-		          		</div>
-		       		</div>
-		       		<hr id="hrGrado">
-		       		<div class="control-group" id="divNCarnet">
-		          		<label class="control-label">Numero de Carnet: </label>
-		          		<div class="input-prepend" style="margin-left: 20px;">
-		          			<span class="add-on">CIP N°</span><input class="input-small" type="text" id="txtNumeroDeCarnet" name="txtNumeroDeCarnet" style="width: 110px;">
-		          			<input class="input-small" type="hidden" name="numeroDeCarnet" id="hdnNumeroDeCarnet" style="width: 110px;">
-		          		</div>
-		       		</div>
-		       		<hr id="hrNCarnet">
-		       		<div class="control-group">
-		          		<label class="control-label">Telefono: </label>
-		          		<div class="controls">
-		          			<input class="span2" type="text" name="telefono">
-		          		</div>
-		       		</div>
-		       		<hr>
-		       		<div class="control-group">
-		          		<label class="control-label">Corre Electrónico: </label>
-		          		<div class="input-prepend" style="margin-left: 20px;">
-		          			<span class="add-on">@</span><input class="input-medium" type="text" id="txtCorreo" name="txtCorreo" style="width: 135px;">
-		          			<input class="input-medium" type="hidden" id="hdnCorreo" name="correo">
-		          		</div>
-		       		</div>
-		       		<hr>
-		       		<div class="control-group">
-		          		<label class="control-label">Sexo: </label>
 		          		<label class="checkbox inline">
 		          			<input type="radio" name="sexo" id="" value="M" checked>Masculino
 		          		</label>
@@ -220,8 +123,137 @@
 		          			<input type="radio" name="sexo" id="" value="F">Femenino
 		          		</label>
 		       		</div>
+		       		<hr>
+		       		<div class="control-group">
+		          		<label class="control-label">Fecha de Nacimiento: </label>
+		          		<div class="controls">
+		          			<input class="span2" type="text" name="txtFecNac" id="txtFecNac">
+		          			<input class="span2" type="hidden" name="fechaDeNacimiento" id="hdnFecNac">
+		          		</div>
+		       		</div>
+		       		<hr>
+		       		<div class="control-group">
+		          		<label class="control-label">Departamento de Nacimiento: </label>
+		          		<div class="controls">
+		          			<input class="span2" type="text" name="departamentoDeNacimiento">
+		          		</div>
+		       		</div>
+		       		<hr>
+		       		<div class="control-group">
+		          		<label class="control-label">Provincia de Nacimiento: </label>
+		          		<div class="controls">
+		          			<input class="span2" type="text" name="provinciaDeNacimiento">
+		          		</div>
+		       		</div>
+		       		<hr>
+		       		<div class="control-group">
+		          		<label class="control-label">Distrito de Nacimiento: </label>
+		          		<div class="controls">
+		          			<input class="span2" type="text" name="distritoDeNacimiento">
+		          		</div>
+		       		</div>
+		       		<hr>
+		       		<div class="control-group">
+		          		<label class="control-label">Grado de Instrucción: </label>
+		          		<div class="controls">
+		          			<input class="span2" type="text" name="gradoDeInstruccion">
+		          		</div>
+		       		</div>
+		       		<hr>
+		       		<div class="control-group" id="divGrado">
+		          		<label class="control-label">Estado Civil: </label>
+		          		<div class="controls">
+		          			<select class="span2" name="estadoCivil" id="sltcEstadoCivil">
+		          				<option> </option>
+		          				<option>Casado</option>
+		          				<option>Divorciado</option>
+		          				<option>Soltero</option>
+		          				<option>Viudo</option>
+				            </select>
+		          		</div>
+		       		</div>
+		       		<hr>
+		       		<div class="control-group">
+		          		<label class="control-label">Estatura: </label>
+		          		<div class="controls">
+		          			<input class="span2" type="text" name="txtEstatura" id="txtEstatura">
+		          			<input class="span2" type="hidden" name="estatura" id="hdnEstatura">
+		          		</div>
+		       		</div>
+		       		<hr>
+		       		<div class="control-group">
+		          		<label class="control-label">Fecha de Inscripción: </label>
+		          		<div class="controls">
+		          			<input class="span2" type="text" name="txtInscripcion" id="txtInscripcion">
+		          			<input class="span2" type="hidden" name="fechaDeInscripcion" id="hdnFecIns">
+		          		</div>
+		       		</div>
+		       		<hr>
+		       		<div class="control-group">
+		          		<label class="control-label">Nombre del Padre: </label>
+		          		<div class="controls">
+		          			<input class="span2" type="text" name="nombrePadre">
+		          		</div>
+		       		</div>
+		       		<hr>
+		       		<div class="control-group">
+		          		<label class="control-label">Nombre de la Madre: </label>
+		          		<div class="controls">
+		          			<input class="span2" type="text" name="nombreMadre">
+		          		</div>
+		       		</div>
+		       		<hr>
+		       		<div class="control-group">
+		          		<label class="control-label">Fecha de Emisión: </label>
+		          		<div class="controls">
+		          			<input class="span2" type="text" name="txtEmision" id="txtEmision">
+		          			<input class="span2" type="hidden" name="fechaDeEmision" id="hdnFecEmi">
+		          		</div>
+		       		</div>
+		       		<hr>
+		       		<div class="control-group">
+		          		<label class="control-label">Restricción: </label>
+		          		<div class="controls">
+		          			<input class="span2" type="text" name="restriccion">
+		          		</div>
+		       		</div>
+		       		<hr>
+		       		<div class="control-group">
+		          		<label class="control-label">Domicilio: </label>
+		          		<div class="controls">
+		          			<input class="span2" type="text" name="domicilio">
+		          		</div>
+		       		</div>
+		       		<hr>
+		       		<div class="control-group">
+		          		<label class="control-label">Departamento de Domicilio: </label>
+		          		<div class="controls">
+		          			<input class="span2" type="text" name="departamentoDeDomicilio">
+		          		</div>
+		       		</div>
+		       		<hr>
+		       		<div class="control-group">
+		          		<label class="control-label">Provincia de Domicilio: </label>
+		          		<div class="controls">
+		          			<input class="span2" type="text" name="provinciaDeDomicilio">
+		          		</div>
+		       		</div>
+		       		<hr>
+		       		<div class="control-group">
+		          		<label class="control-label">Distrito de Domicilio: </label>
+		          		<div class="controls">
+		          			<input class="span2" type="text" name="distritoDeDomicilio">
+		          		</div>
+		       		</div>
+		       		<hr>
+		       		<div class="control-group">
+		          		<label class="control-label">Multas Electorales: </label>
+		          		<div class="controls">
+		          			<input class="span2" type="text" name="multasElectoraleso">
+		          		</div>
+		       		</div>
 		       		<div class="form-actions">
-			        	<button class="btn btn-success" id="btnGuardar" type="submit"><i class="icon-ok icon-white"></i> Guardar Usuario</button>
+			        	<button class="btn btn-success" id="btnGuardar" type="submit"><i class="icon-ok icon-white"></i> Guardar Sospechoso</button>
 			        </div>  
 			</form:form>
 		</fieldset>

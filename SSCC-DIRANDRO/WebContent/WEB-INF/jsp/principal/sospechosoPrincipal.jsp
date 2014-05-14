@@ -35,30 +35,33 @@
 <jsp:include page="../componentes/menu.jsp"/>
 <!--/MENU-->
 <div class="container inner_content">
-				<c:forEach items="${perfilList}" var="perfil">
-					<span id="hdnIdPerfil" style="display: none;"><c:out value="${perfil.idPerfil}"/></span>
-					<span id="hdnEntidad" style="display: none;"><c:out value="${perfil.entidadPerteneciente}"/></span>
+				<c:forEach items="${sospechosoList}" var="sospechoso">
+					<span id="hdnIdSospechoso" style="display: none;"><c:out value="${sospechoso.idSospechoso}"/></span>
 				</c:forEach>
 	<section class="span9" style="margin-left: 80px;">
 		<table class="table table-bordered table-condensed">
 	        <tbody>
 	        	<tr>
-		            <td>Nombre Completo: </td>
-		            <td align="center"><span id="hdrPrimerApellido"></span>&nbsp;<span id="hdrSegundoApellido"></span>&nbsp;<span id="hdrPreNombre"></span></td>
-		            <td rowspan="4" align="center"><img src="img/skills.png" alt="logo" style="margin-bottom:7px; margin-top:7px;"/></td>
+		            <td>Código Único de Identificación: </td>
+		            <td align="center"><span id="hdrCodigoUnicoDeIdentificacion">&nbsp;</span></td>
+		            <td rowspan="5" align="center"><img src="img/skills.png" alt="logo" style="margin-bottom:7px; margin-top:7px;"/></td>
           		</tr>
-	          	<tr>
-            		<td>Número de DNI: </td>
-	            	<td><span id="hdrDni">&nbsp;</span></td>
-	          	</tr>
-       			<tr>
-		           <td>Sexo: </td>
-		           <td><span id="hdrSexo">&nbsp;</span></td>
-		       	</tr>
-	          	<tr>
-            		<td>Lugar de nacimiento: </td>
-	            	<td><span id="hdrlugarN">&nbsp;</span></td>
-	          	</tr>
+	        	<tr>
+		            <td>Primer Apellido: </td>
+		            <td><span id="hdrPrimerApellido">&nbsp;</span></td>
+          		</tr>
+          		<tr>
+		            <td>Segundo Apellido: </td>
+		            <td><span id="hdrSegundoApellido">&nbsp;</span></td>
+          		</tr>
+          		<tr>
+		            <td>Prenombres: </td>
+		            <td><span id="hdrPrenombres">&nbsp;</span></td>
+          		</tr>
+          		<tr>
+		            <td>Sexo: </td>
+		            <td><span id="hdrSexo">&nbsp;</span></td>
+          		</tr>
 	        </tbody>
 	    </table>
 	</section>

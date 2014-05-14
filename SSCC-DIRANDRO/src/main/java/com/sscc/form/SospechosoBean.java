@@ -1,66 +1,35 @@
-package com.sscc.model;
+package com.sscc.form;
 
 import java.sql.Date;
 import java.sql.Timestamp;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+public class SospechosoBean {
 
-@Entity
-public class Sospechoso {
-
-	@Id @GeneratedValue
 	private Integer idSospechoso;
 	
-	@Column(length = 20, nullable = false)
 	private String codigoUnicoDeIdentificacion;
-	@Column(length = 50, nullable = false)
 	private String primerApellido;
-	@Column(length = 50, nullable = false)
 	private String segundoApellido;
-	@Column(length = 50, nullable = false)
 	private String preNombres;
-	@Column(length = 1, nullable = true)
 	private String sexo;//F = femenino, M = masculino
-	@Column(nullable=true)
 	private Date fechaDeNacimiento;
-	@Column(length = 50, nullable = true)
 	private String departamentoDeNacimiento;
-	@Column(length = 50, nullable = true)
 	private String provinciaDeNacimiento;
-	@Column(length = 50, nullable = true)
 	private String distritoDeNacimiento;
-	@Column(length = 50, nullable = true)
 	private String gradoDeInstruccion;
-	@Column(length = 50, nullable = true)
 	private String estadoCivil;//comboBox: Soltero, Casado, Divorciado, Viudo
-	@Column(nullable = true)
 	private Double estatura;
-	@Column(nullable=true)
 	private Date fechaDeInscripcion;
-	@Column(length = 50, nullable = true)
 	private String nombrePadre;
-	@Column(length = 50, nullable = true)
 	private String nombreMadre;
-	@Column(nullable=true)
 	private Date fechaDeEmision;
-	@Column(length = 50, nullable = true)
 	private String restriccion;
-	@Column(length = 50, nullable = true)
 	private String domicilio;
-	@Column(length = 50, nullable = true)
 	private String departamentoDeDomicilio;
-	@Column(length = 50, nullable = true)
 	private String provinciaDeDomicilio;
-	@Column(length = 50, nullable = true)
 	private String distritoDeDomicilio;
-	@Column(nullable = true)
 	private Integer multasElectorales;
-	@Column(length = 50, nullable = true)
 	private String estado;
-	@Column(nullable = false)
 	private Timestamp fecCreacionSospechoso;
 	
 	public Integer getIdSospechoso() {
@@ -129,6 +98,12 @@ public class Sospechoso {
 	public void setGradoDeInstruccion(String gradoDeInstruccion) {
 		this.gradoDeInstruccion = gradoDeInstruccion;
 	}
+	public String getEstadoCivil() {
+		return estadoCivil;
+	}
+	public void setEstadoCivil(String estadoCivil) {
+		this.estadoCivil = estadoCivil;
+	}
 	public Double getEstatura() {
 		return estatura;
 	}
@@ -194,12 +169,6 @@ public class Sospechoso {
 	}
 	public void setMultasElectorales(Integer multasElectorales) {
 		this.multasElectorales = multasElectorales;
-	}
-	public String getEstadoCivil() {
-		return estadoCivil;
-	}
-	public void setEstadoCivil(String estadoCivil) {
-		this.estadoCivil = estadoCivil;
 	}
 	public String getEstado() {
 		return estado;

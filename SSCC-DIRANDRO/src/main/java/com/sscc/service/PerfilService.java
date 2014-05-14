@@ -8,5 +8,4 @@ public interface PerfilService {
 	PerfilBean getPerfil(Integer idPerfil);
 	
 	PerfilBean crearUsuario(Perfil perfil, String correo);
-
 }
