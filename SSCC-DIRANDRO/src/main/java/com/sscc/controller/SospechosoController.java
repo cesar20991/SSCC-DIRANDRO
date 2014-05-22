@@ -61,7 +61,7 @@ public class SospechosoController {
 	@ResponseBody
 	public SospechosoBean editarSopechoso(@ModelAttribute Sospechoso sospechoso, HttpServletRequest req, HttpSession session, Model model){
 		SospechosoBean sospechosobean = new SospechosoBean();
-		sospechosobean = sospechosoServ.EditSospechosoBean(sospechoso);
+		sospechosobean = sospechosoServ.editSospechosoBean(sospechoso);
 		return sospechosobean;
 	}
 }

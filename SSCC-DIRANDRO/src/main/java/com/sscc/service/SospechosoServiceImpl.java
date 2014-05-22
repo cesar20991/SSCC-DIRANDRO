@@ -115,7 +115,7 @@ public class SospechosoServiceImpl implements SospechosoService{
 	}
 
 	@Transactional
-	public SospechosoBean EditSospechosoBean(Sospechoso sospechoso) {
+	public SospechosoBean editSospechosoBean(Sospechoso sospechoso) {
 		Sospechoso s = em.find(Sospechoso.class, sospechoso.getIdSospechoso());
 		Sospechoso editado = em.merge(s);
 		

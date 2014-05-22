@@ -9,5 +9,5 @@ public interface SospechosoService {
 	
 	Integer crearSospechoso(Sospechoso sospechoso);
 	
-	SospechosoBean EditSospechosoBean(Sospechoso sospechoso);
+	SospechosoBean editSospechosoBean(Sospechoso sospechoso);
 }

@@ -12,7 +12,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.sscc.form.SospechosoBean;
+import com.sscc.model.Sospechoso;
 import com.sscc.model.Usuario;
 import com.sscc.service.PerfilService;
 import com.sscc.service.UsuarioService;
@@ -56,5 +59,18 @@ public class UsuarioController {
 		}
 
 		return path;
+	}
+	
+	@RequestMapping(value = "cambiarClave", method = RequestMethod.POST)
+	@ResponseBody
+	public Boolean cambiarClave(HttpServletRequest req, HttpSession session){
+		
+		String claveA = req.getParameter("txtClaveActual");
+		String claveN = req.getParameter("txtClaveNueva");
+		Integer idUsuario = (Integer) session.getAttribute("idUsuario");
+
+		Boolean resultado = usuarioServ.cambiarClave(claveA, claveN, idUsuario);
+		
+		return resultado;
 	}
 }

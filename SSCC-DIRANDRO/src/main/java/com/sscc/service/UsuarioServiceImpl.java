@@ -37,6 +37,7 @@ public class UsuarioServiceImpl implements UsuarioService {
 			// aqui creo sessiones para el usuario que se usaran mientras este logeado
 			Usuario usu = (Usuario) qSesiones.getSingleResult();
 			session.setAttribute("idPerfil", usu.getPerfil().getIdPerfil());
+			session.setAttribute("idUsuario", usu.getIdUsuario());
 			session.setAttribute("grado", usu.getPerfil().getGrado());
 			session.setAttribute("nombreDeUuario", usu.getPerfil().getPrimerNombre()+" "+usu.getPerfil().getSegundoNombre()+" "+usu.getPerfil().getApePaterno()+" "+usu.getPerfil().getApeMaterno());
 			
@@ -46,6 +47,26 @@ public class UsuarioServiceImpl implements UsuarioService {
 			result = false;
 		}
 
+		return result;
+	}
+
+	@Transactional
+	public Boolean cambiarClave(String claveA, String claveN, Integer idUsuario) {
+		boolean result;
+		Query q = em.createQuery("SELECT u FROM Usuario u WHERE u.idUsuario =:idUsuario AND u.contrasena =:contrasena AND u.estado =:estado");
+		q.setParameter("idUsuario", idUsuario);
+		q.setParameter("contrasena", claveA);
+		q.setParameter("estado", "habilitado");
+		
+		try{
+			Usuario us = (Usuario) q.getSingleResult();
+			Usuario editado = em.merge(us);
+			editado.setContrasena(claveN);
+			result = true;
+		}catch (Exception e) {
+			result = false;
+		}
+		
 		return result;
 	}
 	
