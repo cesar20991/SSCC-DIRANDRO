@@ -14,6 +14,10 @@
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 <!-- para que funcione el jquery de la plantilla -->
 <script src="js/jquery.js"></script>
+<!-- datepicker librerias -->
+<link rel="stylesheet" href="//code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">
+<script src="//code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+<link rel="stylesheet" href="/resources/demos/style.css">
 <!-- para el menu -->
 <script src="js/bootstrap-collapse.js"></script>
 <script src="js/jquery.validate.min.js"></script>
@@ -29,41 +33,50 @@
 }
 </style>
 <script>
+$(document).on('change','#txtFecNac', function(e){
+	//var fec  = $("#txtFecNac").val().split("/");
+	$("#hdnFecNac").val($("#txtFecNac").val().split("/")[2]+"-"+$("#txtFecNac").val().split("/")[1]+"-"+$("#txtFecNac").val().split("/")[0]);
+});
+$(document).on('change','#txtInscripcion', function(e){
+	$("#hdnFecIns").val($("#txtInscripcion").val().split("/")[2]+"-"+$("#txtInscripcion").val().split("/")[1]+"-"+$("#txtInscripcion").val().split("/")[0]);
+});
+$(document).on('change','#txtEmision', function(e){
+	$("#hdnFecEmi").val($("#txtEmision").val().split("/")[2]+"-"+$("#txtEmision").val().split("/")[1]+"-"+$("#txtEmision").val().split("/")[0]);
+});
 $(document).ready(function() {
+	$( ".datepicker" ).datepicker({ dateFormat: 'dd/mm/yy' });
+	
 	$("#formCrearSospechoso").validate({
 		rules:{
 			txtFecNac: {date: true},
 			txtEstatura: {number: true},
 			txtInscripcion: {date: true},
 			txtEmision: {date: true},
+			txtCodUnico: {number: true, minlength: 8, maxlength: 8}
 		},
 		messages:{
 			txtFecNac: "Debe tener formato de fecha dd/mm/aaaa",
-			txtEstatura: "Solo números",
+			txtEstatura: "Solo Números",
 			txtInscripcion: "Debe tener formato de fecha dd/mm/aaaa",
 			txtEmision: "Debe tener formato de fecha dd/mm/aaaa",
+			txtCodUnico: "Solo Números, 8 digitos"
 		},
 		submitHandler: function(form){
 			//Se usa 1000-12-12 para que pase de la vista al controlador
 			//y en el implements se seteara como null.
-			if($("#hdnFecNac").val() == ''){
+			if($("#txtFecNac").val() == ''){
 				$("#hdnFecNac").val('1000-12-12');
-			}else{
-				$("#hdnFecNac").val($("#txtFecNac").val());
 			}
 			
-			if($("#hdnFecIns").val() == ''){
+			if($("#txtInscripcion").val() == ''){
 				$("#hdnFecIns").val('1000-12-12');
-			}else{
-				$("#hdnFecIns").val($("#txtInscripcion").val());
 			}
 			
 			$("#hdnEstatura").val($("#txtEstatura").val());
+			$("#hdnCodUnico").val($("#txtCodUnico").val());
 			
-			if($("#hdnFecEmi").val() == ''){
+			if($("#txtEmision").val() == ''){
 				$("#hdnFecEmi").val('1000-12-12');
-			}else{
-				$("#hdnFecEmi").val($("#txtEmision").val());
 			}
 			//$("#hdnFecEmi").val($("#txtEmision").val());
 			
@@ -89,7 +102,8 @@ $(document).ready(function() {
 		       		<div class="control-group">
 		          		<label class="control-label">Código Único de Identificación: </label>
 		          		<div class="controls">
-		          			<input class="span2" type="text" name="codigoUnicoDeIdentificacion" data-rule-required="true" data-msg-required="*">
+		          			<input class="span2" type="text" name="txtCodUnico" id="txtCodUnico" data-rule-required="true" data-msg-required="*">
+		          			<input class="span2" type="hidden" name="codigoUnicoDeIdentificacion" id="hdnCodUnico">
 		          		</div>
 		       		</div>
 		       		<hr>
@@ -115,6 +129,13 @@ $(document).ready(function() {
 		       		</div>
 		       		<hr>
 		       		<div class="control-group">
+		          		<label class="control-label">Alias: </label>
+		          		<div class="controls">
+		          			<input class="span2" type="text" name="alias">
+		          		</div>
+		       		</div>
+		       		<hr>
+		       		<div class="control-group">
 		          		<label class="control-label">Sexo: </label>
 		          		<label class="checkbox inline">
 		          			<input type="radio" name="sexo" id="" value="M" checked>Masculino
@@ -127,7 +148,7 @@ $(document).ready(function() {
 		       		<div class="control-group">
 		          		<label class="control-label">Fecha de Nacimiento: </label>
 		          		<div class="controls">
-		          			<input class="span2" type="text" name="txtFecNac" id="txtFecNac">
+		          			<input class="span2 datepicker" type="text" name="txtFecNac" id="txtFecNac">
 		          			<input class="span2" type="hidden" name="fechaDeNacimiento" id="hdnFecNac">
 		          		</div>
 		       		</div>
@@ -156,7 +177,13 @@ $(document).ready(function() {
 		       		<div class="control-group">
 		          		<label class="control-label">Grado de Instrucción: </label>
 		          		<div class="controls">
-		          			<input class="span2" type="text" name="gradoDeInstruccion">
+		          			<select class="span2" name="gradoDeInstruccion">
+		          				<option value="">No Precisa</option>
+		          				<option>Preescolar</option>
+		          				<option>Primaria</option>
+		          				<option>Secundaria</option>
+		          				<option>Superior</option>
+				            </select>
 		          		</div>
 		       		</div>
 		       		<hr>
@@ -164,7 +191,7 @@ $(document).ready(function() {
 		          		<label class="control-label">Estado Civil: </label>
 		          		<div class="controls">
 		          			<select class="span2" name="estadoCivil" id="sltcEstadoCivil">
-		          				<option> </option>
+		          				<option value="">No Precisa</option>
 		          				<option>Casado</option>
 		          				<option>Divorciado</option>
 		          				<option>Soltero</option>
@@ -184,7 +211,7 @@ $(document).ready(function() {
 		       		<div class="control-group">
 		          		<label class="control-label">Fecha de Inscripción: </label>
 		          		<div class="controls">
-		          			<input class="span2" type="text" name="txtInscripcion" id="txtInscripcion">
+		          			<input class="span2 datepicker" type="text" name="txtInscripcion" id="txtInscripcion">
 		          			<input class="span2" type="hidden" name="fechaDeInscripcion" id="hdnFecIns">
 		          		</div>
 		       		</div>
@@ -206,7 +233,7 @@ $(document).ready(function() {
 		       		<div class="control-group">
 		          		<label class="control-label">Fecha de Emisión: </label>
 		          		<div class="controls">
-		          			<input class="span2" type="text" name="txtEmision" id="txtEmision">
+		          			<input class="span2 datepicker" type="text" name="txtEmision" id="txtEmision">
 		          			<input class="span2" type="hidden" name="fechaDeEmision" id="hdnFecEmi">
 		          		</div>
 		       		</div>
@@ -254,6 +281,7 @@ $(document).ready(function() {
 		       		</div>
 		       		<div class="form-actions">
 			        	<button class="btn btn-success" id="btnGuardar" type="submit"><i class="icon-ok icon-white"></i> Guardar Sospechoso</button>
+			        	<button class="btn btn-danger" type="reset"><i class="icon-refresh icon-white"></i> Reset</button>
 			        </div>  
 			</form:form>
 		</fieldset>

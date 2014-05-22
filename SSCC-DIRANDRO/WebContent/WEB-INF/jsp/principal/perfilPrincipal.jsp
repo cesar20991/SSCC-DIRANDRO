@@ -35,10 +35,10 @@
 <jsp:include page="../componentes/menu.jsp"/>
 <!--/MENU-->
 <div class="container inner_content">
-				<c:forEach items="${perfilList}" var="perfil">
-					<span id="hdnIdPerfil" style="display: none;"><c:out value="${perfil.idPerfil}"/></span>
-					<span id="hdnEntidad" style="display: none;"><c:out value="${perfil.entidadPerteneciente}"/></span>
-				</c:forEach>
+		<c:forEach items="${perfilList}" var="perfil">
+			<span id="hdnIdPerfil" style="display: none;"><c:out value="${perfil.idPerfil}"/></span>
+			<span id="hdnEntidad" style="display: none;"><c:out value="${perfil.entidadPerteneciente}"/></span>
+		</c:forEach>
 	<section class="span9" style="margin-left: 80px;">
 		<table class="table table-bordered table-condensed">
 	        <tbody>

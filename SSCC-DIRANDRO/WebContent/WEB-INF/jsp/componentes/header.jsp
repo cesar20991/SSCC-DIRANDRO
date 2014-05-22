@@ -23,6 +23,12 @@ $(document).ready(function(){
 			$("#titulo").empty();
 			$("#titulo").append('<h1><span class="colored">///</span> Crear Perfil del Sospechoso</h1>');
 		break;
+		case 'sospechosoPrincipal':
+			$("#rowWelcome").removeClass('welcome');
+			$("#rowWelcome").addClass('welcome_inner');
+			$("#titulo").empty();
+			$("#titulo").append('<h1><span class="colored">///</span> Perfil Sospechoso</h1>');
+		break;
 	}
 });
 </script>

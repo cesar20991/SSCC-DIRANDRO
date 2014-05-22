@@ -11,6 +11,7 @@ public class SospechosoBean {
 	private String primerApellido;
 	private String segundoApellido;
 	private String preNombres;
+	private String alias;
 	private String sexo;//F = femenino, M = masculino
 	private Date fechaDeNacimiento;
 	private String departamentoDeNacimiento;
@@ -181,5 +182,11 @@ public class SospechosoBean {
 	}
 	public void setFecCreacionSospechoso(Timestamp fecCreacionSospechoso) {
 		this.fecCreacionSospechoso = fecCreacionSospechoso;
+	}
+	public String getAlias() {
+		return alias;
+	}
+	public void setAlias(String alias) {
+		this.alias = alias;
 	}
 }

@@ -19,13 +19,41 @@ public class SospechosoServiceImpl implements SospechosoService{
 	
 	@Transactional
 	public SospechosoBean getSospechosoBean(Integer idSospechoso) {
-		Query qSospechoso = em.createQuery("");
-		return null;
+		SospechosoBean sb = new SospechosoBean();
+		Query qSospechoso = em.createQuery("SELECT s FROM Sospechoso s WHERE s.estado='habilitado' AND s.idSospechoso=:idSospechoso");
+		qSospechoso.setParameter("idSospechoso", idSospechoso);
+		
+		Sospechoso s = new Sospechoso();
+		s = (Sospechoso) qSospechoso.getSingleResult();
+		
+		sb.setCodigoUnicoDeIdentificacion(s.getCodigoUnicoDeIdentificacion());
+		sb.setPrimerApellido(s.getPrimerApellido());
+		sb.setSegundoApellido(s.getSegundoApellido());
+		sb.setPreNombres(s.getPreNombres());
+		sb.setAlias(s.getAlias());
+		sb.setSexo(s.getSexo());
+		sb.setFechaDeNacimiento(s.getFechaDeNacimiento());
+		sb.setDepartamentoDeNacimiento(s.getDepartamentoDeNacimiento());
+		sb.setProvinciaDeNacimiento(s.getProvinciaDeNacimiento());
+		sb.setDistritoDeNacimiento(s.getDistritoDeNacimiento());
+		sb.setGradoDeInstruccion(s.getGradoDeInstruccion());
+		sb.setEstadoCivil(s.getEstadoCivil());
+		sb.setEstatura(s.getEstatura());
+		sb.setFechaDeInscripcion(s.getFechaDeInscripcion());
+		sb.setNombrePadre(s.getNombrePadre());
+		sb.setNombreMadre(s.getNombreMadre());
+		sb.setFechaDeEmision(s.getFechaDeEmision());
+		sb.setRestriccion(s.getRestriccion());
+		sb.setDomicilio(s.getDomicilio());
+		sb.setDepartamentoDeDomicilio(s.getDepartamentoDeDomicilio());
+		sb.setProvinciaDeDomicilio(s.getProvinciaDeDomicilio());
+		sb.setDistritoDeDomicilio(s.getDistritoDeDomicilio());
+		sb.setMultasElectorales(s.getMultasElectorales());
+		return sb;
 	}
 
 	@Transactional
-	public SospechosoBean crearSospechoso(Sospechoso sospechoso) {
-		SospechosoBean sb=new SospechosoBean();
+	public Integer crearSospechoso(Sospechoso sospechoso) {
 		
 		sospechoso.setEstado("habilitado");
 		DateUtil d = new DateUtil();
@@ -45,9 +73,6 @@ public class SospechosoServiceImpl implements SospechosoService{
 		}
 		if(sospechoso.getGradoDeInstruccion()== null){
 			sospechoso.setGradoDeInstruccion("");
-		}
-		if(sospechoso.getEstadoCivil() == " "){
-			sospechoso.setEstadoCivil("No precisa");
 		}
 		if(sospechoso.getEstatura()== null){
 			sospechoso.setEstatura(0.0);
@@ -86,29 +111,44 @@ public class SospechosoServiceImpl implements SospechosoService{
 		
 		em.persist(sospechoso);
 		
-		sb.setCodigoUnicoDeIdentificacion(sospechoso.getCodigoUnicoDeIdentificacion());
-		sb.setPrimerApellido(sospechoso.getPrimerApellido());
-		sb.setSegundoApellido(sospechoso.getSegundoApellido());
-		sb.setPreNombres(sospechoso.getPreNombres());
-		sb.setFechaDeNacimiento(sospechoso.getFechaDeNacimiento());
-		sb.setDepartamentoDeNacimiento(sospechoso.getDepartamentoDeNacimiento());
-		sb.setProvinciaDeNacimiento(sospechoso.getProvinciaDeNacimiento());
-		sb.setDistritoDeNacimiento(sospechoso.getDistritoDeNacimiento());
-		sb.setGradoDeInstruccion(sospechoso.getGradoDeInstruccion());
-		sb.setEstadoCivil(sospechoso.getEstadoCivil());
-		sb.setEstatura(sospechoso.getEstatura());
-		sb.setFechaDeInscripcion(sospechoso.getFechaDeInscripcion());
-		sb.setNombrePadre(sospechoso.getNombrePadre());
-		sb.setNombreMadre(sospechoso.getNombreMadre());
-		sb.setFechaDeEmision(sospechoso.getFechaDeEmision());
-		sb.setRestriccion(sospechoso.getRestriccion());
-		sb.setDomicilio(sospechoso.getDomicilio());
-		sb.setDepartamentoDeDomicilio(sospechoso.getDepartamentoDeDomicilio());
-		sb.setProvinciaDeDomicilio(sospechoso.getProvinciaDeDomicilio());
-		sb.setDistritoDeDomicilio(sospechoso.getDistritoDeDomicilio());
-		sb.setMultasElectorales(sospechoso.getMultasElectorales());
+		return sospechoso.getIdSospechoso();
+	}
+
+	@Transactional
+	public SospechosoBean EditSospechosoBean(Sospechoso sospechoso) {
+		Sospechoso s = em.find(Sospechoso.class, sospechoso.getIdSospechoso());
+		Sospechoso editado = em.merge(s);
 		
-		return sb;
+		//no te olvides poner la validacion del 1000-12-12
+		editado.setCodigoUnicoDeIdentificacion(sospechoso.getCodigoUnicoDeIdentificacion());
+		editado.setPrimerApellido(sospechoso.getPrimerApellido());
+		editado.setSegundoApellido(sospechoso.getSegundoApellido());
+		editado.setPreNombres(sospechoso.getPreNombres());
+		editado.setAlias(sospechoso.getAlias());
+		editado.setSexo(sospechoso.getSexo());
+		if(sospechoso.getFechaDeNacimiento().toString().equals("1000-12-12")){
+			editado.setFechaDeNacimiento(null);
+		}else{
+			editado.setFechaDeNacimiento(sospechoso.getFechaDeNacimiento());
+		}
+		editado.setDepartamentoDeNacimiento(sospechoso.getDepartamentoDeNacimiento());
+		editado.setProvinciaDeNacimiento(sospechoso.getProvinciaDeNacimiento());
+		editado.setDistritoDeNacimiento(sospechoso.getDistritoDeNacimiento());
+		editado.setGradoDeInstruccion(sospechoso.getGradoDeInstruccion());
+		editado.setEstadoCivil(sospechoso.getEstadoCivil());
+		editado.setEstatura(sospechoso.getEstatura());
+		editado.setFechaDeInscripcion(sospechoso.getFechaDeInscripcion());
+		editado.setNombrePadre(sospechoso.getNombrePadre());
+		editado.setNombreMadre(sospechoso.getNombreMadre());
+		editado.setFechaDeEmision(sospechoso.getFechaDeEmision());
+		editado.setRestriccion(sospechoso.getRestriccion());
+		editado.setDomicilio(sospechoso.getDomicilio());
+		editado.setDepartamentoDeDomicilio(sospechoso.getDepartamentoDeDomicilio());
+		editado.setProvinciaDeDomicilio(sospechoso.getProvinciaDeDomicilio());
+		editado.setDistritoDeDomicilio(sospechoso.getDistritoDeDomicilio());
+		editado.setMultasElectorales(sospechoso.getMultasElectorales());
+		
+		return getSospechosoBean(editado.getIdSospechoso());
 	}
 
 }

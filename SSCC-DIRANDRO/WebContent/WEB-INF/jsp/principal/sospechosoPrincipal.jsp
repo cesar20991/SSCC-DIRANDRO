@@ -18,6 +18,12 @@
 <script src="js/bootstrap-collapse.js"></script>
 <!-- tabs -->
 <script src="js/bootstrap-tab.js"></script>
+<!-- datepicker librerias -->
+<link rel="stylesheet" href="//code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">
+<script src="//code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+<link rel="stylesheet" href="/resources/demos/style.css">
+<!-- validacion -->
+<script src="js/jquery.validate.min.js"></script>
 <!-- styles -->
 <link href="css/bootstrap.css" rel="stylesheet">
 <link href="css/bootstrap-responsive.css" rel="stylesheet">
@@ -35,10 +41,10 @@
 <jsp:include page="../componentes/menu.jsp"/>
 <!--/MENU-->
 <div class="container inner_content">
-				<c:forEach items="${sospechosoList}" var="sospechoso">
-					<span id="hdnIdSospechoso" style="display: none;"><c:out value="${sospechoso.idSospechoso}"/></span>
-				</c:forEach>
 	<section class="span9" style="margin-left: 80px;">
+	<c:forEach items="${sospechosoList}" var="sospechoso">
+		<span id="hdnIdSospechoso" style="display: none;"><c:out value="${sospechoso.idSospechoso}"/></span>
+	</c:forEach>
 		<table class="table table-bordered table-condensed">
 	        <tbody>
 	        	<tr>
@@ -47,20 +53,20 @@
 		            <td rowspan="5" align="center"><img src="img/skills.png" alt="logo" style="margin-bottom:7px; margin-top:7px;"/></td>
           		</tr>
 	        	<tr>
-		            <td>Primer Apellido: </td>
-		            <td><span id="hdrPrimerApellido">&nbsp;</span></td>
-          		</tr>
-          		<tr>
-		            <td>Segundo Apellido: </td>
-		            <td><span id="hdrSegundoApellido">&nbsp;</span></td>
+		            <td>Apellidos: </td>
+		            <td><span id="hdrPrimerApellido">&nbsp;</span>&nbsp;&nbsp;<span id="hdrSegundoApellido">&nbsp;</span></td>
           		</tr>
           		<tr>
 		            <td>Prenombres: </td>
 		            <td><span id="hdrPrenombres">&nbsp;</span></td>
           		</tr>
           		<tr>
-		            <td>Sexo: </td>
-		            <td><span id="hdrSexo">&nbsp;</span></td>
+		            <td>Alias: </td>
+		            <td><span id="hdrAlias">&nbsp;</span></td>
+          		</tr>
+          		<tr>
+		            <td>Caso: </td>
+		            <td><span id="hdrCaso">&nbsp;</span></td>
           		</tr>
 	        </tbody>
 	    </table>

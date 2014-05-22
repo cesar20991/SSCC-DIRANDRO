@@ -22,6 +22,8 @@ public class Sospechoso {
 	private String segundoApellido;
 	@Column(length = 50, nullable = false)
 	private String preNombres;
+	@Column(length = 50, nullable = true)
+	private String alias;
 	@Column(length = 1, nullable = true)
 	private String sexo;//F = femenino, M = masculino
 	@Column(nullable=true)
@@ -212,5 +214,11 @@ public class Sospechoso {
 	}
 	public void setFecCreacionSospechoso(Timestamp fecCreacionSospechoso) {
 		this.fecCreacionSospechoso = fecCreacionSospechoso;
+	}
+	public String getAlias() {
+		return alias;
+	}
+	public void setAlias(String alias) {
+		this.alias = alias;
 	}
 }
