@@ -87,7 +87,7 @@ $(document).ready(function(){
 	 			$("#spnRango").text(perfil.rango);
 	 		}
 	 	});
-});
+});//# carnet -> sub 8 -> oficiales 6
 </script>
 <div id="divMostrarDatos">
 	<form:form class="form-horizontal">

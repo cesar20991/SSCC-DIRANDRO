@@ -151,9 +151,8 @@ $(document).on('click','#btnCancelEditar', function(e){
 </script>
 <div id="divMostrarDatosSospechoso">
 	<div id="divMostrarSospechoso">
-	<form:form class="form-horizontal">
-	   	<fieldset>
-	       	<legend><span class="span3"><span class="colored">///</span> Datos del Sospechoso:</span><span class="span2 offset3"><button class="btn btn-primary btn-small" type="button" id="btnEditarSopechoso"><i class="icon-edit"></i> Editar</button></span></legend>
+		<form:form class="form-horizontal">
+	       	<legend><span class="span3"><span class="colored">///</span> Datos del Sospechoso:</span><span class="span2 offset3"><span class="btn btn-primary btn-small" id="btnEditarSopechoso"><i class="icon-edit"></i> Editar</span></span></legend>
 	       		<div class="control-group">
 	          		<label class="control-label">C.U.I: </label>
 	          		<div class="controls">
@@ -196,8 +195,7 @@ $(document).on('click','#btnCancelEditar', function(e){
 	          			<span id="spnFecNac">&nbsp;</span>
 	          		</div>
 	       		</div>       
-		</fieldset>
-	</form:form>
+		</form:form>
 	</div>
 		
 	<!-- <section> -->

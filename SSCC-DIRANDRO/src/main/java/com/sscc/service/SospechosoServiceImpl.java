@@ -77,7 +77,7 @@ public class SospechosoServiceImpl implements SospechosoService{
 		if(sospechoso.getEstatura()== null){
 			sospechoso.setEstatura(0.0);
 		}
-		if(sospechoso.getFechaDeInscripcion().equals("100-12-12")){
+		if(sospechoso.getFechaDeInscripcion().equals("1000-12-12")){
 			sospechoso.setFechaDeInscripcion(null);
 		}
 		if(sospechoso.getNombrePadre()== null){
@@ -87,7 +87,7 @@ public class SospechosoServiceImpl implements SospechosoService{
 			sospechoso.setNombreMadre("");
 		}
 		
-		if(sospechoso.getFechaDeEmision().equals("100-12-12")){
+		if(sospechoso.getFechaDeEmision().equals("1000-12-12")){
 			sospechoso.setFechaDeEmision(null);
 		}
 		if(sospechoso.getRestriccion()== null){
