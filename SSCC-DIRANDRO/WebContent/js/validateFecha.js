@@ -4,7 +4,18 @@ jQuery.validator.addMethod(
     "peruDate",
     function(value, element) {
         // put your own logic here, this is just a (crappy) example
-        return value.match(/^\d\d?\/\d\d?\/\d\d\d\d$/);
+        return this.optional(element) || value.match(/^\d\d?\/\d\d?\/\d\d\d\d$/);
     },
     "Please enter a date in the format dd/mm/yyyy."
 );
+
+//validacion para numeros double, ahora solo tiene 2 decimales y cuando quieres aumentar aumentas el 1,2 a 1,3 por ejemplo.
+jQuery.validator.addMethod(
+		"doubleNumber", 
+		function (value, element) {
+			return this.optional(element) || /^(\d+|\d+,\d{1,2})$/.test(value) || /^(\d+|\d+.\d{1,2})$/.test(value);
+		}, 
+		"Please specify the correct number format."
+);
+
+

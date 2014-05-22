@@ -43,8 +43,12 @@ function init(sospechoso){
 		$("#spnSexo").append("Masculino");
 	}	 			
 	
-	var fec  = sospechoso.fechaDeNacimiento;
-	$("#spnFecNac").append(fec.split("-")[2]+"/"+fec.split("-")[1]+"/"+fec.split("-")[0]);
+	if(sospechoso.fechaDeNacimiento != null){
+		var fec  = sospechoso.fechaDeNacimiento;
+		$("#spnFecNac").append(fec.split("-")[2]+"/"+fec.split("-")[1]+"/"+fec.split("-")[0]);
+	}else{
+		$("#spnFecNac").append('');
+	}	
 	
 	//$("#spnFecNac").append(sospechoso.fechaDeNacimiento);
 	$("#spnGradoInstruccion").append(sospechoso.gradoDeInstruccion);
@@ -119,8 +123,10 @@ $(document).ready(function(){
 });
 
 $(document).on('change','#txtFecNac', function(e){
-	var fec  = $("#txtFecNac").val();
-	$("#hdnFecNac").val(fec.split("/")[2]+"-"+fec.split("/")[1]+"-"+fec.split("/")[0]);
+	if($("#txtFecNac").val() != null){
+		var fec  = $("#txtFecNac").val();
+		$("#hdnFecNac").val(fec.split("/")[2]+"-"+fec.split("/")[1]+"-"+fec.split("/")[0]);		
+	}
 });
 
 $(document).on('click','#btnEditarSopechoso', function(e){

@@ -35,22 +35,25 @@
 </style>
 <script>
 $(document).on('change','#txtFecNac', function(e){
-	//var fec  = $("#txtFecNac").val().split("/");
-	$("#hdnFecNac").val($("#txtFecNac").val().split("/")[2]+"-"+$("#txtFecNac").val().split("/")[1]+"-"+$("#txtFecNac").val().split("/")[0]);
+	var fec = $("#txtFecNac").val();
+	$("#hdnFecNac").val(fec.split("/")[2]+"-"+fec.split("/")[1]+"-"+fec.split("/")[0]);
 });
 $(document).on('change','#txtInscripcion', function(e){
-	$("#hdnFecIns").val($("#txtInscripcion").val().split("/")[2]+"-"+$("#txtInscripcion").val().split("/")[1]+"-"+$("#txtInscripcion").val().split("/")[0]);
+	var fec = $("#txtInscripcion").val();
+	$("#hdnFecIns").val(fec.split("/")[2]+"-"+fec.split("/")[1]+"-"+fec.split("/")[0]);
 });
 $(document).on('change','#txtEmision', function(e){
-	$("#hdnFecEmi").val($("#txtEmision").val().split("/")[2]+"-"+$("#txtEmision").val().split("/")[1]+"-"+$("#txtEmision").val().split("/")[0]);
+	var fec = $("#txtEmision").val();
+	$("#hdnFecEmi").val(fec.split("/")[2]+"-"+fec.split("/")[1]+"-"+fec.split("/")[0]);
 });
+
 $(document).ready(function() {
 	$( ".datepicker" ).datepicker({ dateFormat: 'dd/mm/yy' });
 	
 	$("#formCrearSospechoso").validate({
 		rules:{
 			txtFecNac: {peruDate: true},
-			txtEstatura: {number: true},
+			txtEstatura: {doubleNumber: true},
 			txtInscripcion: {peruDate: true},
 			txtEmision: {peruDate: true},
 			txtCodUnico: {number: true, minlength: 8, maxlength: 8}
