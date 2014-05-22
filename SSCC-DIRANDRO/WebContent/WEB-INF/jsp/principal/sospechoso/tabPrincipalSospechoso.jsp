@@ -158,7 +158,10 @@ $(document).on('click','#btnCancelEditar', function(e){
 <div id="divMostrarDatosSospechoso">
 	<div id="divMostrarSospechoso">
 		<form:form class="form-horizontal">
-	       	<legend><span class="span3"><span class="colored">///</span> Datos del Sospechoso:</span><span class="span2 offset3"><span class="btn btn-primary btn-small" id="btnEditarSopechoso"><i class="icon-edit"></i> Editar</span></span></legend>
+	       	<legend>
+		       	<span class=""><span class="colored">///</span> Datos del Sospechoso:</span>
+		       	<span class="offset3"><button class="btn btn-primary" type="button" id="btnEditarSopechoso"><i class="icon-edit"></i> Editar</button></span>
+	       	</legend>
 	       		<div class="control-group">
 	          		<label class="control-label">C.U.I: </label>
 	          		<div class="controls">
@@ -207,7 +210,9 @@ $(document).on('click','#btnCancelEditar', function(e){
 	<!-- <section> -->
 		<fieldset class="well" style="display: none;" id="divEditarSospechoso">
 			<form:form class="form-horizontal" id="formEditarSospechoso" action="editarSospechoso" commandName="sospechoso">
-		       	<legend><span class="colored">///</span> Editar Datos Personales del Sospechoso:</legend>
+		       	<legend>
+			       	<span class="colored">///</span> Editar Datos Personales del Sospechoso:
+		       	</legend>
 		       		<input type="hidden" name="idSospechoso" id="hdnIdSospechosoEdit">
 		       		<div class="control-group">
 		          		<label class="control-label">Código Único de Identificación: </label>
