@@ -27,51 +27,54 @@
 </head>
 <body>
 
-<!--HEADER-->
-<jsp:include page="../componentes/header.jsp"/>
-<!--/HEADER-->
-<!--CENTRO-->
-<!--MENU-->
-<jsp:include page="../componentes/menu.jsp"/>
-<!--/MENU-->
-<div class="container inner_content">
-	<section class="span9" style="margin-left: 80px;">
-		<fieldset class="well">
-			<form:form class="form-horizontal" id="formCrearSospechoso" action="crearSospechoso" commandName="sospechoso">
-				<legend><span class="colored">///</span> Cambiar Clave:</legend>
-				<div class="control-group">
-	          		<label class="control-label">Código Único de Identificación: </label>
-	          		<div class="controls">
-	          			<input class="span2" type="text" name="txtCodUnico" id="txtCodUnico" data-rule-required="true" data-msg-required="*">
-	          			<input class="span2" type="hidden" name="codigoUnicoDeIdentificacion" id="hdnCodUnico">
-	          		</div>
-	       		</div>
-	       		<hr>
-	       		<div class="control-group">
-	          		<label class="control-label">Primer Apellido: </label>
-	          		<div class="controls">
-	          			<input class="span2" type="text" name="primerApellido" data-rule-required="true" data-msg-required="*">
-	          		</div>
-	       		</div>
-	       		<hr>
-	       		<div class="control-group">
-	          		<label class="control-label">Segundo Apellido: </label>
-	          		<div class="controls">
-	          			<input class="span2" type="text" name="segundoApellido" data-rule-required="true" data-msg-required="*">
-	          		</div>
-	       		</div>
-	       		<hr>
-	       		<div class="form-actions">
-		        	<button class="btn btn-success" id="btnGuardar" type="submit"><i class="icon-ok icon-white"></i> Cambiar Clave</button>
-		        	<button class="btn btn-danger" type="reset"><i class="icon-refresh icon-white"></i> Reset</button>
-		        </div>  
-			</form:form>
-		</fieldset>
-	</section>
-</div>
-<!--/CENTRO-->
-<!-- sticky footer -->
-<jsp:include page="../componentes/footer.jsp"/>
-<!-- /sticky footer -->
+	<!--HEADER-->
+	<jsp:include page="../componentes/header.jsp" />
+	<!--/HEADER-->
+	<!--CENTRO-->
+	<!--MENU-->
+	<jsp:include page="../componentes/menu.jsp" />
+	<!--/MENU-->
+	<div class="container inner_content">
+		<section class="span9" style="margin-left: 80px;">
+			<fieldset class="well">
+				<form:form class="form-horizontal" id="formCrearSospechoso"
+					action="crearSospechoso" commandName="sospechoso">
+					<legend>
+						<span class="colored">///</span> Cambiar Clave:
+					</legend>
+					<div class="control-group">
+						<label class="control-label">Código Único de Identificación: </label>
+						<div class="controls">
+							<input class="span2" type="text" name="txtCodUnico" id="txtCodUnico" data-rule-required="true" data-msg-required="*">
+							<input class="span2" type="hidden" name="codigoUnicoDeIdentificacion" id="hdnCodUnico">
+						</div>
+					</div>
+					<hr>
+					<div class="control-group">
+						<label class="control-label">Primer Apellido: </label>
+						<div class="controls">
+							<input class="span2" type="text" name="primerApellido" data-rule-required="true" data-msg-required="*">
+						</div>
+					</div>
+					<hr>
+					<div class="control-group">
+						<label class="control-label">Segundo Apellido: </label>
+						<div class="controls">
+							<input class="span2" type="text" name="segundoApellido" data-rule-required="true" data-msg-required="*">
+						</div>
+					</div>
+					<hr>
+					<div class="form-actions">
+						<button class="btn btn-success" id="btnGuardar" type="submit"><i class="icon-ok icon-white"></i> Cambiar Clave </button>
+						<button class="btn btn-danger" type="reset"><i class="icon-refresh icon-white"></i> Reset </button>
+					</div>
+				</form:form>
+			</fieldset>
+		</section>
+	</div>
+	<!--/CENTRO-->
+	<!-- sticky footer -->
+	<jsp:include page="../componentes/footer.jsp" />
+	<!-- /sticky footer -->
 </body>
 </html>

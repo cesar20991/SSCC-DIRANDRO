@@ -1,4 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+	pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -22,87 +23,87 @@
 <link rel="stylesheet" href="css/prettyPhoto.css" type="text/css" media="screen" title="prettyPhoto main stylesheet" charset="utf-8" />
 </head>
 <body>
-<!--HEADER-->
-<jsp:include page="../componentes/header.jsp"/>
-<!--/HEADER-->
-<!--CENTRO-->
-<!--MENU-->
-<jsp:include page="../componentes/menu.jsp"/>
-<!--/MENU-->
-<div class="container inner_content">
-	<section class="span5" style="margin-left: 80px;">
-		<table class="table table-striped table-bordered">
-        <thead>
-          <tr>
-            <th colspan="4">Casos Criminales</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-          	<td colspan="1"><span class="colored">0</span></td>
-            <td colspan="3"> Activo</td>
-          </tr>
-          <tr>
-          	<td colspan="1"><span class="colored">0</span></td>
-            <td colspan="3"> Diligencias Preliminares</td>
-          </tr>
-          <tr>
-          	<td colspan="1"><span class="colored">0</span></td>
-            <td colspan="3"> Calificacion Fiscal</td>
-          </tr>
-          <tr>
-          	<td colspan="1"><span class="colored">0</span></td>
-            <td colspan="3"> Fiscalia Superior</td>
-          </tr>
-          <tr>
-          	<td colspan="1"><span class="colored">0</span></td>
-            <td colspan="3"> Formalizacion de la Investigacion</td>
-          </tr>
-          <tr>
-          	<td colspan="1"><span class="colored">0</span></td>
-            <td colspan="3"> Diligencias de la Investigacion</td>
-          </tr>
-          <tr>
-          	<td colspan="1"><span class="colored">0</span></td>
-            <td colspan="3"> Conclusion de la Investigacion</td>
-          </tr>
-          <tr>
-          	<td colspan="1"><span class="colored">0</span></td>
-            <td colspan="3"> Pausa por Falta de Documentos</td>
-          </tr>
-          <tr>
-          	<td colspan="1"><span class="colored">0</span></td>
-            <td colspan="3"> Pausa por Nuevo Caso</td>
-          </tr>
-          <tr>
-          	<td colspan="1"><span class="colored">0</span></td>
-            <td colspan="3"> Plazo Ampleatorio Investigacion Preliminar</td>
-          </tr>
-          <tr>
-          	<td colspan="1"><span class="colored">0</span></td>
-            <td colspan="3"> Plazo Ampleatorio Investigacion Formal</td>
-          </tr>
-        </tbody>
-      </table>
-	</section>
-	<section class="span4" style="margin-left: 45px;">
-		<table class="table table-striped table-bordered">
-			<thead>
-	          <tr>
-	            <th colspan="4">Ultimos Casos Criminales</th>
-	          </tr>
-	        </thead>
-	        <tbody>
-	        	<tr>
-	        		<td>Caso CC0001-20/04/2014</td>
-	        	</tr>
-	        </tbody>
-		</table>
-	</section>
-</div>
-<!--/CENTRO-->
-<!-- sticky footer -->
-<jsp:include page="../componentes/footer.jsp"/>
-<!-- /sticky footer -->
+	<!--HEADER-->
+	<jsp:include page="../componentes/header.jsp" />
+	<!--/HEADER-->
+	<!--CENTRO-->
+	<!--MENU-->
+	<jsp:include page="../componentes/menu.jsp" />
+	<!--/MENU-->
+	<div class="container inner_content">
+		<section class="span5" style="margin-left: 80px;">
+			<table class="table table-striped table-bordered">
+				<thead>
+					<tr>
+						<th colspan="4">Casos Criminales</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td colspan="1"><span class="colored">0</span></td>
+						<td colspan="3">Activo</td>
+					</tr>
+					<tr>
+						<td colspan="1"><span class="colored">0</span></td>
+						<td colspan="3">Diligencias Preliminares</td>
+					</tr>
+					<tr>
+						<td colspan="1"><span class="colored">0</span></td>
+						<td colspan="3">Calificacion Fiscal</td>
+					</tr>
+					<tr>
+						<td colspan="1"><span class="colored">0</span></td>
+						<td colspan="3">Fiscalia Superior</td>
+					</tr>
+					<tr>
+						<td colspan="1"><span class="colored">0</span></td>
+						<td colspan="3">Formalizacion de la Investigacion</td>
+					</tr>
+					<tr>
+						<td colspan="1"><span class="colored">0</span></td>
+						<td colspan="3">Diligencias de la Investigacion</td>
+					</tr>
+					<tr>
+						<td colspan="1"><span class="colored">0</span></td>
+						<td colspan="3">Conclusion de la Investigacion</td>
+					</tr>
+					<tr>
+						<td colspan="1"><span class="colored">0</span></td>
+						<td colspan="3">Pausa por Falta de Documentos</td>
+					</tr>
+					<tr>
+						<td colspan="1"><span class="colored">0</span></td>
+						<td colspan="3">Pausa por Nuevo Caso</td>
+					</tr>
+					<tr>
+						<td colspan="1"><span class="colored">0</span></td>
+						<td colspan="3">Plazo Ampleatorio Investigacion Preliminar</td>
+					</tr>
+					<tr>
+						<td colspan="1"><span class="colored">0</span></td>
+						<td colspan="3">Plazo Ampleatorio Investigacion Formal</td>
+					</tr>
+				</tbody>
+			</table>
+		</section>
+		<section class="span4" style="margin-left: 45px;">
+			<table class="table table-striped table-bordered">
+				<thead>
+					<tr>
+						<th colspan="4">Ultimos Casos Criminales</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>Caso CC0001-20/04/2014</td>
+					</tr>
+				</tbody>
+			</table>
+		</section>
+	</div>
+	<!--/CENTRO-->
+	<!-- sticky footer -->
+	<jsp:include page="../componentes/footer.jsp" />
+	<!-- /sticky footer -->
 </body>
 </html>

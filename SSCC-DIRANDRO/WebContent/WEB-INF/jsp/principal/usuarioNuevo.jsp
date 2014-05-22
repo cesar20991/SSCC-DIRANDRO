@@ -24,7 +24,7 @@
 <link href="js/google-code-prettify/prettify.css" rel="stylesheet">
 <link rel="stylesheet" href="css/prettyPhoto.css" type="text/css" media="screen" title="prettyPhoto main stylesheet" charset="utf-8" />
 <style>
-.error{
+.error {
 	color: rgb(255, 0, 0);
 }
 </style>
@@ -110,150 +110,157 @@ $(document).ready(function() {
 </script>
 </head>
 <body>
-<!--HEADER-->
-<jsp:include page="../componentes/header.jsp"/>
-<!--/HEADER-->
-<!--CENTRO-->
-<!--MENU-->
-<jsp:include page="../componentes/menu.jsp"/>
-<!--/MENU-->
-<div class="container inner_content">
-	<section class="span9" style="margin-left: 80px;">
-		<fieldset class="well">
-			<form:form class="form-horizontal" id="formCrearUsuario" action="crearUsuario" commandName="perfil">
-		       	<legend><span class="colored">///</span> Datos Personales:</legend>
-		       		<div class="control-group">
-		          		<label class="control-label">Primer Nombre: </label>
-		          		<div class="controls">
-		          			<input class="span2" type="text" name="primerNombre" data-rule-required="true" data-msg-required="*">
-		          		</div>
-		       		</div>
-		       		<div class="control-group">
-		          		<label class="control-label">Segundo Nombre: </label>
-		          		<div class="controls">
-		          			<input class="span2" type="text" name="segundoNombre">
-		          		</div>
-		       		</div>
-		       		<hr>
-		       		<div class="control-group">
-		          		<label class="control-label">Apellido Paterno: </label>
-		          		<div class="controls">
-		          			<input class="span2" type="text" name="apePaterno" data-rule-required="true" data-msg-required="*">
-		          		</div>
-		       		</div>
-		       		<div class="control-group">
-		          		<label class="control-label">Apellidos Materno: </label>
-		          		<div class="controls">
-		          			<input class="span2" type="text" name="apeMaterno" data-rule-required="true" data-msg-required="*">
-		          		</div>
-		       		</div>
-		       		<hr>
-		       		<div class="control-group">
-		          		<label class="control-label">DNI: </label>
-		          		<div class="controls">
-		          			<input class="span2" type="text" name="txtDni" id="txtDni">
-		          			<input class="span2" type="hidden" name="dni" id="hdnDni">
-		          		</div>
-		       		</div>
-		       		<hr>
-		       		<div class="control-group">
-		          		<label class="control-label">Entidad: </label>
-		          		<label class="checkbox inline">
-		          			<input type="radio" name="entidadPerteneciente" id="radioD" value="D" checked>DIRANDRO
-		          		</label>
-		          		<label class="checkbox inline">
-		          			<input type="radio" name="entidadPerteneciente" id="radioM" value="M">Ministerio Público
-		          		</label>
-		       		</div>
-		       		<hr>
-		       		<div class="control-group" id="divFiscal" style="display: none;">
-		          		<label class="control-label">Tipo Fiscal: </label>
-		          		<label class="checkbox inline">
-		          			<input type="radio" name="tipoFiscal" id="chkFiscal" value="Fiscal" checked>Fiscal
-		          		</label>
-		          		<label class="checkbox inline">
-		          			<input type="radio" name="tipoFiscal" id="chkFiscalSup" value="Fiscal Superior">Fiscal Superior
-		          		</label>
-		       		</div>
-		       		<hr id="hrFiscal" style="display: none;">
-		       		<div class="control-group" id="divCargo">
-		          		<label class="control-label">Cargo: </label>
-		          		<div class="controls">
-		          			<select class="span2" name="cargo" data-rule-required="true" data-msg-required="*">
-		          				<option>Jefe de Unidad</option>
-		          				<option>Superior</option>
-		          				<option>Investigador</option>
-				            </select>
-		          		</div>
-		       		</div>
-		       		<hr id="hrCargo">
-		       		<div class="control-group" id="divRango">
-		          		<label class="control-label">Rango: </label>
-		          		<label class="checkbox inline">
-		          			<input type="radio" name="rango" id="rangoOficial" value="Oficial" checked>Oficial
-		          		</label>
-		          		<label class="checkbox inline">
-		          			<input type="radio" name="rango" id="rangoSubOficial" value="Sub Oficial">Sub Oficial
-		          		</label>
-		       		</div>
-		       		<hr id="hrRango"> 
-		       		<div class="control-group" id="divGrado">
-		          		<label class="control-label">Grado: </label>
-		          		<div class="controls">
-		          			<select class="span2" name="grado" id="sltcGrado" data-rule-required="true" data-msg-required="*">
-		          				<option>Alfz. PNP</option>
-		          				<option>Tnte. PNP</option>
-		          				<option>Cap. PNP</option>
+	<!--HEADER-->
+	<jsp:include page="../componentes/header.jsp" />
+	<!--/HEADER-->
+	<!--CENTRO-->
+	<!--MENU-->
+	<jsp:include page="../componentes/menu.jsp" />
+	<!--/MENU-->
+	<div class="container inner_content">
+		<section class="span9" style="margin-left: 80px;">
+			<fieldset class="well">
+				<form:form class="form-horizontal" id="formCrearUsuario"
+					action="crearUsuario" commandName="perfil">
+					<legend>
+						<span class="colored">///</span> Datos Personales:
+					</legend>
+					<div class="control-group">
+						<label class="control-label">Primer Nombre: </label>
+						<div class="controls">
+							<input class="span2" type="text" name="primerNombre" data-rule-required="true" data-msg-required="*">
+						</div>
+					</div>
+					<div class="control-group">
+						<label class="control-label">Segundo Nombre: </label>
+						<div class="controls">
+							<input class="span2" type="text" name="segundoNombre">
+						</div>
+					</div>
+					<hr>
+					<div class="control-group">
+						<label class="control-label">Apellido Paterno: </label>
+						<div class="controls">
+							<input class="span2" type="text" name="apePaterno" data-rule-required="true" data-msg-required="*">
+						</div>
+					</div>
+					<div class="control-group">
+						<label class="control-label">Apellidos Materno: </label>
+						<div class="controls">
+							<input class="span2" type="text" name="apeMaterno" data-rule-required="true" data-msg-required="*">
+						</div>
+					</div>
+					<hr>
+					<div class="control-group">
+						<label class="control-label">DNI: </label>
+						<div class="controls">
+							<input class="span2" type="text" name="txtDni" id="txtDni">
+							<input class="span2" type="hidden" name="dni" id="hdnDni">
+						</div>
+					</div>
+					<hr>
+					<div class="control-group">
+						<label class="control-label">Entidad: </label> 
+						<label class="checkbox inline"> 
+							<input type="radio" name="entidadPerteneciente" id="radioD" value="D" checked>DIRANDRO
+						</label> 
+						<label class="checkbox inline"> 
+						<input type="radio" name="entidadPerteneciente" id="radioM" value="M">Ministerio Público
+						</label>
+					</div>
+					<hr>
+					<div class="control-group" id="divFiscal" style="display: none;">
+						<label class="control-label">Tipo Fiscal: </label> 
+						<label class="checkbox inline"> 
+							<input type="radio" name="tipoFiscal" id="chkFiscal" value="Fiscal" checked>Fiscal
+						</label> 
+						<label class="checkbox inline"> 
+						<input type="radio" name="tipoFiscal" id="chkFiscalSup" value="Fiscal Superior">Fiscal Superior
+						</label>
+					</div>
+					<hr id="hrFiscal" style="display: none;">
+					<div class="control-group" id="divCargo">
+						<label class="control-label">Cargo: </label>
+						<div class="controls">
+							<select class="span2" name="cargo" data-rule-required="true" data-msg-required="*">
+								<option>Jefe de Unidad</option>
+								<option>Superior</option>
+								<option>Investigador</option>
+							</select>
+						</div>
+					</div>
+					<hr id="hrCargo">
+					<div class="control-group" id="divRango">
+						<label class="control-label">Rango: </label> 
+						<label class="checkbox inline"> 
+							<input type="radio" name="rango" id="rangoOficial" value="Oficial" checked>Oficial
+						</label> 
+						<label class="checkbox inline"> 
+							<input type="radio" name="rango" id="rangoSubOficial" value="Sub Oficial">Sub Oficial
+						</label>
+					</div>
+					<hr id="hrRango">
+					<div class="control-group" id="divGrado">
+						<label class="control-label">Grado: </label>
+						<div class="controls">
+							<select class="span2" name="grado" id="sltcGrado"
+								data-rule-required="true" data-msg-required="*">
+								<option>Alfz. PNP</option>
+								<option>Tnte. PNP</option>
+								<option>Cap. PNP</option>
 								<option>May. PNP</option>
 								<option>Cmdte PNP</option>
 								<option>Crnel PNP</option>
 								<option>Gral. PNP</option>
-				            </select>
-		          		</div>
-		       		</div>
-		       		<hr id="hrGrado">
-		       		<div class="control-group" id="divNCarnet">
-		          		<label class="control-label">Numero de Carnet: </label>
-		          		<div class="input-prepend" style="margin-left: 20px;">
-		          			<span class="add-on">CIP N°</span><input class="input-small" type="text" id="txtNumeroDeCarnet" name="txtNumeroDeCarnet" style="width: 110px;">
-		          			<input class="input-small" type="hidden" name="numeroDeCarnet" id="hdnNumeroDeCarnet" style="width: 110px;">
-		          		</div>
-		       		</div>
-		       		<hr id="hrNCarnet">
-		       		<div class="control-group">
-		          		<label class="control-label">Telefono: </label>
-		          		<div class="controls">
-		          			<input class="span2" type="text" name="telefono">
-		          		</div>
-		       		</div>
-		       		<hr>
-		       		<div class="control-group">
-		          		<label class="control-label">Corre Electrónico: </label>
-		          		<div class="input-prepend" style="margin-left: 20px;">
-		          			<span class="add-on">@</span><input class="input-medium" type="text" id="txtCorreo" name="txtCorreo" style="width: 135px;">
-		          			<input class="input-medium" type="hidden" id="hdnCorreo" name="correo">
-		          		</div>
-		       		</div>
-		       		<hr>
-		       		<div class="control-group">
-		          		<label class="control-label">Sexo: </label>
-		          		<label class="checkbox inline">
-		          			<input type="radio" name="sexo" id="" value="M" checked>Masculino
-		          		</label>
-		          		<label class="checkbox inline">
-		          			<input type="radio" name="sexo" id="" value="F">Femenino
-		          		</label>
-		       		</div>
-		       		<div class="form-actions">
-			        	<button class="btn btn-success" id="btnGuardar" type="submit"><i class="icon-ok icon-white"></i> Guardar Usuario</button>
-			        </div>  
-			</form:form>
-		</fieldset>
-	</section>
-</div>
-<!--/CENTRO-->
-<!-- sticky footer -->
-<jsp:include page="../componentes/footer.jsp"/>
-<!-- /sticky footer -->
+							</select>
+						</div>
+					</div>
+					<hr id="hrGrado">
+					<div class="control-group" id="divNCarnet">
+						<label class="control-label">Numero de Carnet: </label>
+						<div class="input-prepend" style="margin-left: 20px;">
+							<span class="add-on">CIP N°</span>
+							<input class="input-small" type="text" id="txtNumeroDeCarnet" name="txtNumeroDeCarnet" style="width: 110px;"> 
+							<input class="input-small" type="hidden" name="numeroDeCarnet" id="hdnNumeroDeCarnet" style="width: 110px;">
+						</div>
+					</div>
+					<hr id="hrNCarnet">
+					<div class="control-group">
+						<label class="control-label">Telefono: </label>
+						<div class="controls">
+							<input class="span2" type="text" name="telefono">
+						</div>
+					</div>
+					<hr>
+					<div class="control-group">
+						<label class="control-label">Corre Electrónico: </label>
+						<div class="input-prepend" style="margin-left: 20px;">
+							<span class="add-on">@</span>
+							<input class="input-medium" type="text" id="txtCorreo" name="txtCorreo"style="width: 135px;"> 
+							<input class="input-medium" type="hidden" id="hdnCorreo" name="correo">
+						</div>
+					</div>
+					<hr>
+					<div class="control-group">
+						<label class="control-label">Sexo: </label> 
+						<label class="checkbox inline"> 
+							<input type="radio" name="sexo" id="" value="M" checked>Masculino
+						</label> 
+						<label class="checkbox inline"> 
+							<input type="radio" name="sexo" id="" value="F">Femenino
+						</label>
+					</div>
+					<div class="form-actions">
+						<button class="btn btn-success" id="btnGuardar" type="submit"><i class="icon-ok icon-white"></i> Guardar Usuario </button>
+						<button class="btn btn-danger" type="reset"><i class="icon-refresh icon-white"></i> Reset</button>
+					</div>
+				</form:form>
+			</fieldset>
+		</section>
+	</div>
+	<!--/CENTRO-->
+	<!-- sticky footer -->
+	<jsp:include page="../componentes/footer.jsp" />
+	<!-- /sticky footer -->
 </body>
 </html>

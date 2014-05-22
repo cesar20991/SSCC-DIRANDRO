@@ -22,56 +22,46 @@
 <link rel="apple-touch-icon" sizes="72x72" href="ico/apple-touch-icon-72x72.html">
 <link rel="apple-touch-icon" sizes="114x114" href="ico/apple-touch-icon-114x114.html"> -->
 </head>
-<script>
-$(document).ready(function(){
-	//alert("Hola");toLogin
-	//document.location.href='toLogin';
-});
-</script>
 <body class="login">
-<!--HEADER-->
-<header>
-	<div class="container">
-  		<div class="row hidden-phone">
-  		<span>&nbsp;</span>
-		</div>
-		<div class="row">
-            <div class="span4 logo">
-            	<a href="index-2.html"><img src="img/logo.png" alt="logo" style="margin-bottom:7px; margin-top:7px;"/></a>
-      		</div>
-      		<!-- <div class="span8">
+	<!--HEADER-->
+	<header>
+		<div class="container">
+			<div class="row hidden-phone">
+				<span>&nbsp;</span>
+			</div>
+			<div class="row">
+				<div class="span4 logo">
+					<a href="index-2.html"><img src="img/logo.png" alt="logo"
+						style="margin-bottom: 7px; margin-top: 7px;" /></a>
+				</div>
+				<!-- <div class="span8">
             	<img src="img/skills.png" style="float: right;"/><span style="margin-top: 20px;" class="header_social"><span class="badge"><a href="#">Cambiar Contraseña</a></span>&nbsp;&nbsp;<span class="badge"><a href="#">Crear Usuarios</a></span></span>
             </div> -->
-    	</div>
+			</div>
+		</div>
+	</header>
+	<!--WELCOME AREA-->
+	<div class="gray_bg">
+		<div class="container">
+			<div class="row welcome" style="margin-top: 0px;">
+				<div class="span12">
+					<h1>Sistema de Seguimiento de Casos Criminales para la DIRANDRO</h1>
+					<!--  <p><em>otro texto</em></p> -->
+				</div>
+			</div>
+		</div>
 	</div>
-</header>
-<!--WELCOME AREA-->
-<div class="gray_bg">
-    <div class="container">
-        <div class="row welcome" style="margin-top: 0px;">
-            <div class="span12">
-               <h1>Sistema de Seguimiento de Casos Criminales para la DIRANDRO</h1>
-                <!--  <p><em>otro texto</em></p> -->
-            </div>
-        </div>
-    </div>
-</div>
-<!--/WELCOME AREA-->
-<!--/HEADER-->
-<!--MAIN CONTENT AREA-->
-<div class="container inner_content">
-	<!-- FORMUALARIO -->
-	<div class="span9 columns">
-	<a href="toLogin">Login</a><br/>
+	<!--/WELCOME AREA-->
+	<!--/HEADER-->
+	<!--MAIN CONTENT AREA-->
+	<div class="container inner_content">
+		<!-- FORMUALARIO -->
+		<div class="span9 columns">
+			<a href="toLogin">Login</a><br />
+		</div>
+		<!-- /FORMUALARIO -->
 	</div>
-	<!-- /FORMUALARIO -->	
-</div>
-<!--/MAIN CONTENT AREA-->
-
-	
-<!-- sticky footer
-<footer>
-		
-</footer> -->
+	<!--/MAIN CONTENT AREA-->
+<!-- sticky footer<footer> </footer> -->
 </body>
 </html>

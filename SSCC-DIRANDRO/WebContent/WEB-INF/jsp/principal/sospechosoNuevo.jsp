@@ -35,16 +35,22 @@
 </style>
 <script>
 $(document).on('change','#txtFecNac', function(e){
-	var fec = $("#txtFecNac").val();
-	$("#hdnFecNac").val(fec.split("/")[2]+"-"+fec.split("/")[1]+"-"+fec.split("/")[0]);
+	if($("#txtFecNac").val() != ''){
+		var fec = $("#txtFecNac").val();
+		$("#hdnFecNac").val(fec.split("/")[2]+"-"+fec.split("/")[1]+"-"+fec.split("/")[0]);		
+	}
 });
 $(document).on('change','#txtInscripcion', function(e){
-	var fec = $("#txtInscripcion").val();
-	$("#hdnFecIns").val(fec.split("/")[2]+"-"+fec.split("/")[1]+"-"+fec.split("/")[0]);
+	if($("#txtInscripcion").val() != ''){
+		var fec = $("#txtInscripcion").val();
+		$("#hdnFecIns").val(fec.split("/")[2]+"-"+fec.split("/")[1]+"-"+fec.split("/")[0]);		
+	}
 });
 $(document).on('change','#txtEmision', function(e){
-	var fec = $("#txtEmision").val();
-	$("#hdnFecEmi").val(fec.split("/")[2]+"-"+fec.split("/")[1]+"-"+fec.split("/")[0]);
+	if($("#txtEmision").val() != ''){
+		var fec = $("#txtEmision").val();
+		$("#hdnFecEmi").val(fec.split("/")[2]+"-"+fec.split("/")[1]+"-"+fec.split("/")[0]);		
+	}
 });
 
 $(document).ready(function() {

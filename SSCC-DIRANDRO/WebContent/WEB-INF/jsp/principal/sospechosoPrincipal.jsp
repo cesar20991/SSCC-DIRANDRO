@@ -34,76 +34,76 @@
 </head>
 <body>
 
-<!--HEADER-->
-<jsp:include page="../componentes/header.jsp"/>
-<!--/HEADER-->
-<!--CENTRO-->
-<!--MENU-->
-<jsp:include page="../componentes/menu.jsp"/>
-<!--/MENU-->
-<div class="container inner_content">
-	<section class="span9" style="margin-left: 80px;">
-	<c:forEach items="${sospechosoList}" var="sospechoso">
-		<span id="hdnIdSospechoso" style="display: none;"><c:out value="${sospechoso.idSospechoso}"/></span>
-	</c:forEach>
-		<table class="table table-bordered table-condensed">
-	        <tbody>
-	        	<tr>
-		            <td>Código Único de Identificación: </td>
-		            <td align="center"><span id="hdrCodigoUnicoDeIdentificacion">&nbsp;</span></td>
-		            <td rowspan="5" align="center"><img src="img/skills.png" alt="logo" style="margin-bottom:7px; margin-top:7px;"/></td>
-          		</tr>
-	        	<tr>
-		            <td>Apellidos: </td>
-		            <td><span id="hdrPrimerApellido">&nbsp;</span>&nbsp;&nbsp;<span id="hdrSegundoApellido">&nbsp;</span></td>
-          		</tr>
-          		<tr>
-		            <td>Prenombres: </td>
-		            <td><span id="hdrPrenombres">&nbsp;</span></td>
-          		</tr>
-          		<tr>
-		            <td>Alias: </td>
-		            <td><span id="hdrAlias">&nbsp;</span></td>
-          		</tr>
-          		<tr>
-		            <td>Caso: </td>
-		            <td><span id="hdrCaso">&nbsp;</span></td>
-          		</tr>
-	        </tbody>
-	    </table>
-	</section>
-	<section class="span9" style="margin-left: 80px;">
-		<div class="tabbable" style="margin-bottom: 9px;">
-        	<ul class="nav nav-tabs">
-          		<li class="active"><a href="#1" data-toggle="tab">Principal</a></li>
-	          	<li class=""><a href="#2" data-toggle="tab">Rasgos Particulares</a></li>
-	          	<li class=""><a href="#3" data-toggle="tab">Archivos Adjuntos</a></li>
-	          	<li class=""><a href="#4" data-toggle="tab">Comentarios</a></li>
-	          	<li class=""><a href="#5" data-toggle="tab">Auditoría</a></li>
-	        </ul>
-	        <div class="tab-content">
-          		<div class="tab-pane active" id="1">
-	            	<jsp:include page="sospechoso/tabPrincipalSospechoso.jsp"/>
-	          	</div>
-	          	<div class="tab-pane" id="2">
-	            	<p>Seccion 2.</p>
-	          	</div>
-	          	<div class="tab-pane" id="3">
-	            	<p>Seccion 3.</p>
-	          	</div>
-	          	<div class="tab-pane" id="4">
-	            	<p>Seccion 4.</p>
-	          	</div>
-	          	<div class="tab-pane" id="5">
-	            	<p>Seccion 5.</p>
-	          	</div>
-        	</div>
-		</div>
-	</section>
-</div>
-<!--/CENTRO-->
-<!-- sticky footer -->
-<jsp:include page="../componentes/footer.jsp"/>
-<!-- /sticky footer -->
+	<!--HEADER-->
+	<jsp:include page="../componentes/header.jsp" />
+	<!--/HEADER-->
+	<!--CENTRO-->
+	<!--MENU-->
+	<jsp:include page="../componentes/menu.jsp" />
+	<!--/MENU-->
+	<div class="container inner_content">
+		<section class="span9" style="margin-left: 80px;">
+			<c:forEach items="${sospechosoList}" var="sospechoso">
+				<span id="hdnIdSospechoso" style="display: none;"><c:out value="${sospechoso.idSospechoso}" /></span>
+			</c:forEach>
+			<table class="table table-bordered table-condensed">
+				<tbody>
+					<tr>
+						<td>Código Único de Identificación:</td>
+						<td align="center"><span id="hdrCodigoUnicoDeIdentificacion">&nbsp;</span></td>
+						<td rowspan="5" align="center"><img src="img/skills.png" alt="logo" style="margin-bottom: 7px; margin-top: 7px;" /></td>
+					</tr>
+					<tr>
+						<td>Apellidos:</td>
+						<td><span id="hdrPrimerApellido">&nbsp;</span>&nbsp;&nbsp;<span id="hdrSegundoApellido">&nbsp;</span></td>
+					</tr>
+					<tr>
+						<td>Prenombres:</td>
+						<td><span id="hdrPrenombres">&nbsp;</span></td>
+					</tr>
+					<tr>
+						<td>Alias:</td>
+						<td><span id="hdrAlias">&nbsp;</span></td>
+					</tr>
+					<tr>
+						<td>Caso:</td>
+						<td><span id="hdrCaso">&nbsp;</span></td>
+					</tr>
+				</tbody>
+			</table>
+		</section>
+		<section class="span9" style="margin-left: 80px;">
+			<div class="tabbable" style="margin-bottom: 9px;">
+				<ul class="nav nav-tabs">
+					<li class="active"><a href="#1" data-toggle="tab">Principal</a></li>
+					<li class=""><a href="#2" data-toggle="tab">Rasgos Particulares</a></li>
+					<li class=""><a href="#3" data-toggle="tab">Archivos Adjuntos</a></li>
+					<li class=""><a href="#4" data-toggle="tab">Comentarios</a></li>
+					<li class=""><a href="#5" data-toggle="tab">Auditoría</a></li>
+				</ul>
+				<div class="tab-content">
+					<div class="tab-pane active" id="1">
+						<jsp:include page="sospechoso/tabPrincipalSospechoso.jsp" />
+					</div>
+					<div class="tab-pane" id="2">
+						<p>Seccion 2.</p>
+					</div>
+					<div class="tab-pane" id="3">
+						<p>Seccion 3.</p>
+					</div>
+					<div class="tab-pane" id="4">
+						<p>Seccion 4.</p>
+					</div>
+					<div class="tab-pane" id="5">
+						<p>Seccion 5.</p>
+					</div>
+				</div>
+			</div>
+		</section>
+	</div>
+	<!--/CENTRO-->
+	<!-- sticky footer -->
+	<jsp:include page="../componentes/footer.jsp" />
+	<!-- /sticky footer -->
 </body>
 </html>

@@ -27,65 +27,65 @@
 </head>
 <body>
 
-<!--HEADER-->
-<jsp:include page="../componentes/header.jsp"/>
-<!--/HEADER-->
-<!--CENTRO-->
-<!--MENU-->
-<jsp:include page="../componentes/menu.jsp"/>
-<!--/MENU-->
-<div class="container inner_content">
+	<!--HEADER-->
+	<jsp:include page="../componentes/header.jsp" />
+	<!--/HEADER-->
+	<!--CENTRO-->
+	<!--MENU-->
+	<jsp:include page="../componentes/menu.jsp" />
+	<!--/MENU-->
+	<div class="container inner_content">
 		<c:forEach items="${perfilList}" var="perfil">
-			<span id="hdnIdPerfil" style="display: none;"><c:out value="${perfil.idPerfil}"/></span>
-			<span id="hdnEntidad" style="display: none;"><c:out value="${perfil.entidadPerteneciente}"/></span>
+			<span id="hdnIdPerfil" style="display: none;"><c:out value="${perfil.idPerfil}" /></span>
+			<span id="hdnEntidad" style="display: none;"><c:out value="${perfil.entidadPerteneciente}" /></span>
 		</c:forEach>
-	<section class="span9" style="margin-left: 80px;">
-		<table class="table table-bordered table-condensed">
-	        <tbody>
-	        	<tr>
-		            <td>Nombre Completo: </td>
-		            <td align="center"><span id="hdrPrimerNombe"></span>&nbsp;<span id="hdrSegundoNombe"></span>&nbsp;<span id="hdrApePaterno"></span>&nbsp;<span id="hdrApeMaterno"></span></td>
-		            <td rowspan="4" align="center"><img src="img/skills.png" alt="logo" style="margin-bottom:7px; margin-top:7px;"/></td>
-          		</tr>
-	          	<tr>
-            		<td id="tdCargo">Cargo: </td>
-	            	<td><span id="hdrCargo">&nbsp;</span></td>
-	          	</tr>
-       			<tr>
-		           <td>Numero de DNI: </td>
-		           <td><span id="hdrDni">&nbsp;</span></td>
-		       	</tr>
-	          	<tr>
-            		<td>Correo Electrónico: </td>
-	            	<td><span id="hdrCorreo">&nbsp;</span></td>
-	          	</tr>
-	        </tbody>
-	    </table>
-	</section>
-	<section class="span9" style="margin-left: 80px;">
-		<div class="tabbable" style="margin-bottom: 9px;">
-        	<ul class="nav nav-tabs">
-          		<li class="active"><a href="#1" data-toggle="tab">Principal</a></li>
-	          	<li class=""><a href="#2" data-toggle="tab">Section 2</a></li>
-	          	<li class=""><a href="#3" data-toggle="tab">Section 3</a></li>
-	        </ul>
-	        <div class="tab-content">
-          		<div class="tab-pane active" id="1">
-	            	<jsp:include page="perfil/tabPrincipal.jsp"/>
-	          	</div>
-	          	<div class="tab-pane" id="2">
-	            	<p>Seccion 2.</p>
-	          	</div>
-	          	<div class="tab-pane" id="3">
-	            	<p>Seccion 3.</p>
-	          	</div>
-        	</div>
-		</div>
-	</section>
-</div>
-<!--/CENTRO-->
-<!-- sticky footer -->
-<jsp:include page="../componentes/footer.jsp"/>
-<!-- /sticky footer -->
+		<section class="span9" style="margin-left: 80px;">
+			<table class="table table-bordered table-condensed">
+				<tbody>
+					<tr>
+						<td>Nombre Completo:</td>
+						<td align="center"><span id="hdrPrimerNombe"></span>&nbsp;<span id="hdrSegundoNombe"></span>&nbsp;<span id="hdrApePaterno"></span>&nbsp;<span id="hdrApeMaterno"></span></td>
+						<td rowspan="4" align="center"><img src="img/skills.png" alt="logo" style="margin-bottom: 7px; margin-top: 7px;" /></td>
+					</tr>
+					<tr>
+						<td id="tdCargo">Cargo:</td>
+						<td><span id="hdrCargo">&nbsp;</span></td>
+					</tr>
+					<tr>
+						<td>Numero de DNI:</td>
+						<td><span id="hdrDni">&nbsp;</span></td>
+					</tr>
+					<tr>
+						<td>Correo Electrónico:</td>
+						<td><span id="hdrCorreo">&nbsp;</span></td>
+					</tr>
+				</tbody>
+			</table>
+		</section>
+		<section class="span9" style="margin-left: 80px;">
+			<div class="tabbable" style="margin-bottom: 9px;">
+				<ul class="nav nav-tabs">
+					<li class="active"><a href="#1" data-toggle="tab">Principal</a></li>
+					<li class=""><a href="#2" data-toggle="tab">Section 2</a></li>
+					<li class=""><a href="#3" data-toggle="tab">Section 3</a></li>
+				</ul>
+				<div class="tab-content">
+					<div class="tab-pane active" id="1">
+						<jsp:include page="perfil/tabPrincipal.jsp" />
+					</div>
+					<div class="tab-pane" id="2">
+						<p>Seccion 2.</p>
+					</div>
+					<div class="tab-pane" id="3">
+						<p>Seccion 3.</p>
+					</div>
+				</div>
+			</div>
+		</section>
+	</div>
+	<!--/CENTRO-->
+	<!-- sticky footer -->
+	<jsp:include page="../componentes/footer.jsp" />
+	<!-- /sticky footer -->
 </body>
 </html>
