@@ -41,7 +41,7 @@ $(document).ready(function(){
       		</div>
       		<div class="span8">
             	<img src="img/skills.png" style="float: right;"/>
-            	<span class="header_social"><span class="badge"><a href="#">Cambiar Contraseña</a></span>&nbsp;&nbsp;<span class="badge"><a href="toCrearUsuario">Crear Usuarios</a></span></br>
+            	<span class="header_social"><span class="badge"><a href="toCambiarClave">Cambiar Contraseña</a></span>&nbsp;&nbsp;<span class="badge"><a href="toCrearUsuario">Crear Usuarios</a></span></br>
             	<span class="badge"><a id="aNombreUsuario" href="toPerfil">&nbsp;</a></span>&nbsp;&nbsp;<span class="badge"><a href="tologout">Cerrar Sesión</a></span></span>
             </div>
     	</div>

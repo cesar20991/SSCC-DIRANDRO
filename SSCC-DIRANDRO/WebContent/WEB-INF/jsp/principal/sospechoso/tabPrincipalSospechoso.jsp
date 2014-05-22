@@ -71,7 +71,7 @@ $(document).ready(function(){
 		/* validacion para editar */
 		$("#formEditarSospechoso").validate({
 			rules:{
-				txtFecNac: {date: true},
+				txtFecNac: {peruDate: true},
 				//txtEstatura: {number: true},
 				//txtInscripcion: {date: true},
 				//txtEmision: {date: true},

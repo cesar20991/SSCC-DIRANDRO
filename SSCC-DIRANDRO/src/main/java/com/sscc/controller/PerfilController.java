@@ -35,6 +35,11 @@ public class PerfilController {
 		return "principal/usuarioNuevo";
 	}
 	
+	@RequestMapping("toCambiarClave")
+	public String toCambiarClave() {
+		return "principal/cambiarClave";
+	}
+	
 	@RequestMapping(value = "getPerfil-{idPerfil}", method = RequestMethod.POST)
 	@ResponseBody
 	public PerfilBean getAllAssetsPropertyAjax(@PathVariable("idPerfil") Integer idperfil){

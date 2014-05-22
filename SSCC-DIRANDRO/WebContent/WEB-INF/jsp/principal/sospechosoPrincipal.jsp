@@ -24,6 +24,7 @@
 <link rel="stylesheet" href="/resources/demos/style.css">
 <!-- validacion -->
 <script src="js/jquery.validate.min.js"></script>
+<script src="js/validateFecha.js"></script>
 <!-- styles -->
 <link href="css/bootstrap.css" rel="stylesheet">
 <link href="css/bootstrap-responsive.css" rel="stylesheet">

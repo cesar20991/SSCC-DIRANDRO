@@ -21,6 +21,7 @@
 <!-- para el menu -->
 <script src="js/bootstrap-collapse.js"></script>
 <script src="js/jquery.validate.min.js"></script>
+<script src="js/validateFecha.js"></script>
 <!-- styles -->
 <link href="css/bootstrap.css" rel="stylesheet">
 <link href="css/bootstrap-responsive.css" rel="stylesheet">
@@ -48,10 +49,10 @@ $(document).ready(function() {
 	
 	$("#formCrearSospechoso").validate({
 		rules:{
-			txtFecNac: {date: true},
+			txtFecNac: {peruDate: true},
 			txtEstatura: {number: true},
-			txtInscripcion: {date: true},
-			txtEmision: {date: true},
+			txtInscripcion: {peruDate: true},
+			txtEmision: {peruDate: true},
 			txtCodUnico: {number: true, minlength: 8, maxlength: 8}
 		},
 		messages:{
