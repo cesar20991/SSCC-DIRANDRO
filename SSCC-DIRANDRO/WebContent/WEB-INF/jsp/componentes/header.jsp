@@ -35,6 +35,12 @@ $(document).ready(function(){
 			$("#titulo").empty();
 			$("#titulo").append('<h1><span class="colored">///</span> Cambiar Contraseña</h1>');
 		break;
+		case 'crearCaso':
+			$("#rowWelcome").removeClass('welcome');
+			$("#rowWelcome").addClass('welcome_inner');
+			$("#titulo").empty();
+			$("#titulo").append('<h1><span class="colored">///</span> Crear Caso Criminal</h1>');
+		break;
 	}
 });
 </script>
