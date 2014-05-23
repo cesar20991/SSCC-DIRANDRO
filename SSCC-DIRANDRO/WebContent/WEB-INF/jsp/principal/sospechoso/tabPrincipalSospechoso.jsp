@@ -8,7 +8,7 @@
 </style>
 <script>
 function init(sospechoso){
-	//cabecera
+	//CABECERA...
 	$("#hdrCodigoUnicoDeIdentificacion").empty();
 	$("#hdrPrimerApellido").empty();
 	$("#hdrSegundoApellido").empty();
@@ -21,8 +21,9 @@ function init(sospechoso){
 	$("#hdrSegundoApellido").append(sospechoso.segundoApellido);
 	$("#hdrPrenombres").append(sospechoso.preNombres);
 	$("#hdrAlias").append(sospechoso.alias);
+	//...FINAL CABECERA
 	//$("#hdrCaso").append(sospechoso.);
-	//tabPrincipal
+	//TAB PRINCIPAL
 	$("#spnCodigoUnicoDeIdentificacion").empty();
 	$("#spnPrimerApellido").empty();
 	$("#spnSegundoApellido").empty();
@@ -30,7 +31,23 @@ function init(sospechoso){
 	$("#spnAlias").empty();
 	$("#spnSexo").empty();
 	$("#spnFecNac").empty();
+	$("#spnDepartamentoNacimiento").empty();
+	$("#spnProvinciaNacimiento").empty();
+	$("#spnDistritoNacimiento").empty();
 	$("#spnGradoInstruccion").empty();
+	$("#spnEstadoCivil").empty();
+	$("#spnEstatura").empty();
+	$("#spnInscripcion").empty();
+	$("#spnNombrePadre").empty();
+	$("#spnNombreMadre").empty();
+	$("#spnEmision").empty();
+	$("#spnRestriccion").empty();
+	$("#spnDomicilio").empty();
+	$("#spnDepartamentoDeNacimiento").empty();
+	$("#spnProvinciaDeNacimiento").empty();
+	$("#spnDistritoDeNacimiento").empty();
+	$("#spnMultasElectorales").empty();
+	
 	
 	$("#spnCodigoUnicoDeIdentificacion").append(sospechoso.codigoUnicoDeIdentificacion);
 	$("#spnPrimerApellido").append(sospechoso.primerApellido);
@@ -39,7 +56,7 @@ function init(sospechoso){
 	$("#spnAlias").append(sospechoso.alias);
 	if(sospechoso.sexo == 'F'){
 		$("#spnSexo").append("Femenino");
-	}else{
+	}else if(sospechoso.sexo == 'M'){
 		$("#spnSexo").append("Masculino");
 	}	 			
 	
@@ -50,8 +67,34 @@ function init(sospechoso){
 		$("#spnFecNac").append('');
 	}	
 	
-	//$("#spnFecNac").append(sospechoso.fechaDeNacimiento);
+	$("#spnDepartamentoNacimiento").append(sospechoso.departamentoDeNacimiento);
+	$("#spnProvinciaNacimiento").append(sospechoso.provinciaDeNacimiento);
+	$("#spnDistritoNacimiento").append(sospechoso.distritoDeNacimiento);
 	$("#spnGradoInstruccion").append(sospechoso.gradoDeInstruccion);
+	$("#spnEstadoCivil").append(sospechoso.estadoCivil);
+	$("#spnEstatura").append(sospechoso.estatura);
+	if(sospechoso.fechaDeInscripcion != null){
+		var fec  = sospechoso.fechaDeInscripcion;
+		$("#spnInscripcion").append(fec.split("-")[2]+"/"+fec.split("-")[1]+"/"+fec.split("-")[0]);
+	}else{
+		$("#spnInscripcion").append('');
+	}
+	$("#spnNombrePadre").append(sospechoso.nombrePadre);
+	$("#spnNombreMadre").append(sospechoso.nombreMadre);
+	if(sospechoso.fechaDeEmision != null){
+		var fec  = sospechoso.fechaDeEmision;
+		$("#spnEmision").append(fec.split("-")[2]+"/"+fec.split("-")[1]+"/"+fec.split("-")[0]);
+	}else{
+		$("#spnEmision").append('');
+	}
+	$("#spnRestriccion").append(sospechoso.restriccion);
+	$("#spnDomicilio").append(sospechoso.domicilio);
+	$("#spnDepartamentoDeDomicilio").append(sospechoso.departamentoDeDomicilio)
+	$("#spnProvinciaDeDomicilio").append(sospechoso.provinciaDeDomicilio);
+	$("#spnDistritoDeDomicilio").append(sospechoso.distritoDeDomicilio);
+	$("#spnMultasElectorales").append(sospechoso.multasElectorales);
+	//$("#spnFecNac").append(sospechoso.fechaDeNacimiento);
+	//$("#spnGradoInstruccion").append(sospechoso.gradoDeInstruccion);
 }
 
 $(document).ready(function(){
@@ -76,16 +119,16 @@ $(document).ready(function(){
 		$("#formEditarSospechoso").validate({
 			rules:{
 				txtFecNac: {peruDate: true},
-				//txtEstatura: {number: true},
-				//txtInscripcion: {date: true},
-				//txtEmision: {date: true},
+				txtEstatura: {doubleNumber: true},
+				txtInscripcion: {peruDate: true},
+				txtEmision: {peruDate: true},
 				txtCodUnico: {number: true, minlength: 8, maxlength: 8}
 			},
 			messages:{
 				txtFecNac: "Debe tener formato de fecha dd/mm/aaaa",
-				//txtEstatura: "Solo Números",
-				//txtInscripcion: "Debe tener formato de fecha dd/mm/aaaa",
-				//txtEmision: "Debe tener formato de fecha dd/mm/aaaa",
+				txtEstatura: "Solo Números",
+				txtInscripcion: "Debe tener formato de fecha dd/mm/aaaa",
+				txtEmision: "Debe tener formato de fecha dd/mm/aaaa",
 				txtCodUnico: "Solo Números, 8 digitos"
 			},
 			submitHandler: function(form){
@@ -95,16 +138,16 @@ $(document).ready(function(){
 					$("#hdnFecNac").val('1000-12-12');
 				}
 				
-				/*if($("#txtInscripcion").val() == ''){
+				if($("#txtInscripcion").val() == ''){
 					$("#hdnFecIns").val('1000-12-12');
-				}*/
+				}
 				
 				/*$("#hdnEstatura").val($("#txtEstatura").val());*/
 				$("#hdnCodUnico").val($("#txtCodUnico").val());
 				
-				/*if($("#txtEmision").val() == ''){
+				if($("#txtEmision").val() == ''){
 					$("#hdnFecEmi").val('1000-12-12');
-				}*/
+				}
 				//$("#hdnFecEmi").val($("#txtEmision").val());
 
 				$.ajax({
@@ -129,6 +172,20 @@ $(document).on('change','#txtFecNac', function(e){
 	}
 });
 
+$(document).on('change','#txtEmision', function(e){
+	if($("#txtInscripcion").val() != null){
+		var fec  = $("#txtInscripcion").val();
+		$("#hdnFecIns").val(fec.split("/")[2]+"-"+fec.split("/")[1]+"-"+fec.split("/")[0]);		
+	}
+});
+
+$(document).on('change','#txtEmision', function(e){
+	if($("#txtEmision").val() != null){
+		var fec  = $("#txtEmision").val();
+		$("#hdnFecEmi").val(fec.split("/")[2]+"-"+fec.split("/")[1]+"-"+fec.split("/")[0]);		
+	}
+});
+
 $(document).on('click','#btnEditarSopechoso', function(e){
 	$("#txtCodUnico").val($("#spnCodigoUnicoDeIdentificacion").text());
 	$("#txtPrimerApellido").val($("#spnPrimerApellido").text());
@@ -138,14 +195,30 @@ $(document).on('click','#btnEditarSopechoso', function(e){
 	
 	if($("#spnSexo").text() == 'Masculino'){
 		$("#checkMasculino").prop("checked",true);
-	}else{
+	}else if($("#spnSexo").text() == 'Femenino'){
 		$("#checkFemenino").prop("checked",true);
 	}
+	
 	$("#txtFecNac").val($("#spnFecNac").text());
+	$("#txtDepartamentoDeNacimiento").val($("#spnDepartamentoNacimiento").text());
+	$("#txtProvinciaDeNacimiento").val($("#spnProvinciaNacimiento").text());
+	$("#txtDistritoDeNacimiento").val($("#spnDistritoNacimiento").text());
 	$("#selectGradoInstruccion").val($("#spnGradoInstruccion").text());
-	
+	$("#sltcEstadoCivil").val($("#spnEstadoCivil").text());
+	$("#txtEstatura").val($("#spnEstatura").text());
+	$("#txtInscripcion").val($("#spnInscripcion").text());
+	$("#txtNombrePadre").val($("#spnNombrePadre").text());
+	$("#txtNombreMadre").val($("#spnNombreMadre").text());
+	$("#txtEmision").val($("#spnEmision").text());
+	$("#txtRestriccion").val($("#spnRestriccion").text());
+	$("#txtDomicilio").val($("#spnDomicilio").text());
+	$("#txtDepartamentoDeDomicilio").val($("#spnDepartamentoDeDomicilio").text());
+	$("#txtProvinciaDeDomicilio").val($("#spnProvinciaDeDomicilio").text());
+	$("#txtDistritoDeDomicilio").val($("#spnDistritoDeDomicilio").text());
+	$("#txtMultasElectorales").val($("#spnMultasElectorales").text());
+	/// ID SOSPECHOSO en ventana
 	$("#hdnIdSospechosoEdit").val($("#hdnIdSospechoso").text());
-	
+	// LOS TABS
 	$("#divMostrarSospechoso").hide();
 	$("#divEditarSospechoso").show();
 });
@@ -187,12 +260,6 @@ $(document).on('click','#btnCancelEditar', function(e){
 	          		</div>
 	       		</div>
 	       		<div class="control-group">
-	          		<label class="control-label">Grado de Instrucción: </label>
-	          		<div class="controls">
-	          			<span id="spnGradoInstruccion">&nbsp;</span>
-	          		</div>
-	       		</div>
-	       		<div class="control-group">
 	          		<label class="control-label">Sexo: </label>
 	          		<div class="controls">
 	          			<span id="spnSexo">&nbsp;</span>
@@ -203,11 +270,109 @@ $(document).on('click','#btnCancelEditar', function(e){
 	          		<div class="controls">
 	          			<span id="spnFecNac">&nbsp;</span>
 	          		</div>
-	       		</div>       
+	       		</div> 
+	       		<!--  agregado INICIA-->      
+	       		<div class="control-group">
+	       			<label class="control-label">Departamento de Nacimiento: </label>
+	       			<div class="controls">
+	       				<span  id="spnDepartamentoNacimiento"></span>
+		          	</div>
+		       	</div>
+		       	<div class="control-group">
+		       		<label class="control-label">Provincia de Nacimiento: </label>
+		       			<div class="controls">
+		       				<span  id="spnProvinciaNacimiento"></span>
+		       			</div>
+		       	</div>
+		       	<div class="control-group">
+		       		<label class="control-label">Distrito de Nacimiento: </label>
+		       			<div class="controls">
+		       				<span  id="spnDistritoNacimiento"></span>
+		       			</div>
+		       	</div>
+		       	<div class="control-group">
+		       		<label class="control-label">Grado de Instrucción: </label>
+		       			<div class="controls">
+		       				<span  id="spnGradoInstruccion"></span>
+		          		</div>
+		       	</div>
+		       	<div class="control-group" id="divGrado">
+		       			<label class="control-label">Estado Civil: </label>
+		          			<div class="controls">
+		          				<span  id="spnEstadoCivil"></span>
+		          		</div>
+		       	</div>
+		       	<div class="control-group">
+		          		<label class="control-label">Estatura: </label>
+		          		<div class="controls">
+		          			<span id="spnEstatura"></span>
+		          		</div>
+		       	</div>
+		       		<div class="control-group">
+		          		<label class="control-label">Fecha de Inscripción: </label>
+		          		<div class="controls">
+		          			<span id="spnInscripcion"></span>
+		          		</div>
+		       	</div>
+		       	<div class="control-group">
+		          		<label class="control-label">Nombre del Padre: </label>
+		          		<div class="controls">
+		          			<span id="spnNombrePadre"></span>
+		          		</div>
+		       	</div>
+		       		<div class="control-group">
+		          		<label class="control-label">Nombre de la Madre: </label>
+		          		<div class="controls">
+		          			<span id="spnNombreMadre"></span>
+		          		</div>
+		       		</div>
+		       		<div class="control-group">
+		          		<label class="control-label">Fecha de Emisión: </label>
+		          		<div class="controls">
+		          			<span id="spnEmision"></span>
+		          		</div>
+		       		</div>
+		       		<div class="control-group">
+		          		<label class="control-label">Restricción: </label>
+		          		<div class="controls">
+		          			<span id="spnRestriccion"></span>
+		          		</div>
+		       		</div>
+		       		<div class="control-group">
+		          		<label class="control-label">Domicilio: </label>
+		          		<div class="controls">
+		          			<span id="spnDomicilio"></span>
+		          		</div>
+		       		</div>
+		       		<div class="control-group">
+		          		<label class="control-label">Departamento de Domicilio: </label>
+		          		<div class="controls">
+		          			<span id="spnDepartamentoDeDomicilio"></span>
+		          		</div>
+		       		</div>
+		       		<div class="control-group">
+		          		<label class="control-label">Provincia de Domicilio: </label>
+		          		<div class="controls">
+		          			<span id="spnProvinciaDeDomicilio"></span>
+		          		</div>
+		       		</div>
+		       		<div class="control-group">
+		          		<label class="control-label">Distrito de Domicilio: </label>
+		          		<div class="controls">
+		          			<span id="spnDistritoDeDomicilio"></span>
+		          		</div>
+		       		</div>
+		       		<div class="control-group">
+		          		<label class="control-label">Multas Electorales: </label>
+		          		<div class="controls">
+		          			<span id="spnMultasElectorales"></span>
+		          		</div>
+		       		</div>
+	       		<!-- agregado cierre -->
 		</form:form>
 	</div>
 		
-	<!-- <section> -->
+	<!-- <section> Formulario editar-->
 		<fieldset class="well" style="display: none;" id="divEditarSospechoso">
 			<form:form class="form-horizontal" id="formEditarSospechoso" action="editarSospechoso" commandName="sospechoso">
 		       	<legend>
@@ -217,7 +382,7 @@ $(document).on('click','#btnCancelEditar', function(e){
 		       		<div class="control-group">
 		          		<label class="control-label">Código Único de Identificación: </label>
 		          		<div class="controls">
-		          			<input class="span2" type="text" name="txtCodUnico" id="txtCodUnico" data-rule-required="true" data-msg-required="*">
+		          			<input class="span2" type="text" name="txtCodUnico" id="txtCodUnico">
 		          			<input class="span2" type="hidden" name="codigoUnicoDeIdentificacion" id="hdnCodUnico">
 		          		</div>
 		       		</div>
@@ -225,28 +390,28 @@ $(document).on('click','#btnCancelEditar', function(e){
 		       		<div class="control-group">
 		          		<label class="control-label">Primer Apellido: </label>
 		          		<div class="controls">
-		          			<input class="span2" type="text" id="txtPrimerApellido" name="primerApellido" data-rule-required="true" data-msg-required="*">
+		          			<input class="span2" type="text" id="txtPrimerApellido" name="primerApellido">
 		          		</div>
 		       		</div>
 		       		<hr>
 		       		<div class="control-group">
 		          		<label class="control-label">Segundo Apellido: </label>
 		          		<div class="controls">
-		          			<input class="span2" type="text" id="txtSegundoApellido" name="segundoApellido" data-rule-required="true" data-msg-required="*">
+		          			<input class="span2" type="text" id="txtSegundoApellido" name="segundoApellido">
 		          		</div>
 		       		</div>
 		       		<hr>
 		       		<div class="control-group">
 		          		<label class="control-label">Prenombres: </label>
 		          		<div class="controls">
-		          			<input class="span2" type="text" id="txtPrenombres" name="preNombres" data-rule-required="true" data-msg-required="*">
+		          			<input class="span2" type="text" id="txtPrenombres" name="preNombres">
 		          		</div>
 		       		</div>
 		       		<hr>
 		       		<div class="control-group">
 		          		<label class="control-label">Alias: </label>
 		          		<div class="controls">
-		          			<input class="span2" type="text" id="txtAlias" name="alias">
+		          			<input class="span2" type="text" id="txtAlias" name="alias" data-rule-required="true" data-msg-required="*">
 		          		</div>
 		       		</div>
 		       		<hr>
@@ -267,27 +432,29 @@ $(document).on('click','#btnCancelEditar', function(e){
 		          			<input class="span2" type="hidden" name="fechaDeNacimiento" id="hdnFecNac">
 		          		</div>
 		       		</div>
-		       		<!-- <hr>
+		       		<!--  -->
+		       		<!-- Aqui empieza mario-->
+		       		<hr>
 		       		<div class="control-group">
 		          		<label class="control-label">Departamento de Nacimiento: </label>
 		          		<div class="controls">
-		          			<input class="span2" type="text" name="departamentoDeNacimiento">
+		          			<input class="span2" type="text" name="txtDepartamentoNacimiento" id="txtDepartamentoDeNacimiento">
 		          		</div>
 		       		</div>
 		       		<hr>
 		       		<div class="control-group">
 		          		<label class="control-label">Provincia de Nacimiento: </label>
 		          		<div class="controls">
-		          			<input class="span2" type="text" name="provinciaDeNacimiento">
+		          			<input class="span2" type="text" name="txtProvinciaNacimiento" id="txtProvinciaDeNacimiento">
 		          		</div>
 		       		</div>
 		       		<hr>
 		       		<div class="control-group">
 		          		<label class="control-label">Distrito de Nacimiento: </label>
 		          		<div class="controls">
-		          			<input class="span2" type="text" name="distritoDeNacimiento">
+		          			<input class="span2" type="text" name="txtDistritoNacimiento" id="txtDistritoDeNacimiento">
 		          		</div>
-		       		</div> -->
+		       		</div>
 		       		<hr>
 		       		<div class="control-group">
 		          		<label class="control-label">Grado de Instrucción: </label>
@@ -301,7 +468,7 @@ $(document).on('click','#btnCancelEditar', function(e){
 				            </select>
 		          		</div>
 		       		</div>
-		       		<!-- <hr>
+		       		<hr>
 		       		<div class="control-group" id="divGrado">
 		          		<label class="control-label">Estado Civil: </label>
 		          		<div class="controls">
@@ -334,14 +501,14 @@ $(document).on('click','#btnCancelEditar', function(e){
 		       		<div class="control-group">
 		          		<label class="control-label">Nombre del Padre: </label>
 		          		<div class="controls">
-		          			<input class="span2" type="text" name="nombrePadre">
+		          			<input class="span2" type="text" name="txtNombrePadre" id="txtNombrePadre">
 		          		</div>
 		       		</div>
 		       		<hr>
 		       		<div class="control-group">
 		          		<label class="control-label">Nombre de la Madre: </label>
 		          		<div class="controls">
-		          			<input class="span2" type="text" name="nombreMadre">
+		          			<input class="span2" type="text" name="txtNombreMadre" id="txtNombreMadre">
 		          		</div>
 		       		</div>
 		       		<hr>
@@ -356,44 +523,45 @@ $(document).on('click','#btnCancelEditar', function(e){
 		       		<div class="control-group">
 		          		<label class="control-label">Restricción: </label>
 		          		<div class="controls">
-		          			<input class="span2" type="text" name="restriccion">
+		          			<input class="span2" type="text" name="txtRestriccion" id="txtRestriccion">
 		          		</div>
 		       		</div>
 		       		<hr>
 		       		<div class="control-group">
 		          		<label class="control-label">Domicilio: </label>
 		          		<div class="controls">
-		          			<input class="span2" type="text" name="domicilio">
+		          			<input class="span2" type="text" name="txtDomicilio" id="txtDomicilio">
 		          		</div>
 		       		</div>
 		       		<hr>
 		       		<div class="control-group">
 		          		<label class="control-label">Departamento de Domicilio: </label>
 		          		<div class="controls">
-		          			<input class="span2" type="text" name="departamentoDeDomicilio">
+		          			<input class="span2" type="text" name="txtDepartamentoDeDomicilio" id="txtDepartamentoDeDomicilio">
 		          		</div>
 		       		</div>
 		       		<hr>
 		       		<div class="control-group">
 		          		<label class="control-label">Provincia de Domicilio: </label>
 		          		<div class="controls">
-		          			<input class="span2" type="text" name="provinciaDeDomicilio">
+		          			<input class="span2" type="text" name="txtProvinciaDeDomicilio" id="txtProvinciaDeDomicilio">
 		          		</div>
 		       		</div>
 		       		<hr>
 		       		<div class="control-group">
 		          		<label class="control-label">Distrito de Domicilio: </label>
 		          		<div class="controls">
-		          			<input class="span2" type="text" name="distritoDeDomicilio">
+		          			<input class="span2" type="text" name="txtDistritoDeDomicilio" id="txtDistritoDeDomicilio">
 		          		</div>
 		       		</div>
 		       		<hr>
 		       		<div class="control-group">
 		          		<label class="control-label">Multas Electorales: </label>
 		          		<div class="controls">
-		          			<input class="span2" type="text" name="multasElectoraleso">
+		          			<input class="span2" type="text" name="txtMultasElectorales" id="txtMultasElectorales">
 		          		</div>
-		       		</div> -->
+		       		</div>
+		       		<!-- Aqui cierra mario-->
 		       		<div class="form-actions">
 			        	<button class="btn btn-success" id="btnGuardar" type="submit"><i class="icon-ok icon-white"></i> Guardar Sospechoso</button>
 			        	<button class="btn btn-danger" type="reset"><i class="icon-refresh icon-white"></i> Reset</button>

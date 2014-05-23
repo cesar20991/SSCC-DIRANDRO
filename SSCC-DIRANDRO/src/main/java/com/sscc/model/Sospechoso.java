@@ -14,16 +14,18 @@ public class Sospechoso {
 	@Id @GeneratedValue
 	private Integer idSospechoso;
 	
-	@Column(length = 20, nullable = false)
+	@Column(length = 20, nullable = true)
 	private String codigoUnicoDeIdentificacion;
-	@Column(length = 50, nullable = false)
-	private String primerApellido;
-	@Column(length = 50, nullable = false)
-	private String segundoApellido;
-	@Column(length = 50, nullable = false)
-	private String preNombres;
 	@Column(length = 50, nullable = true)
+	private String primerApellido;
+	@Column(length = 50, nullable = true)
+	private String segundoApellido;
+	@Column(length = 50, nullable = true)
+	private String preNombres;
+	@Column(length = 50, nullable = false)
 	private String alias;
+	@Column(length = 80, nullable = true)
+	private String codigo;
 	@Column(length = 1, nullable = true)
 	private String sexo;//F = femenino, M = masculino
 	@Column(nullable=true)
@@ -220,5 +222,11 @@ public class Sospechoso {
 	}
 	public void setAlias(String alias) {
 		this.alias = alias;
+	}
+	public String getCodigo() {
+		return codigo;
+	}
+	public void setCodigo(String codigo) {
+		this.codigo = codigo;
 	}
 }

@@ -109,10 +109,11 @@ $(document).ready(function() {
 		<fieldset class="well">
 			<form:form class="form-horizontal" id="formCrearSospechoso" action="crearSospechoso" commandName="sospechoso">
 		       	<legend><span class="colored">///</span> Datos Personales del Sospechoso:</legend>
+		       	<div class="span4">
 		       		<div class="control-group">
-		          		<label class="control-label">Código Único de Identificación: </label>
+		          		<label class="control-label" title="Código Único de Identificación">C.U.I: </label>
 		          		<div class="controls">
-		          			<input class="span2" type="text" name="txtCodUnico" id="txtCodUnico" data-rule-required="true" data-msg-required="*">
+		          			<input class="span2" type="text" name="txtCodUnico" id="txtCodUnico">
 		          			<input class="span2" type="hidden" name="codigoUnicoDeIdentificacion" id="hdnCodUnico">
 		          		</div>
 		       		</div>
@@ -120,35 +121,35 @@ $(document).ready(function() {
 		       		<div class="control-group">
 		          		<label class="control-label">Primer Apellido: </label>
 		          		<div class="controls">
-		          			<input class="span2" type="text" name="primerApellido" data-rule-required="true" data-msg-required="*">
+		          			<input class="span2" type="text" name="primerApellido">
 		          		</div>
 		       		</div>
 		       		<hr>
 		       		<div class="control-group">
 		          		<label class="control-label">Segundo Apellido: </label>
 		          		<div class="controls">
-		          			<input class="span2" type="text" name="segundoApellido" data-rule-required="true" data-msg-required="*">
+		          			<input class="span2" type="text" name="segundoApellido">
 		          		</div>
 		       		</div>
 		       		<hr>
 		       		<div class="control-group">
 		          		<label class="control-label">Prenombres: </label>
 		          		<div class="controls">
-		          			<input class="span2" type="text" name="preNombres" data-rule-required="true" data-msg-required="*">
+		          			<input class="span2" type="text" name="preNombres">
 		          		</div>
 		       		</div>
 		       		<hr>
 		       		<div class="control-group">
 		          		<label class="control-label">Alias: </label>
 		          		<div class="controls">
-		          			<input class="span2" type="text" name="alias">
+		          			<input class="span2" type="text" name="alias" data-rule-required="true" data-msg-required="*">
 		          		</div>
 		       		</div>
 		       		<hr>
 		       		<div class="control-group">
 		          		<label class="control-label">Sexo: </label>
 		          		<label class="checkbox inline">
-		          			<input type="radio" name="sexo" id="" value="M" checked>Masculino
+		          			<input type="radio" name="sexo" id="" value="M">Masculino
 		          		</label>
 		          		<label class="checkbox inline">
 		          			<input type="radio" name="sexo" id="" value="F">Femenino
@@ -209,7 +210,8 @@ $(document).ready(function() {
 				            </select>
 		          		</div>
 		       		</div>
-		       		<hr>
+		       	</div>
+		       	<div class="span4">
 		       		<div class="control-group">
 		          		<label class="control-label">Estatura: </label>
 		          		<div class="controls">
@@ -289,10 +291,14 @@ $(document).ready(function() {
 		          			<input class="span2" type="text" name="multasElectoraleso">
 		          		</div>
 		       		</div>
+		       	</div>
+		       	<span class="span9">
 		       		<div class="form-actions">
 			        	<button class="btn btn-success" id="btnGuardar" type="submit"><i class="icon-ok icon-white"></i> Guardar Sospechoso</button>
 			        	<button class="btn btn-danger" type="reset"><i class="icon-refresh icon-white"></i> Reset</button>
-			        </div>  
+			        </div> 
+		       	</span>	
+		       		 
 			</form:form>
 		</fieldset>
 	</section>

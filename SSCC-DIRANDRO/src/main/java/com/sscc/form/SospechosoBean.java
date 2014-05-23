@@ -12,6 +12,7 @@ public class SospechosoBean {
 	private String segundoApellido;
 	private String preNombres;
 	private String alias;
+	private String codigo;
 	private String sexo;//F = femenino, M = masculino
 	private Date fechaDeNacimiento;
 	private String departamentoDeNacimiento;
@@ -188,5 +189,11 @@ public class SospechosoBean {
 	}
 	public void setAlias(String alias) {
 		this.alias = alias;
+	}
+	public String getCodigo() {
+		return codigo;
+	}
+	public void setCodigo(String codigo) {
+		this.codigo = codigo;
 	}
 }

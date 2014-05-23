@@ -31,6 +31,7 @@ public class SospechosoServiceImpl implements SospechosoService{
 		sb.setSegundoApellido(s.getSegundoApellido());
 		sb.setPreNombres(s.getPreNombres());
 		sb.setAlias(s.getAlias());
+		sb.setCodigo(s.getCodigo());
 		sb.setSexo(s.getSexo());
 		sb.setFechaDeNacimiento(s.getFechaDeNacimiento());
 		sb.setDepartamentoDeNacimiento(s.getDepartamentoDeNacimiento());
@@ -110,6 +111,7 @@ public class SospechosoServiceImpl implements SospechosoService{
 		}
 		
 		em.persist(sospechoso);
+		sospechoso.setCodigo("SPO-"+sospechoso.getIdSospechoso());
 		
 		return sospechoso.getIdSospechoso();
 	}
@@ -137,10 +139,20 @@ public class SospechosoServiceImpl implements SospechosoService{
 		editado.setGradoDeInstruccion(sospechoso.getGradoDeInstruccion());
 		editado.setEstadoCivil(sospechoso.getEstadoCivil());
 		editado.setEstatura(sospechoso.getEstatura());
-		editado.setFechaDeInscripcion(sospechoso.getFechaDeInscripcion());
+		//editado 22/05/14
+		if(sospechoso.getFechaDeInscripcion().toString().equals("1000-12-12")){
+			editado.setFechaDeInscripcion(null);
+		}else{
+			editado.setFechaDeInscripcion(sospechoso.getFechaDeInscripcion());
+		}
 		editado.setNombrePadre(sospechoso.getNombrePadre());
 		editado.setNombreMadre(sospechoso.getNombreMadre());
-		editado.setFechaDeEmision(sospechoso.getFechaDeEmision());
+		//editado.setFechaDeEmision(sospechoso.getFechaDeEmision());
+		if(sospechoso.getFechaDeEmision().toString().equals("1000-12-12")){
+			editado.setFechaDeEmision(null);
+		}else{
+			editado.setFechaDeEmision(sospechoso.getFechaDeEmision());
+		}
 		editado.setRestriccion(sospechoso.getRestriccion());
 		editado.setDomicilio(sospechoso.getDomicilio());
 		editado.setDepartamentoDeDomicilio(sospechoso.getDepartamentoDeDomicilio());
