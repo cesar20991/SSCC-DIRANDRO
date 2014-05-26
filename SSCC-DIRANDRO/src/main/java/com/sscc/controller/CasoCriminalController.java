@@ -35,6 +35,11 @@ public class CasoCriminalController {
 		return "principal/buscarCasoCriminal";
 	}
 	
+	@RequestMapping("toAsignarCaso")
+	public String toAsignarCaso() {
+		return "principal/asignarCasoCriminal";
+	}
+	
 	@RequestMapping(value = "crearCaso", method = RequestMethod.POST)
 	public String crearSospechoso(@ModelAttribute CasoCriminal caso, HttpServletRequest req, HttpSession session, Model model){
 
@@ -56,10 +61,20 @@ public class CasoCriminalController {
 	
 	@RequestMapping(value = "getCaso-{idCaso}", method = RequestMethod.POST)
 	@ResponseBody
-	public CasoCriminalBean getSopechoso(@PathVariable("idCaso") Integer idCaso){
+	public CasoCriminalBean getCaso(@PathVariable("idCaso") Integer idCaso){
 		CasoCriminalBean casobean = new CasoCriminalBean();
 		casobean = casoServ.getCasoCriminalBean(idCaso);
 		return casobean;
+	}
+	
+	@RequestMapping(value = "getCasos", method = RequestMethod.POST)
+	@ResponseBody
+	public List<CasoCriminalBean> getCasos(){
+		List<CasoCriminalBean> c=new ArrayList<CasoCriminalBean>();
+		
+		c = casoServ.getCasosCriminalBean();
+		
+		return c;
 	}
 
 }

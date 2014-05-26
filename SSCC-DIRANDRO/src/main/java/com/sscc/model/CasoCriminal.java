@@ -1,6 +1,7 @@
 package com.sscc.model;
 
 import java.sql.Timestamp;
+import java.util.Collection;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -8,6 +9,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 @Entity
 public class CasoCriminal {
@@ -30,7 +32,10 @@ public class CasoCriminal {
 	
 	@ManyToOne
 	@JoinColumn(name = "idUsuario")
-	private Usuario usuario;	
+	private Usuario usuario;
+	
+	@OneToMany(mappedBy = "casoCriminal")
+	private Collection<casoPorAgente> casopa;
 	
 	public Integer getIdCasoCriminal() {
 		return idCasoCriminal;
@@ -79,6 +84,12 @@ public class CasoCriminal {
 	}
 	public void setUsuario(Usuario usuario) {
 		this.usuario = usuario;
+	}
+	public Collection<casoPorAgente> getCasopa() {
+		return casopa;
+	}
+	public void setCasopa(Collection<casoPorAgente> casopa) {
+		this.casopa = casopa;
 	}
 	
 }

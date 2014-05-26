@@ -1,5 +1,8 @@
 package com.sscc.service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
@@ -7,7 +10,9 @@ import javax.persistence.Query;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.sscc.form.CasoCriminalBean;
 import com.sscc.form.PerfilBean;
+import com.sscc.model.CasoCriminal;
 import com.sscc.model.Perfil;
 import com.sscc.model.Usuario;
 import com.sscc.util.DateUtil;
@@ -87,6 +92,22 @@ public class PerfilServiceImpl implements PerfilService {
 		pf.setRango(perfil.getRango());
 		
 		return pf;
+	}
+
+	public List<PerfilBean> getJefesDeUnidad() {
+		List<PerfilBean> pbl = new ArrayList<PerfilBean>();
+		List<Perfil> p = new ArrayList<Perfil>();
+		Query qCasos = em.createQuery("SELECT p FROM Perfil p WHERE p.estado='habilitado' AND p.cargo='Jefe de Unidad'");
+		p = qCasos.getResultList();
+		
+		for(int i = 0; i < p.size(); i++){
+			PerfilBean pb = new PerfilBean();
+			pb.setIdPerfil(p.get(i).getIdPerfil());
+			pb.setNombreCompleto(p.get(i).getPrimerNombre()+" "+p.get(i).getSegundoNombre()+" "+p.get(i).getApePaterno()+" "+p.get(i).getApeMaterno());
+			pbl.add(pb);
+		}
+		
+		return pbl;
 	}
 
 }

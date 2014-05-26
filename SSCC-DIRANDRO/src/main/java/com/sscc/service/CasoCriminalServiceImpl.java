@@ -1,5 +1,8 @@
 package com.sscc.service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
@@ -35,7 +38,15 @@ public class CasoCriminalServiceImpl implements CasoCriminalService{
 		//grabar en la BD
 		em.persist(caso);
 		
-		caso.setCodigo("N°"+caso.getIdCasoCriminal()+"-"+d.hoy().getMonth()+"-"+d.hoy().getYear()+"-DIRANDRO-PNP-UI");
+		Integer mes = d.hoy().getMonth();
+		mes++;
+		Integer anho = d.hoy().getYear();
+		Integer year = anho+1900;
+		if(mes <= 9){
+			caso.setCodigo("N°"+caso.getIdCasoCriminal()+"-0"+mes+"-"+year+"-DIRANDRO-PNP-UI");
+		}else{
+			caso.setCodigo("N°"+caso.getIdCasoCriminal()+"-"+mes+"-"+year+"-DIRANDRO-PNP-UI");
+		}
 		
 		return caso.getIdCasoCriminal();
 	}
@@ -62,6 +73,24 @@ public class CasoCriminalServiceImpl implements CasoCriminalService{
 		cb.setIdPerfil(p.getIdPerfil());
 		
 		return cb;
+	}
+
+	@SuppressWarnings("unchecked")
+	public List<CasoCriminalBean> getCasosCriminalBean() {
+		List<CasoCriminalBean> cbl = new ArrayList<CasoCriminalBean>();
+		List<CasoCriminal> c = new ArrayList<CasoCriminal>();
+		Query qCasos = em.createQuery("SELECT c FROM CasoCriminal c");
+		c = qCasos.getResultList();
+		
+		for(int i = 0; i < c.size(); i++){
+			CasoCriminalBean cb = new CasoCriminalBean();
+			cb.setIdCasoCriminal(c.get(i).getIdCasoCriminal());
+			cb.setCodigo(c.get(i).getCodigo());
+			cb.setReferencia(c.get(i).getReferencia());
+			cbl.add(cb);
+		}
+		
+		return cbl;
 	}
 
 }

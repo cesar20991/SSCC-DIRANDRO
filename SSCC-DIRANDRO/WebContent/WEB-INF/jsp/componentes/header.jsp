@@ -41,6 +41,18 @@ $(document).ready(function(){
 			$("#titulo").empty();
 			$("#titulo").append('<h1><span class="colored">///</span> Crear Caso Criminal</h1>');
 		break;
+		case 'buscarCasoCriminal':
+			$("#rowWelcome").removeClass('welcome');
+			$("#rowWelcome").addClass('welcome_inner');
+			$("#titulo").empty();
+			$("#titulo").append('<h1><span class="colored">///</span> Buscar Caso Criminal</h1>');
+		break;
+		case 'asignarCasoCriminal':
+			$("#rowWelcome").removeClass('welcome');
+			$("#rowWelcome").addClass('welcome_inner');
+			$("#titulo").empty();
+			$("#titulo").append('<h1><span class="colored">///</span> Asignar Caso Criminal</h1>');
+		break;
 	}
 });
 </script>
