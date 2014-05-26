@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.sscc.form.CasoCriminalBean;
 import com.sscc.form.PerfilBean;
 import com.sscc.model.Perfil;
 import com.sscc.service.PerfilService;
@@ -56,12 +57,19 @@ public class PerfilController {
 		String correo = req.getParameter("correo");
 		
 		PerfilBean pf = perfilServ.crearUsuario(perfil, correo);
+		
+
+		return "redirect:toPerfil-"+pf.getIdPerfil();
+	}
+	
+	@RequestMapping("toPerfil-{idPerfil}")
+	public String toCrearUsuario(@PathVariable("idPerfil") Integer idPerfil, Model model) {
 		List<PerfilBean> p = new ArrayList<PerfilBean>();
+		PerfilBean pf = new PerfilBean();
+		pf.setIdPerfil(idPerfil);
 		p.add(pf);
 		model.addAttribute("perfilList", p);
-		path = "principal/perfilPrincipal";
-
-		return path;
-	}	
+		return "principal/perfilPrincipal";
+	}
 	
 }

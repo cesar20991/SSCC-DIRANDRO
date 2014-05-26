@@ -15,6 +15,7 @@ public class CasoCriminalBean {
 	//usuario
 	private String correoElectronico;
 	//perfil
+	private Integer idPerfil;
 	private String primerNombre;
 	private String segundoNombre;
 	private String apePaterno;
@@ -98,5 +99,11 @@ public class CasoCriminalBean {
 	}
 	public void setTipoFiscal(String tipoFiscal) {
 		this.tipoFiscal = tipoFiscal;
+	}
+	public Integer getIdPerfil() {
+		return idPerfil;
+	}
+	public void setIdPerfil(Integer idPerfil) {
+		this.idPerfil = idPerfil;
 	}
 }

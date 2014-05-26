@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.sscc.form.PerfilBean;
 import com.sscc.form.SospechosoBean;
 import com.sscc.model.Sospechoso;
 import com.sscc.service.SospechosoService;

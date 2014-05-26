@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.sscc.form.CasoCriminalBean;
 import com.sscc.model.CasoCriminal;
@@ -46,6 +47,14 @@ public class CasoCriminalController {
 		c.add(cb);
 		model.addAttribute("casoList",c);
 		return "principal/casoCriminalPrincipal";
+	}
+	
+	@RequestMapping(value = "getCaso-{idCaso}", method = RequestMethod.POST)
+	@ResponseBody
+	public CasoCriminalBean getSopechoso(@PathVariable("idCaso") Integer idCaso){
+		CasoCriminalBean casobean = new CasoCriminalBean();
+		casobean = casoServ.getCasoCriminalBean(idCaso);
+		return casobean;
 	}
 
 }

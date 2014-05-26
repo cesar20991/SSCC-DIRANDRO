@@ -56,16 +56,14 @@
 						<td align="center"><span id="hdrEstado">&nbsp;</span></td>
 					</tr>
 					<tr>
-						<td>Asunto:</td>
-						<td><span id="hdrAsunto">&nbsp;</span></td>
 						<td>Referencia:</td>
 						<td><span id="hdrReferencia">&nbsp;</span></td>
+						<td>Fecha de Creacion:</td>
+						<td><span id="hdrFecCreacion">&nbsp;</span></td>
 					</tr>
 					<tr>
 						<td>Creado por:</td>
-						<td><span id="hdrCreador">&nbsp;</span></td>
-						<td>Fecha de Creacion:</td>
-						<td><span id="hdrFecCreacion">&nbsp;</span></td>
+						<td colspan="3"><span id="hdrCreador">&nbsp;</span></td>						
 					</tr>
 				</tbody>
 			</table>
