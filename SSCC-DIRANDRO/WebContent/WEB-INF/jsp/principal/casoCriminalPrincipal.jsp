@@ -73,7 +73,8 @@
 			<div class="tabbable" style="margin-bottom: 9px;">
 				<ul class="nav nav-tabs">
 					<li class="active"><a href="#1" data-toggle="tab">Principal</a></li>
-					<li class=""><a href="#2" data-toggle="tab">Rasgos Particulares</a></li>
+					<li class=""><a href="#2" data-toggle="tab">Sospechosos</a></li>
+					<li class=""><a href="#2" data-toggle="tab">Bienes</a></li>
 					<li class=""><a href="#3" data-toggle="tab">Archivos Adjuntos</a></li>
 					<li class=""><a href="#4" data-toggle="tab">Comentarios</a></li>
 					<li class=""><a href="#5" data-toggle="tab">Auditoría</a></li>

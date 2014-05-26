@@ -71,7 +71,7 @@
 				</ul>
 				<div class="tab-content">
 					<div class="tab-pane active" id="1">
-						<jsp:include page="perfil/tabPrincipal.jsp" />
+						<jsp:include page="perfil/tabPrincipalPerfil.jsp" />
 					</div>
 					<div class="tab-pane" id="2">
 						<p>Seccion 2.</p>
