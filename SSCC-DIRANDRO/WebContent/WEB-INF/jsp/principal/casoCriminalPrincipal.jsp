@@ -25,6 +25,7 @@
 <!-- validacion -->
 <script src="js/jquery.validate.min.js"></script>
 <script src="js/validateFecha.js"></script>
+<script src="js/formatDates.js"></script>
 <!-- styles -->
 <link href="css/bootstrap.css" rel="stylesheet">
 <link href="css/bootstrap-responsive.css" rel="stylesheet">
@@ -81,7 +82,7 @@
 				</ul>
 				<div class="tab-content">
 					<div class="tab-pane active" id="1">
-						<%-- <jsp:include page="sospechoso/tabPrincipalSospechoso.jsp" /> --%>
+						<jsp:include page="casoCriminal/tabPrincipalCasoCriminal.jsp" />
 					</div>
 					<div class="tab-pane" id="2">
 						<p>Seccion 2.</p>

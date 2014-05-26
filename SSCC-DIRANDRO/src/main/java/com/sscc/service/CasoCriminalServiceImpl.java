@@ -32,7 +32,7 @@ public class CasoCriminalServiceImpl implements CasoCriminalService{
 		//grabar en la BD
 		em.persist(caso);
 		
-		caso.setCodigo("N°"+caso.getIdCasoCriminal()+"-"+d.hoyTimestamp().getMonth()+"-"+d.hoyTimestamp().getYear()+"-DIRANDRO-PNP-UI");
+		caso.setCodigo("N°"+caso.getIdCasoCriminal()+"-"+d.hoy().getMonth()+"-"+d.hoy().getYear()+"-DIRANDRO-PNP-UI");
 		
 		return caso.getIdCasoCriminal();
 	}
