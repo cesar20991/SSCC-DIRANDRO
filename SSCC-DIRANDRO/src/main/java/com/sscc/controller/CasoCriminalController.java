@@ -30,6 +30,11 @@ public class CasoCriminalController {
 		return "principal/crearCaso";
 	}
 	
+	@RequestMapping("toBuscarCaso")
+	public String toBuscarCaso() {
+		return "principal/buscarCasoCriminal";
+	}
+	
 	@RequestMapping(value = "crearCaso", method = RequestMethod.POST)
 	public String crearSospechoso(@ModelAttribute CasoCriminal caso, HttpServletRequest req, HttpSession session, Model model){
 

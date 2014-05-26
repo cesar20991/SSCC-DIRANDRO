@@ -29,11 +29,11 @@ $(document).ready(function(){
 	 			$("#hdrEstado").append(caso.estado);
 	 			$("#hdrReferencia").append(caso.referencia);
 	 			$("#hdrCreador").append('<a href="toPerfil-'+caso.idPerfil+'">'+caso.primerNombre+ ' ' +caso.segundoNombre+ ' ' +caso.apePaterno+ ' ' +caso.apeMaterno+ '('+caso.tipoFiscal+')</a>');
-	 			$("#hdrFecCreacion").text(caso.fecCreacion);
+	 			$("#hdrFecCreacion").text(timeStampFormatted(caso.fecCreacion));
 	 			
 	 			$("#spnCodigo").append(caso.codigo);
 	 			$("#spnEstado").append(caso.estado);
-	 			$("#spnFecCreacion").append(caso.fecCreacion);
+	 			$("#spnFecCreacion").append(timeStampFormatted(caso.fecCreacion));
 	 			$("#spnReferencia").append(caso.referencia);
 	 			$("#spnAsunto").append(caso.asunto);
 	 			$("#spnDescripcion").append(caso.descripcion);

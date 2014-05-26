@@ -14,7 +14,7 @@ $(document).ready(function(){
 			<div id="collapseOne" class="accordion-body collapse"
 				style="height: 0px;">
 				<div class="accordion-inner"><a href="toCrearCaso">Crear Caso Criminal</a></div>
-				<div class="accordion-inner">Buscar Caso Criminal</div>
+				<div class="accordion-inner"><a href="toBuscarCaso">Buscar Caso Criminal</a></div>
 				<div class="accordion-inner">Asignar Caso Criminal</div>
 			</div>
 		</div>
