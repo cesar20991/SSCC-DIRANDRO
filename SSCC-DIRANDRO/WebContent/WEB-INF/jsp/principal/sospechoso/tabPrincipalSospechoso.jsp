@@ -89,7 +89,7 @@ function init(sospechoso){
 	}
 	$("#spnRestriccion").append(sospechoso.restriccion);
 	$("#spnDomicilio").append(sospechoso.domicilio);
-	$("#spnDepartamentoDeDomicilio").append(sospechoso.departamentoDeDomicilio)
+	$("#spnDepartamentoDeDomicilio").append(sospechoso.departamentoDeDomicilio);
 	$("#spnProvinciaDeDomicilio").append(sospechoso.provinciaDeDomicilio);
 	$("#spnDistritoDeDomicilio").append(sospechoso.distritoDeDomicilio);
 	$("#spnMultasElectorales").append(sospechoso.multasElectorales);
