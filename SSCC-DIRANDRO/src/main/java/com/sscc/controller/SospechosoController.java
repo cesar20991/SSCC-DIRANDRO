@@ -30,7 +30,7 @@ public class SospechosoController {
 	public String toCrearSospechoso() {
 		return "principal/sospechosoNuevo";
 	}
-	////
+	
 	@RequestMapping(value = "crearSospechoso", method = RequestMethod.POST)
 	public String crearSospechoso(@ModelAttribute Sospechoso sospechoso, HttpServletRequest req, HttpSession session, Model model){
 
@@ -49,6 +49,15 @@ public class SospechosoController {
 		return "principal/sospechosoPrincipal";
 	}
 	
+	//Este metodo es de Rasgos Particulares del Sospechoso
+	@RequestMapping(value = "editarRasgos", method = RequestMethod.POST)
+	@ResponseBody
+	public SospechosoBean editarRasgos(@ModelAttribute Sospechoso sospechoso, HttpServletRequest req, HttpSession session, Model model){
+		SospechosoBean sospechosobean = new SospechosoBean();
+		sospechosobean = sospechosoServ.editSospechosoBean(sospechoso);
+		return sospechosobean;
+	}
+	//
 	@RequestMapping(value = "getSopechoso-{idSospechoso}", method = RequestMethod.POST)
 	@ResponseBody
 	public SospechosoBean getSopechoso(@PathVariable("idSospechoso") Integer idSospechoso){

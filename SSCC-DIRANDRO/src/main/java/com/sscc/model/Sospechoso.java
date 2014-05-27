@@ -7,6 +7,8 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 
 @Entity
 public class Sospechoso {
@@ -66,6 +68,11 @@ public class Sospechoso {
 	private String estado;
 	@Column(nullable = false)
 	private Timestamp fecCreacionSospechoso;
+	
+	///
+	@OneToOne
+	@JoinColumn(name = "idRasgosParticulares")
+	private RasgosParticulares rasgosParticulares;
 	
 	public Integer getIdSospechoso() {
 		return idSospechoso;
@@ -228,5 +235,11 @@ public class Sospechoso {
 	}
 	public void setCodigo(String codigo) {
 		this.codigo = codigo;
+	}
+	public RasgosParticulares getRasgosParticulares() {
+		return rasgosParticulares;
+	}
+	public void setRasgosParticulares(RasgosParticulares rasgosParticulares) {
+		this.rasgosParticulares = rasgosParticulares;
 	}
 }

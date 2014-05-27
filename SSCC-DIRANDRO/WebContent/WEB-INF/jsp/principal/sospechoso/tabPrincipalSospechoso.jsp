@@ -89,7 +89,7 @@ function init(sospechoso){
 	}
 	$("#spnRestriccion").append(sospechoso.restriccion);
 	$("#spnDomicilio").append(sospechoso.domicilio);
-	$("#spnDepartamentoDeDomicilio").append(sospechoso.departamentoDeDomicilio)
+	$("#spnDepartamentoDeDomicilio").append(sospechoso.departamentoDeDomicilio);
 	$("#spnProvinciaDeDomicilio").append(sospechoso.provinciaDeDomicilio);
 	$("#spnDistritoDeDomicilio").append(sospechoso.distritoDeDomicilio);
 	$("#spnMultasElectorales").append(sospechoso.multasElectorales);
@@ -122,14 +122,16 @@ $(document).ready(function(){
 				txtEstatura: {doubleNumber: true},
 				txtInscripcion: {peruDate: true},
 				txtEmision: {peruDate: true},
-				txtCodUnico: {number: true, minlength: 8, maxlength: 8}
+				txtCodUnico: {number: true, minlength: 8, maxlength: 8},
+				txtMultasElectorales: {number: true, maxlength:4}
 			},
 			messages:{
 				txtFecNac: "Debe tener formato de fecha dd/mm/aaaa",
 				txtEstatura: "Solo Números",
 				txtInscripcion: "Debe tener formato de fecha dd/mm/aaaa",
 				txtEmision: "Debe tener formato de fecha dd/mm/aaaa",
-				txtCodUnico: "Solo Números, 8 digitos"
+				txtCodUnico: "Sólo Números, 8 digitos",
+				txtMultasElectorales: "Sólo Números"
 			},
 			submitHandler: function(form){
 				//Se usa 1000-12-12 para que pase de la vista al controlador
@@ -559,6 +561,7 @@ $(document).on('click','#btnCancelEditar', function(e){
 		          		<label class="control-label">Multas Electorales: </label>
 		          		<div class="controls">
 		          			<input class="span2" type="text" name="txtMultasElectorales" id="txtMultasElectorales">
+		          			<input class="span2" type="hidden" name="txtMultasElectorales" id="txtMultasElectorales">
 		          		</div>
 		       		</div>
 		       		<!-- Aqui cierra mario-->

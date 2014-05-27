@@ -62,14 +62,16 @@ $(document).ready(function() {
 			txtEstatura: {doubleNumber: true},
 			txtInscripcion: {peruDate: true},
 			txtEmision: {peruDate: true},
-			txtCodUnico: {number: true, minlength: 8, maxlength: 8}
+			txtCodUnico: {number: true, minlength: 8, maxlength: 8},
+			multasElectoraleso:{number:true, maxlength:4}
 		},
 		messages:{
 			txtFecNac: "Debe tener formato de fecha dd/mm/aaaa",
 			txtEstatura: "Solo Números",
 			txtInscripcion: "Debe tener formato de fecha dd/mm/aaaa",
 			txtEmision: "Debe tener formato de fecha dd/mm/aaaa",
-			txtCodUnico: "Solo Números, 8 digitos"
+			multasElectoraleso:"Sólo Números",
+			txtCodUnico: "Sólo Números, 8 digitos"
 		},
 		submitHandler: function(form){
 			//Se usa 1000-12-12 para que pase de la vista al controlador

@@ -34,6 +34,19 @@ public class SospechosoBean {
 	private String estado;
 	private Timestamp fecCreacionSospechoso;
 	
+	///Rasgos Particulares
+	private Integer idRasgosParticulares;
+	private String tatuaje;
+	private String lunares;
+	private String cicatrices;
+	private String deficiencias;
+	private String otros;
+	private String textoTatuaje;
+	private String textoLunares;
+	private String textoCicatrices;
+	private String textoDeficiencias;
+	private String textoOtros;
+	
 	public Integer getIdSospechoso() {
 		return idSospechoso;
 	}
@@ -195,5 +208,72 @@ public class SospechosoBean {
 	}
 	public void setCodigo(String codigo) {
 		this.codigo = codigo;
+	}
+	//Rasgos Particulares
+	public Integer getIdRasgosParticulares() {
+		return idRasgosParticulares;
+	}
+	public void setIdRasgosParticulares(Integer idRasgosParticulares) {
+		this.idRasgosParticulares = idRasgosParticulares;
+	}
+	public String getTatuaje() {
+		return tatuaje;
+	}
+	public void setTatuaje(String tatuaje) {
+		this.tatuaje = tatuaje;
+	}
+	public String getLunares() {
+		return lunares;
+	}
+	public void setLunares(String lunares) {
+		this.lunares = lunares;
+	}
+	public String getCicatrices() {
+		return cicatrices;
+	}
+	public void setCicatrices(String cicatrices) {
+		this.cicatrices = cicatrices;
+	}
+	public String getDeficiencias() {
+		return deficiencias;
+	}
+	public void setDeficiencias(String deficiencias) {
+		this.deficiencias = deficiencias;
+	}
+	public String getOtros() {
+		return otros;
+	}
+	public void setOtros(String otros) {
+		this.otros = otros;
+	}
+	public String getTextoTatuaje() {
+		return textoTatuaje;
+	}
+	public void setTextoTatuaje(String textoTatuaje) {
+		this.textoTatuaje = textoTatuaje;
+	}
+	public String getTextoLunares() {
+		return textoLunares;
+	}
+	public void setTextoLunares(String textoLunares) {
+		this.textoLunares = textoLunares;
+	}
+	public String getTextoCicatrices() {
+		return textoCicatrices;
+	}
+	public void setTextoCicatrices(String textoCicatrices) {
+		this.textoCicatrices = textoCicatrices;
+	}
+	public String getTextoDeficiencias() {
+		return textoDeficiencias;
+	}
+	public void setTextoDeficiencias(String textoDeficiencias) {
+		this.textoDeficiencias = textoDeficiencias;
+	}
+	public String getTextoOtros() {
+		return textoOtros;
+	}
+	public void setTextoOtros(String textoOtros) {
+		this.textoOtros = textoOtros;
 	}
 }
