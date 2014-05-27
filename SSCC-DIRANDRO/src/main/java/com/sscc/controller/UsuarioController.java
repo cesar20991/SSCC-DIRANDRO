@@ -1,8 +1,5 @@
 package com.sscc.controller;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -14,8 +11,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.sscc.form.SospechosoBean;
-import com.sscc.model.Sospechoso;
 import com.sscc.model.Usuario;
 import com.sscc.service.PerfilService;
 import com.sscc.service.UsuarioService;

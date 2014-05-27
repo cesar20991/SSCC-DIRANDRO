@@ -1,14 +1,15 @@
 package com.sscc.model;
 
 import java.sql.Timestamp;
+import java.util.Collection;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
-
 
 @Entity
 public class Usuario {
@@ -29,6 +30,12 @@ public class Usuario {
 	@OneToOne
 	@JoinColumn(name = "idPerfil")
 	private Perfil perfil;	
+	
+	@OneToMany(mappedBy = "usuario")
+	private Collection<CasoCriminal> casos;
+	
+	@OneToMany(mappedBy = "usuario")
+	private Collection<casoPorAgente> cpa;
 		
 	public Integer getIdUsuario() {
 		return idUsuario;
@@ -65,6 +72,18 @@ public class Usuario {
 	}
 	public void setCorreoElectronico(String correoElectronico) {
 		this.correoElectronico = correoElectronico;
+	}
+	public Collection<CasoCriminal> getCasos() {
+		return casos;
+	}
+	public void setCasos(Collection<CasoCriminal> casos) {
+		this.casos = casos;
+	}
+	public Collection<casoPorAgente> getCpa() {
+		return cpa;
+	}
+	public void setCpa(Collection<casoPorAgente> cpa) {
+		this.cpa = cpa;
 	}
 	
 }

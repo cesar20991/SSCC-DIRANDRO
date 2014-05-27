@@ -13,6 +13,7 @@ public class PerfilBean {
 	
 	private Integer idPerfil;
 	private String primerNombre;
+	private String nombreCompleto;
 	private String segundoNombre;
 	private String apePaterno;
 	private String apeMaterno;
@@ -160,6 +161,12 @@ public class PerfilBean {
 	}
 	public void setTipoFiscal(String tipoFiscal) {
 		this.tipoFiscal = tipoFiscal;
+	}
+	public String getNombreCompleto() {
+		return nombreCompleto;
+	}
+	public void setNombreCompleto(String nombreCompleto) {
+		this.nombreCompleto = nombreCompleto;
 	}
 	
 }

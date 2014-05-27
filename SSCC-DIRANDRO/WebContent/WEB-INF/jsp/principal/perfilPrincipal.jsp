@@ -66,18 +66,18 @@
 			<div class="tabbable" style="margin-bottom: 9px;">
 				<ul class="nav nav-tabs">
 					<li class="active"><a href="#1" data-toggle="tab">Principal</a></li>
-					<li class=""><a href="#2" data-toggle="tab">Section 2</a></li>
-					<li class=""><a href="#3" data-toggle="tab">Section 3</a></li>
+					<li class=""><a href="#2" data-toggle="tab">Archivos Adjuntos</a></li>
+					<li class=""><a href="#3" data-toggle="tab">Comentarios</a></li>
 				</ul>
 				<div class="tab-content">
 					<div class="tab-pane active" id="1">
-						<jsp:include page="perfil/tabPrincipal.jsp" />
+						<jsp:include page="perfil/tabPrincipalPerfil.jsp" />
 					</div>
 					<div class="tab-pane" id="2">
-						<p>Seccion 2.</p>
+						<p>Archivos Adjuntos.</p>
 					</div>
 					<div class="tab-pane" id="3">
-						<p>Seccion 3.</p>
+						<p>Comentarios.</p>
 					</div>
 				</div>
 			</div>

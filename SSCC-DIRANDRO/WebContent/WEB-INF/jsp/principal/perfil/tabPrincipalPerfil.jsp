@@ -108,6 +108,12 @@ $(document).ready(function(){
 					<span id="spnApePaterno">&nbsp;</span>&nbsp;<span id="spnApeMaterno">&nbsp;</span>
 				</div>
 			</div>
+			<div class="control-group" id="divCarnet">
+				<label class="control-label">Numero de Carnet: </label>
+				<div class="controls">
+					CIP N° <span id="spnNCarnet">&nbsp;</span>
+				</div>
+			</div>
 			<div class="control-group">
 				<label class="control-label">DNI: </label>
 				<div class="controls">
@@ -126,22 +132,16 @@ $(document).ready(function(){
 					<span id="spnRango">&nbsp;</span>
 				</div>
 			</div>
-			<div class="control-group" id="divCargo">
-				<label class="control-label">Cargo: </label>
-				<div class="controls">
-					<span id="spnCargo">&nbsp;</span>
-				</div>
-			</div>
 			<div class="control-group" id="divGrado">
 				<label class="control-label">Grado: </label>
 				<div class="controls">
 					<span id="spnGrado">&nbsp;</span>
 				</div>
 			</div>
-			<div class="control-group" id="divCarnet">
-				<label class="control-label">Numero de Carnet: </label>
+			<div class="control-group" id="divCargo">
+				<label class="control-label">Cargo: </label>
 				<div class="controls">
-					CIP N°<span id="spnNCarnet">&nbsp;</span>
+					<span id="spnCargo">&nbsp;</span>
 				</div>
 			</div>
 			<div class="control-group" id="divFiscal" style="display: none;">
