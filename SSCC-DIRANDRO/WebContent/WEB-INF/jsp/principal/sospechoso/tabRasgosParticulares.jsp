@@ -11,7 +11,7 @@
 }
 </style>
 <script type="text/javascript">
-function init(rasgosParticulares){
+function initRasgosParticulares(rasgosParticulares){
 	//TAB RASGOS PARTICULARES
 	$("#spnTatuajes").empty();
 	$("#spnLunares").empty();
@@ -37,8 +37,18 @@ function init(rasgosParticulares){
 	$("#spntextoCicatrices").append(rasgosParticulares.textoCicatrices);
 	$("#spntextoDeficiencias").append(rasgosParticulares.textoDeficiencias);
 	$("#spntextoOtros").append(rasgosParticulares.textoOtros);
-	}
+}
 	$(document).ready(function(){
+		var idSospechoso = $("#hdnIdSospechoso").text();
+		$.ajax({
+	 		url: 'getRasgosParticulares-'+idSospechoso,
+	 		type: 'post',
+	 		dataType: 'json',
+	 		data: '',
+	 		success: function(rasgos){
+	 			initRasgosParticulares(rasgos);
+	 		}
+	 	});
 		//VALIDACIONES
 		$("#formEditarRasgos").validate({
 			rules:
@@ -58,60 +68,66 @@ function init(rasgosParticulares){
 				txtOtros:"Supero el límite (1500)."
 			},
 			submitHandler: function(form){
+				$("#hdnIdSospechosoRasgos").val($("#hdnIdSospechoso").text());
 				$.ajax({
 					url: 'editarRasgos',
 			 		type: 'post',
 			 		dataType: 'json',
 			 		data: $("#formEditarRasgos").serialize(),
 			 		success: function(rasgosParticulares){
-			 			init(rasgosParticulares);
+			 			initRasgosParticulares(rasgosParticulares);
 			 			$("#divMostrarRasgos").show();
 			 			$("#divEditarRasgos").hide();
-			 			}
+			 		}
 				});
 			}
 		});
 	});
 	$(document).on('click','#btnEditarRasgos', function(e){
+		$("#txtTatuajes").hide();
+		$("#txtLunares").hide();
+		$("#txtCicatrices").hide();
+		$("#txtDeficiencias").hide();
+		$("#txtOtros").hide();
 		//COMPONENTES DEL EDITAR
-		if($("#spnTatuajes").text=='SÍ'){
+		if($("#spnTatuajes").text() =='SI'){
 			$("#radioTSi").prop("checked",true);
-			$("#txtTatuajes").val($("#spnTatuajes").text());
-		}else if($("#spnTatuajes").text=='NO'){
+			$("#txtTatuajes").show();
+			$("#txtTatuajes").val($("#spntextoTatuajes").text());
+		}else if($("#spnTatuajes").text() =='NO'){
 			$("#radioTNo").prop("checked",true);
-			$("#txtTatuajes").val($("#spnTatuajes").text());
 		}
 		
-		if($("#spnLunares").text=='SÍ'){
+		if($("#spnLunares").text() =='SI'){
 			$("#radioLSi").prop("checked",true);
-			$("#txtLunares").val($("#spnLunares").text());
-		}else if($("#spnLunares").text=='NO'){
+			$("#txtLunares").show();
+			$("#txtLunares").val($("#spntextoLunares").text());
+		}else if($("#spnLunares").text() =='NO'){
 			$("#radioLNo").prop("checked",true);
-			$("#txtLunares").val($("#spnLunares").text());
 		}
 		
-		if($("#spnCicatrices").text=='SÍ'){
+		if($("#spnCicatrices").text() =='SI'){
 			$("#radioCSi").prop("checked",true);
-			$("#txtCicatrices").val($("#spnCicatrices").text());
-		}else if($("#spnCicatrices").text=='NO'){
+			$("#txtCicatrices").show();
+			$("#txtCicatrices").val($("#spntextoCicatrices").text());
+		}else if($("#spnCicatrices").text()=='NO'){
 			$("#radioCNo").prop("checked",true);
-			$("#txtCicatrices").val($("#spnCicatrices").text());
 		}
 		
-		if($("#spnDeficiencias").text=='SÍ'){
+		if($("#spnDeficiencias").text() =='SI'){
 			$("#radioDSi").prop("checked",true);
-			$("#txtDeficiencias").val($("#spnDeficiencias").text());
-		}else if($("#spnDeficiencias").text=='NO'){
+			$("#txtDeficiencias").show();
+			$("#txtDeficiencias").val($("#spntextoDeficiencias").text());
+		}else if($("#spnDeficiencias").text()=='NO'){
 			$("#radioDNo").prop("checked",true);
-			$("#txtDeficiencias").val($("#spnDeficiencias").text());
 		}
 		
-		if($("#spnOtros").text=='SÍ'){
+		if($("#spnOtros").text() =='SI'){
 			$("#radioOSi").prop("checked",true);
-			$("#txtOtros").val($("#spnOtros").text());
-		}else if($("#spnOtros").text=='NO'){
+			$("#txtOtros").show();
+			$("#txtOtros").val($("#spntextoOtros").text());
+		}else if($("#spnOtros").text()=='NO'){
 			$("#radioONo").prop("checked",true);
-			$("#txtOtros").val($("#spnOtros").text());
 		}
 		//TABS A OCULTAR Y MOSTRAR
 		$("#divMostrarRasgos").hide();
@@ -122,7 +138,52 @@ function init(rasgosParticulares){
 		$("#divMostrarRasgos").show();
 		$("#divEditarRasgos").hide();
 	});
+	//RADIO BUTTONS PARA LA APARICION DE LOS TEXT AREA
+	$(document).on('click','#radioTSi', function(e){
+		$("#txtTatuajes").show();
+		$("#lblTatuajes").css("margin-top","87px");
+	});
+	$(document).on('click','#radioTNo', function(e){
+		$("#txtTatuajes").hide();
+		$("#txtTatuajes").val("");
+		$("#lblTatuajes").css("margin-top","0px");
+	});
 	
+	$(document).on('click','#radioLSi', function(e){
+		$("#txtLunares").show();
+		$("#lblLunares").css("margin-top","87px");
+	});
+	$(document).on('click','#radioLNo', function(e){
+		$("#txtLunares").hide();
+		$("#lblLunares").css("margin-top","0px");
+	});
+	
+	$(document).on('click','#radioCSi', function(e){
+		$("#txtCicatrices").show();
+		$("#lblCicatrices").css("margin-top","87px");
+	});
+	$(document).on('click','#radioCNo', function(e){
+		$("#txtCicatrices").hide();
+		$("#lblCicatrices").css("margin-top","0px");
+	});
+	
+	$(document).on('click','#radioDSi', function(e){
+		$("#txtDeficiencias").show();
+		$("#lblDeficiencias").css("margin-top","87px");
+	});
+	$(document).on('click','#radioDNo', function(e){
+		$("#txtDeficiencias").hide();
+		$("#lblDeficiencias").css("margin-top","0px");
+	});
+	
+	$(document).on('click','#radioOSi', function(e){
+		$("#txtOtros").show();
+		$("#lblOtros").css("margin-top","87px");
+	});
+	$(document).on('click','#radioONo', function(e){
+		$("#txtOtros").hide();
+		$("#lblOtros").css("margin-top","0px");
+	});
 </script>
 <body>
 <!-- MOSTRAR RASGOS PARTICULARES -->
@@ -173,67 +234,68 @@ function init(rasgosParticulares){
 		<!-- EDITAR RASGOS PARTICULARES -->
 		<fieldset class="well" style="display: none;" id="divEditarRasgos">
 			<form:form class="form-horizontal" id="formEditarRasgos" action="editarRasgos" commandName="rasgosParticulares">
+				<input type="hidden" name="idSospechosoAux" id="hdnIdSospechosoRasgos">
 				<legend>
 			       	<span class="colored">///</span> Editar Rasgos Particualres del Sospechoso:
 		       	</legend>
 		       	<div class="control-group">
-					<label class="control-label">Tatuajes: </label> 
+					<label class="control-label" id="lblTatuajes">Tatuajes: </label> 
 					<label class="checkbox inline"> 
-						<input type="radio" name="entidadTatuaje" id="radioTSi" value="SI">SÍ
+						<input type="radio" name="tatuaje" id="radioTSi" value="SI">SÍ
 					</label> 
 					<label class="checkbox inline"> 
-						<input type="radio" name="entidadTatuaje" id="radioTNo" value="NO">NO
+						<input type="radio" name="tatuaje" id="radioTNo" value="NO" checked>NO
 					</label>
 					<label class="checkbox inline">
-						<textarea rows="10" cols="40" id="txtTatuajes"></textarea>
+						<textarea rows="10" cols="40" name="textoTatuaje" id="txtTatuajes"></textarea>
 					</label>
 				</div>
 				<div class="control-group">
-					<label class="control-label">Lunares: </label> 
+					<label class="control-label" id="lblLunares">Lunares: </label> 
 					<label class="checkbox inline"> 
-						<input type="radio" name="entidadLunares" id="radioLSi" value="s">SÍ
+						<input type="radio" name="lunares" id="radioLSi" value="SI">SÍ
 					</label> 
 					<label class="checkbox inline"> 
-						<input type="radio" name="entidadLunares" id="radioLNo" value="n">NO
+						<input type="radio" name="lunares" id="radioLNo" value="NO" checked>NO
 					</label>
 					<label class="checkbox inline"> 
-						<textarea rows="10" cols="40" id="txtLunares"></textarea>
+						<textarea rows="10" cols="40" name="textoLunares" id="txtLunares"></textarea>
 					</label>
 				</div>
 				<div class="control-group">
-					<label class="control-label">Cicatrices: </label> 
+					<label class="control-label" id="lblCicatrices">Cicatrices: </label> 
 					<label class="checkbox inline"> 
-						<input type="radio" name="entidadCicatrices" id="radioCSi" value="s">SÍ
+						<input type="radio" name="cicatrices" id="radioCSi" value="SI">SÍ
 					</label> 
 					<label class="checkbox inline"> 
-						<input type="radio" name="entidadCicatrices" id="radioCNo" value="n">NO
+						<input type="radio" name="cicatrices" id="radioCNo" value="NO" checked>NO
 					</label>
 					<label class="checkbox inline">
-						<textarea rows="10" cols="40" id="txtCicatrices"></textarea>
+						<textarea rows="10" cols="40" name="textoCicatrices" id="txtCicatrices"></textarea>
 					</label>
 				</div>
 				<div class="control-group">
-					<label class="control-label">Deficiencias: </label> 
+					<label class="control-label" id="lblDeficiencias">Deficiencias: </label> 
 					<label class="checkbox inline"> 
-						<input type="radio" name="entidadDeficiencias" id="radioDSi" value="s">SÍ
+						<input type="radio" name="deficiencias" id="radioDSi" value="SI">SÍ
 					</label> 
 					<label class="checkbox inline"> 
-						<input type="radio" name="entidadDeficiencias" id="radioNo" value="n">NO
+						<input type="radio" name="deficiencias" id="radioDNo" value="NO" checked>NO
 					</label>
 					<label class="checkbox inline">
-						<textarea rows="10" cols="40" id="txtDeficiencias"></textarea>
+						<textarea rows="10" cols="40" name="textoDeficiencias" id="txtDeficiencias"></textarea>
 					</label>
 				</div>
 				<div class="control-group">
-					<label class="control-label">Otros: </label> 
+					<label class="control-label" id="lblOtros">Otros: </label> 
 					<label class="checkbox inline"> 
-						<input type="radio" name="entidadOtros" id="radioSi" value="s">SÍ
+						<input type="radio" name="otros" id="radioOSi" value="SI">SÍ
 					</label> 
 					<label class="checkbox inline"> 
-						<input type="radio" name="entidadOtros" id="radioNo" value="n">NO
+						<input type="radio" name="otros" id="radioONo" value="NO" checked>NO
 					</label>
 					<label class="checkbox inline">
-						<textarea rows="10" cols="40" id="txtOtros"></textarea>
+						<textarea rows="10" cols="40" name="textoOtros" id="txtOtros"></textarea>
 					</label>
 				</div>
 				<!-- BOTONES -->

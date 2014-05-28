@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.sscc.form.SospechosoBean;
+import com.sscc.model.RasgosParticulares;
 import com.sscc.model.Sospechoso;
 import com.sscc.util.DateUtil;
 
@@ -50,6 +51,7 @@ public class SospechosoServiceImpl implements SospechosoService{
 		sb.setProvinciaDeDomicilio(s.getProvinciaDeDomicilio());
 		sb.setDistritoDeDomicilio(s.getDistritoDeDomicilio());
 		sb.setMultasElectorales(s.getMultasElectorales());
+		sb.setIdRasgosParticulares(s.getRasgosParticulares().getIdRasgosParticulares());
 		return sb;
 	}
 
@@ -112,6 +114,9 @@ public class SospechosoServiceImpl implements SospechosoService{
 		
 		em.persist(sospechoso);
 		sospechoso.setCodigo("SPO-"+sospechoso.getIdSospechoso());
+		RasgosParticulares rp = new RasgosParticulares();
+		em.persist(rp);
+		sospechoso.setRasgosParticulares(rp);
 		
 		return sospechoso.getIdSospechoso();
 	}

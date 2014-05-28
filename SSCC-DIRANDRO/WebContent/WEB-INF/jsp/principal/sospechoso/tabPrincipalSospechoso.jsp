@@ -7,7 +7,7 @@
 }
 </style>
 <script>
-function init(sospechoso){
+function initSospechoso(sospechoso){
 	//CABECERA...
 	$("#hdrCodigoUnicoDeIdentificacion").empty();
 	$("#hdrPrimerApellido").empty();
@@ -111,7 +111,7 @@ $(document).ready(function(){
 	 		dataType: 'json',
 	 		data: '',
 	 		success: function(sospechoso){
-	 			init(sospechoso);
+	 			initSospechoso(sospechoso);
 	 		}
 	 	});
 		
@@ -158,7 +158,7 @@ $(document).ready(function(){
 			 		dataType: 'json',
 			 		data: $("#formEditarSospechoso").serialize(),
 			 		success: function(sospechoso){
-			 			init(sospechoso);
+			 			initSospechoso(sospechoso);
 			 			$("#divMostrarSospechoso").show();
 			 			$("#divEditarSospechoso").hide();
 			 		}

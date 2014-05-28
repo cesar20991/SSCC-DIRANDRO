@@ -20,7 +20,7 @@ public class RasgosParticulares {
 	private String cicatrices;
 	@Column(length = 2, nullable = true)
 	private String deficiencias;
-	@Column(length = 2, nullable = false)
+	@Column(length = 2, nullable = true)
 	private String otros;
 	
 	@Column(length = 1500, nullable = true)

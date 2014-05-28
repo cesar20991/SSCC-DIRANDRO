@@ -16,7 +16,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.sscc.form.SospechosoBean;
+import com.sscc.model.RasgosParticulares;
 import com.sscc.model.Sospechoso;
+import com.sscc.service.RasgosParticularesService;
 import com.sscc.service.SospechosoService;
 
 @Controller
@@ -24,6 +26,9 @@ public class SospechosoController {
 	
 	@Autowired
 	SospechosoService sospechosoServ;
+	
+	@Autowired
+	RasgosParticularesService rpServ;
 	
 	@RequestMapping("toCrearSospechoso")
 	public String toCrearSospechoso() {
@@ -48,13 +53,21 @@ public class SospechosoController {
 		return "principal/sospechosoPrincipal";
 	}
 	
-	//Este metodo es de Rasgos Particulares del Sospechoso
+	//METODO PARA RASGOS PARTICULARES
+	@RequestMapping(value = "getRasgosParticulares-{idSospechoso}", method = RequestMethod.POST)
+	@ResponseBody
+	public SospechosoBean getRasgosParticulares(@PathVariable("idSospechoso") Integer idSospechoso){
+		SospechosoBean rpBean = new SospechosoBean();
+		rpBean = rpServ.getRasgosParticulares(idSospechoso);
+		return rpBean;
+	}
 	@RequestMapping(value = "editarRasgos", method = RequestMethod.POST)
 	@ResponseBody
-	public SospechosoBean editarRasgos(@ModelAttribute Sospechoso sospechoso, HttpServletRequest req, HttpSession session, Model model){
-		SospechosoBean sospechosobean = new SospechosoBean();
-		sospechosobean = sospechosoServ.editSospechosoBean(sospechoso);
-		return sospechosobean;
+	public SospechosoBean editarRasgos(@ModelAttribute RasgosParticulares rasgosParticulares, HttpServletRequest req, HttpSession session, Model model){
+		Integer idSospechoso = Integer.parseInt(req.getParameter("idSospechosoAux"));
+		SospechosoBean rpBean = new SospechosoBean();
+		rpBean = rpServ.editRasgosParticularesBean(rasgosParticulares, idSospechoso);
+		return rpBean;
 	}
 	//
 	@RequestMapping(value = "getSopechoso-{idSospechoso}", method = RequestMethod.POST)

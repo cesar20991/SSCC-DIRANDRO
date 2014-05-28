@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.sscc.form.SospechosoBean;
 import com.sscc.model.RasgosParticulares;
+import com.sscc.model.Sospechoso;
 
 @Service
 public class RasgosParticularesServiceImpl implements RasgosParticularesService{
@@ -17,10 +18,11 @@ public class RasgosParticularesServiceImpl implements RasgosParticularesService{
 	EntityManager em;
 
 	@Transactional
-	public SospechosoBean getSospechosoBean(Integer idRasgosParticulares) {
+	public SospechosoBean getRasgosParticulares(Integer idSospechoso) {
+		Sospechoso s = em.find(Sospechoso.class, idSospechoso); 
 		SospechosoBean sb = new SospechosoBean();
-		Query qRasgosParticulares = em.createQuery("SELECT s FROM Sospechoso s JOIN s.idRasgosParticulares r WHERE r.idRasgosParticulares=:idRasgosParticulares AND s.estado='habilitado' ");
-		qRasgosParticulares.setParameter("idRasgosParticulares", idRasgosParticulares);
+		Query qRasgosParticulares = em.createQuery("SELECT r FROM Sospechoso s JOIN s.rasgosParticulares r WHERE r.idRasgosParticulares=:idRasgosParticulares AND s.estado='habilitado' ");
+		qRasgosParticulares.setParameter("idRasgosParticulares", s.getRasgosParticulares().getIdRasgosParticulares());
 		
 		RasgosParticulares rp = new RasgosParticulares();
 		rp = (RasgosParticulares) qRasgosParticulares.getSingleResult();
@@ -39,8 +41,10 @@ public class RasgosParticularesServiceImpl implements RasgosParticularesService{
 	}
 	
 	@Transactional
-	public SospechosoBean editRasgosParticularesBean(RasgosParticulares rasgosParticulares) {
-		RasgosParticulares rp = em.find(RasgosParticulares.class, rasgosParticulares.getIdRasgosParticulares());
+	public SospechosoBean editRasgosParticularesBean(RasgosParticulares rasgosParticulares, Integer idSospechoso) {
+		Sospechoso s = em.find(Sospechoso.class, idSospechoso);
+		
+		RasgosParticulares rp = em.find(RasgosParticulares.class, s.getRasgosParticulares().getIdRasgosParticulares());
 		RasgosParticulares editadoRP = em.merge(rp);
 		
 		editadoRP.setTatuaje(rasgosParticulares.getTatuaje());
@@ -53,7 +57,8 @@ public class RasgosParticularesServiceImpl implements RasgosParticularesService{
 		editadoRP.setTextoCicatrices(rasgosParticulares.getTextoCicatrices());
 		editadoRP.setTextoDeficiencias(rasgosParticulares.getDeficiencias());
 		editadoRP.setTextoOtros(rasgosParticulares.getOtros());
-		return getSospechosoBean(editadoRP.getIdRasgosParticulares());
+		
+		return getRasgosParticulares(idSospechoso);
 	}
 
 }
