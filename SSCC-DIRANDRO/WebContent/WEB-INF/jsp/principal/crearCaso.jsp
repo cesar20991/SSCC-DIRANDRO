@@ -56,7 +56,9 @@ $(document).ready(function() {
 	<section class="span9" style="margin-left: 80px;">
 		<fieldset class="well">
 			<form:form class="form-horizontal" id="formCrearCaso" action="crearCaso" commandName="caso">
-		       	<legend><span class="colored">///</span> Caso Criminal:</legend>
+		       	<legend>
+		       		<span class="colored">///</span> Caso Criminal:
+		       	</legend>
 	       		<div class="control-group">
 	          		<label class="control-label">Asunto: </label>
 	          		<div class="controls">
@@ -85,6 +87,7 @@ $(document).ready(function() {
 		</fieldset>
 	</section>
 </div>
+<!-- AGREGADO 29/05/14 -->
 <!--/CENTRO-->
 <!-- sticky footer -->
 <jsp:include page="../componentes/footer.jsp"/>

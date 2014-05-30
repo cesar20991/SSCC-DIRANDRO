@@ -129,9 +129,26 @@ function initRasgosParticulares(rasgosParticulares){
 		}else if($("#spnOtros").text()=='NO'){
 			$("#radioONo").prop("checked",true);
 		}
+		
 		//TABS A OCULTAR Y MOSTRAR
 		$("#divMostrarRasgos").hide();
 		$("#divEditarRasgos").show();
+	});
+	//Limpieza de los textArea al dar NO
+	$(document).on('click','#radioTNo', function(e){
+		$("#txtTatuajes").val("");
+	});
+	$(document).on('click','#radioLNo', function(e){
+		$("#txtLunares").val("");
+	});
+	$(document).on('click','#radioCNo', function(e){
+		$("#txtCicatrices").val("");
+	});
+	$(document).on('click','#radioDNo', function(e){
+		$("#txtDeficiencias").val("");
+	});
+	$(document).on('click','#radioONo', function(e){
+		$("#txtOtros").val("");
 	});
 	$(document).on('click','#btnCancelEditar', function(e){
 		//TABS A MOSTRAR Y OCULTAR
@@ -198,34 +215,52 @@ function initRasgosParticulares(rasgosParticulares){
 	          		<label class="control-label">Tatuajes: </label>
 	          		<div class="controls">
 	          			<span id="spnTatuajes">&nbsp;</span>
+	          		</div>
+	          		<br/>
+	          		<div class="controls">
 	          			<span id="spntextoTatuajes"></span>
 	          		</div>
 	       		</div>
+	       		<hr/>
 	       		<div class="control-group">
 	          		<label class="control-label">Lunares: </label>
 	          		<div class="controls">
 	          			<span id="spnLunares">&nbsp;</span>
+	          		</div>
+	          		<br/>
+	          		<div class="controls">
 	          			<span id="spntextoLunares"></span>
 	          		</div>
 	       		</div>
+	       		<hr/>
 	       		<div class="control-group">
 	          		<label class="control-label">Cicatrices: </label>
 	          		<div class="controls">
 	          			<span id="spnCicatrices">&nbsp;</span>
+	          		</div>
+	          		<br/>
+	          		<div class="controls">
 	          			<span id="spntextoCicatrices"></span>
 	          		</div>
 	       		</div>
+	       		<hr/>
 	       		<div class="control-group">
 	          		<label class="control-label">Deficiencias: </label>
 	          		<div class="controls">
 	          			<span id="spnDeficiencias">&nbsp;</span>
-	          			<span id="spntextoDefiniciones"></span>
+	          		</div>
+	          		<br/>
+	          		<div class="controls">
+	          			<span id="spntextoDeficiencias"></span>
 	          		</div>
 	       		</div>
+	       		<hr/>
 	       		<div class="control-group">
 	          		<label class="control-label">Otros: </label>
 	          		<div class="controls">
 	          			<span id="spnOtros">&nbsp;</span>
+	          		</div>
+	          		<div class="controls">
 	          			<span id="spntextoOtros"></span>
 	          		</div>
 	       		</div>
@@ -236,7 +271,7 @@ function initRasgosParticulares(rasgosParticulares){
 			<form:form class="form-horizontal" id="formEditarRasgos" action="editarRasgos" commandName="rasgosParticulares">
 				<input type="hidden" name="idSospechosoAux" id="hdnIdSospechosoRasgos">
 				<legend>
-			       	<span class="colored">///</span> Editar Rasgos Particualres del Sospechoso:
+			       	<span class="colored">///</span> Editar Rasgos Particulares del Sospechoso:
 		       	</legend>
 		       	<div class="control-group">
 					<label class="control-label" id="lblTatuajes">Tatuajes: </label> 
@@ -250,6 +285,7 @@ function initRasgosParticulares(rasgosParticulares){
 						<textarea rows="10" cols="40" name="textoTatuaje" id="txtTatuajes"></textarea>
 					</label>
 				</div>
+				<hr/>
 				<div class="control-group">
 					<label class="control-label" id="lblLunares">Lunares: </label> 
 					<label class="checkbox inline"> 
@@ -262,6 +298,7 @@ function initRasgosParticulares(rasgosParticulares){
 						<textarea rows="10" cols="40" name="textoLunares" id="txtLunares"></textarea>
 					</label>
 				</div>
+				<hr/>
 				<div class="control-group">
 					<label class="control-label" id="lblCicatrices">Cicatrices: </label> 
 					<label class="checkbox inline"> 
@@ -274,6 +311,7 @@ function initRasgosParticulares(rasgosParticulares){
 						<textarea rows="10" cols="40" name="textoCicatrices" id="txtCicatrices"></textarea>
 					</label>
 				</div>
+				<hr/>
 				<div class="control-group">
 					<label class="control-label" id="lblDeficiencias">Deficiencias: </label> 
 					<label class="checkbox inline"> 
@@ -286,6 +324,7 @@ function initRasgosParticulares(rasgosParticulares){
 						<textarea rows="10" cols="40" name="textoDeficiencias" id="txtDeficiencias"></textarea>
 					</label>
 				</div>
+				<hr/>
 				<div class="control-group">
 					<label class="control-label" id="lblOtros">Otros: </label> 
 					<label class="checkbox inline"> 

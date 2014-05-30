@@ -55,8 +55,8 @@ public class RasgosParticularesServiceImpl implements RasgosParticularesService{
 		editadoRP.setTextoTatuaje(rasgosParticulares.getTextoTatuaje());
 		editadoRP.setTextoLunares(rasgosParticulares.getTextoLunares());
 		editadoRP.setTextoCicatrices(rasgosParticulares.getTextoCicatrices());
-		editadoRP.setTextoDeficiencias(rasgosParticulares.getDeficiencias());
-		editadoRP.setTextoOtros(rasgosParticulares.getOtros());
+		editadoRP.setTextoDeficiencias(rasgosParticulares.getTextoDeficiencias());
+		editadoRP.setTextoOtros(rasgosParticulares.getTextoOtros());
 		
 		return getRasgosParticulares(idSospechoso);
 	}
