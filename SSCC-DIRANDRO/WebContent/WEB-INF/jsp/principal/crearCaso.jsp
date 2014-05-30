@@ -67,7 +67,7 @@ $(document).ready(function() {
 	       		</div>
 	       		<hr>
 	       		<div class="control-group">
-	          		<label class="control-label">Referencia: </label>
+	          		<label class="control-label" title="Nombre Clave">Referencia: </label>
 	          		<div class="controls">
 	          			<input class="span3" type="text" name="referencia" id="txtReferencia" data-rule-required="true" data-msg-required="*">
 	          		</div>
