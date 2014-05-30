@@ -79,36 +79,73 @@ public class CasoCriminalServiceImpl implements CasoCriminalService{
 	@SuppressWarnings("unchecked")
 	public List<CasoCriminalBean> getCasosCriminalBean() {
 		List<CasoCriminalBean> cbl = new ArrayList<CasoCriminalBean>();
-		List<CasoCriminal> c = new ArrayList<CasoCriminal>();
-		Query qCasos = em.createQuery("SELECT c.idCasoCriminal, c.codigo, c.referencia, u.idUsuario FROM CasoCriminal c JOIN c.casopa cpa JOIN cpa.usuario u JOIN u.perfil");
-		c = qCasos.getResultList();
-		
+		Query qCasos = em.createQuery("SELECT c.idCasoCriminal, c.codigo, c.referencia, u.idUsuario, p.primerNombre, p.segundoNombre, p.apePaterno, p.apeMaterno FROM CasoCriminal c LEFT JOIN c.casopa cpa LEFT JOIN cpa.usuario u LEFT JOIN u.perfil p");
+		List<Object[]> c = qCasos.getResultList();
+		String nom1 ="";
+		String nom2 ="";
+		String ape1 ="";
+		String ape2 ="";
 		for(int i = 0; i < c.size(); i++){
 			CasoCriminalBean cb = new CasoCriminalBean();
-			cb.setIdCasoCriminal(c.get(i).getIdCasoCriminal());
-			cb.setCodigo(c.get(i).getCodigo());
-			cb.setReferencia(c.get(i).getReferencia());
+			Object[] cc = c.get(i);
+			cb.setIdCasoCriminal((Integer)cc[0]);
+			cb.setCodigo((String)cc[1]);
+			cb.setReferencia((String)cc[2]);
+			cb.setIdUsuario((Integer)cc[3]);
+			if((String)cc[4] == null){
+				nom1 = "";
+			}else{
+				nom1 = (String)cc[4];
+			}
+			if((String)cc[5] == null){
+				nom2 = "";
+			}else{
+				nom2 = (String)cc[5];
+			}
+			if((String)cc[6] == null){
+				ape1 = "";
+			}else{
+				ape1 = (String)cc[6];
+			}
+			if((String)cc[7] == null){
+				ape2 = "";
+			}else{
+				ape2 = (String)cc[7];
+			}
+			cb.setNombreCompleto(nom1+" "+nom2+" "+ape1+" "+ape2);
 			cbl.add(cb);
 		}
 		
 		return cbl;
 	}
-
-	public List<CasoCriminalBean> asignarCasoCriminal(Integer idCaso, Integer idJefeDeUnidad) {
-		CasoPorAgente cpa = new CasoPorAgente();
-		cpa.setEstado("habilitado");
+	
+	@Transactional
+	public List<CasoCriminalBean> asignarCasoCriminalEditar(Integer idCaso, Integer idJefeDeUnidad) {
+		Query qCasos = em.createQuery("SELECT cpa FROM CasoPorAgente cpa JOIN cpa.casoCriminal c JOIN cpa.usuario u JOIN u.perfil p WHERE c.idCasoCriminal = "+idCaso+" AND p.cargo = 'Jefe de Unidad' ");
 		
-		CasoCriminal c = new CasoCriminal();
-		c.setIdCasoCriminal(idCaso);
-		Usuario u = new Usuario();
-		u.setIdUsuario(idJefeDeUnidad);
+		try{
+			CasoPorAgente cpa = (CasoPorAgente) qCasos.getSingleResult();
+			CasoPorAgente cpaEdit = em.merge(cpa);
+			
+			Usuario u = new Usuario();
+			u.setIdUsuario(idJefeDeUnidad);
+			cpaEdit.setUsuario(u);
+		}catch (Exception e) {
+			CasoPorAgente cpa = new CasoPorAgente();
+			cpa.setEstado("habilitado");
+			
+			CasoCriminal c = new CasoCriminal();
+			c.setIdCasoCriminal(idCaso);
+			Usuario u = new Usuario();
+			u.setIdUsuario(idJefeDeUnidad);
+			
+			cpa.setCasoCriminal(c);
+			cpa.setUsuario(u);
+			
+			em.persist(cpa);
+		}
 		
-		cpa.setCasoCriminal(c);
-		cpa.setUsuario(u);
-		
-		em.persist(cpa);
-		
-		return null;
+		return getCasosCriminalBean();
 	}
 
 }

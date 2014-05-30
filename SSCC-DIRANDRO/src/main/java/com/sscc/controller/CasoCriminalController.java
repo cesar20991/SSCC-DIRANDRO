@@ -82,7 +82,7 @@ public class CasoCriminalController {
 	public List<CasoCriminalBean> asignarCaso(@PathVariable("idCaso") Integer idCaso, @PathVariable("idJefeDeUnidad") Integer idJefeDeUnidad){
 		List<CasoCriminalBean> c=new ArrayList<CasoCriminalBean>();
 		
-		c = casoServ.asignarCasoCriminal(idCaso, idJefeDeUnidad);
+		c = casoServ.asignarCasoCriminalEditar(idCaso, idJefeDeUnidad);
 		
 		return c;
 	}

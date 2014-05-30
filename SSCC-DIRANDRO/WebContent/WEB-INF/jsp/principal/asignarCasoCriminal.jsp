@@ -26,6 +26,26 @@
 <script>
 var totalCasos = 0;
 var indiceCaso = 0;
+function initAsignaCasos(casos){
+	indiceCaso = 0;
+	totalCasos = casos.length;
+		$("#tblBody").empty();
+		$.each(casos, function(i, caso) {
+			$("#tblBody").append('<tr>');
+				$("#tblBody").append('<td>'+caso.codigo+' ('+caso.referencia+')'+'<input type="hidden" name="idCaso" id="hdnCaso_'+indiceCaso+'" value="'+caso.idCasoCriminal+'"></td>');
+				$("#tblBody").append('<td id="jefeDeUnidad_'+indiceCaso+'"><span id="spnJefeDeUnidad_'+indiceCaso+'">'+caso.nombreCompleto+'</span></td>'+
+						'<td style="display:none;" id="jefeDeUnidadCombo_'+indiceCaso+'"><select name="jefeDeUnidad" id="slctJefe_'+indiceCaso+'"></select></td>');
+				$("#tblBody").append('<td id="btnAsignar_'+indiceCaso+'">'+
+						'<button class="btn btn-primary asignar" id="asignar_'+indiceCaso+'"><i class="icon-edit icon-white"></i> Asignar</button>'+
+						'</td>'+
+						'<td style="display:none;" id="btnAccion_'+indiceCaso+'">'+
+						'<button class="btn btn-success asignar" id="GuardarAsigna_'+indiceCaso+'"><i class="icon-ok icon-white"></i> Guardar</button>'+
+						'<button class="btn btn-danger asignar" id="CancelarAsigna_'+indiceCaso+'"><i class="icon-remove icon-white"></i> Cancelar</button>'+
+						'</td>');
+			$("#tblBody").append('</tr>');
+			indiceCaso++;
+		});
+}
 $(document).ready(function(){
 	
 	var llenarCombo = "";
@@ -47,23 +67,7 @@ $(document).ready(function(){
  		dataType: 'json',
  		data: '',
  		success: function(casos){
- 			totalCasos = casos.length;
- 			$("#tblBody").empty();
- 			$.each(casos, function(i, caso) {
- 				$("#tblBody").append('<tr>');
-	 				$("#tblBody").append('<td>'+caso.codigo+' ('+caso.referencia+')'+'<input type="hidden" name="idCaso" id="hdnCaso_'+indiceCaso+'" value="'+caso.idCasoCriminal+'"></td>');
-	 				$("#tblBody").append('<td id="jefeDeUnidad_'+indiceCaso+'">'+
-	 									'</td><td style="display:none;" id="jefeDeUnidadCombo_'+indiceCaso+'"><select name="jefeDeUnidad" id="slctJefe_'+indiceCaso+'"></select></td>');
-	 				$("#tblBody").append('<td id="btnAsignar_'+indiceCaso+'">'+
-	 						'<button class="btn btn-primary asignar" id="asignar_'+indiceCaso+'"><i class="icon-edit icon-white"></i> Asignar</button>'+
-	 						'</td>'+
-	 						'<td style="display:none;" id="btnAccion_'+indiceCaso+'">'+
-	 						'<button class="btn btn-success asignar" id="GuardarAsigna_'+indiceCaso+'"><i class="icon-ok icon-white"></i> Guardar</button>'+
-	 						'<button class="btn btn-danger asignar" id="CancelarAsigna_'+indiceCaso+'"><i class="icon-remove icon-white"></i> Cancelar</button>'+
-	 						'</td>');
- 				$("#tblBody").append('</tr>');
- 				indiceCaso++;
- 			});
+ 			initAsignaCasos(casos);
  		}
  	});
  	
@@ -91,30 +95,14 @@ $(document).ready(function(){
 			break;
 			case 'GuardarAsigna':
 				$.ajax({
-			 		url: 'asignarCaso-'+$("#hdnCaso_"+idN)+"-"+$("#jefeDeUnidadCombo_"+idN),
+			 		url: 'asignarCaso-'+$("#hdnCaso_"+idN).val()+"-"+$("#slctJefe_"+idN).val(),
 			 		type: 'post',
 			 		dataType: 'json',
 			 		data: '',
 			 		success: function(casos){
-			 			totalCasos = casos.length;
-			 			$("#tblBody").empty();
-			 			$.each(casos, function(i, caso) {
-			 				$("#tblBody").append('<tr>');
-				 				$("#tblBody").append('<td>'+caso.codigo+' ('+caso.referencia+')<input type="hidden" name="idCaso" id="hdnCaso" value="'+caso.idCasoCriminal+'"></td>');
-				 				$("#tblBody").append('<td id="jefeDeUnidad_'+indiceCaso+'"></td>'+
-				 									'<td style="display:none;" id="jefeDeUnidadCombo_'+indiceCaso+'"><select name="jefeDeUnidad" id="slctJefe_'+indiceCaso+'"></select></td>');
-				 				$("#tblBody").append('<td id="btnAsignar_'+indiceCaso+'">'+
-				 						'<button class="btn btn-primary asignar" id="asignar_'+indiceCaso+'"><i class="icon-edit icon-white"></i> Asignar</button>'+
-				 						'</td>'+
-				 						'<td style="display:none;" id="btnAccion_'+indiceCaso+'">'+
-				 						'<button class="btn btn-success asignar" id="GuardarAsigna_'+indiceCaso+'"><i class="icon-ok icon-white"></i> Guardar</button>'+
-				 						'<button class="btn btn-danger asignar" id="CancelarAsigna_'+indiceCaso+'"><i class="icon-remove icon-white"></i> Cancelar</button>'+
-				 						'</td>');
-			 				$("#tblBody").append('</tr>');
-			 				indiceCaso++;
-			 			});
+			 			initAsignaCasos(casos);
 			 		}
-			 	});
+			 	});				
 			break;
 		}
 		

@@ -92,7 +92,7 @@ label.error {
 							<div class="row-fluid block-login">
 								<div class="span12">
 									<label class="control-label">Correo Electrónico:</label>
-									<input class="error span3" name="correoElectronico" type="text" placeholder="ejemplo@correo.com"><label class="error" for="email"></label> 
+									<input class="error span3" name="correoElectronico" type="text" placeholder="ejemplo@correo.com" autofocus="autofocus"><label class="error" for="email"></label> 
 									<label class="control-label">Contraseña:</label>
 									<input class="error span3" name="contrasena" type="password" placeholder="contraseña"><label class="error" for="password"></label>
 								</div>

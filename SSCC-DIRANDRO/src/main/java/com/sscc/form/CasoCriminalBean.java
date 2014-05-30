@@ -21,6 +21,8 @@ public class CasoCriminalBean {
 	private String apePaterno;
 	private String apeMaterno;
 	private String tipoFiscal;
+	private Integer idUsuario;
+	private String nombreCompleto;
 	
 	public Integer getIdCasoCriminal() {
 		return idCasoCriminal;
@@ -105,5 +107,17 @@ public class CasoCriminalBean {
 	}
 	public void setIdPerfil(Integer idPerfil) {
 		this.idPerfil = idPerfil;
+	}
+	public String getNombreCompleto() {
+		return nombreCompleto;
+	}
+	public void setNombreCompleto(String nombreCompleto) {
+		this.nombreCompleto = nombreCompleto;
+	}
+	public Integer getIdUsuario() {
+		return idUsuario;
+	}
+	public void setIdUsuario(Integer idUsuario) {
+		this.idUsuario = idUsuario;
 	}
 }

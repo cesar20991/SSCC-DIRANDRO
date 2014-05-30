@@ -13,6 +13,6 @@ public interface CasoCriminalService {
 	
 	List<CasoCriminalBean> getCasosCriminalBean();
 	
-	List<CasoCriminalBean> asignarCasoCriminal(Integer idCaso, Integer idJefeDeUnidad);
+	List<CasoCriminalBean> asignarCasoCriminalEditar(Integer idCaso, Integer idJefeDeUnidad);
 
 }

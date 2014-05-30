@@ -10,9 +10,7 @@ import javax.persistence.Query;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.sscc.form.CasoCriminalBean;
 import com.sscc.form.PerfilBean;
-import com.sscc.model.CasoCriminal;
 import com.sscc.model.Perfil;
 import com.sscc.model.Usuario;
 import com.sscc.util.DateUtil;
