@@ -35,7 +35,7 @@ public class CasoCriminal {
 	private Usuario usuario;
 	
 	@OneToMany(mappedBy = "casoCriminal")
-	private Collection<casoPorAgente> casopa;
+	private Collection<CasoPorAgente> casopa;
 	
 	public Integer getIdCasoCriminal() {
 		return idCasoCriminal;
@@ -85,10 +85,10 @@ public class CasoCriminal {
 	public void setUsuario(Usuario usuario) {
 		this.usuario = usuario;
 	}
-	public Collection<casoPorAgente> getCasopa() {
+	public Collection<CasoPorAgente> getCasopa() {
 		return casopa;
 	}
-	public void setCasopa(Collection<casoPorAgente> casopa) {
+	public void setCasopa(Collection<CasoPorAgente> casopa) {
 		this.casopa = casopa;
 	}
 	

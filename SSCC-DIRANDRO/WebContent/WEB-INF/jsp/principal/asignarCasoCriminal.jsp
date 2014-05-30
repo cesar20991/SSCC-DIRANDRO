@@ -36,7 +36,7 @@ $(document).ready(function(){
  		data: '',
  		success: function(jefes){
  			$.each(jefes, function(i, jefe) {
- 				llenarCombo = llenarCombo + '<option value="'+jefe.idPerfil+'">'+jefe.nombreCompleto+'</option>';
+ 				llenarCombo = llenarCombo + '<option value="'+jefe.idUsuario+'">'+jefe.nombreCompleto+'</option>';
  			});
  		}
  	});
@@ -51,7 +51,7 @@ $(document).ready(function(){
  			$("#tblBody").empty();
  			$.each(casos, function(i, caso) {
  				$("#tblBody").append('<tr>');
-	 				$("#tblBody").append('<td>'+caso.codigo+' ('+caso.referencia+')'+'<input type="hidden" name="idCaso" id="hdnCaso" value="'+caso.idCasoCriminal+'"></td>');
+	 				$("#tblBody").append('<td>'+caso.codigo+' ('+caso.referencia+')'+'<input type="hidden" name="idCaso" id="hdnCaso_'+indiceCaso+'" value="'+caso.idCasoCriminal+'"></td>');
 	 				$("#tblBody").append('<td id="jefeDeUnidad_'+indiceCaso+'">'+
 	 									'</td><td style="display:none;" id="jefeDeUnidadCombo_'+indiceCaso+'"><select name="jefeDeUnidad" id="slctJefe_'+indiceCaso+'"></select></td>');
 	 				$("#tblBody").append('<td id="btnAsignar_'+indiceCaso+'">'+
@@ -90,7 +90,31 @@ $(document).ready(function(){
 				$("#btnAccion_"+idN).hide();
 			break;
 			case 'GuardarAsigna':
-				
+				$.ajax({
+			 		url: 'asignarCaso-'+$("#hdnCaso_"+idN)+"-"+$("#jefeDeUnidadCombo_"+idN),
+			 		type: 'post',
+			 		dataType: 'json',
+			 		data: '',
+			 		success: function(casos){
+			 			totalCasos = casos.length;
+			 			$("#tblBody").empty();
+			 			$.each(casos, function(i, caso) {
+			 				$("#tblBody").append('<tr>');
+				 				$("#tblBody").append('<td>'+caso.codigo+' ('+caso.referencia+')<input type="hidden" name="idCaso" id="hdnCaso" value="'+caso.idCasoCriminal+'"></td>');
+				 				$("#tblBody").append('<td id="jefeDeUnidad_'+indiceCaso+'"></td>'+
+				 									'<td style="display:none;" id="jefeDeUnidadCombo_'+indiceCaso+'"><select name="jefeDeUnidad" id="slctJefe_'+indiceCaso+'"></select></td>');
+				 				$("#tblBody").append('<td id="btnAsignar_'+indiceCaso+'">'+
+				 						'<button class="btn btn-primary asignar" id="asignar_'+indiceCaso+'"><i class="icon-edit icon-white"></i> Asignar</button>'+
+				 						'</td>'+
+				 						'<td style="display:none;" id="btnAccion_'+indiceCaso+'">'+
+				 						'<button class="btn btn-success asignar" id="GuardarAsigna_'+indiceCaso+'"><i class="icon-ok icon-white"></i> Guardar</button>'+
+				 						'<button class="btn btn-danger asignar" id="CancelarAsigna_'+indiceCaso+'"><i class="icon-remove icon-white"></i> Cancelar</button>'+
+				 						'</td>');
+			 				$("#tblBody").append('</tr>');
+			 				indiceCaso++;
+			 			});
+			 		}
+			 	});
 			break;
 		}
 		

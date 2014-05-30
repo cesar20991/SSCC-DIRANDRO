@@ -8,7 +8,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 @Entity
-public class casoPorAgente {
+public class CasoPorAgente {
 	
 	@Id @GeneratedValue	
 	private Integer idcasoPorAgente;

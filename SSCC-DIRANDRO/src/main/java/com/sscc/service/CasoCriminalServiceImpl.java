@@ -14,6 +14,7 @@ import com.sscc.form.CasoCriminalBean;
 import com.sscc.model.CasoCriminal;
 import com.sscc.model.Perfil;
 import com.sscc.model.Usuario;
+import com.sscc.model.CasoPorAgente;
 import com.sscc.util.DateUtil;
 
 @Service
@@ -79,7 +80,7 @@ public class CasoCriminalServiceImpl implements CasoCriminalService{
 	public List<CasoCriminalBean> getCasosCriminalBean() {
 		List<CasoCriminalBean> cbl = new ArrayList<CasoCriminalBean>();
 		List<CasoCriminal> c = new ArrayList<CasoCriminal>();
-		Query qCasos = em.createQuery("SELECT c FROM CasoCriminal c");
+		Query qCasos = em.createQuery("SELECT c.idCasoCriminal, c.codigo, c.referencia, u.idUsuario FROM CasoCriminal c JOIN c.casopa cpa JOIN cpa.usuario u JOIN u.perfil");
 		c = qCasos.getResultList();
 		
 		for(int i = 0; i < c.size(); i++){
@@ -91,6 +92,23 @@ public class CasoCriminalServiceImpl implements CasoCriminalService{
 		}
 		
 		return cbl;
+	}
+
+	public List<CasoCriminalBean> asignarCasoCriminal(Integer idCaso, Integer idJefeDeUnidad) {
+		CasoPorAgente cpa = new CasoPorAgente();
+		cpa.setEstado("habilitado");
+		
+		CasoCriminal c = new CasoCriminal();
+		c.setIdCasoCriminal(idCaso);
+		Usuario u = new Usuario();
+		u.setIdUsuario(idJefeDeUnidad);
+		
+		cpa.setCasoCriminal(c);
+		cpa.setUsuario(u);
+		
+		em.persist(cpa);
+		
+		return null;
 	}
 
 }

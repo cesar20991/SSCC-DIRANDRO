@@ -76,5 +76,15 @@ public class CasoCriminalController {
 		
 		return c;
 	}
+	
+	@RequestMapping(value = "asignarCaso-{idCaso}-{idJefeDeUnidad}", method = RequestMethod.POST)
+	@ResponseBody
+	public List<CasoCriminalBean> asignarCaso(@PathVariable("idCaso") Integer idCaso, @PathVariable("idJefeDeUnidad") Integer idJefeDeUnidad){
+		List<CasoCriminalBean> c=new ArrayList<CasoCriminalBean>();
+		
+		c = casoServ.asignarCasoCriminal(idCaso, idJefeDeUnidad);
+		
+		return c;
+	}
 
 }

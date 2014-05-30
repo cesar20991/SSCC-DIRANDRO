@@ -102,6 +102,7 @@ public class PerfilServiceImpl implements PerfilService {
 		
 		for(int i = 0; i < p.size(); i++){
 			PerfilBean pb = new PerfilBean();
+			pb.setIdUsuario(p.get(i).getUsuario().getIdUsuario());
 			pb.setIdPerfil(p.get(i).getIdPerfil());
 			pb.setNombreCompleto(p.get(i).getPrimerNombre()+" "+p.get(i).getSegundoNombre()+" "+p.get(i).getApePaterno()+" "+p.get(i).getApeMaterno());
 			pbl.add(pb);
