@@ -59,6 +59,9 @@
 		<div class="span9 columns">
 			<a href="toLogin">Login</a><br />
 		</div>
+		<div class="span9 columns">
+			<a href="toUpload">uploadFile</a><br />
+		</div>
 		<!-- /FORMUALARIO -->
 	</div>
 	<!--/MAIN CONTENT AREA-->
