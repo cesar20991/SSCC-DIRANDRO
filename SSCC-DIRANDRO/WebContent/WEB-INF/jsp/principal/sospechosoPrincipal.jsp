@@ -54,12 +54,8 @@
 						<td rowspan="5" align="center"><img src="img/skills.png" alt="logo" style="margin-bottom: 7px; margin-top: 7px;" /></td>
 					</tr>
 					<tr>
-						<td>Apellidos:</td>
-						<td><span id="hdrPrimerApellido">&nbsp;</span>&nbsp;&nbsp;<span id="hdrSegundoApellido">&nbsp;</span></td>
-					</tr>
-					<tr>
-						<td>Prenombres:</td>
-						<td><span id="hdrPrenombres">&nbsp;</span></td>
+						<td>Apellidos y Nombres:</td>
+						<td><span id="hdrPrimerApellido">&nbsp;</span>&nbsp;&nbsp;<span id="hdrSegundoApellido">&nbsp;</span>&nbsp;<span id="hdrPrenombres">&nbsp;</span></td>
 					</tr>
 					<tr>
 						<td>Alias:</td>
@@ -81,8 +77,8 @@
 					<li class=""><a href="#4" data-toggle="tab">Comentarios</a></li>
 					<li class=""><a href="#5" data-toggle="tab">Auditoría</a></li>
 				</ul>
-				<div class="tab-content">
-					<div class="tab-pane active" id="1">
+				<div class="tab-content" style="margin-left: -3.5%;">
+					<div class="tab-pane active span9" id="1">
 						<jsp:include page="sospechoso/tabPrincipalSospechoso.jsp" />
 					</div>
 					<div class="tab-pane" id="2">

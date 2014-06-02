@@ -18,7 +18,7 @@ function initSospechoso(sospechoso){
 	//
 	$("#hdrCodigoUnicoDeIdentificacion").append(sospechoso.codigoUnicoDeIdentificacion);
 	$("#hdrPrimerApellido").append(sospechoso.primerApellido);
-	$("#hdrSegundoApellido").append(sospechoso.segundoApellido);
+	$("#hdrSegundoApellido").append(sospechoso.segundoApellido+",");
 	$("#hdrPrenombres").append(sospechoso.preNombres);
 	$("#hdrAlias").append(sospechoso.alias);
 	//...FINAL CABECERA
@@ -237,8 +237,9 @@ $(document).on('click','#btnCancelEditar', function(e){
 		       	<span class=""><span class="colored">///</span> Datos del Sospechoso:</span>
 		       	<span class="offset3"><button class="btn btn-primary" type="button" id="btnEditarSopechoso"><i class="icon-edit"></i> Editar</button></span>
 	       	</legend>
+	       	<div class="span4">
 	       		<div class="control-group">
-	          		<label class="control-label">C.U.I: </label>
+	          		<label class="control-label" title="código único de identificación">C.U.I: </label>
 	          		<div class="controls">
 	          			<span id="spnCodigoUnicoDeIdentificacion">&nbsp;</span>
 	          		</div>
@@ -272,8 +273,7 @@ $(document).on('click','#btnCancelEditar', function(e){
 	          		<div class="controls">
 	          			<span id="spnFecNac">&nbsp;</span>
 	          		</div>
-	       		</div> 
-	       		<!--  agregado INICIA-->      
+	       		</div>
 	       		<div class="control-group">
 	       			<label class="control-label">Departamento de Nacimiento: </label>
 	       			<div class="controls">
@@ -282,95 +282,97 @@ $(document).on('click','#btnCancelEditar', function(e){
 		       	</div>
 		       	<div class="control-group">
 		       		<label class="control-label">Provincia de Nacimiento: </label>
-		       			<div class="controls">
-		       				<span  id="spnProvinciaNacimiento"></span>
-		       			</div>
+	       			<div class="controls">
+	       				<span  id="spnProvinciaNacimiento"></span>
+	       			</div>
 		       	</div>
 		       	<div class="control-group">
 		       		<label class="control-label">Distrito de Nacimiento: </label>
-		       			<div class="controls">
-		       				<span  id="spnDistritoNacimiento"></span>
-		       			</div>
+	       			<div class="controls">
+	       				<span  id="spnDistritoNacimiento"></span>
+	       			</div>
 		       	</div>
 		       	<div class="control-group">
 		       		<label class="control-label">Grado de Instrucción: </label>
-		       			<div class="controls">
-		       				<span  id="spnGradoInstruccion"></span>
-		          		</div>
+	       			<div class="controls">
+	       				<span  id="spnGradoInstruccion"></span>
+	          		</div>
 		       	</div>
 		       	<div class="control-group" id="divGrado">
-		       			<label class="control-label">Estado Civil: </label>
-		          			<div class="controls">
-		          				<span  id="spnEstadoCivil"></span>
-		          		</div>
+	       			<label class="control-label">Estado Civil: </label>
+          			<div class="controls">
+          				<span  id="spnEstadoCivil"></span>
+	          		</div>
+		       	</div> 
+	       	</div>
+	       	<div class="span4">	       		
+		       	<div class="control-group">
+	          		<label class="control-label">Estatura: </label>
+	          		<div class="controls">
+	          			<span id="spnEstatura"></span>
+	          		</div>
+		       	</div>
+	       		<div class="control-group">
+	          		<label class="control-label">Fecha de Inscripción: </label>
+	          		<div class="controls">
+	          			<span id="spnInscripcion"></span>
+	          		</div>
 		       	</div>
 		       	<div class="control-group">
-		          		<label class="control-label">Estatura: </label>
-		          		<div class="controls">
-		          			<span id="spnEstatura"></span>
-		          		</div>
+	          		<label class="control-label">Nombre del Padre: </label>
+	          		<div class="controls">
+	          			<span id="spnNombrePadre"></span>
+	          		</div>
 		       	</div>
-		       		<div class="control-group">
-		          		<label class="control-label">Fecha de Inscripción: </label>
-		          		<div class="controls">
-		          			<span id="spnInscripcion"></span>
-		          		</div>
-		       	</div>
-		       	<div class="control-group">
-		          		<label class="control-label">Nombre del Padre: </label>
-		          		<div class="controls">
-		          			<span id="spnNombrePadre"></span>
-		          		</div>
-		       	</div>
-		       		<div class="control-group">
-		          		<label class="control-label">Nombre de la Madre: </label>
-		          		<div class="controls">
-		          			<span id="spnNombreMadre"></span>
-		          		</div>
-		       		</div>
-		       		<div class="control-group">
-		          		<label class="control-label">Fecha de Emisión: </label>
-		          		<div class="controls">
-		          			<span id="spnEmision"></span>
-		          		</div>
-		       		</div>
-		       		<div class="control-group">
-		          		<label class="control-label">Restricción: </label>
-		          		<div class="controls">
-		          			<span id="spnRestriccion"></span>
-		          		</div>
-		       		</div>
-		       		<div class="control-group">
-		          		<label class="control-label">Domicilio: </label>
-		          		<div class="controls">
-		          			<span id="spnDomicilio"></span>
-		          		</div>
-		       		</div>
-		       		<div class="control-group">
-		          		<label class="control-label">Departamento de Domicilio: </label>
-		          		<div class="controls">
-		          			<span id="spnDepartamentoDeDomicilio"></span>
-		          		</div>
-		       		</div>
-		       		<div class="control-group">
-		          		<label class="control-label">Provincia de Domicilio: </label>
-		          		<div class="controls">
-		          			<span id="spnProvinciaDeDomicilio"></span>
-		          		</div>
-		       		</div>
-		       		<div class="control-group">
-		          		<label class="control-label">Distrito de Domicilio: </label>
-		          		<div class="controls">
-		          			<span id="spnDistritoDeDomicilio"></span>
-		          		</div>
-		       		</div>
-		       		<div class="control-group">
-		          		<label class="control-label">Multas Electorales: </label>
-		          		<div class="controls">
-		          			<span id="spnMultasElectorales"></span>
-		          		</div>
-		       		</div>
-	       		<!-- agregado cierre -->
+	       		<div class="control-group">
+	          		<label class="control-label">Nombre de la Madre: </label>
+	          		<div class="controls">
+	          			<span id="spnNombreMadre"></span>
+	          		</div>
+	       		</div>
+	       		<div class="control-group">
+	          		<label class="control-label">Fecha de Emisión: </label>
+	          		<div class="controls">
+	          			<span id="spnEmision"></span>
+	          		</div>
+	       		</div>
+	       		<div class="control-group">
+	          		<label class="control-label">Restricción: </label>
+	          		<div class="controls">
+	          			<span id="spnRestriccion"></span>
+	          		</div>
+	       		</div>
+	       		<div class="control-group">
+	          		<label class="control-label">Domicilio: </label>
+	          		<div class="controls">
+	          			<span id="spnDomicilio"></span>
+	          		</div>
+	       		</div>
+	       		<div class="control-group">
+	          		<label class="control-label">Departamento de Domicilio: </label>
+	          		<div class="controls">
+	          			<span id="spnDepartamentoDeDomicilio"></span>
+	          		</div>
+	       		</div>
+	       		<div class="control-group">
+	          		<label class="control-label">Provincia de Domicilio: </label>
+	          		<div class="controls">
+	          			<span id="spnProvinciaDeDomicilio"></span>
+	          		</div>
+	       		</div>
+	       		<div class="control-group">
+	          		<label class="control-label">Distrito de Domicilio: </label>
+	          		<div class="controls">
+	          			<span id="spnDistritoDeDomicilio"></span>
+	          		</div>
+	       		</div>
+	       		<div class="control-group">
+	          		<label class="control-label">Multas Electorales: </label>
+	          		<div class="controls">
+	          			<span id="spnMultasElectorales"></span>
+	          		</div>
+	       		</div>
+	       	</div>
 		</form:form>
 	</div>
 		
@@ -381,8 +383,9 @@ $(document).on('click','#btnCancelEditar', function(e){
 			       	<span class="colored">///</span> Editar Datos Personales del Sospechoso:
 		       	</legend>
 		       		<input type="hidden" name="idSospechoso" id="hdnIdSospechosoEdit">
+		       	<div class="span4">
 		       		<div class="control-group">
-		          		<label class="control-label">Código Único de Identificación: </label>
+		          		<label class="control-label" title="Código Único de Identificación">C.U.I: </label>
 		          		<div class="controls">
 		          			<input class="span2" type="text" name="txtCodUnico" id="txtCodUnico">
 		          			<input class="span2" type="hidden" name="codigoUnicoDeIdentificacion" id="hdnCodUnico">
@@ -483,7 +486,8 @@ $(document).on('click','#btnCancelEditar', function(e){
 				            </select>
 		          		</div>
 		       		</div>
-		       		<hr>
+		       	</div>
+		       	<div class="span4">
 		       		<div class="control-group">
 		          		<label class="control-label">Estatura: </label>
 		          		<div class="controls">
@@ -564,12 +568,13 @@ $(document).on('click','#btnCancelEditar', function(e){
 		          			<input class="span2" type="hidden" name="txtMultasElectorales" id="txtMultasElectorales">
 		          		</div>
 		       		</div>
+		       	</div>
 		       		<!-- Aqui cierra mario-->
-		       		<div class="form-actions">
-			        	<button class="btn btn-success" id="btnGuardar" type="submit"><i class="icon-ok icon-white"></i> Guardar Sospechoso</button>
-			        	<button class="btn btn-danger" type="reset"><i class="icon-refresh icon-white"></i> Reset</button>
-			        	<button class="btn btn-warning" type="button" id="btnCancelEditar"><i class="icon-arrow-left icon-white"></i> Cancel</button>
-			        </div>  
+	       		<div class="form-actions span8">
+		        	<button class="btn btn-success" id="btnGuardar" type="submit"><i class="icon-ok icon-white"></i> Guardar Sospechoso</button>
+		        	<button class="btn btn-danger" type="reset"><i class="icon-refresh icon-white"></i> Reset</button>
+		        	<button class="btn btn-warning" type="button" id="btnCancelEditar"><i class="icon-arrow-left icon-white"></i> Cancel</button>
+		        </div>  
 			</form:form>
 		</fieldset>
 	<!-- </section> -->
