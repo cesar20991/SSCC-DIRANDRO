@@ -79,4 +79,12 @@ public class PerfilController {
 		return perfilbean;
 	}
 	
+	@RequestMapping(value = "getPersonalPolicial", method = RequestMethod.POST)
+	@ResponseBody
+	public List<PerfilBean> getPersonalPolicial(){
+		List<PerfilBean> perfilbean = new ArrayList<PerfilBean>();
+		perfilbean = perfilServ.getJefesDeUnidad();
+		return perfilbean;
+	}
+	
 }

@@ -92,10 +92,29 @@ public class PerfilServiceImpl implements PerfilService {
 		return pf;
 	}
 
+	@SuppressWarnings("unchecked")
 	public List<PerfilBean> getJefesDeUnidad() {
 		List<PerfilBean> pbl = new ArrayList<PerfilBean>();
 		List<Perfil> p = new ArrayList<Perfil>();
 		Query qCasos = em.createQuery("SELECT p FROM Perfil p WHERE p.estado='habilitado' AND p.cargo='Jefe de Unidad'");
+		p = qCasos.getResultList();
+		
+		for(int i = 0; i < p.size(); i++){
+			PerfilBean pb = new PerfilBean();
+			pb.setIdUsuario(p.get(i).getUsuario().getIdUsuario());
+			pb.setIdPerfil(p.get(i).getIdPerfil());
+			pb.setNombreCompleto(p.get(i).getPrimerNombre()+" "+p.get(i).getSegundoNombre()+" "+p.get(i).getApePaterno()+" "+p.get(i).getApeMaterno());
+			pbl.add(pb);
+		}
+		
+		return pbl;
+	}
+
+	@SuppressWarnings("unchecked")
+	public List<PerfilBean> getPersonalPolicial() {
+		List<PerfilBean> pbl = new ArrayList<PerfilBean>();
+		List<Perfil> p = new ArrayList<Perfil>();
+		Query qCasos = em.createQuery("SELECT p FROM Perfil p WHERE p.estado='habilitado' AND (p.cargo='Superior' OR p.cargo='Investigador')");
 		p = qCasos.getResultList();
 		
 		for(int i = 0; i < p.size(); i++){

@@ -12,4 +12,6 @@ public interface PerfilService {
 	PerfilBean crearUsuario(Perfil perfil, String correo);
 	
 	List<PerfilBean> getJefesDeUnidad();
+	
+	List<PerfilBean> getPersonalPolicial();
 }

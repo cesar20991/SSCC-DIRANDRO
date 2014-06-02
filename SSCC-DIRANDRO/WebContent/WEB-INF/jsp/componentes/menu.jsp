@@ -27,7 +27,7 @@ $(document).ready(function(){
 			<div id="collapseTwo" class="accordion-body collapse"
 				style="height: 0px;">
 				<div class="accordion-inner">Buscar Personal Policial</div>
-				<div class="accordion-inner">Asignar Personal Policial</div>
+				<div class="accordion-inner"><a href="toAsignarPersonal">Asignar Personal Policial</a></div>
 			</div>
 		</div>
 		<div class="accordion-group">
