@@ -91,5 +91,23 @@ public class CasoCriminalController {
 		
 		return c;
 	}
+	
+	@RequestMapping("getStatusList")
+	@ResponseBody
+	public List<String> getStatusList(HttpServletRequest req){
+		List<String> list = new ArrayList<String>();
+		list = casoServ.getStatusCasoCriminal();		
+		return list;
+		
+	}
+	
+	@RequestMapping("getLastCasosCriminales")
+	@ResponseBody
+	public List<CasoCriminalBean> getLastCasosCriminales(HttpServletRequest req){
+		List<CasoCriminalBean> list = new ArrayList<CasoCriminalBean>();
+		list = casoServ.getLastCasosCriminales(req.getSession());		
+		return list;
+		
+	}	
 
 }

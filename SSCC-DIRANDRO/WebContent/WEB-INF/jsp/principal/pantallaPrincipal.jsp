@@ -21,6 +21,71 @@
 <link href="css/docs.css" rel="stylesheet">
 <link href="js/google-code-prettify/prettify.css" rel="stylesheet">
 <link rel="stylesheet" href="css/prettyPhoto.css" type="text/css" media="screen" title="prettyPhoto main stylesheet" charset="utf-8" />
+<script>
+
+var CRStates = "";
+var listCRs="";
+
+$(document).ready(function(e){
+	
+	
+	/*GET INIT CASOS CRIMINALES*/
+  	$.ajax({
+ 		url: 'getStatusList',
+ 		type: 'post',
+ 		dataType: 'json',
+ 		data: '',
+ 		success: function(CRs){ 			
+ 			
+ 			CRStates = ["Activo",
+							"Diligencias Preliminares",
+							"Calificacion Fiscald",
+							"Fiscalia Superior",
+							"Formalizacion de la Investigacion",
+							"Diligencias de la Investigacion",
+							"Conclusion de la Investigacion",
+							"Pausa por Falta de Documentos",
+							"Pausa por Nuevo Caso",
+							"Plazo Ampleatorio Investigacion Preliminar",
+							"Plazo Ampleatorio Investigacion Formal"];
+ 			listCRs = CRs;
+ 			for(var i = 0; i < CRStates.length; i++){
+ 				$('#CRNumber'+i).empty(); 				
+ 				if(CRs[i].split('-')[1] == 'id'){
+ 					$('#CRNumber'+i).text('1');
+ 					$('.CRLink'+i).attr('href', 'toPageCR-'+CRs[i].split('-')[0]); //cambiar Link
+ 				}else{
+ 					$('#CRNumber'+i).text(CRs[i]);
+ 					$('.CRLink'+i).attr('href', 'toSearchCR-'+CRStates[i]); // Cambiar Link
+ 				}
+ 				
+ 			}
+			
+ 		},
+ 	    error: function(textStatus){
+ 		    //alert("ERROR");
+ 		}
+ 	});
+  	
+  	/*GET INIT LAST CASOS CRIMINALES*/
+  	$.ajax({
+  		url: 'getLastCasosCriminales',
+  		type: 'post',
+  		dataType: 'json',
+  		data: '',
+  		success: function(messages){
+  			$.each(messages, function(i, message){
+				$("#notificationListBox").append(
+						'<tr> '+						
+						'<td><a href="'+message.idCasoCriminal+'">'+message.codigo+'</a></td>'+
+						'</tr>');
+  			});
+  		}
+  	});
+});
+
+
+</script>
 </head>
 <body>
 	<!--HEADER-->
@@ -40,48 +105,48 @@
 				</thead>
 				<tbody>
 					<tr>
-						<td colspan="1"><span class="colored">0</span></td>
-						<td colspan="3">Activo</td>
+						<td colspan="1"><a class="CRLink0"><span id="CRNumber0">0</span></a></td>
+						<td colspan="3"><a class="CRLink0">Activo</a></td>
 					</tr>
 					<tr>
-						<td colspan="1"><span class="colored">0</span></td>
-						<td colspan="3">Diligencias Preliminares</td>
+						<td colspan="1"><a class="CRLink1"><span id="CRNumber1">0</span></a></td>
+						<td colspan="3"><a class="CRLink1">Diligencias Preliminares</a></td>
 					</tr>
 					<tr>
-						<td colspan="1"><span class="colored">0</span></td>
-						<td colspan="3">Calificacion Fiscal</td>
+						<td colspan="1"><a class="CRLink2"><span id="CRNumber2">0</span></a></td>
+						<td colspan="3"><a class="CRLink2">Calificacion Fiscal</a></td>
 					</tr>
 					<tr>
-						<td colspan="1"><span class="colored">0</span></td>
-						<td colspan="3">Fiscalia Superior</td>
+						<td colspan="1"><a class="CRLink3"><span id="CRNumber3">0</span></a></td>
+						<td colspan="3"><a class="CRLink3">Fiscalia Superior</a></td>
 					</tr>
 					<tr>
-						<td colspan="1"><span class="colored">0</span></td>
-						<td colspan="3">Formalizacion de la Investigacion</td>
+						<td colspan="1"><a class="SRLink4"><span id="SRNumber4">0</span></a></td>
+						<td colspan="3"><a class="SRLink4">Formalizacion de la Investigacion</a></td>
 					</tr>
 					<tr>
-						<td colspan="1"><span class="colored">0</span></td>
-						<td colspan="3">Diligencias de la Investigacion</td>
+						<td colspan="1"><a class="CRLink5"><span id="CRNumber5">0</span></a></td>
+						<td colspan="3"><a class="CRLink5">Diligencias de la Investigacion</a></td>
 					</tr>
 					<tr>
-						<td colspan="1"><span class="colored">0</span></td>
-						<td colspan="3">Conclusion de la Investigacion</td>
+						<td colspan="1"><a class="CRLink6"><span id="CRNumber6">0</span></a></td>
+						<td colspan="3"><a class="CRLink6">Conclusion de la Investigacion</a></td>
 					</tr>
 					<tr>
-						<td colspan="1"><span class="colored">0</span></td>
-						<td colspan="3">Pausa por Falta de Documentos</td>
+						<td colspan="1"><a class="CRLink7"><span id="CRNumber7">0</span></a></td>
+						<td colspan="3"><a class="CRLink7">Pausa por Falta de Documentos</a></td>
 					</tr>
 					<tr>
-						<td colspan="1"><span class="colored">0</span></td>
-						<td colspan="3">Pausa por Nuevo Caso</td>
+						<td colspan="1"><a class="CRLink8"><span id="CRNumber8">0</span></a></td>
+						<td colspan="3"><a class="CRLink8">Pausa por Nuevo Caso</a></td>
 					</tr>
 					<tr>
-						<td colspan="1"><span class="colored">0</span></td>
-						<td colspan="3">Plazo Ampleatorio Investigacion Preliminar</td>
+						<td colspan="1"><a class="CRLink9"><span id="CRNumber9">0</span></a></td>
+						<td colspan="3"><a class="CRLink9">Plazo Ampleatorio Investigacion Preliminar</a></td>
 					</tr>
 					<tr>
-						<td colspan="1"><span class="colored">0</span></td>
-						<td colspan="3">Plazo Ampleatorio Investigacion Formal</td>
+						<td colspan="1"><a class="CRLink10"><span id="CRNumber10">0</span></a></td>
+						<td colspan="3"><a class="CRLink10">Plazo Ampleatorio Investigacion Formal</a></td>
 					</tr>
 				</tbody>
 			</table>
@@ -93,10 +158,8 @@
 						<th colspan="4">Ultimos Casos Criminales</th>
 					</tr>
 				</thead>
-				<tbody>
-					<tr>
-						<td>Caso CC0001-20/04/2014</td>
-					</tr>
+				<tbody id="notificationListBox">
+					
 				</tbody>
 			</table>
 		</section>

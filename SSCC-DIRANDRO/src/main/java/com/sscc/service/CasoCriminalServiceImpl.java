@@ -6,6 +6,7 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -146,6 +147,48 @@ public class CasoCriminalServiceImpl implements CasoCriminalService{
 		}
 		
 		return getCasosCriminalBean();
+	}
+
+	public List<String> getStatusCasoCriminal() {
+		List<String> CRs = new ArrayList<String>();		
+		String [] states = {"Activo",
+							"Diligencias Preliminares",
+							"Calificacion Fiscal",
+							"Fiscalia Superior",
+							"Formalizacion de la Investigacion",
+							"Diligencias de la Investigacion",
+							"Conclusion de la Investigacion",
+							"Pausa por Falta de Documentos",
+							"Pausa por Nuevo Caso",
+							"Plazo Ampleatorio Investigacion Preliminar",
+							"Plazo Ampleatorio Investigacion Formal"};		
+		
+		for(int i = 0; i < states.length; i++){			
+			Query q =em.createQuery("SELECT COUNT(cr.idCasoCriminal) FROM CasoCriminal cr WHERE cr.estado ='"+ states[i] +"'");			
+			String number = q.getSingleResult().toString();
+			if(number.equals("1")){
+				Query qId =em.createQuery("SELECT cr.idCasoCriminal FROM CasoCriminal cr WHERE cr.estado ='"+ states[i] +"'");
+				int abc = (Integer) qId.getSingleResult();
+				number = Integer.toString(abc)+"-id";
+			}
+			CRs.add(number);
+		}
+		return CRs;
+	}
+
+	@SuppressWarnings("unchecked")
+	public List<CasoCriminalBean> getLastCasosCriminales(HttpSession session) {
+		List<CasoCriminalBean> listCR = new ArrayList<CasoCriminalBean>();
+		Query q =em.createNativeQuery("select  cr.idcasocriminal,cr.codigo from casocriminal cr where cr.feccreacion between (CURRENT_TIMESTAMP - interval '15 days') AND (CURRENT_TIMESTAMP)");	
+		List<String[]> rowsCR = q.getResultList();
+		for (int i = 0; i < rowsCR.size(); i++) {
+			CasoCriminalBean crBean = new CasoCriminalBean();
+			Object[] obj = rowsCR.get(i);
+			crBean.setIdCasoCriminal((Integer)obj[0]);
+			crBean.setCodigo((String)obj[1]);
+			listCR.add(crBean);
+		}
+		return listCR;
 	}
 
 }

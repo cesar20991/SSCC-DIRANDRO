@@ -2,6 +2,8 @@ package com.sscc.service;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import com.sscc.form.CasoCriminalBean;
 import com.sscc.model.CasoCriminal;
 
@@ -14,5 +16,9 @@ public interface CasoCriminalService {
 	List<CasoCriminalBean> getCasosCriminalBean();
 	
 	List<CasoCriminalBean> asignarCasoCriminalEditar(Integer idCaso, Integer idJefeDeUnidad);
-
+	
+	List<String> getStatusCasoCriminal();
+	
+	List<CasoCriminalBean> getLastCasosCriminales(HttpSession session);
+	
 }
