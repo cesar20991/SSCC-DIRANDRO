@@ -46,6 +46,8 @@ public class Perfil {
 	private String cargo;
 	@Column(length = 100, nullable = true)
 	private String tipoFiscal;
+	@Column(length = 50, nullable = true)
+	private String codigo;
 	
 	//Referencias
 	@OneToOne(mappedBy="perfil")
@@ -186,6 +188,14 @@ public class Perfil {
 
 	public void setTipoFiscal(String tipoFiscal) {
 		this.tipoFiscal = tipoFiscal;
+	}
+
+	public String getCodigo() {
+		return codigo;
+	}
+
+	public void setCodigo(String codigo) {
+		this.codigo = codigo;
 	}
 	
 	

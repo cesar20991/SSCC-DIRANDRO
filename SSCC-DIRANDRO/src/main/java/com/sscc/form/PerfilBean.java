@@ -29,6 +29,7 @@ public class PerfilBean {
 	private String cargo;
 	private String rango;
 	private String tipoFiscal;
+	private String codigoPerfil;
 	
 	public Integer getIdUsuario() {
 		return idUsuario;
@@ -167,6 +168,12 @@ public class PerfilBean {
 	}
 	public void setNombreCompleto(String nombreCompleto) {
 		this.nombreCompleto = nombreCompleto;
+	}
+	public String getCodigoPerfil() {
+		return codigoPerfil;
+	}
+	public void setCodigoPerfil(String codigoPerfil) {
+		this.codigoPerfil = codigoPerfil;
 	}
 	
 }

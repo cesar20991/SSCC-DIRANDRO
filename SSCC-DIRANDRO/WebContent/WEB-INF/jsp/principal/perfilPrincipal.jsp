@@ -45,19 +45,27 @@
 					<tr>
 						<td>Nombre Completo:</td>
 						<td align="center"><span id="hdrPrimerNombe"></span>&nbsp;<span id="hdrSegundoNombe"></span>&nbsp;<span id="hdrApePaterno"></span>&nbsp;<span id="hdrApeMaterno"></span></td>
+						<td>Codigo de Usuario:</td>
+						<td><span id="hdrCodigo"></span></td>
 						<td rowspan="4" align="center"><img src="img/skills.png" alt="logo" style="margin-bottom: 7px; margin-top: 7px;" /></td>
 					</tr>
 					<tr>
 						<td id="tdCargo">Cargo:</td>
 						<td><span id="hdrCargo">&nbsp;</span></td>
+						<td id="tdGrado">Grado:</td>
+						<td id="tdGradoResult"><span id="hdrGrado"></span></td>
 					</tr>
 					<tr>
-						<td>Numero de DNI:</td>
+						<td>Número de DNI:</td>
 						<td><span id="hdrDni">&nbsp;</span></td>
+						<td id="tdNCarnet">N° Carnet:</td>
+						<td id="tdNCarnetResult"><span id="hdrNCarnet"></span></td>
 					</tr>
 					<tr>
 						<td>Correo Electrónico:</td>
 						<td><span id="hdrCorreo">&nbsp;</span></td>
+						<td>Entidad:</td>
+						<td><span id="hdrEntidad"></span></td>
 					</tr>
 				</tbody>
 			</table>

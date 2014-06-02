@@ -28,6 +28,11 @@ $(document).ready(function(){
 	 			$("#hdrSegundoNombe").empty();
 	 			$("#hdrApePaterno").empty();
 	 			$("#hdrApeMaterno").empty();
+	 			$("#hdrCodigo").empty();
+	 			$("#hdrGrado").empty();
+	 			$("#hdrNCarnet").empty();
+	 			$("#hdrEntidad").empty();
+	 			
 	 			$("#spnApePaterno").empty();
 	 			$("#spnApeMaterno").empty();
 	 			$("#spnDni").empty();
@@ -59,6 +64,7 @@ $(document).ready(function(){
 	 			$("#spnCorreo").text(perfil.correoElectronico);
 	 			$("#hdrCorreo").text(perfil.correoElectronico);
 	 			$("#spnFecNac").text(perfil.fecNacimiento);
+	 			$("#hdrCodigo").text(perfil.codigoPerfil);
 	 			if(perfil.sexo == 'M'){
 	 				$("#spnSexo").text('Masculino');
 	 			}else{
@@ -66,25 +72,35 @@ $(document).ready(function(){
 	 			}
 	 			if(perfil.entidadPerteneciente == 'D'){
 	 				$("#spnEntidad").text("DIRANDRO");
+	 				$("#hdrEntidad").text("DIRANDRO");
 		 			$("#spnCargo").text(perfil.cargo);
 		 			$("#hdrCargo").text(perfil.cargo);
+		 			$("#spnGrado").text(perfil.grado);
+		 			$("#hdrGrado").text(perfil.grado);
+		 			$("#hdrNCarnet").text(perfil.numeroDeCarnet);
+		 			$("#spnNCarnet").text(perfil.numeroDeCarnet);
+		 			$("#spnRango").text(perfil.rango);
 	 			}else if(perfil.entidadPerteneciente == 'M'){
 	 				$("#spnEntidad").text("Ministerio Público");
-	 				
+	 				$("#hdrEntidad").text("Ministerio Público");
 	 				$("#divCargo").hide();
 	 				$("#divGrado").hide();
 	 				$("#divCarnet").hide();
 	 				$("#divRango").hide();
+	 				
+	 				$("#tdGrado").empty();
+	 				$("#tdGradoResult").empty();
+	 				$("#tdNCarnet").empty();
+	 				$("#tdNCarnetResult").empty();
+	 				
 	 				$("#tdCargo").empty();
 	 				$("#tdCargo").append("Tipo Fiscal");
 	 				
 	 				$("#divFiscal").show();
 	 				$("#hdrCargo").text(perfil.tipoFiscal);
 	 				$("#spnTipoFiscal").text(perfil.tipoFiscal);
-	 			}
-	 			$("#spnNCarnet").text(perfil.numeroDeCarnet);
-	 			$("#spnGrado").text(perfil.grado);
-	 			$("#spnRango").text(perfil.rango);
+	 			}			
+	 				 
 	 		}
 	 	});
 });//# carnet -> sub 8 -> oficiales 6

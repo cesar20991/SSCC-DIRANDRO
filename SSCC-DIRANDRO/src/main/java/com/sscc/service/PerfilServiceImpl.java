@@ -47,6 +47,7 @@ public class PerfilServiceImpl implements PerfilService {
 		pf.setCargo(p.getCargo());
 		pf.setRango(p.getRango());
 		pf.setTipoFiscal(p.getTipoFiscal());
+		pf.setCodigoPerfil(p.getCodigo());
 		
 		return pf;
 	}
@@ -63,7 +64,9 @@ public class PerfilServiceImpl implements PerfilService {
 			perfil.setGrado("");
 		}
 		
-		em.persist(perfil);
+		em.persist(perfil);		
+		
+		perfil.setCodigo("USU-"+perfil.getIdPerfil());
 		
 		Usuario us = new Usuario();
 		us.setCorreoElectronico(correo);
@@ -88,6 +91,7 @@ public class PerfilServiceImpl implements PerfilService {
 		pf.setIdPerfil(perfil.getIdPerfil());
 		pf.setTipoFiscal(perfil.getTipoFiscal());
 		pf.setRango(perfil.getRango());
+		pf.setCodigoPerfil(perfil.getCodigo());
 		
 		return pf;
 	}
