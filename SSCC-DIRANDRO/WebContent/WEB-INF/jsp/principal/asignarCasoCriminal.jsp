@@ -82,6 +82,7 @@ $(document).ready(function(){
 				$("#jefeDeUnidadCombo_"+idN).show();
 				$("#slctJefe_"+idN).empty();
 				$("#slctJefe_"+idN).append(llenarCombo);
+				$("#slctJefe_"+idN).val($("#spnJefeDeUnidad_"+idN).text());
 				
 				$("#btnAsignar_"+idN).hide();
 				$("#btnAccion_"+idN).show();

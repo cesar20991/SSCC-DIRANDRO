@@ -53,7 +53,7 @@ $(document).ready(function(e){
  				$('#CRNumber'+i).empty(); 				
  				if(CRs[i].split('-')[1] == 'id'){
  					$('#CRNumber'+i).text('1');
- 					$('.CRLink'+i).attr('href', 'toPageCR-'+CRs[i].split('-')[0]); //cambiar Link
+ 					$('.CRLink'+i).attr('href', 'toCasoCriminal-'+CRs[i].split('-')[0]); //cambiar Link
  				}else{
  					$('#CRNumber'+i).text(CRs[i]);
  					$('.CRLink'+i).attr('href', 'toSearchCR-'+CRStates[i]); // Cambiar Link

@@ -14,6 +14,8 @@ import org.springframework.transaction.annotation.Transactional;
 import com.sscc.form.CasoCriminalBean;
 import com.sscc.model.CasoCriminal;
 import com.sscc.model.Perfil;
+import com.sscc.model.RasgosParticulares;
+import com.sscc.model.Sospechoso;
 import com.sscc.model.Usuario;
 import com.sscc.model.CasoPorAgente;
 import com.sscc.util.DateUtil;
@@ -189,6 +191,18 @@ public class CasoCriminalServiceImpl implements CasoCriminalService{
 			listCR.add(crBean);
 		}
 		return listCR;
+	}
+
+	@Transactional
+	public CasoCriminalBean editarCasoCriminal(CasoCriminal caso) {
+		CasoCriminal c = em.find(CasoCriminal.class, caso.getIdCasoCriminal());
+		CasoCriminal editadoC = em.merge(c);
+		
+		editadoC.setAsunto(caso.getAsunto());
+		editadoC.setReferencia(caso.getReferencia());
+		editadoC.setDescripcion(caso.getDescripcion());
+		
+		return getCasoCriminalBean(caso.getIdCasoCriminal());
 	}
 
 }

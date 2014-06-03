@@ -21,4 +21,6 @@ public interface CasoCriminalService {
 	
 	List<CasoCriminalBean> getLastCasosCriminales(HttpSession session);
 	
+	CasoCriminalBean editarCasoCriminal(CasoCriminal caso);
+	
 }

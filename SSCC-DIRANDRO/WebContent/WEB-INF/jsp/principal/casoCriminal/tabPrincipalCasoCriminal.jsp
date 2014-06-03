@@ -60,13 +60,17 @@ $(document).ready(function(){
 });
 $(document).on('click','#btnEditarCasoCriminal', function(e){
 	//TABS A OCULTAR Y MOSTRAR
+	$("#txtAsunto").val($("#spnAsunto").text());
+	$("#txtReferencia").val($("#spnReferencia").text());
+	$("#txtDescription").val($("#spnDescripcion").text());
+	
 	$("#divMostrarCasoCriminal").hide();
 	$("#divEditarCasoCriminal").show();
 });
 $(document).on('click','#btnCancelEditar', function(e){
 	//TABS A OCULTAR Y MOSTRAR
 	$("#divMostrarCasoCriminal").show();
-	$("#divEditarCasoCriminal").hice();
+	$("#divEditarCasoCriminal").hide();
 });
 </script>
 <div id="divCasoCriminal">
@@ -118,8 +122,8 @@ $(document).on('click','#btnCancelEditar', function(e){
 </div>
 <!-- EDITAR CAOS CRIMINAL -->
 	<fieldset class="well" style="display: none;" id="divEditarCasoCriminal">
-		<form:form class="form-horizontal" id="formEditarCasoCriminal" action="editarCasoCriminal" commandName="editarCasoCriminal">
-				<input type="hidden" name="idCasoCriminalAux" id="hdnIdCasoCriminal">
+		<form:form class="form-horizontal" id="formEditarCasoCriminal" action="editarCasoCriminal" commandName="CasoCriminal">
+				<input type="hidden" name="idCasoCriminal" id="hdnIdCasoCriminal">
 				<legend>
 			       	<span class="colored">///</span> Editar Caso Criminal:
 		       	</legend>
@@ -140,7 +144,7 @@ $(document).on('click','#btnCancelEditar', function(e){
 				<div class="control-group">
 	          		<label class="control-label">Description: </label>
 	          		<div class="controls">
-	          			<input class="span3" type="text" name="referencia" id="txtDescripcion" data-rule-required="true" data-msg-required="*">
+	          			<textarea class="input-xlarge" name="descripcion" id="txtDescription" rows="8" data-rule-required="true" data-msg-required="*"></textarea>
 	          		</div>
 	       		</div>
 				<!-- BOTONES -->

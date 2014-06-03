@@ -108,6 +108,14 @@ public class CasoCriminalController {
 		list = casoServ.getLastCasosCriminales(req.getSession());		
 		return list;
 		
-	}	
+	}
+	
+	@RequestMapping("editarCasoCriminal")
+	@ResponseBody
+	public CasoCriminalBean editarCasoCriminal(@ModelAttribute CasoCriminal caso, HttpServletRequest req){
+		CasoCriminalBean list = casoServ.editarCasoCriminal(caso);		
+		return list;
+		
+	}
 
 }
