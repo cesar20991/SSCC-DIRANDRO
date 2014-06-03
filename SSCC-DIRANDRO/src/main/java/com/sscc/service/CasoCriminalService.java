@@ -15,6 +15,8 @@ public interface CasoCriminalService {
 	
 	List<CasoCriminalBean> getCasosCriminalBean();
 	
+	List<CasoCriminalBean> getCasosCriminalBeanPersonal();
+	
 	List<CasoCriminalBean> asignarCasoCriminalEditar(Integer idCaso, Integer idJefeDeUnidad);
 	
 	List<String> getStatusCasoCriminal();
@@ -22,5 +24,9 @@ public interface CasoCriminalService {
 	List<CasoCriminalBean> getLastCasosCriminales(HttpSession session);
 	
 	CasoCriminalBean editarCasoCriminal(CasoCriminal caso);
+	
+	Boolean asignarPersonalPolicial(Integer idCaso, Integer idPolicia, String estado);
+	
+	Boolean reAsignarPersonalPolicial(Integer idCaso, Integer idPolicia, String estado);
 	
 }

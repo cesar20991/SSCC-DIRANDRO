@@ -14,8 +14,6 @@ import org.springframework.transaction.annotation.Transactional;
 import com.sscc.form.CasoCriminalBean;
 import com.sscc.model.CasoCriminal;
 import com.sscc.model.Perfil;
-import com.sscc.model.RasgosParticulares;
-import com.sscc.model.Sospechoso;
 import com.sscc.model.Usuario;
 import com.sscc.model.CasoPorAgente;
 import com.sscc.util.DateUtil;
@@ -122,6 +120,23 @@ public class CasoCriminalServiceImpl implements CasoCriminalService{
 		return cbl;
 	}
 	
+	@SuppressWarnings("unchecked")
+	public List<CasoCriminalBean> getCasosCriminalBeanPersonal() {
+		List<CasoCriminalBean> cbl = new ArrayList<CasoCriminalBean>();
+		Query qCasos = em.createQuery("SELECT c.idCasoCriminal, c.codigo, c.referencia FROM CasoCriminal c ");
+		List<Object[]> c = qCasos.getResultList();
+		for(int i = 0; i < c.size(); i++){
+			CasoCriminalBean cb = new CasoCriminalBean();
+			Object[] cc = c.get(i);
+			cb.setIdCasoCriminal((Integer)cc[0]);
+			cb.setCodigo((String)cc[1]);
+			cb.setReferencia((String)cc[2]);
+			cbl.add(cb);
+		}
+		
+		return cbl;
+	}
+	
 	@Transactional
 	public List<CasoCriminalBean> asignarCasoCriminalEditar(Integer idCaso, Integer idJefeDeUnidad) {
 		Query qCasos = em.createQuery("SELECT cpa FROM CasoPorAgente cpa JOIN cpa.casoCriminal c JOIN cpa.usuario u JOIN u.perfil p WHERE c.idCasoCriminal = "+idCaso+" AND p.cargo = 'Jefe de Unidad' ");
@@ -203,6 +218,64 @@ public class CasoCriminalServiceImpl implements CasoCriminalService{
 		editadoC.setDescripcion(caso.getDescripcion());
 		
 		return getCasoCriminalBean(caso.getIdCasoCriminal());
+	}
+
+	@Transactional
+	public Boolean asignarPersonalPolicial(Integer idCaso, Integer idPolicia, String estado) {
+		Query qCasos = em.createQuery("SELECT cpa FROM CasoPorAgente cpa JOIN cpa.casoCriminal c JOIN cpa.usuario u JOIN u.perfil p WHERE c.idCasoCriminal = "+idCaso+" AND u.idUsuario = "+idPolicia+" AND cpa.estado='habilitado' AND (p.cargo = 'Superior' OR p.cargo = 'Investigador')");
+		
+		try{
+			CasoPorAgente cpa = (CasoPorAgente) qCasos.getSingleResult();			
+			
+			return false;
+		}catch (Exception e) {
+			
+			Query qCasos1 = em.createQuery("SELECT cpa FROM CasoPorAgente cpa JOIN cpa.casoCriminal c JOIN cpa.usuario u JOIN u.perfil p WHERE c.idCasoCriminal = "+idCaso+" AND u.idUsuario = "+idPolicia+" AND cpa.estado='deshabilitado' AND (p.cargo = 'Superior' OR p.cargo = 'Investigador')");
+			try{
+
+				//System.err.println("actualiza habilitado");
+				CasoPorAgente cpa1 = (CasoPorAgente) qCasos1.getSingleResult();
+				CasoPorAgente cpaEdit = em.merge(cpa1);
+				
+				cpaEdit.setEstado("habilitado");
+				return true;
+			}catch(Exception e1){
+
+				//System.err.println("crea");
+				CasoPorAgente cpa = new CasoPorAgente();
+				cpa.setEstado("habilitado");
+				
+				CasoCriminal c = new CasoCriminal();
+				c.setIdCasoCriminal(idCaso);
+				Usuario u = new Usuario();
+				u.setIdUsuario(idPolicia);
+				
+				cpa.setCasoCriminal(c);
+				cpa.setUsuario(u);
+				
+				em.persist(cpa);
+			
+				return true;
+			}
+		}
+		
+	}
+	
+	@Transactional
+	public Boolean reAsignarPersonalPolicial(Integer idCaso, Integer idPolicia, String estado) {
+		Query qCasos = em.createQuery("SELECT cpa FROM CasoPorAgente cpa JOIN cpa.casoCriminal c JOIN cpa.usuario u JOIN u.perfil p WHERE c.idCasoCriminal = "+idCaso+" AND u.idUsuario = "+idPolicia+" AND cpa.estado='habilitado' AND (p.cargo = 'Superior' OR p.cargo = 'Investigador')");
+		
+		try{
+			//System.err.println("Actualizar");
+			CasoPorAgente cpa = (CasoPorAgente) qCasos.getSingleResult();
+			CasoPorAgente cpaEdit = em.merge(cpa);
+			
+			cpaEdit.setEstado(estado);
+			return true;
+		}catch (Exception e) {
+			return false;
+		}
+		
 	}
 
 }

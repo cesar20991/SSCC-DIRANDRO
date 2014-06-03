@@ -72,6 +72,14 @@ public class CasoCriminalController {
 		return casobean;
 	}
 	
+	@RequestMapping(value = "getCasosPersonal", method = RequestMethod.POST)
+	@ResponseBody
+	public List<CasoCriminalBean> getCasosPersonal(){
+		List<CasoCriminalBean> c=new ArrayList<CasoCriminalBean>();
+		c = casoServ.getCasosCriminalBeanPersonal();
+		return c;
+	}
+	
 	@RequestMapping(value = "getCasos", method = RequestMethod.POST)
 	@ResponseBody
 	public List<CasoCriminalBean> getCasos(){
@@ -114,14 +122,17 @@ public class CasoCriminalController {
 	@RequestMapping(value = "asignarPersonalPolicial-{idCaso}-{idPolicia}", method = RequestMethod.POST)
 	@ResponseBody
 	public Boolean asignarPersonalPolicial(@PathVariable("idCaso") Integer idCaso, @PathVariable("idPolicia") Integer idPolicia){
-		casoServ.asignarPersonalPolicial(idCaso, idPolicia, "habilitado");		
-		return true;
+		if(casoServ.asignarPersonalPolicial(idCaso, idPolicia, "habilitado")){
+			return true;
+		}else{
+			return false;
+		}		
 	}
 	
 	@RequestMapping(value = "reAsignarPersonalPolicial-{idCaso}-{idPolicia}", method = RequestMethod.POST)
 	@ResponseBody
 	public Boolean reAsignarPersonalPolicial(@PathVariable("idCaso") Integer idCaso, @PathVariable("idPolicia") Integer idPolicia){
-		casoServ.asignarPersonalPolicial(idCaso, idPolicia, "deshabilitado");		
+		casoServ.reAsignarPersonalPolicial(idCaso, idPolicia, "deshabilitado");		
 		return true;
 	}
 

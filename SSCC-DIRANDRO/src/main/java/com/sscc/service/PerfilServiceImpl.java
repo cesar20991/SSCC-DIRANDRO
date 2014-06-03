@@ -131,5 +131,23 @@ public class PerfilServiceImpl implements PerfilService {
 		
 		return pbl;
 	}
+	
+	@SuppressWarnings("unchecked")
+	public List<PerfilBean> getPersonalPolicialPorCaso(Integer idCasoCriminal) {
+		List<PerfilBean> pbl = new ArrayList<PerfilBean>();
+		List<Perfil> p = new ArrayList<Perfil>();
+		Query qCasos = em.createQuery("SELECT p FROM Perfil p JOIN p.usuario u JOIN u.cpa cpa WHERE p.estado='habilitado' AND cpa.estado='habilitado' AND cpa.casoCriminal.idCasoCriminal="+idCasoCriminal+" AND (p.cargo='Superior' OR p.cargo='Investigador')");
+		p = qCasos.getResultList();
+		
+		for(int i = 0; i < p.size(); i++){
+			PerfilBean pb = new PerfilBean();
+			pb.setIdUsuario(p.get(i).getUsuario().getIdUsuario());
+			pb.setIdPerfil(p.get(i).getIdPerfil());
+			pb.setNombreCompleto(p.get(i).getPrimerNombre()+" "+p.get(i).getSegundoNombre()+" "+p.get(i).getApePaterno()+" "+p.get(i).getApeMaterno());
+			pbl.add(pb);
+		}
+		
+		return pbl;
+	}
 
 }

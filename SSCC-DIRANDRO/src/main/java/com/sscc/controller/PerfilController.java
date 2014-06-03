@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.sscc.form.CasoCriminalBean;
 import com.sscc.form.PerfilBean;
 import com.sscc.model.Perfil;
 import com.sscc.service.PerfilService;
@@ -51,8 +50,6 @@ public class PerfilController {
 	
 	@RequestMapping(value = "crearUsuario", method = RequestMethod.POST)
 	public String crearUsuario(@ModelAttribute Perfil perfil, HttpServletRequest req, HttpSession session, Model model){
-		String path = "";
-		
 		String correo = req.getParameter("correo");
 		
 		PerfilBean pf = perfilServ.crearUsuario(perfil, correo);
@@ -83,7 +80,15 @@ public class PerfilController {
 	@ResponseBody
 	public List<PerfilBean> getPersonalPolicial(){
 		List<PerfilBean> perfilbean = new ArrayList<PerfilBean>();
-		perfilbean = perfilServ.getJefesDeUnidad();
+		perfilbean = perfilServ.getPersonalPolicial();
+		return perfilbean;
+	}
+	
+	@RequestMapping(value = "getPersonalPolicialPorCaso-{idCasoCriminal}", method = RequestMethod.POST)
+	@ResponseBody
+	public List<PerfilBean> getPersonalPolicialPorCaso(@PathVariable("idCasoCriminal") Integer idCasoCriminal){
+		List<PerfilBean> perfilbean = new ArrayList<PerfilBean>();
+		perfilbean = perfilServ.getPersonalPolicialPorCaso(idCasoCriminal);
 		return perfilbean;
 	}
 	

@@ -26,6 +26,8 @@
 <script>
 var totalCasos = 0;
 var indiceCaso = 0;
+var llenarCombo = "";
+var indicePol = 0;
 function initAsignaCasos(casos){
 	indiceCaso = 0;
 	totalCasos = casos.length;
@@ -33,80 +35,113 @@ function initAsignaCasos(casos){
 		$.each(casos, function(i, caso) {
 			$("#tblBody").append('<tr>');
 				$("#tblBody").append('<td>'+caso.codigo+' ('+caso.referencia+')'+'<input type="hidden" name="idCaso" id="hdnCaso_'+indiceCaso+'" value="'+caso.idCasoCriminal+'"></td>');
-				$("#tblBody").append('<td id="jefeDeUnidad_'+indiceCaso+'"><span id="spnJefeDeUnidad_'+indiceCaso+'">'+caso.nombreCompleto+'</span></td>'+
-						'<td style="display:none;" id="jefeDeUnidadCombo_'+indiceCaso+'"><select name="jefeDeUnidad" id="slctJefe_'+indiceCaso+'"></select></td>');
-				$("#tblBody").append('<td id="btnAsignar_'+indiceCaso+'">'+
-						'<button class="btn btn-primary asignar" id="asignar_'+indiceCaso+'"><i class="icon-edit icon-white"></i> Asignar</button>'+
-						'</td>'+
-						'<td style="display:none;" id="btnAccion_'+indiceCaso+'">'+
-						'<button class="btn btn-success asignar" id="GuardarAsigna_'+indiceCaso+'"><i class="icon-ok icon-white"></i> Guardar</button>'+
-						'<button class="btn btn-danger asignar" id="CancelarAsigna_'+indiceCaso+'"><i class="icon-remove icon-white"></i> Cancelar</button>'+
-						'</td>');
+				$("#tblBody").append('<td id="jefeDeUnidadCombo_'+indiceCaso+'"><select name="jefeDeUnidad" id="slctPol_'+indiceCaso+'"></select> <button class="btn btn-success btn-mini asignar" id="GuardarAsigna_'+indiceCaso+'" type="button"><i class="icon-plus icon-white"></i></button>'+
+											'<div id="divAsignadorAgregar_'+indiceCaso+'">'+
+								          	'</div></td>');
 			$("#tblBody").append('</tr>');
+
+			$("#slctPol_"+indiceCaso).empty();
+			$("#slctPol_"+indiceCaso).append(llenarCombo);
+			
 			indiceCaso++;
 		});
 }
-$(document).ready(function(){
+
+function traerCasos(){
+	$.ajax({
+ 		url: 'getCasosPersonal',
+ 		type: 'post',
+ 		dataType: 'json',
+ 		data: '',
+ 		success: function(casos){
+ 			initAsignaCasos(casos);
+	 		$.each(casos, function(i, caso) {
+	 			$.ajax({
+	 		 		url: 'getPersonalPolicialPorCaso-'+caso.idCasoCriminal,
+	 		 		type: 'post',
+	 		 		dataType: 'json',
+	 		 		data: '',
+	 		 		success: function(policias){
+	 		 			$.each(policias, function(j, policia) {
+	 		 				$("#divAsignadorAgregar_"+i).append(
+									'<div class="control-group" id="divPolName_'+indicePol+'">'+
+										'<div class="controls" >'+policia.nombreCompleto+
+										' <button class="btn btn-danger btn-mini asignar" id="CancelarAsigna_'+i+'_'+indicePol+'" type="button"><i class="icon-minus icon-white"></i></button>'+
+											'<input type="hidden" id="hdnIsUsuario_'+i+'_'+indicePol+'" name="" value="'+policia.idUsuario+'">'+
+					          			'</div>'+
+					          		'</div>');
+					 			indicePol++;
+	 		 			});
+	 		 		}
+	 		 	});
+	 		});
+ 		}
+ 	});
+}
+
+$(document).ready(function(){	
 	
-	var llenarCombo = "";
 	$.ajax({
  		url: 'getPersonalPolicial',
  		type: 'post',
  		dataType: 'json',
  		data: '',
  		success: function(jefes){
+ 				llenarCombo = llenarCombo + '<option value="">No precisa</option>';
  			$.each(jefes, function(i, jefe) {
  				llenarCombo = llenarCombo + '<option value="'+jefe.idUsuario+'">'+jefe.nombreCompleto+'</option>';
  			});
+ 			traerCasos();
  		}
- 	});
-	
-	$.ajax({
- 		url: 'getCasos',
- 		type: 'post',
- 		dataType: 'json',
- 		data: '',
- 		success: function(casos){
- 			initAsignaCasos(casos);
- 		}
- 	});
+ 	});	
  	
 	$(document).on('click','.asignar', function(e){
 		var id = this.id;
 		var idA = id.split("_")[0];
 		var idN = id.split("_")[1];
+		var idN2 = id.split("_")[2];
 		
 		switch(idA){
-			case 'asignar':
-				$("#jefeDeUnidad_"+idN).hide();
-				$("#jefeDeUnidadCombo_"+idN).show();
-				$("#slctJefe_"+idN).empty();
-				$("#slctJefe_"+idN).append(llenarCombo);
-				
-				$("#btnAsignar_"+idN).hide();
-				$("#btnAccion_"+idN).show();
-			break;
 			case 'CancelarAsigna':
-				$("#jefeDeUnidad_"+idN).show();
-				$("#jefeDeUnidadCombo_"+idN).hide();
-				
-				$("#btnAsignar_"+idN).show();
-				$("#btnAccion_"+idN).hide();
+				var respuesta = confirm('¿Esta seguro que desea quitar a este agente?');
+				if(respuesta){
+					$.ajax({
+				 		url: 'reAsignarPersonalPolicial-'+$("#hdnCaso_"+idN).val()+"-"+$("#hdnIsUsuario_"+idN+"_"+idN2).val(),
+				 		type: 'post',
+				 		dataType: 'json',
+				 		data: '',
+				 		success: function(casos){
+				 			$("#divPolName_"+idN2).remove();
+				 		}
+				 	});
+				}				
 			break;
 			case 'GuardarAsigna':
-				/*$.ajax({
-			 		url: 'asignarCaso-'+$("#hdnCaso_"+idN).val()+"-"+$("#slctJefe_"+idN).val(),
+				$.ajax({
+			 		url: 'asignarPersonalPolicial-'+$("#hdnCaso_"+idN).val()+"-"+$("#slctPol_"+idN).val(),
 			 		type: 'post',
 			 		dataType: 'json',
 			 		data: '',
-			 		success: function(casos){
-			 			initAsignaCasos(casos);
+			 		success: function(caso){
+			 			//initAsignaCasos(casos);
+			 			if(caso){
+			 				$("#divAsignadorAgregar_"+idN).append(
+									'<div class="control-group" id="divPolName_'+indicePol+'">'+
+										'<div class="controls" >'+$("#slctPol_"+idN+" option:selected").html()+
+										' <button class="btn btn-danger btn-mini asignar" id="CancelarAsigna_'+idN+'_'+indicePol+'" type="button"><i class="icon-minus icon-white"></i></button>'+
+											'<input type="hidden" id="hdnIsUsuario_'+idN+'_'+indicePol+'" name="" value="'+$("#slctPol_"+idN).val()+'">'+
+					          			'</div>'+
+					          		'</div>');
+					 			$("#slctPol_"+idN).val("");
+					 			indicePol++;
+					 		alert("Asignado Correctamente.");
+			 			}else{
+			 				alert($("#slctPol_"+idN+" option:selected").html()+" ya esta asignado(a) al caso.");
+			 			}			 			
 			 		}
-			 	});	*/			
+			 	});		
 			break;
 		}
-		
-		
 	});
 	
 });
@@ -127,8 +162,7 @@ $(document).ready(function(){
 				<thead>
 					<tr>
 						<th>Caso Criminal</th>
-						<th>Personal Policial</th>
-						<th>Asignar</th>
+						<th>Asignar Personal Policial</th>
 					</tr>
 				</thead>
 				<tbody id="tblBody">
