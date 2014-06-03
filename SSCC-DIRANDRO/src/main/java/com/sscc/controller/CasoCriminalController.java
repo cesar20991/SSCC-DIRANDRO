@@ -76,9 +76,7 @@ public class CasoCriminalController {
 	@ResponseBody
 	public List<CasoCriminalBean> getCasos(){
 		List<CasoCriminalBean> c=new ArrayList<CasoCriminalBean>();
-		
 		c = casoServ.getCasosCriminalBean();
-		
 		return c;
 	}
 	
