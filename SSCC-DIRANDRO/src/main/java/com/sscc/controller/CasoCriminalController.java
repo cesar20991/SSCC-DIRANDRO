@@ -86,29 +86,9 @@ public class CasoCriminalController {
 	@ResponseBody
 	public List<CasoCriminalBean> asignarCaso(@PathVariable("idCaso") Integer idCaso, @PathVariable("idJefeDeUnidad") Integer idJefeDeUnidad){
 		List<CasoCriminalBean> c=new ArrayList<CasoCriminalBean>();
-		
 		c = casoServ.asignarCasoCriminalEditar(idCaso, idJefeDeUnidad);
-		
 		return c;
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	
 	@RequestMapping("getStatusList")
 	@ResponseBody
@@ -116,7 +96,6 @@ public class CasoCriminalController {
 		List<String> list = new ArrayList<String>();
 		list = casoServ.getStatusCasoCriminal();		
 		return list;
-		
 	}
 	
 	@RequestMapping("getLastCasosCriminales")
@@ -125,7 +104,6 @@ public class CasoCriminalController {
 		List<CasoCriminalBean> list = new ArrayList<CasoCriminalBean>();
 		list = casoServ.getLastCasosCriminales(req.getSession());		
 		return list;
-		
 	}
 	
 	@RequestMapping("editarCasoCriminal")
@@ -133,7 +111,6 @@ public class CasoCriminalController {
 	public CasoCriminalBean editarCasoCriminal(@ModelAttribute CasoCriminal caso, HttpServletRequest req){
 		CasoCriminalBean list = casoServ.editarCasoCriminal(caso);		
 		return list;
-		
 	}
 	
 	@RequestMapping(value = "asignarPersonalPolicial-{idCaso}-{idPolicia}", method = RequestMethod.POST)
