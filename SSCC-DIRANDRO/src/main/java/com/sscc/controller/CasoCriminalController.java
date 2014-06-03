@@ -92,6 +92,24 @@ public class CasoCriminalController {
 		return c;
 	}
 	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	@RequestMapping("getStatusList")
 	@ResponseBody
 	public List<String> getStatusList(HttpServletRequest req){
@@ -116,6 +134,20 @@ public class CasoCriminalController {
 		CasoCriminalBean list = casoServ.editarCasoCriminal(caso);		
 		return list;
 		
+	}
+	
+	@RequestMapping(value = "asignarPersonalPolicial-{idCaso}-{idPolicia}", method = RequestMethod.POST)
+	@ResponseBody
+	public Boolean asignarPersonalPolicial(@PathVariable("idCaso") Integer idCaso, @PathVariable("idPolicia") Integer idPolicia){
+		casoServ.asignarPersonalPolicial(idCaso, idPolicia, "habilitado");		
+		return true;
+	}
+	
+	@RequestMapping(value = "reAsignarPersonalPolicial-{idCaso}-{idPolicia}", method = RequestMethod.POST)
+	@ResponseBody
+	public Boolean reAsignarPersonalPolicial(@PathVariable("idCaso") Integer idCaso, @PathVariable("idPolicia") Integer idPolicia){
+		casoServ.asignarPersonalPolicial(idCaso, idPolicia, "deshabilitado");		
+		return true;
 	}
 
 }
