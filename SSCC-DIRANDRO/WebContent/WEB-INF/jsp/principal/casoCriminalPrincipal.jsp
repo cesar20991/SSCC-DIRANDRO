@@ -26,6 +26,8 @@
 <script src="js/jquery.validate.min.js"></script>
 <script src="js/validateFecha.js"></script>
 <script src="js/formatDates.js"></script>
+<!-- alertas de colores -->
+<script src="js/bootstrap-alert.js"></script>
 <!-- styles -->
 <link href="css/bootstrap.css" rel="stylesheet">
 <link href="css/bootstrap-responsive.css" rel="stylesheet">
@@ -72,27 +74,34 @@
 			<div class="tabbable" style="margin-bottom: 9px;">
 				<ul class="nav nav-tabs">
 					<li class="active"><a href="#1" data-toggle="tab">Principal</a></li>
-					<li class=""><a href="#2" data-toggle="tab">Sospechosos</a></li>
-					<li class=""><a href="#2" data-toggle="tab">Bienes</a></li>
-					<li class=""><a href="#3" data-toggle="tab">Archivos Adjuntos</a></li>
-					<li class=""><a href="#4" data-toggle="tab">Comentarios</a></li>
-					<li class=""><a href="#5" data-toggle="tab">Auditoría</a></li>
+					<li class=""><a href="#2" data-toggle="tab">Personal Asignado</a></li>
+					<li class=""><a href="#3" data-toggle="tab">Sospechosos</a></li>
+					<li class=""><a href="#4" data-toggle="tab">Bienes</a></li>
+					<li class=""><a href="#5" data-toggle="tab">Archivos Adjuntos</a></li>
+					<li class=""><a href="#6" data-toggle="tab">Comentarios</a></li>
+					<li class=""><a href="#7" data-toggle="tab">Auditoría</a></li>
 				</ul>
 				<div class="tab-content">
 					<div class="tab-pane active" id="1">
 						<jsp:include page="casoCriminal/tabPrincipalCasoCriminal.jsp" />
 					</div>
 					<div class="tab-pane" id="2">
-						<p>Seccion 2.</p>
+						<p>Seccion 5.</p>
 					</div>
 					<div class="tab-pane" id="3">
-						<p>Seccion 3.</p>
+						<p>Seccion 2.</p>
 					</div>
 					<div class="tab-pane" id="4">
-						<p>Seccion 4.</p>
+						<p>Seccion 3.</p>
 					</div>
 					<div class="tab-pane" id="5">
-						<p>Seccion 5.</p>
+						<p>Seccion 4.</p>
+					</div>
+					<div class="tab-pane" id="6">
+						<p>Seccion 6.</p>
+					</div>
+					<div class="tab-pane" id="7">
+						<p>Seccion 7.</p>
 					</div>
 				</div>
 			</div>

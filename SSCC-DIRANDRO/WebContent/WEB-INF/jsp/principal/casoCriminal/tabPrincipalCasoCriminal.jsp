@@ -53,6 +53,11 @@ $(document).ready(function(){
 		 			initCasoCriminal(caso);
 		 			$("#divMostrarCasoCriminal").show();
 		 			$("#divEditarCasoCriminal").hide();
+		 			$("#alertas").show();
+		 			$("#alertas").append('<div class="alert alert-success" id="alertaVerde">'+
+						 			        '<a class="close" data-dismiss="alert">×</a>'+
+						 			        '<strong id="msgVerde">Editado Correctamente</strong>'+
+						 			    '</div>');
 		 		}
 			});
 		}
@@ -74,6 +79,8 @@ $(document).on('click','#btnCancelEditar', function(e){
 });
 </script>
 <div id="divCasoCriminal">
+	<div id="alertas" style="display: none;">
+	</div>
 	<div id="divMostrarCasoCriminal">
 	<form:form class="form-horizontal">
 		<fieldset>

@@ -117,29 +117,34 @@ $(document).ready(function(){
 				}				
 			break;
 			case 'GuardarAsigna':
-				$.ajax({
-			 		url: 'asignarPersonalPolicial-'+$("#hdnCaso_"+idN).val()+"-"+$("#slctPol_"+idN).val(),
-			 		type: 'post',
-			 		dataType: 'json',
-			 		data: '',
-			 		success: function(caso){
-			 			//initAsignaCasos(casos);
-			 			if(caso){
-			 				$("#divAsignadorAgregar_"+idN).append(
-									'<div class="control-group" id="divPolName_'+indicePol+'">'+
-										'<div class="controls" >'+$("#slctPol_"+idN+" option:selected").html()+
-										' <button class="btn btn-danger btn-mini asignar" id="CancelarAsigna_'+idN+'_'+indicePol+'" type="button"><i class="icon-minus icon-white"></i></button>'+
-											'<input type="hidden" id="hdnIsUsuario_'+idN+'_'+indicePol+'" name="" value="'+$("#slctPol_"+idN).val()+'">'+
-					          			'</div>'+
-					          		'</div>');
-					 			$("#slctPol_"+idN).val("");
-					 			indicePol++;
-					 		alert("Asignado Correctamente.");
-			 			}else{
-			 				alert($("#slctPol_"+idN+" option:selected").html()+" ya esta asignado(a) al caso.");
-			 			}			 			
-			 		}
-			 	});		
+				if($("#slctPol_"+idN).val() != ""){
+					$.ajax({
+				 		url: 'asignarPersonalPolicial-'+$("#hdnCaso_"+idN).val()+"-"+$("#slctPol_"+idN).val(),
+				 		type: 'post',
+				 		dataType: 'json',
+				 		data: '',
+				 		success: function(caso){
+				 			//initAsignaCasos(casos);
+				 			if(caso){
+				 				$("#divAsignadorAgregar_"+idN).append(
+										'<div class="control-group" id="divPolName_'+indicePol+'">'+
+											'<div class="controls" >'+$("#slctPol_"+idN+" option:selected").html()+
+											' <button class="btn btn-danger btn-mini asignar" id="CancelarAsigna_'+idN+'_'+indicePol+'" type="button"><i class="icon-minus icon-white"></i></button>'+
+												'<input type="hidden" id="hdnIsUsuario_'+idN+'_'+indicePol+'" name="" value="'+$("#slctPol_"+idN).val()+'">'+
+						          			'</div>'+
+						          		'</div>');
+						 			$("#slctPol_"+idN).val("");
+						 			indicePol++;
+						 		alert("Asignado Correctamente.");
+				 			}else{
+				 				alert($("#slctPol_"+idN+" option:selected").html()+" ya esta asignado(a) al caso.");
+				 			}			 			
+				 		}
+				 	});
+				}else{
+					alert("Debe Seleccionar una opcion.");					
+				}
+						
 			break;
 		}
 	});
