@@ -94,6 +94,9 @@
 				<div class="accordion-inner">
 					<a href="toRegistrarInmueble">Registrar Bien Inmueble</a>
 				</div>
+				<div class="accordion-inner">
+					<a href="toRegistrarVehiculo">Registrar Bien Vehicular</a>
+				</div>
 			</div>
 		</div>
 	</div>

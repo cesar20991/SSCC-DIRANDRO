@@ -65,6 +65,12 @@ $(document).ready(function(){
 			$("#titulo").empty();
 			$("#titulo").append('<h1><span class="colored">///</span> Registrar Bien Inmueble</h1>');
 		break;
+		case 'registrarBienVehicular':
+			$("#rowWelcome").removeClass('welcome');
+			$("#rowWelcome").addClass('welcome_inner');
+			$("#titulo").empty();
+			$("#titulo").append('<h1><span class="colored">///</span> Registrar Bien Vehicular</h1>');
+		break;
 
 	}
 });
