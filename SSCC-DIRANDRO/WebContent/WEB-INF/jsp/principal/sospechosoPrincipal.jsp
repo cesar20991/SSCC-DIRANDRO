@@ -83,7 +83,7 @@
 						<jsp:include page="sospechoso/tabPrincipalSospechoso.jsp" />
 					</div>
 					<div class="tab-pane active span9" id="2">
-						<jsp:include page="sospechoso/tabDatosdeContacto.jsp" />
+						<%-- <jsp:include page="sospechoso/tabDatosdeContacto.jsp" /> --%>
 					</div>
 					<div class="tab-pane" id="3">
 						<jsp:include page="sospechoso/tabRasgosParticulares.jsp" />

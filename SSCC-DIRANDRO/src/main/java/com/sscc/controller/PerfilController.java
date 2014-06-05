@@ -83,7 +83,14 @@ public class PerfilController {
 		perfilbean = perfilServ.getPersonalPolicial();
 		return perfilbean;
 	}
-	
+	@RequestMapping(value = "getJefeAsignado-{idCasoCriminal}", method = RequestMethod.POST)
+	@ResponseBody
+	public PerfilBean getJefesPorCaso(@PathVariable("idCasoCriminal") Integer idCasoCriminal){
+		PerfilBean perfilbean = new PerfilBean();
+		perfilbean = perfilServ.getJefesPorCaso(idCasoCriminal);
+		return perfilbean;
+	}
+	//este se usa en el jsp asignar personal no muestra a los jefes de unidad
 	@RequestMapping(value = "getPersonalPolicialPorCaso-{idCasoCriminal}", method = RequestMethod.POST)
 	@ResponseBody
 	public List<PerfilBean> getPersonalPolicialPorCaso(@PathVariable("idCasoCriminal") Integer idCasoCriminal){
@@ -91,5 +98,12 @@ public class PerfilController {
 		perfilbean = perfilServ.getPersonalPolicialPorCaso(idCasoCriminal);
 		return perfilbean;
 	}
-	
+	//este se usa la pagina del caso
+	@RequestMapping(value = "getPersonalAsignado-{idCasoCriminal}", method = RequestMethod.POST)
+	@ResponseBody
+	public List<PerfilBean> getPersonalAsignado(@PathVariable("idCasoCriminal") Integer idCasoCriminal){
+		List<PerfilBean> perfilbean = new ArrayList<PerfilBean>();
+		perfilbean = perfilServ.getPersonalPolicial(idCasoCriminal);
+		return perfilbean;
+	}
 }

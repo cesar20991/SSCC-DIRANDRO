@@ -86,7 +86,7 @@
 						<jsp:include page="casoCriminal/tabPrincipalCasoCriminal.jsp" />
 					</div>
 					<div class="tab-pane" id="2">
-						<p>Seccion 5.</p>
+						<jsp:include page="casoCriminal/tabPersonalAsignado.jsp" />
 					</div>
 					<div class="tab-pane" id="3">
 						<p>Seccion 2.</p>
