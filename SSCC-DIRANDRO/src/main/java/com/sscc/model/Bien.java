@@ -20,14 +20,12 @@ public class Bien {
 	@Column(length=256, nullable = false)
 	private String partidaRegistral;
 	
-	
-	//TODO si no tubiera propietario, como se declara que puede ser null?
 	// Propietario del bien
 	@ManyToOne
 	@JoinColumn(name = "idUsuario")
 	private Usuario usuario;
 	
-	@OneToOne
+	@ManyToOne
 	@JoinColumn(name = "idSospechoso")
 	private Sospechoso sospechoso;	
 	
