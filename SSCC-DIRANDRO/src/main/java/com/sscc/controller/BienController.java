@@ -102,6 +102,7 @@ public class BienController {
 	@RequestMapping(value= "getVehiculo-{idVehiculo}", method=RequestMethod.POST)
 	@ResponseBody
 	public VehiculoBean getVehiculo(@PathVariable("idVehiculo")Integer idVehiculo){
+		System.out.println("IdVehiculo = "+idVehiculo);
 		VehiculoBean vehiculoBean = new VehiculoBean();
 		vehiculoBean = bienServ.getVehiculoBean(idVehiculo);
 		

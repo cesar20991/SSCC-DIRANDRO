@@ -1,5 +1,6 @@
 package com.sscc.model;
 
+import java.sql.Date;
 import java.sql.Timestamp;
 
 import javax.persistence.Column;
@@ -64,7 +65,7 @@ public class Vehiculo {
 	private String color;
 
 	@Column(nullable = false)
-	private Timestamp fecFabricacion;
+	private Date fecFabricacion;
 
 	@OneToOne
 	@JoinColumn(name = "idBien")
@@ -206,11 +207,11 @@ public class Vehiculo {
 		this.color = color;
 	}
 
-	public Timestamp getFecFabricacion() {
+	public Date getFecFabricacion() {
 		return fecFabricacion;
 	}
 
-	public void setFecFabricacion(Timestamp fecFabricacion) {
+	public void setFecFabricacion(Date fecFabricacion) {
 		this.fecFabricacion = fecFabricacion;
 	}
 

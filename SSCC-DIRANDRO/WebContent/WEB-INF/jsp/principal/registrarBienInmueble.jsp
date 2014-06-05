@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="utf-8">
-<title>SSCC - DIRANDRO - Registrar Bien</title>
+<title>SSCC - DIRANDRO - Registrar Bien Inmueble</title>
 <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
