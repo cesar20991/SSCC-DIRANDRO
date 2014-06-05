@@ -1,5 +1,6 @@
 package com.sscc.form;
 
+import java.sql.Date;
 import java.sql.Timestamp;
 
 public class VehiculoBean {
@@ -12,22 +13,22 @@ public class VehiculoBean {
 	// Vehiculo
 	private Integer idVehiculo;
 	private String codigo;
+	private String marca;
+	private String modelo;
+	private String color;
+	private String placa;
+	private String chasis;
+	private String motor;
 	private Double altura;
 	private Double ancho;
 	private Double longitud;
 	private Double pesoBruto;
 	private Double pesoNeto;
-	private String placa;
-	private String marca;
-	private String modelo;
-	private String chasis;
-	private String motor;
 	private Integer ruedas;
 	private Integer ejes;
 	private Integer pasajeros;
 	private Integer asientos;
-	private String color;
-	private Timestamp fecFabricacion;
+	private Date fecFabricacion;
 
 	// usuario
 	private String correoElectronico;
@@ -160,10 +161,10 @@ public class VehiculoBean {
 	public void setColor(String color) {
 		this.color = color;
 	}
-	public Timestamp getFecFabricacion() {
+	public Date getFecFabricacion() {
 		return fecFabricacion;
 	}
-	public void setFecFabricacion(Timestamp fecFabricacion) {
+	public void setFecFabricacion(Date fecFabricacion) {
 		this.fecFabricacion = fecFabricacion;
 	}
 	public String getCorreoElectronico() {

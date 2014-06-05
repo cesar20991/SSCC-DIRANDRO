@@ -57,6 +57,7 @@ public class BienServiceImpl implements BienService {
 		}else{
 			vehiculo.setFecFabricacion(vb.getFecFabricacion());
 		}
+		vehiculo.setCodigo("");
 		em.persist(vehiculo);
 		
 		vehiculo.setCodigo("VHC-"+vehiculo.getIdVehiculo());
@@ -86,7 +87,7 @@ public class BienServiceImpl implements BienService {
 		vb.setCodigo(v.getCodigo());
 		vb.setAltura(v.getAltura());
 		vb.setAncho(v.getAncho());
-		vb.setAltura(v.getAltura());
+		vb.setLongitud(v.getLongitud());
 		vb.setPesoBruto(v.getPesoBruto());
 		vb.setPesoNeto(v.getPesoNeto());
 		vb.setPlaca(v.getPlaca());
@@ -104,6 +105,7 @@ public class BienServiceImpl implements BienService {
 		return vb;
 	}
 	
+	@Transactional
 	public VehiculoBean editVehiculoBean(VehiculoBean vb){
 		Vehiculo v = em.find(Vehiculo.class, vb.getIdVehiculo());
 		Vehiculo editado = em.merge(v);
@@ -126,8 +128,11 @@ public class BienServiceImpl implements BienService {
 		editado.setPasajeros(num(vb.getPasajeros()));
 		editado.setAsientos(num(vb.getAsientos()));
 		editado.setColor(texto(vb.getColor()));
-		editado.setFecFabricacion(vb.getFecFabricacion());
-		
+		if(vb.getFecFabricacion().toString().equals("1000-12-12")){
+			editado.setFecFabricacion(null);
+		}else{
+			editado.setFecFabricacion(vb.getFecFabricacion());
+		}
 		return getVehiculoBean(editado.getIdVehiculo());
 	}
 	
@@ -204,6 +209,7 @@ public class BienServiceImpl implements BienService {
 		Inmueble i = em.find(Inmueble.class, ib.getIdInmueble());
 		
 		Inmueble editado = em.merge(i);
+		
 		Bien b= editado.getBien();
 		b.setPartidaRegistral(ib.getPartidaRegistral());
 		b.setDescripcion(ib.getDescripcion());
