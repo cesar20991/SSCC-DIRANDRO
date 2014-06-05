@@ -43,15 +43,15 @@ public class BienServiceImpl implements BienService {
 		
 		//Registro del inmueble
 		inmueble.setBien(bien);
-		inmueble.setAreaTotal(inmuebleBean.getAreaTotal());
-		inmueble.setAreaConstruido(inmuebleBean.getAreaConstruido());
-		inmueble.setAreaCercado(inmuebleBean.getAreaCercado());
-		inmueble.setPisos(inmuebleBean.getPisos());
-		inmueble.setAmbientes(inmuebleBean.getAmbientes());
+		inmueble.setAreaTotal(dec(inmuebleBean.getAreaTotal()));
+		inmueble.setAreaConstruido(dec(inmuebleBean.getAreaConstruido()));
+		inmueble.setAreaCercado(dec(inmuebleBean.getAreaCercado()));
+		inmueble.setPisos(num(inmuebleBean.getPisos()));
+		inmueble.setAmbientes(num(inmuebleBean.getAmbientes()));
 		inmueble.setDireccion(texto(inmuebleBean.getDireccion()));
-		inmueble.setLatitud(inmuebleBean.getLatitud());
-		inmueble.setLongitud(inmuebleBean.getLongitud());
-		inmueble.setAntiguedad(inmuebleBean.getAntiguedad());
+		inmueble.setLatitud(dec(inmuebleBean.getLatitud()));
+		inmueble.setLongitud(dec(inmuebleBean.getLongitud()));
+		inmueble.setAntiguedad(num(inmuebleBean.getAntiguedad()));
 		inmueble.setCodigo("");
 		em.persist(inmueble);
 		inmueble.setCodigo("IMB-"+inmueble.getIdInmueble());
@@ -118,8 +118,11 @@ public class BienServiceImpl implements BienService {
 	public InmuebleBean editInmuebleBean(InmuebleBean ib) {
 		System.out.print("IdInmueble = "+ib.getIdInmueble());
 		Inmueble i = em.find(Inmueble.class, ib.getIdInmueble());
-		Inmueble editado = em.merge(i);
 		
+		Inmueble editado = em.merge(i);
+		Bien b= editado.getBien();
+		b.setPartidaRegistral(ib.getPartidaRegistral());
+		b.setDescripcion(ib.getDescripcion());
 		editado.setAreaTotal(ib.getAreaTotal());
 		editado.setAreaCercado(ib.getAreaCercado());
 		editado.setAreaConstruido(ib.getAreaConstruido());

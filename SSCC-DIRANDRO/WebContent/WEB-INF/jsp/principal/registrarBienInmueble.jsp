@@ -39,18 +39,26 @@ $(document).ready(function() {
 	
 	$("#formRegistrarBien").validate({
 		rules:{
-			txtAntiguedad:{number:true},
-			txtPisos:{number:true},
-			txtAreaTotal:{doubleNumber:true},
-			txtAreaConstruido:{doubleNumber:true},
-			txtAreaCercado:{doubleNumber:true}
+			partidaRegistral:{required:true, minlength: 8, maxlength: 8},
+			descripcion:{required:true, minlength: 10,maxlength: 250},
+			areaTotal:{required:true,doubleNumber:true},
+			areaConstruido:{required:true,doubleNumber:true},
+			areaCercado:{required:true,doubleNumber:true},
+			pisos:{number:true},
+			ambientes:{number:true},
+			direccion:{required:true, maxlength:100},
+			antiguedad:{number:true}
 		},
 		messages:{
-			txtAreaTotal:"Solo números decimales",
-			txtAreaConstruido:"Solo números decimales",
-			txtAreaCercado:"Solo números decimales",
-			txtAntiguedad:"Solo números",
-			txtPisos:"Solo números"
+			partidaRegistral:"Complete los 8 carácteres",
+			descripcion:"Minimo 10 carácteres, máximo 250 carácteres",
+			areaTotal:"Solo números decimales",
+			areaConstruido:"Solo números decimales",
+			areaCercado:"Solo números decimales",
+			pisos:"Solo números",
+			ambientes:"Solo números",
+			direccion:"Máximo 100 carácteres",
+			antiguedad:"Solo números"
 		},
 		submitHandler: function(form){			
 			form.submit();
@@ -75,13 +83,13 @@ $(document).ready(function() {
 	       		<div class="control-group">
 	          		<label class="control-label">Partida Registral: </label>
 	          		<div class="controls">
-	          			<input class="span3" type="text" name="partidaRegistral" id="txtPartida" data-rule-required="true" data-msg-required="*">
+	          			<input class="span3" type="text" name="partidaRegistral" maxlength="8" id="txtPartida" data-rule-required="true" data-msg-required="*">
 	          		</div>
 	       		</div>
 	       		<div class="control-group">
 	          		<label class="control-label">Descripcion: </label>
 	          		<div class="controls">
-	          			<textarea class="input-xlarge" name="descripcion" id="txtDescripcion" rows="3" style="width: 400px" data-rule-required="true" data-msg-required="*"></textarea>
+	          			<textarea class="input-xlarge" name="descripcion" id="txtDescripcion" maxlength="250" rows="3" style="width: 400px" data-rule-required="true" data-msg-required="*"></textarea>
 	          		</div>
 	       		</div>
 	       		<div class="control-group">
@@ -121,7 +129,7 @@ $(document).ready(function() {
 	       		<div class="control-group" id="divPisos">
 	          		<label class="control-label">Pisos: </label>
 	          		<div class="controls">
-	          			<input class="span1" type="text" name="pisos" id="txtPisos" data-rule-required="true" data-msg-required="*">
+	          			<input class="span1" type="text" name="pisos" maxlength="2" id="txtPisos" data-rule-required="true" data-msg-required="*">
 	          		</div>
 	       		</div>
 	       		<div class="control-group" id="divAmbientes">
@@ -133,7 +141,7 @@ $(document).ready(function() {
 	       		<div class="control-group" id="divDireccion">
 	          		<label class="control-label">Dirección: </label>
 	          		<div class="controls">
-	          			<input class="span4" type="text" name="direccion" id="txtDireccion" data-rule-required="true" data-msg-required="*">
+	          			<input class="span4" type="text" name="direccion" id="txtDireccion" maxlength="100" data-rule-required="true" data-msg-required="*">
 	          		</div>
 	       		</div>
 	       		<div class="control-group" id="divAntiguedad">

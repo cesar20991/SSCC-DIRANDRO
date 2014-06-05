@@ -56,6 +56,28 @@ $(document).ready(function(){
  	});
 	
 	$("#formEditarInmueble").validate({
+		rules:{
+			partidaRegistral:{required:true, minlength: 8, maxlength: 8},
+			descripcion:{required:true, minlength: 10,maxlength: 250},
+			areaTotal:{required:true,doubleNumber:true},
+			areaConstruido:{required:true,doubleNumber:true},
+			areaCercado:{required:true,doubleNumber:true},
+			pisos:{number:true},
+			ambientes:{number:true},
+			direccion:{required:true, maxlength:100},
+			antiguedad:{number:true}
+		},
+		messages:{
+			partidaRegistral:"Complete los 8 carácteres",
+			descripcion:"Minimo 10 carácteres, máximo 250 carácteres",
+			areaTotal:"Solo números decimales",
+			areaConstruido:"Solo números decimales",
+			areaCercado:"Solo números decimales",
+			pisos:"Solo números",
+			ambientes:"Solo números",
+			direccion:"Máximo 100 carácteres",
+			antiguedad:"Solo números"
+		},
 		submitHandler:function(form){
 			$("#hdnIdInmuebleAux").val($("#hdnIdInmueble").text());
 			$.ajax({
