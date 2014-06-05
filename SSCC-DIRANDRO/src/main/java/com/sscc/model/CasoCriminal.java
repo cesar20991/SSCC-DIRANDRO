@@ -38,6 +38,9 @@ public class CasoCriminal {
 	@OneToMany(mappedBy = "casoCriminal")
 	private Collection<CasoPorAgente> casopa;
 	
+	@OneToMany(mappedBy = "casoCriminal")
+	private Collection<CasoPorSospechoso> casoPorSospechoso;
+	
 	public Integer getIdCasoCriminal() {
 		return idCasoCriminal;
 	}
@@ -91,6 +94,12 @@ public class CasoCriminal {
 	}
 	public void setCasopa(Collection<CasoPorAgente> casopa) {
 		this.casopa = casopa;
+	}
+	public Collection<CasoPorSospechoso> getCasoPorSospechoso() {
+		return casoPorSospechoso;
+	}
+	public void setCasoPorSospechoso(Collection<CasoPorSospechoso> casoPorSospechoso) {
+		this.casoPorSospechoso = casoPorSospechoso;
 	}
 	
 }

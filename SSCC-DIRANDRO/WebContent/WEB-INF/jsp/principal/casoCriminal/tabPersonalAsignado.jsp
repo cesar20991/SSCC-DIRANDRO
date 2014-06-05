@@ -140,7 +140,7 @@ function iniPersonalAsignadoPorCaso(idCaso){
  	});
 }
 </script>
-<div id="divCasoCriminal">
+<div id="divPersonalAsignado">
 	<div id="alertasTab2" style="display: none;">
 	</div>
 	<div id="divMostrarPersonalAsignado">
