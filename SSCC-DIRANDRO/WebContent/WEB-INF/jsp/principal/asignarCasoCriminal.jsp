@@ -18,6 +18,8 @@
 <script src="js/bootstrap-collapse.js"></script>
 <!-- tabs -->
 <script src="js/bootstrap-tab.js"></script>
+<!-- alertas de colores -->
+<script src="js/bootstrap-alert.js"></script>
 <!-- styles -->
 <link href="css/bootstrap.css" rel="stylesheet">
 <link href="css/bootstrap-responsive.css" rel="stylesheet">
@@ -124,10 +126,19 @@ $(document).ready(function(){
 				 		data: '',
 				 		success: function(casos){
 				 			getCasosInit();
+				 			$("#alertasAsignarCaso").show();
+				 			$("#alertasAsignarCaso").append('<div class="alert alert-success" id="alertaVerde">'+
+									 			        '<a class="close" data-dismiss="alert">×</a>'+
+									 			        '<strong id="msgVerde">Asignado Correctamente.</strong>'+
+									 			    '</div>');
 				 		}
 				 	});
 				}else{
-					alert("Debe seleccionar un Jefe de Unidad.");
+					$("#alertasAsignarCaso").show();
+		 			$("#alertasAsignarCaso").append('<div class="alert alert-error" id="alertaVerde">'+
+							 			        '<a class="close" data-dismiss="alert">×</a>'+
+							 			        '<strong id="msgVerde">Debe Seleccionar a un Jefe de Unidad.</strong>'+
+							 			    '</div>');	
 				}								
 			break;
 		}
@@ -149,6 +160,8 @@ $(document).ready(function(){
 	<!--/MENU-->
 	<div class="container inner_content">
 		<section class="span9" style="margin-left: 80px;">
+		<div id="alertasAsignarCaso" style="display: none;">
+		</div>
 			<table class="table table-bordered" id="tblCasos">
 				<thead>
 					<tr>
