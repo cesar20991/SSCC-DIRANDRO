@@ -15,5 +15,9 @@ public interface PerfilService {
 	
 	List<PerfilBean> getPersonalPolicial();
 	
+	PerfilBean getJefesPorCaso(Integer idCasoCriminal);
+	
 	List<PerfilBean> getPersonalPolicialPorCaso(Integer idCasoCriminal);
+	
+	List<PerfilBean> getPersonalPolicial(Integer idCasoCriminal);
 }

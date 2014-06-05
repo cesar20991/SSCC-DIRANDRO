@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="utf-8">
-<title>SSCC - DIRANDRO - Sospechoso</title>
+<title>SSCC - DIRANDRO - Bien Inmueble</title>
 <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -25,6 +25,7 @@
 <!-- validacion -->
 <script src="js/jquery.validate.min.js"></script>
 <script src="js/validateFecha.js"></script>
+<script src="js/formatDates.js"></script>
 <!-- styles -->
 <link href="css/bootstrap.css" rel="stylesheet">
 <link href="css/bootstrap-responsive.css" rel="stylesheet">
@@ -43,27 +44,24 @@
 	<!--/MENU-->
 	<div class="container inner_content">
 		<section class="span9" style="margin-left: 80px;">
-			<c:forEach items="${sospechosoList}" var="sospechoso">
-				<span id="hdnIdSospechoso" style="display: none;"><c:out value="${sospechoso.idSospechoso}" /></span>
+			<c:forEach items="${inmuebleList}" var="inmueble">
+				<span id="hdnIdInmueble" style="display: none;"><c:out value="${inmueble.idInmueble}" /></span>
 			</c:forEach>
 			<table class="table table-bordered table-condensed">
 				<tbody>
 					<tr>
-						<td>Código Único de Identificación:</td>
-						<td align="center"><span id="hdrCodigoUnicoDeIdentificacion">&nbsp;</span></td>
-						<td rowspan="5" align="center"><img src="img/skills.png" alt="logo" style="margin-bottom: 7px; margin-top: 7px;" /></td>
+						<td>Codigo:</td>
+						<td align="center"><span id="hdrCodigo">&nbsp;</span></td>
+						<td>Partida Registral:</td>
+						<td align="center"><span id="hdrPartida">&nbsp;</span></td>
 					</tr>
 					<tr>
-						<td>Apellidos y Nombres:</td>
-						<td><span id="hdrPrimerApellido">&nbsp;</span>&nbsp;&nbsp;<span id="hdrSegundoApellido">&nbsp;</span>&nbsp;<span id="hdrPrenombres">&nbsp;</span></td>
+						<td>Descripcion:</td>
+						<td colspan="3"><span id="hdrDescripcion">&nbsp;</span></td>
 					</tr>
 					<tr>
-						<td>Alias:</td>
-						<td><span id="hdrAlias">&nbsp;</span></td>
-					</tr>
-					<tr>
-						<td>Caso:</td>
-						<td><span id="hdrCaso">&nbsp;</span></td>
+						<td>Creado por:</td>
+						<td colspan="3"><span id="hdrCreador">&nbsp;</span></td>						
 					</tr>
 				</tbody>
 			</table>
@@ -72,29 +70,25 @@
 			<div class="tabbable" style="margin-bottom: 9px;">
 				<ul class="nav nav-tabs">
 					<li class="active"><a href="#1" data-toggle="tab">Principal</a></li>
-					<li class=""><a href="#2" data-toggle="tab">Datos de Contacto</a></li>
-					<li class=""><a href="#3" data-toggle="tab">Rasgos Particulares</a></li>
-					<li class=""><a href="#4" data-toggle="tab">Archivos Adjuntos</a></li>
-					<li class=""><a href="#5" data-toggle="tab">Comentarios</a></li>
-					<li class=""><a href="#6" data-toggle="tab">Auditoría</a></li>
+					<li class=""><a href="#2" data-toggle="tab">-</a></li>
+					<li class=""><a href="#3" data-toggle="tab">-</a></li>
+					<li class=""><a href="#4" data-toggle="tab">-</a></li>
+					<li class=""><a href="#5" data-toggle="tab">-</a></li>
 				</ul>
-				<div class="tab-content" style="margin-left: -3.5%;">
-					<div class="tab-pane active span9" id="1">
-						<jsp:include page="sospechoso/tabPrincipalSospechoso.jsp" />
+				<div class="tab-content">
+					<div class="tab-pane active" id="1">
+						<jsp:include page="bien/tabPrincipalInmueble.jsp" />
 					</div>
-					<div class="tab-pane active span9" id="2">
-						<%-- <jsp:include page="sospechoso/tabDatosdeContacto.jsp" /> --%>
+					<div class="tab-pane" id="2">
+						<p>Seccion 2.</p>
 					</div>
 					<div class="tab-pane" id="3">
-						<jsp:include page="sospechoso/tabRasgosParticulares.jsp" />
-					</div>
-					<div class="tab-pane" id="4">
 						<p>Seccion 3.</p>
 					</div>
-					<div class="tab-pane" id="5">
+					<div class="tab-pane" id="4">
 						<p>Seccion 4.</p>
 					</div>
-					<div class="tab-pane" id="6">
+					<div class="tab-pane" id="5">
 						<p>Seccion 5.</p>
 					</div>
 				</div>

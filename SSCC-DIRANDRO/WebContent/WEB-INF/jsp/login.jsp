@@ -78,7 +78,7 @@ label.error {
 			<section class="content">
 				<div class="container">
 					<div class="well well-white span5" style="width: 350px;">
-						<form:form id="frmLogin" action="login" method="get" commandName="user">
+						<form:form id="frmLogin" action="login" method="post" commandName="user">
 							<div class="row-fluid">
 								<div class="span12">
 									<h3>

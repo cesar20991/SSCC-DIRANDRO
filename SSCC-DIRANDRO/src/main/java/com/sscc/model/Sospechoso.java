@@ -2,6 +2,7 @@ package com.sscc.model;
 
 import java.sql.Date;
 import java.sql.Timestamp;
+import java.util.Collection;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -9,6 +10,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
 @Entity
@@ -83,6 +85,9 @@ public class Sospechoso {
 	@OneToOne
 	@JoinColumn(name = "idRasgosParticulares")
 	private RasgosParticulares rasgosParticulares;
+	
+	@OneToMany(mappedBy = "sospechoso")
+	private Collection<Bien> bienes;
 	
 	public Integer getIdSospechoso() {
 		return idSospechoso;
@@ -275,5 +280,11 @@ public class Sospechoso {
 	}
 	public void setTelefonos(String telefonos) {
 		this.telefonos = telefonos;
+	}
+	public Collection<Bien> getBienes() {
+		return bienes;
+	}
+	public void setBienes(Collection<Bien> bienes) {
+		this.bienes = bienes;
 	}
 }

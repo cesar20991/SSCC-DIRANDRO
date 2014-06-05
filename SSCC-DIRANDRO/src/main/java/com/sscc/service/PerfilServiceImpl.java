@@ -133,6 +133,24 @@ public class PerfilServiceImpl implements PerfilService {
 	}
 	
 	@SuppressWarnings("unchecked")
+	public PerfilBean getJefesPorCaso(Integer idCasoCriminal) {
+		PerfilBean pb = new PerfilBean();
+		Perfil p = new Perfil();
+		
+		try{
+			Query qCasos = em.createQuery("SELECT p FROM Perfil p JOIN p.usuario u JOIN u.cpa cpa WHERE p.estado='habilitado' AND cpa.estado='habilitado' AND cpa.casoCriminal.idCasoCriminal="+idCasoCriminal+" AND p.cargo='Jefe de Unidad'");
+			p = (Perfil) qCasos.getSingleResult();
+			pb.setIdUsuario(p.getUsuario().getIdUsuario());
+			pb.setIdPerfil(p.getIdPerfil());
+			pb.setNombreCompleto(p.getPrimerNombre()+" "+p.getSegundoNombre()+" "+p.getApePaterno()+" "+p.getApeMaterno());
+		}catch(Exception e){
+			System.err.println("ERROR no encontre jefes");
+		}
+		
+		return pb;
+	}
+	
+	@SuppressWarnings("unchecked")
 	public List<PerfilBean> getPersonalPolicialPorCaso(Integer idCasoCriminal) {
 		List<PerfilBean> pbl = new ArrayList<PerfilBean>();
 		List<Perfil> p = new ArrayList<Perfil>();
@@ -144,6 +162,34 @@ public class PerfilServiceImpl implements PerfilService {
 			pb.setIdUsuario(p.get(i).getUsuario().getIdUsuario());
 			pb.setIdPerfil(p.get(i).getIdPerfil());
 			pb.setNombreCompleto(p.get(i).getPrimerNombre()+" "+p.get(i).getSegundoNombre()+" "+p.get(i).getApePaterno()+" "+p.get(i).getApeMaterno());
+			pbl.add(pb);
+		}
+		
+		return pbl;
+	}
+	
+	@SuppressWarnings("unchecked")
+	public List<PerfilBean> getPersonalPolicial(Integer idCasoCriminal) {
+		List<PerfilBean> pbl = new ArrayList<PerfilBean>();
+		List<Perfil> p = new ArrayList<Perfil>();
+		Query qCasos = em.createQuery("SELECT p FROM Perfil p JOIN p.usuario u JOIN u.cpa cpa WHERE p.estado='habilitado' AND cpa.estado='habilitado' AND cpa.casoCriminal.idCasoCriminal="+idCasoCriminal+ " ORDER BY p.apePaterno ASC");
+		p = qCasos.getResultList();
+		
+		for(int i = 0; i < p.size(); i++){
+			PerfilBean pb = new PerfilBean();
+			pb.setIdUsuario(p.get(i).getUsuario().getIdUsuario());
+			pb.setIdPerfil(p.get(i).getIdPerfil());
+			pb.setNumeroDeCarnet(p.get(i).getNumeroDeCarnet());
+			pb.setGrado(p.get(i).getGrado());
+			pb.setRango(p.get(i).getRango());
+			pb.setCargo(p.get(i).getCargo());
+			pb.setCodigoPerfil(p.get(i).getCodigo());
+			pb.setApeMaterno(p.get(i).getApeMaterno());
+			pb.setApePaterno(p.get(i).getApePaterno());
+			pb.setPrimerNombre(p.get(i).getPrimerNombre());
+			pb.setSegundoNombre(p.get(i).getSegundoNombre());
+			pb.setCorreoElectronico(p.get(i).getUsuario().getCorreoElectronico());
+			//pb.setNombreCompleto(p.get(i).getPrimerNombre()+" "+p.get(i).getSegundoNombre()+" "+p.get(i).getApePaterno()+" "+p.get(i).getApeMaterno());
 			pbl.add(pb);
 		}
 		

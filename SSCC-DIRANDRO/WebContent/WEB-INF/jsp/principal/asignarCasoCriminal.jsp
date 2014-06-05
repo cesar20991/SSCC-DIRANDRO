@@ -18,6 +18,8 @@
 <script src="js/bootstrap-collapse.js"></script>
 <!-- tabs -->
 <script src="js/bootstrap-tab.js"></script>
+<!-- alertas de colores -->
+<script src="js/bootstrap-alert.js"></script>
 <!-- styles -->
 <link href="css/bootstrap.css" rel="stylesheet">
 <link href="css/bootstrap-responsive.css" rel="stylesheet">
@@ -33,7 +35,7 @@ function initAsignaCasos(casos){
 		$.each(casos, function(i, caso) {
 			$("#tblBody").append('<tr>');
 				$("#tblBody").append('<td>'+caso.codigo+' ('+caso.referencia+')'+'<input type="hidden" name="idCaso" id="hdnCaso_'+indiceCaso+'" value="'+caso.idCasoCriminal+'"></td>');
-				$("#tblBody").append('<td id="jefeDeUnidad_'+indiceCaso+'"><span id="spnJefeDeUnidad_'+indiceCaso+'">'+caso.nombreCompleto+'</span></td>'+
+				$("#tblBody").append('<td id="jefeDeUnidad_'+indiceCaso+'"><span id="spnJefeDeUnidad_'+indiceCaso+'"></span></td>'+
 						'<td style="display:none;" id="jefeDeUnidadCombo_'+indiceCaso+'"><select name="jefeDeUnidad" id="slctJefe_'+indiceCaso+'"></select></td>');
 				$("#tblBody").append('<td id="btnAsignar_'+indiceCaso+'">'+
 						'<button class="btn btn-primary asignar" id="asignar_'+indiceCaso+'"><i class="icon-edit icon-white"></i> Asignar</button>'+
@@ -46,7 +48,37 @@ function initAsignaCasos(casos){
 			indiceCaso++;
 		});
 }
+
+function getCasosInit(){
+	$.ajax({
+ 		url: 'getCasos',
+ 		type: 'post',
+ 		dataType: 'json',
+ 		data: '',
+ 		success: function(casos){
+ 			initAsignaCasos(casos);
+ 			$.each(casos, function(i, caso) {
+ 				$.ajax({
+ 	 		 		url: 'getJefeAsignado-'+caso.idCasoCriminal,
+ 	 		 		type: 'post',
+ 	 		 		dataType: 'json',
+ 	 		 		data: '',
+ 	 		 		success: function(jefe){
+ 	 		 			$("#spnJefeDeUnidad_"+i).empty();
+ 	 		 			if(jefe.nombreCompleto == null){
+ 							$("#spnJefeDeUnidad_"+i).append('');
+ 	 		 			}else{
+ 	 		 				$("#spnJefeDeUnidad_"+i).append(jefe.nombreCompleto);
+ 	 		 			}
+ 	 		 		}
+ 	 		 	});
+ 			}); 			
+ 		}
+ 	});	
+}
+
 $(document).ready(function(){
+	getCasosInit();
 	
 	var llenarCombo = "";
 	$.ajax({
@@ -55,21 +87,12 @@ $(document).ready(function(){
  		dataType: 'json',
  		data: '',
  		success: function(jefes){
+ 			llenarCombo = llenarCombo + '<option value="">No Precisa</option>';
  			$.each(jefes, function(i, jefe) {
  				llenarCombo = llenarCombo + '<option value="'+jefe.idUsuario+'">'+jefe.nombreCompleto+'</option>';
  			});
  		}
- 	});
-	
-	$.ajax({
- 		url: 'getCasos',
- 		type: 'post',
- 		dataType: 'json',
- 		data: '',
- 		success: function(casos){
- 			initAsignaCasos(casos);
- 		}
- 	});
+ 	});	
  	
 	$(document).on('click','.asignar', function(e){
 		var id = this.id;
@@ -95,15 +118,28 @@ $(document).ready(function(){
 				$("#btnAccion_"+idN).hide();
 			break;
 			case 'GuardarAsigna':
-				$.ajax({
-			 		url: 'asignarCaso-'+$("#hdnCaso_"+idN).val()+"-"+$("#slctJefe_"+idN).val(),
-			 		type: 'post',
-			 		dataType: 'json',
-			 		data: '',
-			 		success: function(casos){
-			 			initAsignaCasos(casos);
-			 		}
-			 	});				
+				if($("#slctJefe_"+idN).val() != ''){
+					$.ajax({
+				 		url: 'asignarCaso-'+$("#hdnCaso_"+idN).val()+"-"+$("#slctJefe_"+idN).val(),
+				 		type: 'post',
+				 		dataType: 'json',
+				 		data: '',
+				 		success: function(casos){
+				 			getCasosInit();
+				 			$("#alertasAsignarCaso").show();
+				 			$("#alertasAsignarCaso").append('<div class="alert alert-success" id="alertaVerde">'+
+									 			        '<a class="close" data-dismiss="alert">×</a>'+
+									 			        '<strong id="msgVerde">Asignado Correctamente.</strong>'+
+									 			    '</div>');
+				 		}
+				 	});
+				}else{
+					$("#alertasAsignarCaso").show();
+		 			$("#alertasAsignarCaso").append('<div class="alert alert-error" id="alertaVerde">'+
+							 			        '<a class="close" data-dismiss="alert">×</a>'+
+							 			        '<strong id="msgVerde">Debe Seleccionar a un Jefe de Unidad.</strong>'+
+							 			    '</div>');	
+				}								
 			break;
 		}
 		
@@ -124,6 +160,8 @@ $(document).ready(function(){
 	<!--/MENU-->
 	<div class="container inner_content">
 		<section class="span9" style="margin-left: 80px;">
+		<div id="alertasAsignarCaso" style="display: none;">
+		</div>
 			<table class="table table-bordered" id="tblCasos">
 				<thead>
 					<tr>

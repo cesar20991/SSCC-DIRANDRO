@@ -37,6 +37,9 @@ public class Usuario {
 	
 	@OneToMany(mappedBy = "usuario")
 	private Collection<CasoPorAgente> cpa;
+	
+	@OneToMany(mappedBy = "usuario")
+	private Collection<Bien> bienes;
 		
 	public Integer getIdUsuario() {
 		return idUsuario;
@@ -85,6 +88,12 @@ public class Usuario {
 	}
 	public void setCpa(Collection<CasoPorAgente> cpa) {
 		this.cpa = cpa;
+	}
+	public Collection<Bien> getBienes() {
+		return bienes;
+	}
+	public void setBienes(Collection<Bien> bienes) {
+		this.bienes = bienes;
 	}
 	
 }

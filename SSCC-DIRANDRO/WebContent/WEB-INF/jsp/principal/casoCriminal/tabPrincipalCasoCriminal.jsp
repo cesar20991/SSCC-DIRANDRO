@@ -86,7 +86,7 @@ $(document).on('click','#btnCancelEditar', function(e){
 		<fieldset>
 			<legend>
 				<span class=""><span class="colored">///</span> Datos del Caso Criminal:</span>
-				<span class="offset3"><button class="btn btn-primary btn-small" type="button" id="btnEditarCasoCriminal"><i class="icon-edit"></i> Editar</button></span>
+				<span class="offset3"><button class="btn btn-primary btn-small" type="button" id="btnEditarCasoCriminal"><i class="icon-edit icon-white"></i> Editar</button></span>
 			</legend>
 			<div class="control-group">
 				<label class="control-label">Codigo: </label>

@@ -57,7 +57,7 @@ public class UsuarioController {
 		return "principal/pantallaPrincipal";
 	}
 	
-	@RequestMapping(value = "login", method = RequestMethod.GET)
+	@RequestMapping(value = "login", method = RequestMethod.POST)
 	public String welcome(@ModelAttribute Usuario usuario, HttpServletRequest req, HttpSession session, Model model){
 		String path = "";
 		
