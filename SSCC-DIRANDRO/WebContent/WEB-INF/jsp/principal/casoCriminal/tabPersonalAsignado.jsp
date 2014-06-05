@@ -30,7 +30,6 @@ $(document).on('click','.asignar', function(e){
 	if((this.id) == "btnAsignarPersonal"){
 		$("#divMostrarPersonalAsignado").hide();
 		$("#divAsignarPersonal").show();
-		$("#slctPersonal").empty();
 		$.ajax({
 	 		url: 'getPersonalPolicial',
 	 		type: 'post',
@@ -41,6 +40,8 @@ $(document).on('click','.asignar', function(e){
 	 			$.each(jefes, function(i, jefe) {
 	 				llenarCombo = llenarCombo + '<option value="'+jefe.idUsuario+'">'+jefe.nombreCompleto+'</option>';
 	 			});
+	 			$("#divSelectPersonal").empty();
+	 			$("#divSelectPersonal").append('<select id="slctPersonal"></select>');
 	 			$("#slctPersonal").append(llenarCombo);
 	 		}
 	 	});
@@ -160,7 +161,7 @@ function iniPersonalAsignadoPorCaso(idCaso){
 			<legend>
 				<span class="colored">///</span> Asignar Personal Policial:
 			</legend>
-			<div class="control-group">
+			<div class="control-group" id="divSelectPersonal">
 				<select id="slctPersonal"></select>
 			</div>
 			<div class="form-actions">

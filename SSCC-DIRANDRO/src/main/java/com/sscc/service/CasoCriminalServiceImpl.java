@@ -171,7 +171,9 @@ public class CasoCriminalServiceImpl implements CasoCriminalService{
 	@SuppressWarnings("unchecked")
 	public List<CasoCriminalBean> getLastCasosCriminales(HttpSession session) {
 		List<CasoCriminalBean> listCR = new ArrayList<CasoCriminalBean>();
-		Query q =em.createNativeQuery("select  cr.idcasocriminal,cr.codigo from casocriminal cr where cr.feccreacion between (CURRENT_TIMESTAMP - interval '15 days') AND (CURRENT_TIMESTAMP)");	
+		Query q =em.createNativeQuery("SELECT cr.idcasocriminal,cr.codigo FROM casocriminal cr ORDER BY cr.fecCreacion DESC");
+		//Query q =em.createNativeQuery("select  cr.idcasocriminal,cr.codigo from casocriminal cr where cr.feccreacion between (CURRENT_TIMESTAMP - interval '15 days') AND (CURRENT_TIMESTAMP)");
+		q.setMaxResults(15);
 		List<String[]> rowsCR = q.getResultList();
 		for (int i = 0; i < rowsCR.size(); i++) {
 			CasoCriminalBean crBean = new CasoCriminalBean();
