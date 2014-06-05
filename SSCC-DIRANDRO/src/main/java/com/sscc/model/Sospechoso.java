@@ -70,6 +70,15 @@ public class Sospechoso {
 	@Column(nullable = false)
 	private Timestamp fecCreacionSospechoso;
 	
+	// DATOS DE CONTACTO
+	@Column (length = 1000, nullable = true)
+	private String celulares;
+	@Column (length = 1000, nullable = true)
+	private String correos;
+	@Column (length = 1000, nullable = true)
+	private String direcciones;
+	@Column (length = 1000, nullable = true)
+	private String telefonos;
 	///
 	@OneToOne
 	@JoinColumn(name = "idRasgosParticulares")
@@ -242,5 +251,29 @@ public class Sospechoso {
 	}
 	public void setRasgosParticulares(RasgosParticulares rasgosParticulares) {
 		this.rasgosParticulares = rasgosParticulares;
+	}
+	public String getCelulares() {
+		return celulares;
+	}
+	public void setCelulares(String celulares) {
+		this.celulares = celulares;
+	}
+	public String getCorreos() {
+		return correos;
+	}
+	public void setCorreos(String correos) {
+		this.correos = correos;
+	}
+	public String getDirecciones() {
+		return direcciones;
+	}
+	public void setDirecciones(String direcciones) {
+		this.direcciones = direcciones;
+	}
+	public String getTelefonos() {
+		return telefonos;
+	}
+	public void setTelefonos(String telefonos) {
+		this.telefonos = telefonos;
 	}
 }

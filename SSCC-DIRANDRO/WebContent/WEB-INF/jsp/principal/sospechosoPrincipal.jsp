@@ -72,25 +72,29 @@
 			<div class="tabbable" style="margin-bottom: 9px;">
 				<ul class="nav nav-tabs">
 					<li class="active"><a href="#1" data-toggle="tab">Principal</a></li>
-					<li class=""><a href="#2" data-toggle="tab">Rasgos Particulares</a></li>
-					<li class=""><a href="#3" data-toggle="tab">Archivos Adjuntos</a></li>
-					<li class=""><a href="#4" data-toggle="tab">Comentarios</a></li>
-					<li class=""><a href="#5" data-toggle="tab">Auditoría</a></li>
+					<li class=""><a href="#2" data-toggle="tab">Datos de Contacto</a></li>
+					<li class=""><a href="#3" data-toggle="tab">Rasgos Particulares</a></li>
+					<li class=""><a href="#4" data-toggle="tab">Archivos Adjuntos</a></li>
+					<li class=""><a href="#5" data-toggle="tab">Comentarios</a></li>
+					<li class=""><a href="#6" data-toggle="tab">Auditoría</a></li>
 				</ul>
 				<div class="tab-content" style="margin-left: -3.5%;">
 					<div class="tab-pane active span9" id="1">
 						<jsp:include page="sospechoso/tabPrincipalSospechoso.jsp" />
 					</div>
-					<div class="tab-pane" id="2">
-						<jsp:include page="sospechoso/tabRasgosParticulares.jsp" />
+					<div class="tab-pane active span9" id="2">
+						<jsp:include page="sospechoso/tabDatosdeContacto.jsp" />
 					</div>
 					<div class="tab-pane" id="3">
-						<p>Seccion 3.</p>
+						<jsp:include page="sospechoso/tabRasgosParticulares.jsp" />
 					</div>
 					<div class="tab-pane" id="4">
-						<p>Seccion 4.</p>
+						<p>Seccion 3.</p>
 					</div>
 					<div class="tab-pane" id="5">
+						<p>Seccion 4.</p>
+					</div>
+					<div class="tab-pane" id="6">
 						<p>Seccion 5.</p>
 					</div>
 				</div>
