@@ -77,7 +77,7 @@ $(document).ready(function(e){
   			$.each(messages, function(i, message){
 				$("#notificationListBox").append(
 						'<tr> '+						
-						'<td><a href="'+message.idCasoCriminal+'">'+message.codigo+'</a></td>'+
+						'<td><a href="toCasoCriminal-'+message.idCasoCriminal+'">'+message.codigo+'</a></td>'+
 						'</tr>');
   			});
   		}

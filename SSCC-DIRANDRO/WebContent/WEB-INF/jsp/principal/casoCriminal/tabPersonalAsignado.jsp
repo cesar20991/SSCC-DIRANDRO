@@ -30,22 +30,6 @@ $(document).on('click','.asignar', function(e){
 	if((this.id) == "btnAsignarPersonal"){
 		$("#divMostrarPersonalAsignado").hide();
 		$("#divAsignarPersonal").show();
-		$.ajax({
-	 		url: 'getPersonalPolicial',
-	 		type: 'post',
-	 		dataType: 'json',
-	 		data: '',
-	 		success: function(jefes){
-	 				llenarCombo = llenarCombo + '<option value="">No precisa</option>';
-	 			$.each(jefes, function(i, jefe) {
-	 				llenarCombo = llenarCombo + '<option value="'+jefe.idUsuario+'">'+jefe.nombreCompleto+'</option>';
-	 			});
-	 			$("#divSelectPersonal").empty();
-	 			$("#divSelectPersonal").append('<select id="slctPersonal"></select>');
-	 			$("#slctPersonal").append(llenarCombo);
-	 		}
-	 	});
-		
 	}else if((this.id) == "btnCancelar"){
 		$("#divMostrarPersonalAsignado").show();
 		$("#divAsignarPersonal").hide();
@@ -90,6 +74,23 @@ $(document).ready(function(){
 	var idCaso = $("#hdnIdCaso").text();
 	
 	iniPersonalAsignadoPorCaso(idCaso);
+	
+	$.ajax({
+ 		url: 'getPersonalPolicial',
+ 		type: 'post',
+ 		dataType: 'json',
+ 		data: '',
+ 		success: function(jefes){
+ 				llenarCombo = llenarCombo + '<option value="">No precisa</option>';
+ 			$.each(jefes, function(i, jefe) {
+ 				llenarCombo = llenarCombo + '<option value="'+jefe.idUsuario+'">'+jefe.nombreCompleto+'</option>';
+ 			});
+
+ 			$("#slctPersonal").remove();
+ 			$("#divSelectPersonal").append('<select id="slctPersonal"></select>');
+ 			$("#slctPersonal").append(llenarCombo);
+ 		}
+ 	});
 	
 });
 
