@@ -8,7 +8,11 @@ import com.sscc.model.Vehiculo;
 
 public interface BienService {
 
-	Integer registrarBienVehicular(VehiculoBean vehiculoBean);
+	Integer registrarBienVehicular(VehiculoBean vehiculoBean, Integer idUsuario);
+	VehiculoBean getVehiculoBean(Integer idVehiculo);
+	VehiculoBean editVehiculoBean(VehiculoBean vb);
+	
+	
 	Integer registrarBienInmueble(InmuebleBean inmuebleBean, Integer idUsuario);
 	InmuebleBean getInmuebleBean(Integer idInmueble);
 	InmuebleBean editInmuebleBean(InmuebleBean inmuebleBean);

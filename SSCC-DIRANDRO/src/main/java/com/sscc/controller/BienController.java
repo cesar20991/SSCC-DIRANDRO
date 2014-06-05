@@ -82,9 +82,37 @@ public class BienController {
 	
 	@RequestMapping(value = "registrarVehiculo", method = RequestMethod.POST)
 	public String registrarVehiculo(@ModelAttribute VehiculoBean vehiculoBean, HttpServletRequest req, HttpSession session, Model model){
-
-		Integer id = bienServ.registrarBienVehicular(vehiculoBean);
+	
+		Integer idUsuario = (Integer)session.getAttribute("idUsuario");
+		Integer id = bienServ.registrarBienVehicular(vehiculoBean,idUsuario);
 		
-		return "";
+		return "redirect:toVehiculo-"+id;
+	}
+	
+	@RequestMapping("toVehiculo-{idVehiculo}")
+	public String toVehiculo(@PathVariable("idVehiculo")Integer idVehiculo, Model model ){
+		List<VehiculoBean> v = new ArrayList<VehiculoBean>();
+		VehiculoBean vb = new VehiculoBean();
+		vb.setIdVehiculo(idVehiculo);
+		v.add(vb);		
+		model.addAttribute("vehiculoList", v);
+		return "principal/vehiculoPrincipal";
+	}
+	
+	@RequestMapping(value= "getVehiculo-{idVehiculo}", method=RequestMethod.POST)
+	@ResponseBody
+	public VehiculoBean getVehiculo(@PathVariable("idVehiculo")Integer idVehiculo){
+		VehiculoBean vehiculoBean = new VehiculoBean();
+		vehiculoBean = bienServ.getVehiculoBean(idVehiculo);
+		
+		return vehiculoBean;
+	}
+	
+	@RequestMapping(value = "editarVehiculo", method = RequestMethod.POST)
+	@ResponseBody
+	public VehiculoBean editarSopechoso(@ModelAttribute VehiculoBean vehiculo, HttpServletRequest req, HttpSession session, Model model){
+		VehiculoBean vehiculoBean = new VehiculoBean();
+		vehiculoBean = bienServ.editVehiculoBean(vehiculo);
+		return vehiculoBean;
 	}
 }
