@@ -82,19 +82,19 @@
 					<div class="tab-pane active span9" id="1">
 						<jsp:include page="sospechoso/tabPrincipalSospechoso.jsp" />
 					</div>
-					<div class="tab-pane active span9" id="2">
-						<%-- <jsp:include page="sospechoso/tabDatosdeContacto.jsp" /> --%>
+					<div class="tab-pane span9" id="2">
+						<jsp:include page="sospechoso/tabDatosdeContacto.jsp" />
 					</div>
-					<div class="tab-pane" id="3">
+					<div class="tab-pane span9" id="3">
 						<jsp:include page="sospechoso/tabRasgosParticulares.jsp" />
 					</div>
-					<div class="tab-pane" id="4">
+					<div class="tab-pane span9" id="4">
 						<p>Seccion 3.</p>
 					</div>
-					<div class="tab-pane" id="5">
+					<div class="tab-pane span9" id="5">
 						<p>Seccion 4.</p>
 					</div>
-					<div class="tab-pane" id="6">
+					<div class="tab-pane span9" id="6">
 						<p>Seccion 5.</p>
 					</div>
 				</div>

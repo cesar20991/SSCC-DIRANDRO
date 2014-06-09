@@ -52,6 +52,10 @@ public class SospechosoServiceImpl implements SospechosoService{
 		sb.setDistritoDeDomicilio(s.getDistritoDeDomicilio());
 		sb.setMultasElectorales(s.getMultasElectorales());
 		sb.setIdRasgosParticulares(s.getRasgosParticulares().getIdRasgosParticulares());
+		sb.setCelulares(s.getCelulares());
+		sb.setTelefonos(s.getTelefonos());
+		sb.setCorreos(s.getCorreos());
+		sb.setDirecciones(s.getDirecciones());
 		return sb;
 	}
 
@@ -164,6 +168,49 @@ public class SospechosoServiceImpl implements SospechosoService{
 		editado.setProvinciaDeDomicilio(sospechoso.getProvinciaDeDomicilio());
 		editado.setDistritoDeDomicilio(sospechoso.getDistritoDeDomicilio());
 		editado.setMultasElectorales(sospechoso.getMultasElectorales());
+		
+		return getSospechosoBean(editado.getIdSospechoso());
+	}
+
+	@Transactional
+	public SospechosoBean editSospechosoDatosContacto(Sospechoso sospechoso, String[] correos, String[] telefonos, String[] celulares, String[] direcciones) {
+		//concateno valores en strings
+		String correo="", telefono="", celular="", direccion="";
+		for(int i = 0; i < correos.length; i++){
+			if(i==(correos.length-1)){
+				correo += correos[i];
+			}else{
+				correo += correos[i] + ", ";
+			}
+		}
+		for(int i = 0; i < telefonos.length; i++){
+			if(i==(telefonos.length-1)){
+				telefono += telefonos[i];
+			}else{
+				telefono += telefonos[i] + ", ";
+			}
+		}
+		for(int i = 0; i < celulares.length; i++){
+			if(i==(celulares.length-1)){
+				celular += celulares[i];
+			}else{
+				celular += celulares[i] + ", ";
+			}
+		}
+		for(int i = 0; i < direcciones.length; i++){
+			if(i==(direcciones.length-1)){
+				direccion += direcciones[i];
+			}else{
+				direccion += direcciones[i] + ", ";
+			}
+		}
+		//edito al sospechoso
+		Sospechoso s = em.find(Sospechoso.class, sospechoso.getIdSospechoso());
+		Sospechoso editado = em.merge(s);
+		editado.setCorreos(correo);
+		editado.setCelulares(celular);
+		editado.setDirecciones(direccion);
+		editado.setTelefonos(telefono);		
 		
 		return getSospechosoBean(editado.getIdSospechoso());
 	}

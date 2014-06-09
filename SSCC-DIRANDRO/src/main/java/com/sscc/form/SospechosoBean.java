@@ -3,6 +3,8 @@ package com.sscc.form;
 import java.sql.Date;
 import java.sql.Timestamp;
 
+import javax.persistence.Column;
+
 public class SospechosoBean {
 
 	private Integer idSospechoso;
@@ -46,6 +48,11 @@ public class SospechosoBean {
 	private String textoCicatrices;
 	private String textoDeficiencias;
 	private String textoOtros;
+	//datos contacto
+	private String celulares;
+	private String correos;
+	private String direcciones;
+	private String telefonos;
 	
 	public Integer getIdSospechoso() {
 		return idSospechoso;
@@ -275,5 +282,29 @@ public class SospechosoBean {
 	}
 	public void setTextoOtros(String textoOtros) {
 		this.textoOtros = textoOtros;
+	}
+	public String getCelulares() {
+		return celulares;
+	}
+	public void setCelulares(String celulares) {
+		this.celulares = celulares;
+	}
+	public String getCorreos() {
+		return correos;
+	}
+	public void setCorreos(String correos) {
+		this.correos = correos;
+	}
+	public String getDirecciones() {
+		return direcciones;
+	}
+	public void setDirecciones(String direcciones) {
+		this.direcciones = direcciones;
+	}
+	public String getTelefonos() {
+		return telefonos;
+	}
+	public void setTelefonos(String telefonos) {
+		this.telefonos = telefonos;
 	}
 }

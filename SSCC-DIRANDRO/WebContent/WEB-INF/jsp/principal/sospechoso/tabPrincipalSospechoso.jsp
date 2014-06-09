@@ -112,6 +112,7 @@ $(document).ready(function(){
 	 		data: '',
 	 		success: function(sospechoso){
 	 			initSospechoso(sospechoso);
+	 			initDatosContacto(sospechoso);
 	 		}
 	 	});
 		

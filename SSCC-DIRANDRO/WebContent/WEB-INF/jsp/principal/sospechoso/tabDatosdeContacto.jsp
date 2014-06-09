@@ -7,57 +7,66 @@
 }
 </style>
 <script>
-function initDatosContacto(datosContacto){
+var totalCorreos = 0;
+var totalTelefonos = 0;
+var totalCelulares = 0;
+var totalDirecciones = 0;
+
+function initDatosContacto(sospechoso){
 	$("#spnCorreos").empty();
 	$("#spnTelefonos").empty();
 	$("#spnCelulares").empty();
 	$("#spnDirecciones").empty();
 	
-	$("#spnCorreos").append(datosContacto.correos);
-	$("#spnTelefonos").append(datosContacto.telefonos);
-	$("#spnCelulares").append(datosContacto.celulares);
-	$("#spnDirecciones").append(datosContacto.direcciones);
-};
-$(document).ready(function(){
-	var idSospechoso = $("#hdnIdSospechoso").text();
+	$("#spnCorreos").append(sospechoso.correos);
+	$("#spnTelefonos").append(sospechoso.telefonos);
+	$("#spnCelulares").append(sospechoso.celulares);
+	$("#spnDirecciones").append(sospechoso.direcciones);
 	
-	/*$.ajax({
- 		url: 'get...-'+idSospechoso,
- 		type: 'post',
- 		dataType: 'json',
- 		data: '',
- 		success: function(datosContacto){
- 			initDatosContacto(datosContacto);
- 		}
- 	});
+	if($("#spnCorreos").text() == ''){
+		totalCorreos = 0;
+	}else{
+		totalCorreos = ((sospechoso.correos).split(", ").length);
+	}
+	
+	if($("#spnTelefonos").text() == ''){
+		totalTelefonos = 0;
+	}else{
+		totalTelefonos = (sospechoso.telefonos).split(", ").length;
+	}
+	
+	if($("#spnCelulares").text() == ''){
+		totalCelulares = 0;
+	}else{
+		totalCelulares = (sospechoso.celulares).split(", ").length;
+	}
+	
+	if($("#spnDirecciones").text() == ''){
+		totalDirecciones = 0;
+	}else{
+		totalDirecciones = (sospechoso.direcciones).split(", ").length;	
+	}
+}
+
+$(document).ready(function(){
+
 	$("#formEditarContacto").validate({
 		submitHandler: function(form){
-			$("#hdnIdSospechosoRasgos").val($("#hdnIdSospechoso").text());
-			$.ajax({
-				url: 'editarContacto',
-		 		type: 'post',
-		 		dataType: 'json',
-		 		data: $("#formEditarContacto").serialize(),
-		 		success: function(datosContacto){
-		 			initDatosContacto(datosContacto);
-		 			$("#divMostrarContacto").show();
-		 			$("#divEditarContacto").hide();
-		 		}
-			});
-		}
-	});*/
-	$("#formEditarContacto").validate({
-		submitHandler: function(form){
-			$("#hdnIdSospechosoRasgos").val($("#hdnIdSospechoso").text());
+			$("#hdnIdSospechosoDatos").val($("#hdnIdSospechoso").text());
 			$.ajax({
 				url: 'editarDatosContacto',
 		 		type: 'post',
 		 		dataType: 'json',
 		 		data: $("#formEditarContacto").serialize(),
-		 		success: function(datosContacto){
-		 			initDatosContacto(datosContacto);
+		 		success: function(sospechoso){
+		 			initDatosContacto(sospechoso);
 		 			$("#divMostrarContacto").show();
 		 			$("#divEditarContacto").hide();
+
+		 			$('#txtTelefonos_0').val("");
+		 			$('#txtCorreo_0').val("");
+		 			$('#txtCelulares_0').val("");
+		 			$('#txtDirecciones_0').val("");
 		 		}
 			});
 		}
@@ -65,6 +74,63 @@ $(document).ready(function(){
 });
 $(document).on('click','#btnEditarContacto', function(e){
 	//TABS A OCULTAR Y MOSTRAR
+	var correo = $("#spnCorreos").text().split(", ");
+	if((totalCorreos+1) >= 2){
+		$("#camposCorreo").empty();
+		$("#txtCorreo_0").val(correo[0]);
+		for(var numCorreos = 1; numCorreos < totalCorreos; numCorreos++){
+			$("#camposCorreo").append('<div class="control-group" id="campoCorreo_'+numCorreos+'">'+
+				      		'<label class="control-label">Correo Electrónico: </label>'+
+				      		'<div class="controls">'+
+				      			'<input class="span2" type="text" name="txtCorreo" value="'+correo[numCorreos]+'" id="txtCorreo_'+numCorreos+'" data-rule-email="true" data-msg-email="Debe ingresar un correo electronico válido."> <button class="btn btn-danger eliminarCamposCorreo" id="btnEliminarCampos_'+num+'" type="button"><i class="icon-minus icon-white"></i></button>'+
+				      		'</div>'+
+				   		'</div>');
+		}
+	}
+	
+	var tel = $("#spnTelefonos").text().split(", ");
+	if(totalTelefonos >= 2){
+		$("#camposTelefonos").empty();
+		$("#txtTelefonos_0").val(tel[0]);
+		for(var numTelefonos = 1; numTelefonos < totalTelefonos; numTelefonos++){
+			$("#camposTelefonos").append('<div class="control-group" id="campoTelefono_'+numTelefonos+'">'+
+		      		'<label class="control-label">Teléfonos: </label>'+
+		      		'<div class="controls">'+
+		      			'<input class="span2" type="text" name="txtTelefonos" value="'+tel[numTelefonos]+'" id="txtTelefonos_'+numTelefonos+'" data-rule-number="true" data-rule-minlength="7" data-rule-maxlength="7" data-msg-number="Debe ingresar un número de teléfono válido."> <button class="btn btn-danger eliminarCamposTelefonos" id="btnEliminarTelefonos_'+x+'" type="button"><i class="icon-minus icon-white"></i></button>'+
+		      		'</div>'+
+		   		'</div>');
+		}
+		x = totalTelefonos;
+	}
+	
+	var cel = $("#spnCelulares").text().split(", ");
+	if(totalCelulares >= 2){
+		$("#camposCelulares").empty();
+		$("#txtCelulares_0").val(cel[0]);
+		for(var numCelulares = 1; numCelulares < totalCelulares; numCelulares++){
+			$("#camposCelulares").append('<div class="control-group" id="campoCelulares_'+numCelulares+'">'+
+		      		'<label class="control-label">Celulares: </label>'+
+		      		'<div class="controls">'+
+		      			'<input class="span2" type="text" name="txtCelulares" value="'+cel[numCelulares]+'" id="txtCelulares_'+numCelulares+'" data-rule-number="true"  data-rule-minlength="9" data-rule-maxlength="9" data-msg-number="Debe ingresar un número de celular válido."> <button class="btn btn-danger eliminarCamposCelulares" id="btnEliminarCelulares_'+y+'" type="button"><i class="icon-minus icon-white"></i></button>'+
+		      		'</div>'+
+		   		'</div>');
+		}
+	}
+	
+	var direc = $("#spnDirecciones").text().split(", ");
+	if(totalDirecciones >= 2){
+		$("#camposDirecciones").empty();
+		$("#txtDirecciones_0").val(direc[0]);
+		for(var numDirecciones = 1; numDirecciones < totalDirecciones; numDirecciones++){
+			$("#camposDirecciones").append('<div class="control-group" id="campoDirecciones_'+numDirecciones+'">'+
+		      		'<label class="control-label">Direcciones: </label>'+
+		      		'<div class="controls">'+
+		      			'<input class="span2" type="text" name="txtDirecciones" value="'+direc[numDirecciones]+'" id="txtDirecciones_'+numDirecciones+'"> <button class="btn btn-danger eliminarCamposDirecciones" id="btnEliminarDirecciones_'+z+'" type="button"><i class="icon-minus icon-white"></i></button>'+
+		      		'</div>'+
+		   		'</div>');
+		}
+	}
+	
 	$("#divMostrarContacto").hide();
 	$("#divEditarContacto").show();
 });
@@ -79,7 +145,7 @@ $(document).on('click','#btnGeneraCampos', function(e){
 	$("#camposCorreo").append('<div class="control-group" id="campoCorreo_'+num+'">'+
 					      		'<label class="control-label">Correo Electrónico: </label>'+
 					      		'<div class="controls">'+
-					      			'<input class="span2" type="text" name="txtCorreo" id="txtCorreo_'+num+'"> <button class="btn btn-danger eliminarCamposCorreo" id="btnEliminarCampos_'+num+'" type="button"><i class="icon-minus icon-white"></i></button>'+
+					      			'<input class="span2" type="text" name="txtCorreo" id="txtCorreo_'+num+'" data-rule-email="true" data-msg-email="Debe ingresar un correo electronico válido."> <button class="btn btn-danger eliminarCamposCorreo" id="btnEliminarCampos_'+num+'" type="button"><i class="icon-minus icon-white"></i></button>'+
 					      		'</div>'+
 					   		'</div>');
 	num++;
@@ -94,7 +160,7 @@ $(document).on('click','#btnGenerarTelefonos', function(e){
 	$("#camposTelefonos").append('<div class="control-group" id="campoTelefono_'+x+'">'+
 					      		'<label class="control-label">Teléfonos: </label>'+
 					      		'<div class="controls">'+
-					      			'<input class="span2" type="text" name="txtTelefonos" id="txtTelefonos_'+x+'"> <button class="btn btn-danger eliminarCamposTelefonos" id="btnEliminarTelefonos_'+x+'" type="button"><i class="icon-minus icon-white"></i></button>'+
+					      			'<input class="span2" type="text" name="txtTelefonos" id="txtTelefonos_'+x+'" data-rule-number="true" data-rule-minlength="7" data-rule-maxlength="7" data-msg-number="Debe ingresar un número de teléfono válido."> <button class="btn btn-danger eliminarCamposTelefonos" id="btnEliminarTelefonos_'+x+'" type="button"><i class="icon-minus icon-white"></i></button>'+
 					      		'</div>'+
 					   		'</div>');
 	x++;
@@ -109,7 +175,7 @@ $(document).on('click','#btnGenerarCelulares', function(e){
 	$("#camposCelulares").append('<div class="control-group" id="campoCelulares_'+y+'">'+
 					      		'<label class="control-label">Celulares: </label>'+
 					      		'<div class="controls">'+
-					      			'<input class="span2" type="text" name="txtCelulares" id="txtCelulares_'+y+'"> <button class="btn btn-danger eliminarCamposCelulares" id="btnEliminarCelulares_'+y+'" type="button"><i class="icon-minus icon-white"></i></button>'+
+					      			'<input class="span2" type="text" name="txtCelulares" id="txtCelulares_'+y+'" data-rule-number="true"  data-rule-minlength="9" data-rule-maxlength="9" data-msg-number="Debe ingresar un número de celular válido."> <button class="btn btn-danger eliminarCamposCelulares" id="btnEliminarCelulares_'+y+'" type="button"><i class="icon-minus icon-white"></i></button>'+
 					      		'</div>'+
 					   		'</div>');
 	y++;
@@ -171,15 +237,15 @@ $(document).on('click','.eliminarCamposDirecciones', function(e){
 	</div>
 	<!-- EDITAR DATOS DE CONTACTO -->
 	<fieldset class="well" style="display: none;" id="divEditarContacto">
-		<form:form class="form-horizontal" id="formEditarContacto" action="editarContacto" commandName="datosContacto">
-			<input type="hidden" name="idSospechosoAux" id="hdnIdSospechosoDatos">
+		<form:form class="form-horizontal" id="formEditarContacto" action="editarContacto" commandName="sospechoso">
+			<input type="hidden" name="idSospechoso" id="hdnIdSospechosoDatos">
 			<legend>
 		       	<span class="colored">///</span> Datos de Contacto del Sospechoso:
 	       	</legend>
 	       	<div class="control-group">
           		<label class="control-label">Correo Electrónico: </label>
           		<div class="controls">
-          			<input class="span2" type="text" name="txtCorreo" id="txtCorreo_0"> <button class="btn btn-success" id="btnGeneraCampos" type="button"><i class="icon-plus icon-white"></i></button>
+          			<input class="span2" type="text" name="txtCorreo" id="txtCorreo_0" data-rule-email="true" data-msg-email="Debe ingresar un correo electronico válido."> <button class="btn btn-success" id="btnGeneraCampos" type="button"><i class="icon-plus icon-white"></i></button>
           		</div>
        		</div>
        		<div id="camposCorreo">
@@ -187,7 +253,7 @@ $(document).on('click','.eliminarCamposDirecciones', function(e){
        		<div class="control-group">
           		<label class="control-label">Teléfonos: </label>
           		<div class="controls">
-          			<input class="span2" type="text" name="txtTelefonos" id="txtTelefonos_0"> <button class="btn btn-success" id="btnGenerarTelefonos" type="button"><i class="icon-plus icon-white"></i></button>
+          			<input class="span2" type="text" name="txtTelefonos" id="txtTelefonos_0" data-rule-number="true" data-rule-minlength="7" data-rule-maxlength="7" data-msg-number="Debe ingresar un número de teléfono válido."> <button class="btn btn-success" id="btnGenerarTelefonos" type="button"><i class="icon-plus icon-white"></i></button>
           		</div>
        		</div>
        		<div id="camposTelefonos">
@@ -195,7 +261,7 @@ $(document).on('click','.eliminarCamposDirecciones', function(e){
        		<div class="control-group">
           		<label class="control-label">Celulares: </label>
           		<div class="controls">
-          			<input class="span2" type="text" name="txtCelulares" id="txtCelulares_0"><button class="btn btn-success" id="btnGenerarCelulares" type="button"><i class="icon-plus icon-white"></i></button>
+          			<input class="span2" type="text" name="txtCelulares" id="txtCelulares_0" data-rule-number="true"  data-rule-minlength="9" data-rule-maxlength="9" data-msg-number="Debe ingresar un número de celular válido."> <button class="btn btn-success" id="btnGenerarCelulares" type="button"><i class="icon-plus icon-white"></i></button>
           		</div>
        		</div>
        		<div id="camposCelulares">
@@ -203,7 +269,7 @@ $(document).on('click','.eliminarCamposDirecciones', function(e){
        		<div class="control-group">
           		<label class="control-label">Direcciones: </label>
           		<div class="controls">
-          			<input class="span2" type="text" name="txtDirecciones" id="txtDirecciones_0"><button class="btn btn-success" id="btnGenerarDirecciones" type="button"><i class="icon-plus icon-white"></i></button>
+          			<input class="span2" type="text" name="txtDirecciones" id="txtDirecciones_0"> <button class="btn btn-success" id="btnGenerarDirecciones" type="button"><i class="icon-plus icon-white"></i></button>
           		</div>
        		</div>
        		<div id="camposDirecciones">

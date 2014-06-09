@@ -10,4 +10,6 @@ public interface SospechosoService {
 	Integer crearSospechoso(Sospechoso sospechoso);
 	
 	SospechosoBean editSospechosoBean(Sospechoso sospechoso);
+	
+	SospechosoBean editSospechosoDatosContacto(Sospechoso sospechoso, String[] correos, String[] telefonos, String[] celulares, String[] direcciones);
 }

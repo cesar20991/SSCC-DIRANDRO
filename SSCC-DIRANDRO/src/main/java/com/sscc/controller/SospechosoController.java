@@ -85,4 +85,16 @@ public class SospechosoController {
 		sospechosobean = sospechosoServ.editSospechosoBean(sospechoso);
 		return sospechosobean;
 	}
+	
+	@RequestMapping(value = "editarDatosContacto", method = RequestMethod.POST)
+	@ResponseBody
+	public SospechosoBean editarDatosContacto(@ModelAttribute Sospechoso sospechoso, HttpServletRequest req, HttpSession session, Model model){
+		SospechosoBean sospechosobean = new SospechosoBean();
+		String[] correos = req.getParameterValues("txtCorreo");
+		String[] telefonos = req.getParameterValues("txtTelefonos");
+		String[] celulares = req.getParameterValues("txtCelulares");
+		String[] direcciones = req.getParameterValues("txtDirecciones");
+		sospechosobean = sospechosoServ.editSospechosoDatosContacto(sospechoso, correos, telefonos, celulares, direcciones);
+		return sospechosobean;
+	}
 }
