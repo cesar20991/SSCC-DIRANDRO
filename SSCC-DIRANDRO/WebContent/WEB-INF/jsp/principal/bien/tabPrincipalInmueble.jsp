@@ -19,7 +19,9 @@ function initInmueble(inmueble){
 	
 	// Cuerpo
 	$("#spnCodigo").empty();
+	$("#spnValor").empty();
 	$("#spnPartida").empty();
+	$("#spnValor").empty();
 	$("#spnDescripcion").empty();
 	$("#spnAreaTotal").empty();
 	$("#spnAreaCercado").empty();
@@ -31,6 +33,7 @@ function initInmueble(inmueble){
 
 	$("#spnCodigo").append(inmueble.codigo);
 	$("#spnPartida").append(inmueble.partidaRegistral);
+	$("#spnValor").append(inmueble.valor);
 	$("#spnDescripcion").append(inmueble.descripcion);
 	$("#spnAreaTotal").append(inmueble.areaTotal);
 	$("#spnAreaCercado").append(inmueble.areaCercado);
@@ -102,6 +105,7 @@ $(document).on('click','#btnEditarInmueble', function(e){
 	
 	//Cargar datos
 	$("#txtPartida").val($("#spnPartida").text());
+	$("#txtValor").val($("#spnValor").text());
 	$("#txtDescripcion").val($("#spnDescripcion").text());
 	$("#txtAreaTotal").val($("#spnAreaTotal").text());
 	$("#txtAreaCercado").val($("#spnAreaCercado").text());
@@ -138,22 +142,16 @@ $(document).on('click','#btnCancelEditar', function(e){
 					<span id="spnPartida">&nbsp;</span>
 				</div>
 			</div>
+			<div class="control-group" >
+				<label class="control-label">Valor Monetario(S/.): </label>
+				<div class="controls">
+					<span id="spnValor">&nbsp;</span>
+				</div>
+			</div>
 			<div class="control-group">
 				<label class="control-label">Descripcion: </label>
 				<div class="controls">
 					<span id="spnDescripcion">&nbsp;</span>
-				</div>
-			</div>
-			<div class="control-group">
-				<label class="control-label">Propietario: </label>
-				<div class="controls">
-					<span id="spnPropietario">&nbsp;</span>
-				</div>
-			</div>
-			<div class="control-group">
-				<label class="control-label">Caso Criminal: </label>
-				<div class="controls">
-					<span id="spnAsunto">&nbsp;</span>
 				</div>
 			</div>
 			<div class="control-group">
@@ -215,21 +213,15 @@ $(document).on('click','#btnCancelEditar', function(e){
 	          		</div>
 	       		</div>
 	       		<div class="control-group">
+	          		<label class="control-label">Valor Monetario: </label>
+	          		<div class="controls">
+	          			<input class="span3" type="text" name="valor" id="txtValor" data-rule-required="true" data-msg-required="*">
+	          		</div>
+	       		</div>
+	       		<div class="control-group">
 	          		<label class="control-label">Descripcion: </label>
 	          		<div class="controls">
 	          			<textarea class="input-xlarge" name="descripcion" id="txtDescripcion" rows="3" style="width: 400px" data-rule-required="true" data-msg-required="*"></textarea>
-	          		</div>
-	       		</div>
-	       		<div class="control-group">
-	          		<label class="control-label">Propietario: </label>
-	          		<div class="controls">
-	          			<input class="span3" type="text" name="txtPropietario" id="txtPropietario" data-rule-required="false">
-	          		</div>
-	       		</div>
-	       		<div class="control-group">
-	          		<label class="control-label">Caso Criminal: </label>
-	          		<div class="controls">
-	          			<input class="span3" type="text" name="txtCasoCriminal" id="txtCasoCrominal" data-rule-required="false">
 	          		</div>
 	       		</div>
 	       		<hr>
