@@ -62,6 +62,12 @@
 		<div class="span9 columns">
 			<a href="toUpload">uploadFile</a><br />
 		</div>
+		<div class="span9 columns">
+			<a href="toMap">mapas</a><br />
+		</div>
+		<div class="span9 columns">
+			<a href="toRutas">rutas</a><br />
+		</div>
 		<!-- /FORMUALARIO -->
 	</div>
 	<!--/MAIN CONTENT AREA-->

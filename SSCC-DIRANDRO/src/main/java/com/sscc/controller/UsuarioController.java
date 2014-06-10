@@ -45,6 +45,15 @@ public class UsuarioController {
 		return "uploadFiles";
 	}
 	
+	@RequestMapping("toMap")
+	public String toMap() {
+		return "mapasEjemplo";
+	}
+	@RequestMapping("toRutas")
+	public String toRutas() {
+		return "rutasMapas";
+	}
+	
 	@RequestMapping("tologout")
 	public String tologout(HttpServletRequest request, HttpSession session){
 		session = request.getSession();
