@@ -8,6 +8,7 @@ public class VehiculoBean {
 	// Bien
 	private Integer idBien;
 	private String descripcion;
+	private Double valor;
 	private String partidaRegistral;
 
 	// Vehiculo
@@ -220,5 +221,11 @@ public class VehiculoBean {
 	}
 	public void setNombreCompleto(String nombreCompleto) {
 		this.nombreCompleto = nombreCompleto;
+	}
+	public Double getValor() {
+		return valor;
+	}
+	public void setValor(Double valor) {
+		this.valor = valor;
 	}
 }

@@ -5,6 +5,7 @@ public class InmuebleBean {
 	// Bien
 	private Integer idBien;
 	private String descripcion;
+	private Double valor;
 	private String partidaRegistral;
 
 	// Inmueble
@@ -215,6 +216,14 @@ public class InmuebleBean {
 
 	public void setAntiguedad(Integer antiguedad) {
 		this.antiguedad = antiguedad;
+	}
+
+	public Double getValor() {
+		return valor;
+	}
+
+	public void setValor(Double valor) {
+		this.valor = valor;
 	}
 
 }

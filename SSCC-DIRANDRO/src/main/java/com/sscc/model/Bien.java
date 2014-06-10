@@ -1,5 +1,7 @@
 package com.sscc.model;
 
+import java.sql.Timestamp;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -21,20 +23,38 @@ public class Bien {
 	@Column(length=256, nullable = false)
 	private String partidaRegistral;
 	
+	@Column(nullable= false)
+	private Double valor;
+	
 	// Propietario del bien
 	@ManyToOne
 	@JoinColumn(name = "idUsuario")
 	private Usuario usuario;
 	
-	@ManyToOne
-	@JoinColumn(name = "idSospechoso")
-	private Sospechoso sospechoso;	
+	@Column(nullable = false)
+	private Timestamp fecCreacion;
 	
 	@OneToOne(mappedBy="bien")
 	private Vehiculo vehiculo;
 	
 	@OneToOne(mappedBy="bien")
 	private Inmueble inmueble;
+
+	public Double getValor() {
+		return valor;
+	}
+
+	public void setValor(Double valor) {
+		this.valor = valor;
+	}
+
+	public Timestamp getFecCreacion() {
+		return fecCreacion;
+	}
+
+	public void setFecCreacion(Timestamp fecCreacion) {
+		this.fecCreacion = fecCreacion;
+	}
 
 	public Integer getIdBien() {
 		return idBien;
@@ -66,14 +86,6 @@ public class Bien {
 
 	public void setUsuario(Usuario usuario) {
 		this.usuario = usuario;
-	}
-
-	public Sospechoso getSospechoso() {
-		return sospechoso;
-	}
-
-	public void setSospechoso(Sospechoso sospechoso) {
-		this.sospechoso = sospechoso;
 	}
 
 	public Vehiculo getVehiculo() {

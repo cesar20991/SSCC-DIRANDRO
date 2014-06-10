@@ -13,6 +13,7 @@ import com.sscc.model.Inmueble;
 import com.sscc.model.Perfil;
 import com.sscc.model.Usuario;
 import com.sscc.model.Vehiculo;
+import com.sscc.util.DateUtil;
 
 @Service
 public class BienServiceImpl implements BienService {
@@ -30,9 +31,13 @@ public class BienServiceImpl implements BienService {
 		usuario.setIdUsuario(idUsuario);
 		
 		// Registro del bien
-		bien.setDescripcion(vb.getDescripcion());
-		bien.setPartidaRegistral(vb.getPartidaRegistral());
+		bien.setDescripcion(texto(vb.getDescripcion()));
+		bien.setValor(dec(vb.getValor()));
+		bien.setPartidaRegistral(texto(vb.getPartidaRegistral()));
 		bien.setUsuario(usuario);
+		DateUtil d = new DateUtil();
+		bien.setFecCreacion(d.hoyTimestamp());
+		
 		em.persist(bien);
 		
 		// Registro del vehiculo
@@ -73,6 +78,7 @@ public class BienServiceImpl implements BienService {
 		Perfil p = u.getPerfil();
 		
 		vb.setIdBien(b.getIdBien());
+		vb.setValor(b.getValor());
 		vb.setPartidaRegistral(b.getPartidaRegistral());
 		vb.setDescripcion(b.getDescripcion());
 		vb.setApeMaterno(p.getApeMaterno());
@@ -111,8 +117,9 @@ public class BienServiceImpl implements BienService {
 		Vehiculo editado = em.merge(v);
 		
 		Bien b = editado.getBien();
-		b.setPartidaRegistral(vb.getPartidaRegistral());
-		b.setDescripcion(vb.getDescripcion());
+		b.setValor(dec(vb.getValor()));
+		b.setPartidaRegistral(texto(vb.getPartidaRegistral()));
+		b.setDescripcion(texto(vb.getDescripcion()));
 		editado.setAltura(dec(vb.getAltura()));
 		editado.setAncho(dec(vb.getAncho()));
 		editado.setLongitud(dec(vb.getLongitud()));
@@ -147,9 +154,12 @@ public class BienServiceImpl implements BienService {
 		usuario.setIdUsuario(idUsuario);
 		
 		//Registro del bien
+		bien.setValor(dec(inmuebleBean.getValor()));
 		bien.setDescripcion(texto(inmuebleBean.getDescripcion()));
 		bien.setPartidaRegistral(texto(inmuebleBean.getPartidaRegistral()));
 		bien.setUsuario(usuario);
+		DateUtil d = new DateUtil();
+		bien.setFecCreacion(d.hoyTimestamp());
 		em.persist(bien);
 		
 		//Registro del inmueble
@@ -179,6 +189,7 @@ public class BienServiceImpl implements BienService {
 		Perfil p = u.getPerfil();
 		
 		ib.setIdBien(b.getIdBien());
+		ib.setValor(b.getValor());
 		ib.setPartidaRegistral(b.getPartidaRegistral());
 		ib.setDescripcion(b.getDescripcion());
 		ib.setApeMaterno(p.getApeMaterno());
@@ -204,6 +215,9 @@ public class BienServiceImpl implements BienService {
 		return ib;
 	}
 
+	
+	
+	
 	@Transactional
 	public InmuebleBean editInmuebleBean(InmuebleBean ib) {
 		Inmueble i = em.find(Inmueble.class, ib.getIdInmueble());
@@ -211,6 +225,7 @@ public class BienServiceImpl implements BienService {
 		Inmueble editado = em.merge(i);
 		
 		Bien b= editado.getBien();
+		b.setValor(ib.getValor());
 		b.setPartidaRegistral(ib.getPartidaRegistral());
 		b.setDescripcion(ib.getDescripcion());
 		editado.setAreaTotal(ib.getAreaTotal());

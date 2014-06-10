@@ -56,10 +56,13 @@
 						<td align="center"><span id="hdrPartida">&nbsp;</span></td>
 					</tr>
 					<tr>
+					
 						<td>Descripcion:</td>
 						<td colspan="3"><span id="hdrDescripcion">&nbsp;</span></td>
 					</tr>
 					<tr>
+					<td>Valor(S/.):</td>
+						<td align="center"><span id="hdrValor">&nbsp;</span></td>
 						<td>Creado por:</td>
 						<td colspan="3"><span id="hdrCreador">&nbsp;</span></td>						
 					</tr>

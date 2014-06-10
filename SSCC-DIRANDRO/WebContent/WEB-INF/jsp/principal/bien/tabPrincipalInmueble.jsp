@@ -8,19 +8,19 @@ function initInmueble(inmueble){
 	$("#hdrCodigo").empty();
 	$("#hdrPartida").empty();
 	$("#hdrDescripcion").empty();
+	$("#hdrValor").empty();
 	$("#hdrCreador").empty();
 	
 	$("#hdrCodigo").append(inmueble.codigo);
 	$("#hdrPartida").append(inmueble.partidaRegistral);
 	$("#hdrDescripcion").append(inmueble.descripcion);
+	$("#hdrValor").append(inmueble.valor);
 	$("#hdrCreador").append('<a href="toPerfil-'+inmueble.idPerfil+'">'+inmueble.primerNombre+ ' ' +inmueble.segundoNombre+ ' ' +inmueble.apePaterno+ ' ' +inmueble.apeMaterno+ '('+inmueble.tipoFiscal+')</a>');
 	
 	// Cuerpo
 	$("#spnCodigo").empty();
 	$("#spnPartida").empty();
 	$("#spnDescripcion").empty();
-	$("#spnPropietario").empty();
-	$("#spnCasoCriminal").empty();
 	$("#spnAreaTotal").empty();
 	$("#spnAreaCercado").empty();
 	$("#spnAreaConstruido").empty();
@@ -32,8 +32,6 @@ function initInmueble(inmueble){
 	$("#spnCodigo").append(inmueble.codigo);
 	$("#spnPartida").append(inmueble.partidaRegistral);
 	$("#spnDescripcion").append(inmueble.descripcion);
-	$("#spnPropietario").append("");
-	$("#spnCasoCriminal").append("");
 	$("#spnAreaTotal").append(inmueble.areaTotal);
 	$("#spnAreaCercado").append(inmueble.areaCercado);
 	$("#spnAreaConstruido").append(inmueble.areaConstruido);
@@ -58,6 +56,7 @@ $(document).ready(function(){
 	$("#formEditarInmueble").validate({
 		rules:{
 			partidaRegistral:{required:true, minlength: 8, maxlength: 8},
+			valor:{required:true,doubleNumber:true},
 			descripcion:{required:true, minlength: 10,maxlength: 250},
 			areaTotal:{required:true,doubleNumber:true},
 			areaConstruido:{required:true,doubleNumber:true},
@@ -69,6 +68,7 @@ $(document).ready(function(){
 		},
 		messages:{
 			partidaRegistral:"Complete los 8 carácteres",
+			valor:"Solo números decimales",
 			descripcion:"Minimo 10 carácteres, máximo 250 carácteres",
 			areaTotal:"Solo números decimales",
 			areaConstruido:"Solo números decimales",
