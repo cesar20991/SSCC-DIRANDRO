@@ -43,22 +43,6 @@ public class ArchivosServiceImpl implements ArchivosService{
 				CommonsMultipartFile file1 = cmpf.get(i);
 
 				if(file1 != null && file1.getSize() > 0 ){
-					archivo.setEstado("habilitado");
-					DateUtil u = new DateUtil();
-					archivo.setFecCreacion(u.hoyTimestamp());
-					archivo.setNombreArchivo(file1.getOriginalFilename());
-					archivo.setTamanio(file1.getSize());
-					archivo.setTipo("");
-					archivo.setTipoArchivo(file1.getContentType());
-					archivo.setTipoEntidad(tipoEntidad);
-					archivo.setIdEntidad(idEntidad);
-					archivo.setUrl(request.getServletContext().getRealPath("images")+"/pictures/"+file1.getOriginalFilename());
-					Usuario us = new Usuario();
-					if(tipoEntidad.equals("usuario")){						
-						us.setIdUsuario(idEntidad);
-						archivo.setUsuario(us);
-					}
-					em.persist(archivo);
 					//mover a la carpeta
 					byte[] bytes = file1.getBytes();
 					//String fileContentType = file1.getContentType();
@@ -68,8 +52,23 @@ public class ArchivosServiceImpl implements ArchivosService{
 					System.err.println(request.getServletContext().getRealPath("images")+"/pictures/"+file1.getOriginalFilename()+"/"+file1.getOriginalFilename());
 					boolean dir = localFile.mkdirs();
 					file1.transferTo(localFile);
-					//
-					
+					//setear archivos
+					archivo.setEstado("habilitado");
+					DateUtil u = new DateUtil();
+					archivo.setFecCreacion(u.hoyTimestamp());
+					archivo.setNombreArchivo(file1.getOriginalFilename());
+					archivo.setTamanio(file1.getSize());
+					archivo.setTipo("");
+					archivo.setTipoArchivo(file1.getContentType());
+					archivo.setTipoEntidad(tipoEntidad);
+					archivo.setIdEntidad(idEntidad);
+					archivo.setUrl(request.getServletContext().getRealPath("images")+"/pictures/"+file1.getOriginalFilename()+"/"+file1.getOriginalFilename());
+					Usuario us = new Usuario();
+					if(tipoEntidad.equals("usuario")){						
+						us.setIdUsuario(idEntidad);
+						archivo.setUsuario(us);
+					}
+					em.persist(archivo);
 			    }
 			}
 			
