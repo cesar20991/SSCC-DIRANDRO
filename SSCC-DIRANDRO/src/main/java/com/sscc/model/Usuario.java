@@ -40,6 +40,9 @@ public class Usuario {
 	
 	@OneToMany(mappedBy = "usuario")
 	private Collection<Bien> bienes;
+	
+	@OneToMany(mappedBy = "usuario")
+	private Collection<Archivo> archivos;
 		
 	public Integer getIdUsuario() {
 		return idUsuario;
@@ -94,6 +97,12 @@ public class Usuario {
 	}
 	public void setBienes(Collection<Bien> bienes) {
 		this.bienes = bienes;
+	}
+	public Collection<Archivo> getArchivos() {
+		return archivos;
+	}
+	public void setArchivos(Collection<Archivo> archivos) {
+		this.archivos = archivos;
 	}
 	
 }

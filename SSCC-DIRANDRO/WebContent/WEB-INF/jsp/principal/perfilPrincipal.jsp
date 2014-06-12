@@ -18,6 +18,9 @@
 <script src="js/bootstrap-collapse.js"></script>
 <!-- tabs -->
 <script src="js/bootstrap-tab.js"></script>
+<script src="http://malsup.github.com/jquery.form.js"></script>
+<!-- alertas de colores -->
+<script src="js/bootstrap-alert.js"></script>
 <!-- styles -->
 <link href="css/bootstrap.css" rel="stylesheet">
 <link href="css/bootstrap-responsive.css" rel="stylesheet">
@@ -25,6 +28,15 @@
 <link href="js/google-code-prettify/prettify.css" rel="stylesheet">
 <link rel="stylesheet" href="css/prettyPhoto.css" type="text/css" media="screen" title="prettyPhoto main stylesheet" charset="utf-8" />
 </head>
+<script type="text/javascript">
+var tipoEntidad = "usuario";
+var idEntidad = '';
+	if($("#hdnIdPerfil").text() != ""){
+		idEntidad = $("#hdnIdPerfil").text();
+	}else{
+		idEntidad = '${pageContext.session.getAttribute("idPerfil")}';
+	}
+</script>
 <body>
 
 	<!--HEADER-->
@@ -82,7 +94,7 @@
 						<jsp:include page="perfil/tabPrincipalPerfil.jsp" />
 					</div>
 					<div class="tab-pane" id="2">
-						<p>Archivos Adjuntos.</p>
+						<jsp:include page="../componentes/archivos.jsp" />
 					</div>
 					<div class="tab-pane" id="3">
 						<p>Comentarios.</p>
