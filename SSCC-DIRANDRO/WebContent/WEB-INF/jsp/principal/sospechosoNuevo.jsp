@@ -53,8 +53,9 @@ $(document).on('change','#txtEmision', function(e){
 	}
 });
 
+var flag = false;
 $(document).ready(function() {
-	$( ".datepicker" ).datepicker({ dateFormat: 'dd/mm/yy' });
+	//$( ".datepicker" ).datepicker({ dateFormat: 'dd/mm/yy' });
 	
 	$("#formCrearSospechoso").validate({
 		rules:{
@@ -71,7 +72,8 @@ $(document).ready(function() {
 			txtInscripcion: "Debe tener formato de fecha dd/mm/aaaa",
 			txtEmision: "Debe tener formato de fecha dd/mm/aaaa",
 			multasElectoraleso:"Sólo Números",
-			txtCodUnico: "Sólo Números, 8 digitos"
+			txtCodUnico: "Sólo Números, 8 digitos",
+			txtCodUnico: "Código Único de Identificación ya existes."
 		},
 		submitHandler: function(form){
 			//Se usa 1000-12-12 para que pase de la vista al controlador
@@ -91,8 +93,32 @@ $(document).ready(function() {
 				$("#hdnFecEmi").val('1000-12-12');
 			}
 			//$("#hdnFecEmi").val($("#txtEmision").val());
-			
-			form.submit();
+			if(flag == true){
+				form.submit();
+			}else{
+				alert("Debe Corregir los datos");
+			}			
+		}
+	});
+});
+$(document).on('change','#txtAlias', function(e){
+	$.ajax({
+		url: 'getAlias-'+$('#txtAlias').val(),
+		type: 'post',
+		dataType: 'json',
+		data: '',
+		success: function(sospechoso){
+			if(sospechoso == true){
+				$("#alertasSospechosoNuevo").show();
+				$("#alertasSospechosoNuevo").empty();
+				$("#alertasSospechosoNuevo").append('<div class="alert alert-error" id="alertaVerde">'+
+	 			        '<a class="close" data-dismiss="alert">×</a>'+
+	 			        '<strong id="msgVerde">El Alias usado ya existe en otro sospechoso.</strong>'+
+	 			    '</div>');
+				flag = false;
+			}else{
+				flag = true;
+			}
 		}
 	});
 });
@@ -109,6 +135,8 @@ $(document).ready(function() {
 <div class="container inner_content">
 	<section class="span9" style="margin-left: 80px;">
 		<fieldset class="well">
+		<div id="alertasSospechosoNuevo" style="display: none;">
+		</div>
 			<form:form class="form-horizontal" id="formCrearSospechoso" action="crearSospechoso" commandName="sospechoso">
 		       	<legend><span class="colored">///</span> Datos Personales del Sospechoso:</legend>
 		       	<div class="span4">
@@ -144,7 +172,7 @@ $(document).ready(function() {
 		       		<div class="control-group">
 		          		<label class="control-label">Alias: </label>
 		          		<div class="controls">
-		          			<input class="span2" type="text" name="alias" data-rule-required="true" data-msg-required="*">
+		          			<input class="span2" type="text" name="alias" id="txtAlias" data-rule-required="true" data-msg-required="*">
 		          		</div>
 		       		</div>
 		       		<hr>

@@ -97,8 +97,9 @@ function initSospechoso(sospechoso){
 	//$("#spnGradoInstruccion").append(sospechoso.gradoDeInstruccion);
 }
 
+var flag = false;
 $(document).ready(function(){
-	$(".datepicker").datepicker({dateFormat: 'dd/mm/yy'});
+	//$(".datepicker").datepicker({dateFormat: 'dd/mm/yy'});
 	//esto es para que los checkbox del editar esten en blanco cuando se carga la pagina
 	$("#checkFemenino").prop("checked", false);
 	$("#checkMasculino").prop("checked", false);
@@ -152,22 +153,24 @@ $(document).ready(function(){
 					$("#hdnFecEmi").val('1000-12-12');
 				}
 				//$("#hdnFecEmi").val($("#txtEmision").val());
-
-				$.ajax({
-			 		url: 'editarSopechoso',
-			 		type: 'post',
-			 		dataType: 'json',
-			 		data: $("#formEditarSospechoso").serialize(),
-			 		success: function(sospechoso){
-			 			initSospechoso(sospechoso);
-			 			$("#divMostrarSospechoso").show();
-			 			$("#divEditarSospechoso").hide();
-			 		}
-			 	});
-			}
+				if(flag == true){
+					$.ajax({
+				 		url: 'editarSopechoso',
+				 		type: 'post',
+				 		dataType: 'json',
+				 		data: $("#formEditarSospechoso").serialize(),
+				 		success: function(sospechoso){
+				 			initSospechoso(sospechoso);
+				 			$("#divMostrarSospechoso").show();
+				 			$("#divEditarSospechoso").hide();
+				 		}
+				 	});
+				}else{
+					alert("Debe Corregir los datos");
+				}
+				}
+			});
 		});
-});
-
 $(document).on('change','#txtFecNac', function(e){
 	if($("#txtFecNac").val() != null){
 		var fec  = $("#txtFecNac").val();
@@ -229,6 +232,27 @@ $(document).on('click','#btnEditarSopechoso', function(e){
 $(document).on('click','#btnCancelEditar', function(e){
 	$("#divMostrarSospechoso").show();
 	$("#divEditarSospechoso").hide();
+});
+$(document).on('change','#txtAlias', function(e){
+	$.ajax({
+		url: 'getAlias-'+$('#txtAlias').val(),
+		type: 'post',
+		dataType: 'json',
+		data: '',
+		success: function(sospechoso){
+			if(sospechoso == true){
+				$("#alertasSospechosoNuevo").show();
+				$("#alertasSospechosoNuevo").empty();
+				$("#alertasSospechosoNuevo").append('<div class="alert alert-error" id="alertaVerde">'+
+	 			        '<a class="close" data-dismiss="alert">×</a>'+
+	 			        '<strong id="msgVerde">El Alias usado ya existe en otro sospechoso.</strong>'+
+	 			    '</div>');
+				flag = false;
+			}else{
+				flag = true;
+			}
+		}
+	});
 });
 </script>
 <div id="divMostrarDatosSospechoso">
@@ -379,6 +403,8 @@ $(document).on('click','#btnCancelEditar', function(e){
 		
 	<!-- <section> Formulario editar-->
 		<fieldset class="well" style="display: none;" id="divEditarSospechoso">
+		<div id="alertasSospechosoNuevo" style="display: none;">
+		</div>
 			<form:form class="form-horizontal" id="formEditarSospechoso" action="editarSospechoso" commandName="sospechoso">
 		       	<legend>
 			       	<span class="colored">///</span> Editar Datos Personales del Sospechoso:

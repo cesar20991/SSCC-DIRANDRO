@@ -28,6 +28,8 @@
 <script src="js/formatDates.js"></script>
 <!-- alertas de colores -->
 <script src="js/bootstrap-alert.js"></script>
+<!-- mapas -->
+<script src="http://maps.google.com/maps/api/js?sensor=false"></script>
 <!-- styles -->
 <link href="css/bootstrap.css" rel="stylesheet">
 <link href="css/bootstrap-responsive.css" rel="stylesheet">
@@ -80,6 +82,7 @@
 					<li class=""><a href="#5" data-toggle="tab">Archivos Adjuntos</a></li>
 					<li class=""><a href="#6" data-toggle="tab">Comentarios</a></li>
 					<li class=""><a href="#7" data-toggle="tab">Auditoría</a></li>
+					<li class=""><a href="#8" data-toggle="tab">Rutas</a></li>
 				</ul>
 				<div class="tab-content">
 					<div class="tab-pane active" id="1">
@@ -102,6 +105,9 @@
 					</div>
 					<div class="tab-pane" id="7">
 						<p>Seccion 7.</p>
+					</div>
+					<div class="tab-pane" id="8">
+						<jsp:include page="casoCriminal/tabRutas.jsp" />
 					</div>
 				</div>
 			</div>

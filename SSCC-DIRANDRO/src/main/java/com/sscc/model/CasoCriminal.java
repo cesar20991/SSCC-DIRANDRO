@@ -41,6 +41,9 @@ public class CasoCriminal {
 	@OneToMany(mappedBy = "casoCriminal")
 	private Collection<CasoPorSospechoso> casoPorSospechoso;
 	
+	@OneToMany(mappedBy = "casoCriminal")
+	private Collection<RutasMapas> rutasMapas;
+	
 	public Integer getIdCasoCriminal() {
 		return idCasoCriminal;
 	}
@@ -100,6 +103,12 @@ public class CasoCriminal {
 	}
 	public void setCasoPorSospechoso(Collection<CasoPorSospechoso> casoPorSospechoso) {
 		this.casoPorSospechoso = casoPorSospechoso;
+	}
+	public Collection<RutasMapas> getRutasMapas() {
+		return rutasMapas;
+	}
+	public void setRutasMapas(Collection<RutasMapas> rutasMapas) {
+		this.rutasMapas = rutasMapas;
 	}
 	
 }

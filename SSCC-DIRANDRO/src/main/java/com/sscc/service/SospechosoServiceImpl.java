@@ -14,7 +14,7 @@ import com.sscc.util.DateUtil;
 
 @Service
 public class SospechosoServiceImpl implements SospechosoService{
-
+	
 	@PersistenceContext
 	EntityManager em;
 	
@@ -215,4 +215,18 @@ public class SospechosoServiceImpl implements SospechosoService{
 		return getSospechosoBean(editado.getIdSospechoso());
 	}
 
+	public Boolean getAlias(String alias) {
+		Query queryCont = em.createQuery("SELECT COUNT(s) FROM Sospechoso s WHERE s.alias LIKE:alias");
+		queryCont.setParameter("alias",alias);
+		Integer cont = Integer.parseInt(queryCont.getSingleResult().toString());
+		//System.err.println("contador: "+cont);
+		return cont > 0 ? true : false;
+	}
+
+	public Boolean getCUI(String cui) {
+		Query queryCont = em.createQuery("SELECT COUNT(s) FROM Sospechoso s WHERE s.codigoUnicoDeIdentificacion =:codigoUnicoDeIdentificacion");
+		queryCont.setParameter("codigoUnicoDeIdentificacion", cui);
+		Integer cont = Integer.parseInt(queryCont.getSingleResult().toString());
+		return cont > 0 ? true : false;
+	}
 }

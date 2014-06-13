@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.sscc.form.CasoCriminalBean;
 import com.sscc.form.SospechosoBean;
 import com.sscc.model.RasgosParticulares;
 import com.sscc.model.Sospechoso;
@@ -96,5 +97,15 @@ public class SospechosoController {
 		String[] direcciones = req.getParameterValues("txtDirecciones");
 		sospechosobean = sospechosoServ.editSospechosoDatosContacto(sospechoso, correos, telefonos, celulares, direcciones);
 		return sospechosobean;
+	}
+	
+	@RequestMapping(value = "getAlias-{alias}", method = RequestMethod.POST)
+	@ResponseBody
+	public Boolean getAlias(@PathVariable("alias") String alias){
+		if(sospechosoServ.getAlias(alias)){
+			return true;
+		}else{
+			return false;
+		}
 	}
 }

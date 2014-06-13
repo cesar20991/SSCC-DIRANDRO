@@ -12,4 +12,8 @@ public interface SospechosoService {
 	SospechosoBean editSospechosoBean(Sospechoso sospechoso);
 	
 	SospechosoBean editSospechosoDatosContacto(Sospechoso sospechoso, String[] correos, String[] telefonos, String[] celulares, String[] direcciones);
+	
+	Boolean getAlias(String alias);
+	
+	Boolean getCUI(String cui);
 }
