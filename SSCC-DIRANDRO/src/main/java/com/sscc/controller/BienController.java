@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.sscc.form.BienBean;
+import com.sscc.form.CasoCriminalBean;
 import com.sscc.form.InmuebleBean;
 import com.sscc.form.SospechosoBean;
 import com.sscc.form.VehiculoBean;
@@ -27,10 +29,12 @@ public class BienController {
 	@Autowired
 	BienService bienServ;
 	
-	@RequestMapping("toBuscarBien")
-	public String toBuscarBien() {
+	@RequestMapping("toBuscarBien-{idSospechoso}")
+	public String toBuscarBien(@PathVariable("idSospechoso")Integer idSospechoso, Model model ) {
+		model.addAttribute("idSospechoso", idSospechoso);
 		return "principal/buscarBien";
 	}
+	
 	
 	// Metodos para el Inmueble
 	@RequestMapping("toRegistrarInmueble")
@@ -116,4 +120,14 @@ public class BienController {
 		vehiculoBean = bienServ.editVehiculoBean(vehiculo);
 		return vehiculoBean;
 	}
+	
+	// BIENES
+	@RequestMapping(value = "getBienes", method = RequestMethod.POST)
+	@ResponseBody
+	public List<BienBean> getBienes(){
+		List<BienBean> bienes=new ArrayList<BienBean>();
+		bienes = bienServ.getBienesBean();
+		return bienes;
+	}
+	
 }

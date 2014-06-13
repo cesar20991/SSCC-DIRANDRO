@@ -21,7 +21,6 @@ function initInmueble(inmueble){
 	$("#spnCodigo").empty();
 	$("#spnValor").empty();
 	$("#spnPartida").empty();
-	$("#spnValor").empty();
 	$("#spnDescripcion").empty();
 	$("#spnAreaTotal").empty();
 	$("#spnAreaCercado").empty();

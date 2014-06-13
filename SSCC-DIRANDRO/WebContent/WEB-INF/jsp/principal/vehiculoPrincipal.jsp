@@ -60,8 +60,10 @@
 						<td colspan="3"><span id="hdrDescripcion">&nbsp;</span></td>
 					</tr>
 					<tr>
+						<td>Valor Monetario(S/.):</td>
+						<td align="center"><span id="hdrValor">&nbsp;</span></td>
 						<td>Creado por:</td>
-						<td colspan="3"><span id="hdrCreador">&nbsp;</span></td>						
+						<td><span id="hdrCreador">&nbsp;</span></td>						
 					</tr>
 				</tbody>
 			</table>

@@ -77,6 +77,7 @@
 					<li class=""><a href="#4" data-toggle="tab">Archivos Adjuntos</a></li>
 					<li class=""><a href="#5" data-toggle="tab">Comentarios</a></li>
 					<li class=""><a href="#6" data-toggle="tab">Auditoría</a></li>
+					<li class=""><a href="#7" data-toggle="tab">Bienes</a></li>
 				</ul>
 				<div class="tab-content" style="margin-left: -3.5%;">
 					<div class="tab-pane active span9" id="1">
@@ -96,6 +97,9 @@
 					</div>
 					<div class="tab-pane span9" id="6">
 						<p>Seccion 5.</p>
+					</div>
+					<div class="tab-pane span9" id="7">
+					<jsp:include page="sospechoso/tabBienesPorSospechoso.jsp" />
 					</div>
 				</div>
 			</div>

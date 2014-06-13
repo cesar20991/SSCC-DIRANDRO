@@ -1,11 +1,16 @@
 package com.sscc.service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.sscc.form.BienBean;
 import com.sscc.form.InmuebleBean;
 import com.sscc.form.VehiculoBean;
 import com.sscc.model.Bien;
@@ -237,6 +242,32 @@ public class BienServiceImpl implements BienService {
 		editado.setAntiguedad(ib.getAntiguedad());
 		
 		return getInmuebleBean(editado.getIdInmueble());
+	}
+	
+	// obtener listado de bienes
+	@SuppressWarnings("unchecked")
+	public List<BienBean> getBienesBean(){
+		List<BienBean> lBien = new ArrayList<BienBean>();
+		Query qBienes = em.createQuery("SELECT b.idBien FROM Bien b");
+		List<Integer> lista = qBienes.getResultList();
+		System.out.println("Tamaño ="+ lista.size());
+		for(int i = 0; i<lista.size(); i++){
+			Integer b = lista.get(i);
+			Bien bien = em.find(Bien.class, (b));
+			BienBean bb = new BienBean();
+			bb.setIdBien(bien.getIdBien());
+			bb.setPartidaRegistral(bien.getPartidaRegistral());
+			bb.setValor(bien.getValor());
+			if(bien.getInmueble()!=null){
+				bb.setTipoBien(1);
+				bb.setCodigo(bien.getInmueble().getCodigo());
+			}else if(bien.getVehiculo()!=null){
+				bb.setTipoBien(2);
+				bb.setCodigo(bien.getVehiculo().getCodigo());
+			}
+			lBien.add(bb);
+		}
+		return lBien;
 	}
 	
 	

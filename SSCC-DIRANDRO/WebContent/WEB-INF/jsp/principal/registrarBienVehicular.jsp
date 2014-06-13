@@ -48,6 +48,7 @@ $(document).ready(function() {
 	$("#formRegistrarBien").validate({
 		rules:{
 			partidaRegistral:{required:true, minlength: 8, maxlength: 8},
+			valor:{required:true,doubleNumber:true},
 			descripcion:{required:true, minlength: 10,maxlength: 250},
 			marca:{required:true,maxlength:30},
 			modelo:{required:true,maxlength:30},
@@ -68,6 +69,7 @@ $(document).ready(function() {
 		},
 		messages:{
 			partidaRegistral:"Complete los 8 carácteres",
+			valor:"Solo números decimales",
 			descripcion:"Minimo 10 carácteres, máximo 250 carácteres",
 			marca:"Máximo 30 caracteres",
 			modelo:"Máximo 30 caracteres",
@@ -113,21 +115,15 @@ $(document).ready(function() {
 	          		</div>
 	       		</div>
 	       		<div class="control-group">
+	          		<label class="control-label">Valor Monetario(S/.): </label>
+	          		<div class="controls">
+	          			<input class="span3" type="text" name="valor"  id="txtValor" data-rule-required="true" data-msg-required="*">
+	          		</div>
+	       		</div>	   
+	       		<div class="control-group">
 	          		<label class="control-label">Descripcion: </label>
 	          		<div class="controls">
 	          			<textarea class="input-xlarge" name="descripcion" id="txtDescripcion" rows="3" style="width: 400px" data-rule-required="true" data-msg-required="*"></textarea>
-	          		</div>
-	       		</div>
-	       		<div class="control-group">
-	          		<label class="control-label">Propietario: </label>
-	          		<div class="controls">
-	          			<input class="span3" type="text" name="txtPropietario" id="txtPropietario" data-rule-required="false">
-	          		</div>
-	       		</div>
-	       		<div class="control-group">
-	          		<label class="control-label">Caso Criminal: </label>
-	          		<div class="controls">
-	          			<input class="span3" type="text" name="txtCasoCriminal" id="txtCasoCriminal" data-rule-required="false">
 	          		</div>
 	       		</div>
 	       		<hr>

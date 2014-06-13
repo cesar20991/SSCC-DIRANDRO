@@ -11,7 +11,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <!-- para que funcione el jquery -->
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script
+	src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 <!-- para que funcione el jquery de la plantilla -->
 <script src="js/jquery.js"></script>
 <!-- para el menu -->
@@ -19,7 +20,8 @@
 <!-- tabs -->
 <script src="js/bootstrap-tab.js"></script>
 <!-- datepicker librerias -->
-<link rel="stylesheet" href="//code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">
+<link rel="stylesheet"
+	href="//code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">
 <script src="//code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
 <link rel="stylesheet" href="/resources/demos/style.css">
 <!-- validacion -->
@@ -31,7 +33,8 @@
 <link href="css/bootstrap-responsive.css" rel="stylesheet">
 <link href="css/docs.css" rel="stylesheet">
 <link href="js/google-code-prettify/prettify.css" rel="stylesheet">
-<link rel="stylesheet" href="css/prettyPhoto.css" type="text/css" media="screen" title="prettyPhoto main stylesheet" charset="utf-8" />
+<link rel="stylesheet" href="css/prettyPhoto.css" type="text/css"
+	media="screen" title="prettyPhoto main stylesheet" charset="utf-8" />
 </head>
 <body>
 
@@ -45,7 +48,8 @@
 	<div class="container inner_content">
 		<section class="span9" style="margin-left: 80px;">
 			<c:forEach items="${inmuebleList}" var="inmueble">
-				<span id="hdnIdInmueble" style="display: none;"><c:out value="${inmueble.idInmueble}" /></span>
+				<span id="hdnIdInmueble" style="display: none;"><c:out
+						value="${inmueble.idInmueble}" /></span>
 			</c:forEach>
 			<table class="table table-bordered table-condensed">
 				<tbody>
@@ -56,15 +60,15 @@
 						<td align="center"><span id="hdrPartida">&nbsp;</span></td>
 					</tr>
 					<tr>
-					
+
 						<td>Descripcion:</td>
 						<td colspan="3"><span id="hdrDescripcion">&nbsp;</span></td>
 					</tr>
 					<tr>
-					<td>Valor Monetario(S/.):</td>
+						<td>Valor Monetario(S/.):</td>
 						<td align="center"><span id="hdrValor">&nbsp;</span></td>
 						<td>Creado por:</td>
-						<td colspan="3"><span id="hdrCreador">&nbsp;</span></td>						
+						<td><span id="hdrCreador">&nbsp;</span></td>
 					</tr>
 				</tbody>
 			</table>

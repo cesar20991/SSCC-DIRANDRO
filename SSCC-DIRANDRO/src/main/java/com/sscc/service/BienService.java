@@ -1,5 +1,8 @@
 package com.sscc.service;
 
+import java.util.List;
+
+import com.sscc.form.BienBean;
 import com.sscc.form.InmuebleBean;
 import com.sscc.form.VehiculoBean;
 import com.sscc.model.Bien;
@@ -16,4 +19,6 @@ public interface BienService {
 	Integer registrarBienInmueble(InmuebleBean inmuebleBean, Integer idUsuario);
 	InmuebleBean getInmuebleBean(Integer idInmueble);
 	InmuebleBean editInmuebleBean(InmuebleBean inmuebleBean);
+	
+	List<BienBean> getBienesBean();
 }

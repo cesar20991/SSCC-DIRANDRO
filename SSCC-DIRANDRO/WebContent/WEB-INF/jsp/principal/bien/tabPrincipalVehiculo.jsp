@@ -16,19 +16,20 @@ function initVehiculo(vehiculo){
 	$("#hdrCodigo").empty();
 	$("#hdrPartida").empty();
 	$("#hdrDescripcion").empty();
+	$("#hdrValor").empty();
 	$("#hdrCreador").empty();
 	
 	$("#hdrCodigo").append(vehiculo.codigo);
 	$("#hdrPartida").append(vehiculo.partidaRegistral);
 	$("#hdrDescripcion").append(vehiculo.descripcion);
+	$("#hdrValor").append(vehiculo.valor);
 	$("#hdrCreador").append('<a href="toPerfil-'+vehiculo.idPerfil+'">'+vehiculo.primerNombre+ ' ' +vehiculo.segundoNombre+ ' ' +vehiculo.apePaterno+ ' ' +vehiculo.apeMaterno+ '('+vehiculo.tipoFiscal+')</a>');
 	
 	// Cuerpo
 	$("#spnCodigo").empty();
+	$("#spnValor").empty();
 	$("#spnPartida").empty();
 	$("#spnDescripcion").empty();
-	$("#spnPropietario").empty();
-	$("#spnCasoCriminal").empty();
 	$("#spnMarca").empty();
 	$("#spnModelo").empty();
 	$("#spnColor").empty();
@@ -49,9 +50,8 @@ function initVehiculo(vehiculo){
 	
 	$("#spnCodigo").append(vehiculo.codigo);
 	$("#spnPartida").append(vehiculo.partidaRegistral);
+	$("#spnValor").append(vehiculo.valor);
 	$("#spnDescripcion").append(vehiculo.descripcion);
-	$("#spnPropietario").append("");
-	$("#spnCasoCriminal").append("");
 	$("#spnMarca").append(vehiculo.marca);
 	$("#spnModelo").append(vehiculo.modelo);
 	$("#spnColor").append(vehiculo.color);
@@ -88,6 +88,7 @@ $( ".datepicker" ).datepicker({ dateFormat: 'dd/mm/yy' });
 	$("#formEditarVehiculo").validate({
 		rules:{
 			partidaRegistral:{required:true, minlength: 8, maxlength: 8},
+			valor:{required:true,doubleNumber:true},
 			descripcion:{required:true, minlength: 10,maxlength: 250},
 			marca:{required:true,maxlength:30},
 			modelo:{required:true,maxlength:30},
@@ -108,6 +109,7 @@ $( ".datepicker" ).datepicker({ dateFormat: 'dd/mm/yy' });
 		},
 		messages:{
 			partidaRegistral:"Complete los 8 carácteres",
+			valor:"Solo números decimales",
 			descripcion:"Minimo 10 carácteres, máximo 250 carácteres",
 			marca:"Máximo 30 caracteres",
 			modelo:"Máximo 30 caracteres",
@@ -150,9 +152,8 @@ $(document).on('click','#btnEditarInmueble', function(e){
 	
 	//Cargar datos
 	$("#txtPartida").val($("#spnPartida").text());
+	$("#txtValor").val($("#spnValor").text());
 	$("#txtDescripcion").val($("#spnDescripcion").text());
-	$("#txtPropietario").val($("#spnPropietario").text());
-	$("#txtCasoCriminal").val($("#spnCasoCriminal").text());
 	$("#txtMarca").val($("#spnMarca").text());
 	$("#txtModelo").val($("#spnModelo").text());
 	$("#txtColor").val($("#spnColor").text());
@@ -199,22 +200,16 @@ $(document).on('click','#btnCancelEditar', function(e){
 					<span id="spnPartida">&nbsp;</span>
 				</div>
 			</div>
+			<div class="control-group" >
+				<label class="control-label">Valor Monetario(S/.): </label>
+				<div class="controls">
+					<span id="spnValor">&nbsp;</span>
+				</div>
+			</div>
 			<div class="control-group">
 				<label class="control-label">Descripcion: </label>
 				<div class="controls">
 					<span id="spnDescripcion">&nbsp;</span>
-				</div>
-			</div>
-			<div class="control-group">
-				<label class="control-label">Propietario: </label>
-				<div class="controls">
-					<span id="spnPropietario">&nbsp;</span>
-				</div>
-			</div>
-			<div class="control-group">
-				<label class="control-label">Caso Criminal: </label>
-				<div class="controls">
-					<span id="spnAsunto">&nbsp;</span>
 				</div>
 			</div>
 			<div class="control-group">
@@ -330,21 +325,15 @@ $(document).on('click','#btnCancelEditar', function(e){
 	          		</div>
 	       		</div>
 	       		<div class="control-group">
+	          		<label class="control-label">Valor Monetario: </label>
+	          		<div class="controls">
+	          			<input class="span3" type="text" name="valor" id="txtValor" data-rule-required="true" data-msg-required="*">
+	          		</div>
+	       		</div>
+	       		<div class="control-group">
 	          		<label class="control-label">Descripcion: </label>
 	          		<div class="controls">
 	          			<textarea class="input-xlarge" name="descripcion" id="txtDescripcion" rows="3" style="width: 400px" data-rule-required="true" data-msg-required="*"></textarea>
-	          		</div>
-	       		</div>
-	       		<div class="control-group">
-	          		<label class="control-label">Propietario: </label>
-	          		<div class="controls">
-	          			<input class="span3" type="text" name="txtPropietario" id="txtPropietario" data-rule-required="false">
-	          		</div>
-	       		</div>
-	       		<div class="control-group">
-	          		<label class="control-label">Caso Criminal: </label>
-	          		<div class="controls">
-	          			<input class="span3" type="text" name="txtCasoCriminal" id="txtCasoCriminal" data-rule-required="false">
 	          		</div>
 	       		</div>
 	       		<hr>
