@@ -25,6 +25,9 @@
 <!-- validacion -->
 <script src="js/jquery.validate.min.js"></script>
 <script src="js/validateFecha.js"></script>
+<script src="http://malsup.github.com/jquery.form.js"></script>
+<!-- alertas de colores -->
+<script src="js/bootstrap-alert.js"></script>
 <!-- styles -->
 <link href="css/bootstrap.css" rel="stylesheet">
 <link href="css/bootstrap-responsive.css" rel="stylesheet">
@@ -32,6 +35,10 @@
 <link href="js/google-code-prettify/prettify.css" rel="stylesheet">
 <link rel="stylesheet" href="css/prettyPhoto.css" type="text/css" media="screen" title="prettyPhoto main stylesheet" charset="utf-8" />
 </head>
+<script type="text/javascript">
+var tipoEntidad = "sospechoso";
+var idEntidad = '';
+</script>
 <body>
 
 	<!--HEADER-->
@@ -90,7 +97,7 @@
 						<jsp:include page="sospechoso/tabRasgosParticulares.jsp" />
 					</div>
 					<div class="tab-pane span9" id="4">
-						<p>Seccion 3.</p>
+						<jsp:include page="../componentes/archivos.jsp" />
 					</div>
 					<div class="tab-pane span9" id="5">
 						<p>Seccion 4.</p>

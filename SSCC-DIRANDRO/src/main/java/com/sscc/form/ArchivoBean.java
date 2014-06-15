@@ -1,52 +1,23 @@
-package com.sscc.model;
+package com.sscc.form;
 
 import java.sql.Timestamp;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-
-@Entity
-public class Archivo {
+public class ArchivoBean {
 	
-	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer idArchivo;
 	
-	@Column(nullable = false)
-	private Integer idEntidad;//de prueba
+	private Integer idEntidad;
 	
-	@Column(length = 60, nullable = false)	
-	private String tipoEntidad;
-	@Column(length = 180, nullable = true)	
-	private String nombreArchivo;
-	@Column(length = 60, nullable = true)	
-	private String tipo;///por siaca
-	@Column(length = 30, nullable = true)	
-	private String tipoArchivo;
-	@Column(nullable = true)	
-	private String url;
-	@Column(nullable = true)	
-	private Long tamanio;
-	@Column(length = 60, nullable = true)	
+	private String tipoEntidad;	
+	private String nombreArchivo;	
+	private String tipo;
+	private String tipoArchivo;	
+	private String url;	
+	private Long tamanio;	
 	private Timestamp fecCreacion;
-	@Column(length = 90, nullable = false)
-	private String estado;
-	@Column(length = 300, nullable = true)	
+	private String estado;	
 	private String descripcion;
-	@Column(length = 100, nullable = true)	
 	private String tituloArchivo;
-	
-	@ManyToOne
-	@JoinColumn(name = "idUsuario")
-	private Usuario usuario;
-	
-	@ManyToOne
-	@JoinColumn(name = "idSospechoso")
-	private Sospechoso sospechoso;
 	
 	public Integer getIdArchivo() {
 		return idArchivo;
@@ -114,23 +85,11 @@ public class Archivo {
 	public void setDescripcion(String descripcion) {
 		this.descripcion = descripcion;
 	}
-	public Usuario getUsuario() {
-		return usuario;
-	}
-	public void setUsuario(Usuario usuario) {
-		this.usuario = usuario;
-	}
 	public String getTituloArchivo() {
 		return tituloArchivo;
 	}
 	public void setTituloArchivo(String tituloArchivo) {
 		this.tituloArchivo = tituloArchivo;
-	}
-	public Sospechoso getSospechoso() {
-		return sospechoso;
-	}
-	public void setSospechoso(Sospechoso sospechoso) {
-		this.sospechoso = sospechoso;
 	}
 	
 }

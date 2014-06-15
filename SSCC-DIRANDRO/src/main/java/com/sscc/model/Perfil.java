@@ -9,7 +9,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
 
-
 @Entity
 public class Perfil {
 
@@ -50,7 +49,7 @@ public class Perfil {
 	private String codigo;
 	
 	//Referencias
-	@OneToOne(mappedBy="perfil")
+	@OneToOne(mappedBy="perfil")		
 	private Usuario usuario;
 	
 

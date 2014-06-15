@@ -31,11 +31,11 @@
 <script type="text/javascript">
 var tipoEntidad = "usuario";
 var idEntidad = '';
-	if($("#hdnIdPerfil").text() != ""){
+	/*if($("#hdnIdPerfil").text() != ""){
 		idEntidad = $("#hdnIdPerfil").text();
 	}else{
 		idEntidad = '${pageContext.session.getAttribute("idPerfil")}';
-	}
+	}*/
 </script>
 <body>
 

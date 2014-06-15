@@ -29,7 +29,7 @@ public class Usuario {
 	
 	//Referencias
 	@OneToOne
-	@JoinColumn(name = "idPerfil")
+	@JoinColumn(name = "idPerfil")	
 	private Perfil perfil;	
 	
 	@OneToMany(mappedBy = "usuario")
