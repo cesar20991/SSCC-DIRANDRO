@@ -91,7 +91,10 @@ $(document).ready(function() {
 	       		<div class="control-group">
 	          		<label class="control-label">Valor Monetario(S/.): </label>
 	          		<div class="controls">
-	          			<input class="span3" type="text" name="valor"  id="txtValor" data-rule-required="true" data-msg-required="*">
+	          			<div class="input-prepend">
+		          			<span class="add-on">S/.</span>
+	          				<input class="span3" type="text" name="valor"  id="txtValor" data-rule-required="true" data-msg-required="*">
+	          			</div>
 	          		</div>
 	       		</div>	       		
 	       		<div class="control-group">
@@ -106,21 +109,30 @@ $(document).ready(function() {
 	       		
 	       		<!-- Bien del tipo inmueble -->
 	       		<div class="control-group" id="divATotal">
-	          		<label class="control-label">Area total(m2): </label>
+	          		<label class="control-label">Area total: </label>
 	          		<div class="controls">
-	          			<input class="span2" type="text" name="areaTotal" id="txtAreaTotal" data-rule-required="false" data-msg-required="*">
+	          			<div class="input-append">
+	          				<input class="span2" type="text" name="areaTotal" id="txtAreaTotal" data-rule-required="false" data-msg-required="*">
+	          			<span class="add-on">m2</span>
+	          			</div>
 	          		</div>
 	       		</div>
 	       		<div class="control-group" id="divACercado">
-	          		<label class="control-label">Area Cercado(m2): </label>
+	          		<label class="control-label">Area Cercado: </label>
 	          		<div class="controls">
-	          			<input class="span2" type="text" name="areaCercado" id="txtAreaCercado" data-rule-required="false" data-msg-required="*">
+	          			<div class="input-append">
+	          				<input class="span2" type="text" name="areaCercado" id="txtAreaCercado" data-rule-required="false" data-msg-required="*">
+	          				<span class="add-on">m2</span>
+	          			</div>
 	          		</div>
 	       		</div>
 	       		<div class="control-group" id="divAConstruido">
-	          		<label class="control-label">Area Construido(m2): </label>
+	          		<label class="control-label">Area Construido: </label>
 	          		<div class="controls">
-	          			<input class="span2" type="text" name="areaConstruido" id="txtAreaConstruido" data-rule-required="false" data-msg-required="*">
+	          			<div class="input-append">
+		          			<input class="span2" type="text" name="areaConstruido" id="txtAreaConstruido" data-rule-required="false" data-msg-required="*">
+		          			<span class="add-on">m2</span>
+	          			</div>
 	          		</div>
 	       		</div>
 	       		<div class="control-group" id="divPisos">
@@ -144,7 +156,10 @@ $(document).ready(function() {
 	       		<div class="control-group" id="divAntiguedad">
 	          		<label class="control-label">Antigüedad: </label>
 	          		<div class="controls">
-	          			<input class="span4" type="text" name="antiguedad" id="txtAntiguedad" data-rule-required="true" data-msg-required="*">
+		          		<div class="input-append">
+		          			<input class="span4" type="text" name="antiguedad" id="txtAntiguedad" data-rule-required="true" data-msg-required="*">
+		          			<span class="add-on">años</span>
+		          		</div>	          			
 	          		</div>
 	       		</div>
 	       		

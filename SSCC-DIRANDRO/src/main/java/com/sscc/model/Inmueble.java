@@ -1,11 +1,14 @@
 package com.sscc.model;
 
+import java.util.Collection;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
 @Entity
@@ -50,6 +53,9 @@ public class Inmueble {
 	@OneToOne
 	@JoinColumn(name = "idBien")
 	private Bien bien;
+	
+	@OneToMany(mappedBy = "inmueble")
+	private Collection<Archivo> archivos;
 
 	public Integer getIdInmueble() {
 		return idInmueble;
@@ -145,6 +151,14 @@ public class Inmueble {
 
 	public void setBien(Bien bien) {
 		this.bien = bien;
+	}
+
+	public Collection<Archivo> getArchivos() {
+		return archivos;
+	}
+
+	public void setArchivos(Collection<Archivo> archivos) {
+		this.archivos = archivos;
 	}
 	
 	

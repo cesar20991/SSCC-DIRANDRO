@@ -142,6 +142,10 @@ $(document).ready(function(){
 			$("#hdnIdEntidad").val($("#hdnIdCaso").text());
 			idEntidad = $("#hdnIdCaso").text();
 		break;
+		case 'inmueble':
+			$("#hdnIdEntidad").val($("#hdnIdInmueble").text());
+			idEntidad = $("#hdnIdInmueble").text();
+		break;
 	}
 
 	$.ajax({
