@@ -81,25 +81,44 @@ $.ajax({
 		}
 	});
 	
-function selectAndClose(codigo, cui, primerApellido, segundoApellido, prenombres, alias, sexo, fecNacimiento, depNacimiento, provNacimiento, distNacimiento, gradoInstruccion, estadoCivil, Estatura, fecInscripcion, nomPadre, nomMadre, fecEmision, restriccion, domicilio, depDomicilio, provDomicilio, distDomicilio, multas){
-	window.opener.document.getElementById("lbladdress").innerHTML=address;
-	window.opener.document.getElementById("lblCity").innerHTML=city;
-	window.opener.document.getElementById("lblUsState").innerHTML=usState;
-	window.opener.document.getElementById("lblZipCode").innerHTML=zipCode;
-	window.opener.document.getElementById("lblIdProperty").innerHTML=id;
-	window.opener.document.getElementById("lblPropertyType").innerHTML=propertyType;
-	window.opener.document.getElementById("lblPropertySubType").innerHTML=propertySubType;
-	window.opener.document.getElementById("lblDescription").innerHTML=description;
-	window.opener.document.getElementById("lblImprovementSizeType").innerHTML=improvementType;
-	window.opener.document.getElementById("lblImprovementSize").innerHTML=improvementSize;
-	window.opener.document.getElementById("lblSiteSize").innerHTML=siteSize;
+function selectAndClose(codigo, cui, primerApellido, segundoApellido, prenombres, alias, sexo, fecNacimiento, depNacimiento, provNacimiento, distNacimiento, gradoInstruccion, estadoCivil, estatura, fecInscripcion, nomPadre, nomMadre, fecEmision, restriccion, domicilio, depDomicilio, provDomicilio, distDomicilio, multas){
+	window.opener.$("#txtCodigo").val(codigo);
+	window.opener.$("#hdnCodUnico").val(cui);
+	window.opener.$("#txtCodUnico").val(cui);
+	window.opener.$("#txtPrimerApellido").val(primerApellido);
+	window.opener.$("#txtSegundoApellido").val(segundoApellido);
+	window.opener.$("#txtPrenombres").val(prenombres);
+	window.opener.$("#txtAlias").val(alias);
 	
-	window.opener.$("#TemporalHeader").remove();
-	window.opener.document.getElementById("imgProperty").setAttribute("src", 'https://maps.googleapis.com/maps/api/streetview?size=120x120&location='+ latLng +'&sensor=false');
+	if(sexo == 'F'){
+		window.opener.$("#checkFemenino").prop("checked",true);
+	}else if(sexo == 'M'){
+		window.opener.$("#checkMasculino").prop("checked",true);
+	}	
 	
-	window.opener.document.getElementById("summaryPane").setAttribute("style", "visibility : show;");
-	window.opener.document.getElementById("selectAsset").setAttribute("style", "visibility : show;");
-	window.opener.selectFunction(id);
+	window.opener.$("#txtFecNac").val(fecNacimiento);
+	window.opener.$("#hdnFecNac").val(fecNacimiento);
+	window.opener.$("#txtDepartamentoDeNacimiento").val(depNacimiento);
+	window.opener.$("#txtProvinciaDeNacimiento").val(provNacimiento);
+	window.opener.$("#txtDistritoDeNacimiento").val(distNacimiento);
+	window.opener.$("#selectGradoInstruccion").val(gradoInstruccion);
+	window.opener.$("#sltcEstadoCivil").val(estadoCivil);
+	window.opener.$("#txtEstatura").val(estatura);
+	window.opener.$("#hdnEstatura").val(estatura);
+	window.opener.$("#txtInscripcion").val(fecInscripcion);
+	window.opener.$("#hdnFecIns").val(fecInscripcion);
+	window.opener.$("#txtNombrePadre").val(nomPadre);
+	window.opener.$("#txtNombreMadre").val(nomMadre);
+	window.opener.$("#txtEmision").val(fecEmision);
+	window.opener.$("#hdnFecEmi").val(fecEmision);
+	window.opener.$("#txtRestriccion").val(restriccion);
+	window.opener.$("#txtDomicilio").val(domicilio);
+	window.opener.$("#txtDepartamentoDeDomicilio").val(depDomicilio);
+	window.opener.$("#txtProvinciaDeDomicilio").val(provDomicilio);
+	window.opener.$("#txtDistritoDeDomicilio").val(distDomicilio);
+	window.opener.$("#txtMultasElectorales").val(multas);
+	window.opener.$("#hdnMultasElectorales").val(multas);
+	
 	window.close();
 }
 </script>

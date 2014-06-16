@@ -164,7 +164,7 @@ $(document).ready(function(){
 					$("#hdnFecEmi").val('1000-12-12');
 				}
 				//$("#hdnFecEmi").val($("#txtEmision").val());
-				if(flag == true){
+				if(flag == true && flag2 == true){
 					$.ajax({
 				 		url: 'editarSopechoso',
 				 		type: 'post',
@@ -261,6 +261,27 @@ $(document).on('change','#txtAlias', function(e){
 				flag = false;
 			}else{
 				flag = true;
+			}
+		}
+	});
+});
+$(document).on('change','#txtCodUnico', function(e){
+	$.ajax({
+		url: 'getCUI-'+$('#txtCodUnico').val(),
+		type: 'post',
+		dataType: 'json',
+		data: '',
+		success: function(sospechoso){
+			if(sospechoso == true){
+				$("#alertasSospechosoNuevo2").show();
+				$("#alertasSospechosoNuevo2").empty();
+				$("#alertasSospechosoNuevo2").append('<div class="alert alert-error" id="alertaVerde">'+
+	 			        '<a class="close" data-dismiss="alert">×</a>'+
+	 			        '<strong id="msgVerde">El Código Único de Identificación usado ya existe en otro sospechoso.</strong>'+
+	 			    '</div>');
+				flag2 = false;
+			}else{
+				flag2 = true;
 			}
 		}
 	});
