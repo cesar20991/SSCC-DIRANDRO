@@ -107,6 +107,7 @@ function initSospechoso(sospechoso){
 }
 
 var flag = true;
+var flag2 = true;
 $(document).ready(function(){
 	$(".datepicker").datepicker({dateFormat: 'dd/mm/yy'});
 	//esto es para que los checkbox del editar esten en blanco cuando se carga la pagina

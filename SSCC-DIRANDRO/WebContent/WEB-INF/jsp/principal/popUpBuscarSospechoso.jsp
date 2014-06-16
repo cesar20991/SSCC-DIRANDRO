@@ -61,7 +61,7 @@ $.ajax({
 								'<td>Código Único de Identificación:</td>'+
 								'<td align="center"><span id="hdrCodigoUnicoDeIdentificacion">'+sospechoso.codigoUnicoDeIdentificacion+'</span></td>'+
 								'<td>Acción:</td>'+
-								'<td><button class="btn btn-danger btn-mini asignar" id="" type="button" onlcick="selectAndClose(&#39;'+sospechoso.idSospechoso+'&#39;)"><i class="icon-plus icon-white"></i></button></td>'+
+								'<td><button class="btn btn-danger btn-mini asignar" id="" type="button" onlcick="selectAndClose(&#39;'+sospechoso.codigo+'&#39;)"><i class="icon-plus icon-white"></i></button></td>'+
 							'</tr>'+
 							'<tr>'+
 								'<td colspan="2">Apellidos y Nombres:</td>'+
@@ -81,7 +81,7 @@ $.ajax({
 		}
 	});
 	
-function selectAndClose(id,address,city,usState,zipCode,propertyType,propertySubType,description,improvementType,improvementSize,siteSize, latLng){
+function selectAndClose(codigo, cui, primerApellido, segundoApellido, prenombres, alias, sexo, fecNacimiento, depNacimiento, provNacimiento, distNacimiento, gradoInstruccion, estadoCivil, Estatura){
 	window.opener.document.getElementById("lbladdress").innerHTML=address;
 	window.opener.document.getElementById("lblCity").innerHTML=city;
 	window.opener.document.getElementById("lblUsState").innerHTML=usState;
