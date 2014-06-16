@@ -26,7 +26,7 @@ public class Bien {
 	@Column(nullable= false)
 	private Double valor;
 	
-	// Propietario del bien
+	// Propietario del bien// no es propietario .-. es el que creo el bien nada mas los propietarios con sospechosos xD
 	@ManyToOne
 	@JoinColumn(name = "idUsuario")
 	private Usuario usuario;

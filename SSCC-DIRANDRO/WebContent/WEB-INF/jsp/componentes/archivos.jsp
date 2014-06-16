@@ -124,19 +124,25 @@ $(document).on('click','.accion', function(e){
 
 $(document).ready(function(){
 	$("#hdnTipoEntidad").val(tipoEntidad);
-	if(tipoEntidad == 'usuario'){
-		if($("#hdnIdPerfil").text() != ""){
-			$("#hdnIdEntidad").val($("#hdnIdPerfil").text());
-			idEntidad = $("#hdnIdPerfil").text();
-		}else{
-			$("#hdnIdEntidad").val('${pageContext.session.getAttribute("idPerfil")}');
-			idEntidad = '${pageContext.session.getAttribute("idPerfil")}';
-		}
-	}else if(tipoEntidad == 'sospechoso'){
-		$("#hdnIdEntidad").val($("#hdnIdSospechoso").text());
-		idEntidad = $("#hdnIdSospechoso").text();
+	switch(tipoEntidad){
+		case 'usuario':
+			if($("#hdnIdPerfil").text() != ""){
+				$("#hdnIdEntidad").val($("#hdnIdPerfil").text());
+				idEntidad = $("#hdnIdPerfil").text();
+			}else{
+				$("#hdnIdEntidad").val('${pageContext.session.getAttribute("idPerfil")}');
+				idEntidad = '${pageContext.session.getAttribute("idPerfil")}';
+			}
+		break;
+		case 'sospechoso':
+			$("#hdnIdEntidad").val($("#hdnIdSospechoso").text());
+			idEntidad = $("#hdnIdSospechoso").text();
+		break;
+		case 'casoCriminal':
+			$("#hdnIdEntidad").val($("#hdnIdCaso").text());
+			idEntidad = $("#hdnIdCaso").text();
+		break;
 	}
-	
 
 	$.ajax({
 		url: 'getArchivos',

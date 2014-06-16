@@ -48,6 +48,10 @@ public class Archivo {
 	@JoinColumn(name = "idSospechoso")
 	private Sospechoso sospechoso;
 	
+	@ManyToOne
+	@JoinColumn(name = "idCasoCriminal")
+	private CasoCriminal casoCriminal;
+	
 	public Integer getIdArchivo() {
 		return idArchivo;
 	}
@@ -131,6 +135,12 @@ public class Archivo {
 	}
 	public void setSospechoso(Sospechoso sospechoso) {
 		this.sospechoso = sospechoso;
+	}
+	public CasoCriminal getCasoCriminal() {
+		return casoCriminal;
+	}
+	public void setCasoCriminal(CasoCriminal casoCriminal) {
+		this.casoCriminal = casoCriminal;
 	}
 	
 }

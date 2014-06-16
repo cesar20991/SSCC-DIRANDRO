@@ -22,6 +22,7 @@
 <link rel="stylesheet" href="//code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">
 <script src="//code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
 <link rel="stylesheet" href="/resources/demos/style.css">
+<script src="http://malsup.github.com/jquery.form.js"></script>
 <!-- validacion -->
 <script src="js/jquery.validate.min.js"></script>
 <script src="js/validateFecha.js"></script>
@@ -37,6 +38,15 @@
 <link href="js/google-code-prettify/prettify.css" rel="stylesheet">
 <link rel="stylesheet" href="css/prettyPhoto.css" type="text/css" media="screen" title="prettyPhoto main stylesheet" charset="utf-8" />
 </head>
+<script type="text/javascript">
+var tipoEntidad = "casoCriminal";
+var idEntidad = '';
+	/*if($("#hdnIdPerfil").text() != ""){
+		idEntidad = $("#hdnIdPerfil").text();
+	}else{
+		idEntidad = '${pageContext.session.getAttribute("idPerfil")}';
+	}*/
+</script>
 <body>
 
 	<!--HEADER-->
@@ -98,7 +108,7 @@
 						<p>Seccion 3.</p>
 					</div>
 					<div class="tab-pane" id="5">
-						<p>Seccion 4.</p>
+						<jsp:include page="../componentes/archivos.jsp" />
 					</div>
 					<div class="tab-pane" id="6">
 						<p>Seccion 6.</p>

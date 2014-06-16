@@ -48,8 +48,7 @@
 	<div class="container inner_content">
 		<section class="span9" style="margin-left: 80px;">
 			<c:forEach items="${inmuebleList}" var="inmueble">
-				<span id="hdnIdInmueble" style="display: none;"><c:out
-						value="${inmueble.idInmueble}" /></span>
+				<span id="hdnIdInmueble" style="display: none;"><c:out value="${inmueble.idInmueble}" /></span>
 			</c:forEach>
 			<table class="table table-bordered table-condensed">
 				<tbody>

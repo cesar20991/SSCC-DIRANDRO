@@ -18,6 +18,7 @@ import org.springframework.web.multipart.commons.CommonsMultipartFile;
 import com.sscc.form.ArchivoBean;
 import com.sscc.form.adjuntoBean;
 import com.sscc.model.Archivo;
+import com.sscc.model.CasoCriminal;
 import com.sscc.model.Sospechoso;
 import com.sscc.model.Usuario;
 import com.sscc.util.DateUtil;
@@ -74,6 +75,10 @@ public class ArchivosServiceImpl implements ArchivosService{
 						Sospechoso s = new Sospechoso();
 						s.setIdSospechoso(idEntidad);
 						archivo.setSospechoso(s);
+					}else if(tipoEntidad.equals("casoCriminal")){
+						CasoCriminal c = new CasoCriminal();
+						c.setIdCasoCriminal(idEntidad);
+						archivo.setCasoCriminal(c);
 					}
 					em.persist(archivo);
 			    }
@@ -95,6 +100,8 @@ public class ArchivosServiceImpl implements ArchivosService{
 			qArchivos = em.createQuery("SELECT a FROM Archivo a JOIN a.usuario u WHERE a.tipoEntidad = 'usuario' AND u.idUsuario="+idEntidad+" AND a.estado = 'habilitado' ORDER BY a.fecCreacion DESC ");
 		}else if(tipoEntidad.equals("sospechoso")){
 			qArchivos = em.createQuery("SELECT a FROM Archivo a JOIN a.sospechoso s WHERE a.tipoEntidad = 'sospechoso' AND s.idSospechoso="+idEntidad+" AND a.estado = 'habilitado' ORDER BY a.fecCreacion DESC ");
+		}else if(tipoEntidad.equals("casoCriminal")){
+			qArchivos = em.createQuery("SELECT a FROM Archivo a JOIN a.casoCriminal c WHERE a.tipoEntidad = 'casoCriminal' AND c.idCasoCriminal="+idEntidad+" AND a.estado = 'habilitado' ORDER BY a.fecCreacion DESC ");
 		}
 		
 		List<Archivo> a = qArchivos.getResultList();
