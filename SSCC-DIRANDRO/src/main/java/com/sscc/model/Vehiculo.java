@@ -2,6 +2,7 @@ package com.sscc.model;
 
 import java.sql.Date;
 import java.sql.Timestamp;
+import java.util.Collection;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -9,6 +10,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
 @Entity
@@ -71,6 +73,9 @@ public class Vehiculo {
 	@OneToOne
 	@JoinColumn(name = "idBien")
 	private Bien bien;
+	
+	@OneToMany(mappedBy = "inmueble")
+	private Collection<Archivo> vehiculo;
 
 	public Integer getIdVehiculo() {
 		return idVehiculo;
@@ -222,6 +227,14 @@ public class Vehiculo {
 
 	public void setBien(Bien bien) {
 		this.bien = bien;
+	}
+
+	public Collection<Archivo> getVehiculo() {
+		return vehiculo;
+	}
+
+	public void setVehiculo(Collection<Archivo> vehiculo) {
+		this.vehiculo = vehiculo;
 	}
 	
 	

@@ -55,7 +55,7 @@ $(document).on('change','#txtEmision', function(e){
 
 var flag = false;
 $(document).ready(function() {
-	//$( ".datepicker" ).datepicker({ dateFormat: 'dd/mm/yy' });
+	$( ".datepicker" ).datepicker({ dateFormat: 'dd/mm/yy' });
 	
 	$("#formCrearSospechoso").validate({
 		rules:{

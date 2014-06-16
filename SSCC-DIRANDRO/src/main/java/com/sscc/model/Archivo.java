@@ -56,6 +56,10 @@ public class Archivo {
 	@JoinColumn(name = "idInmueble")
 	private Inmueble inmueble;
 	
+	@ManyToOne
+	@JoinColumn(name = "idVehiculo")
+	private Vehiculo vehiculo;
+	
 	public Integer getIdArchivo() {
 		return idArchivo;
 	}
@@ -151,6 +155,12 @@ public class Archivo {
 	}
 	public void setInmueble(Inmueble inmueble) {
 		this.inmueble = inmueble;
+	}
+	public Vehiculo getVehiculo() {
+		return vehiculo;
+	}
+	public void setVehiculo(Vehiculo vehiculo) {
+		this.vehiculo = vehiculo;
 	}
 	
 }

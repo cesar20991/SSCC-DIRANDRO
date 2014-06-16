@@ -59,7 +59,7 @@ var idEntidad = '';
 						<td align="center"><span id="hdrPrimerNombe"></span>&nbsp;<span id="hdrSegundoNombe"></span>&nbsp;<span id="hdrApePaterno"></span>&nbsp;<span id="hdrApeMaterno"></span></td>
 						<td>Codigo de Usuario:</td>
 						<td><span id="hdrCodigo"></span></td>
-						<td rowspan="4" align="center"><img src="img/skills.png" alt="logo" style="margin-bottom: 7px; margin-top: 7px;" /></td>
+						<td rowspan="4" align="center" style="width: 90px; height: 100px;" id="tdImagen"></td>
 					</tr>
 					<tr>
 						<td id="tdCargo">Cargo:</td>

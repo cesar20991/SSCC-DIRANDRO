@@ -35,6 +35,7 @@ public class SospechosoBean {
 	private Integer multasElectorales;
 	private String estado;
 	private Timestamp fecCreacionSospechoso;
+	private String urlSospechoso;
 	
 	///Rasgos Particulares
 	private Integer idRasgosParticulares;
@@ -306,5 +307,11 @@ public class SospechosoBean {
 	}
 	public void setTelefonos(String telefonos) {
 		this.telefonos = telefonos;
+	}
+	public String getUrlSospechoso() {
+		return urlSospechoso;
+	}
+	public void setUrlSospechoso(String urlSospechoso) {
+		this.urlSospechoso = urlSospechoso;
 	}
 }

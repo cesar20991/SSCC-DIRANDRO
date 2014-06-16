@@ -48,6 +48,7 @@ public class PerfilServiceImpl implements PerfilService {
 		pf.setRango(p.getRango());
 		pf.setTipoFiscal(p.getTipoFiscal());
 		pf.setCodigoPerfil(p.getCodigo());
+		pf.setUrlPerfil(p.getUrlPerfil());
 		
 		return pf;
 	}

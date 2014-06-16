@@ -30,6 +30,7 @@ public class PerfilBean {
 	private String rango;
 	private String tipoFiscal;
 	private String codigoPerfil;
+	private String urlPerfil;
 	
 	public Integer getIdUsuario() {
 		return idUsuario;
@@ -174,6 +175,12 @@ public class PerfilBean {
 	}
 	public void setCodigoPerfil(String codigoPerfil) {
 		this.codigoPerfil = codigoPerfil;
+	}
+	public String getUrlPerfil() {
+		return urlPerfil;
+	}
+	public void setUrlPerfil(String urlPerfil) {
+		this.urlPerfil = urlPerfil;
 	}
 	
 }

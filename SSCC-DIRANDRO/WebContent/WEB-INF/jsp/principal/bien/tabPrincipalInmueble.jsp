@@ -17,7 +17,7 @@ function initInmueble(inmueble){
 	$("#hdrCodigo").append(inmueble.codigo);
 	$("#hdrPartida").append(inmueble.partidaRegistral);
 	$("#hdrValor").append(inmueble.valor);
-	$("#hdrCreador").append('<a href="toPerfil-'+inmueble.idPerfil+'">'+inmueble.primerNombre+ ' ' +inmueble.segundoNombre+ ' ' +inmueble.apePaterno+ ' ' +inmueble.apeMaterno+ '('+inmueble.tipoFiscal+')</a>');
+	$("#hdrCreador").append('<a href="toPerfil-'+inmueble.idPerfil+'">'+inmueble.primerNombre+ ' ' +inmueble.segundoNombre+ ' ' +inmueble.apePaterno+ ' ' +inmueble.apeMaterno+ '</a>');
 	
 	// Cuerpo
 	$("#spnCodigo").empty();

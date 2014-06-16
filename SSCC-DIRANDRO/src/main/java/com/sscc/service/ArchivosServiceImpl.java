@@ -10,18 +10,22 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
 import com.sscc.form.ArchivoBean;
+import com.sscc.form.PerfilBean;
 import com.sscc.form.adjuntoBean;
 import com.sscc.model.Archivo;
 import com.sscc.model.CasoCriminal;
 import com.sscc.model.Inmueble;
+import com.sscc.model.Perfil;
 import com.sscc.model.Sospechoso;
 import com.sscc.model.Usuario;
+import com.sscc.model.Vehiculo;
 import com.sscc.util.DateUtil;
 
 @Service
@@ -84,6 +88,10 @@ public class ArchivosServiceImpl implements ArchivosService{
 						Inmueble in = new Inmueble();
 						in.setIdInmueble(idEntidad);
 						archivo.setInmueble(in);
+					}else if(tipoEntidad.equals("vehiculo")){
+						Vehiculo v = new Vehiculo();
+						v.setIdVehiculo(idEntidad);
+						archivo.setVehiculo(v);
 					}
 					em.persist(archivo);
 			    }
@@ -109,6 +117,8 @@ public class ArchivosServiceImpl implements ArchivosService{
 			qArchivos = em.createQuery("SELECT a FROM Archivo a JOIN a.casoCriminal c WHERE a.tipoEntidad = 'casoCriminal' AND c.idCasoCriminal="+idEntidad+" AND a.estado = 'habilitado' ORDER BY a.fecCreacion DESC ");
 		}else if(tipoEntidad.equals("inmueble")){
 			qArchivos = em.createQuery("SELECT a FROM Archivo a JOIN a.inmueble i WHERE a.tipoEntidad = 'inmueble' AND i.idInmueble="+idEntidad+" AND a.estado = 'habilitado' ORDER BY a.fecCreacion DESC ");
+		}else if(tipoEntidad.equals("vehiculo")){
+			qArchivos = em.createQuery("SELECT a FROM Archivo a JOIN a.vehiculo v WHERE a.tipoEntidad = 'vehiculo' AND v.idVehiculo="+idEntidad+" AND a.estado = 'habilitado' ORDER BY a.fecCreacion DESC ");
 		}
 		
 		List<Archivo> a = qArchivos.getResultList();
@@ -155,4 +165,44 @@ public class ArchivosServiceImpl implements ArchivosService{
 			return false;
 		}
 	}
+
+	@Transactional
+	public Boolean asignarArchivo(String url, Integer idEntidad, HttpSession session) {
+		boolean result = false;
+
+		try{
+			Perfil p = em.find(Perfil.class, idEntidad);
+			Perfil pEdit = em.merge(p);
+			
+			pEdit.setUrlPerfil(url);
+			if(session.getAttribute("idPerfil") == idEntidad){
+				session.setAttribute("url", pEdit.getUrlPerfil());
+			}
+			result = true;
+		}catch(Exception e){
+			result = false;
+		}	
+
+		return result;
+	}
+	
+	@Transactional
+	public Boolean asignarArchivoSospechoso(String url, Integer idEntidad, HttpSession session) {
+		boolean result = false;
+
+		try{
+			Sospechoso s = em.find(Sospechoso.class, idEntidad);
+			Sospechoso sEdit = em.merge(s);
+			
+			sEdit.setUrlSospechoso(url);
+			result = true;
+		}catch(Exception e){
+			result = false;
+		}	
+
+		return result;
+	}
+	/*else if(tipoEntidad == "sospechoso"){
+			
+		}*/
 }

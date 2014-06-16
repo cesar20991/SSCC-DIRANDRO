@@ -41,6 +41,7 @@ public class UsuarioServiceImpl implements UsuarioService {
 			session.setAttribute("grado", usu.getPerfil().getGrado());
 			session.setAttribute("nombreDeUuario", usu.getPerfil().getPrimerNombre()+" "+usu.getPerfil().getSegundoNombre()+" "+usu.getPerfil().getApePaterno()+" "+usu.getPerfil().getApeMaterno());
 			session.setAttribute("entidad", usu.getPerfil().getEntidadPerteneciente());
+			session.setAttribute("url", usu.getPerfil().getUrlPerfil());
 			
 			result = true;
 

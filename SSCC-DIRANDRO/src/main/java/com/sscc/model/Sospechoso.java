@@ -81,6 +81,9 @@ public class Sospechoso {
 	private String direcciones;
 	@Column (length = 1000, nullable = true)
 	private String telefonos;
+	//url
+	@Column(nullable = true)	
+	private String urlSospechoso;
 	///
 	@OneToOne
 	@JoinColumn(name = "idRasgosParticulares")
@@ -295,5 +298,11 @@ public class Sospechoso {
 	}
 	public void setArchivos(Collection<Archivo> archivos) {
 		this.archivos = archivos;
+	}
+	public String getUrlSospechoso() {
+		return urlSospechoso;
+	}
+	public void setUrlSospechoso(String urlSospechoso) {
+		this.urlSospechoso = urlSospechoso;
 	}
 }

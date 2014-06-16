@@ -18,6 +18,8 @@
 <script src="js/bootstrap-collapse.js"></script>
 <!-- tabs -->
 <script src="js/bootstrap-tab.js"></script>
+<!-- para los archivos -->
+<script src="http://malsup.github.com/jquery.form.js"></script>
 <!-- datepicker librerias -->
 <link rel="stylesheet" href="//code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">
 <script src="//code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
@@ -26,6 +28,8 @@
 <script src="js/jquery.validate.min.js"></script>
 <script src="js/validateFecha.js"></script>
 <script src="js/formatDates.js"></script>
+<!-- alertas de colores -->
+<script src="js/bootstrap-alert.js"></script>
 <!-- styles -->
 <link href="css/bootstrap.css" rel="stylesheet">
 <link href="css/bootstrap-responsive.css" rel="stylesheet">
@@ -33,6 +37,15 @@
 <link href="js/google-code-prettify/prettify.css" rel="stylesheet">
 <link rel="stylesheet" href="css/prettyPhoto.css" type="text/css" media="screen" title="prettyPhoto main stylesheet" charset="utf-8" />
 </head>
+<script type="text/javascript">
+var tipoEntidad = "vehiculo";
+var idEntidad = '';
+	/*if($("#hdnIdPerfil").text() != ""){
+		idEntidad = $("#hdnIdPerfil").text();
+	}else{
+		idEntidad = '${pageContext.session.getAttribute("idPerfil")}';
+	}*/
+</script>
 <body>
 
 	<!--HEADER-->
@@ -60,8 +73,8 @@
 						<td colspan="3"><span id="hdrDescripcion">&nbsp;</span></td>
 					</tr>
 					<tr>
-						<td>Valor Monetario(S/.):</td>
-						<td align="center"><span id="hdrValor">&nbsp;</span></td>
+						<td>Valor Monetario:</td>
+						<td align="center">S/. <span id="hdrValor">&nbsp;</span></td>
 						<td>Creado por:</td>
 						<td><span id="hdrCreador">&nbsp;</span></td>						
 					</tr>
@@ -72,10 +85,10 @@
 			<div class="tabbable" style="margin-bottom: 9px;">
 				<ul class="nav nav-tabs">
 					<li class="active"><a href="#1" data-toggle="tab">Principal</a></li>
-					<li class=""><a href="#2" data-toggle="tab">-</a></li>
-					<li class=""><a href="#3" data-toggle="tab">-</a></li>
-					<li class=""><a href="#4" data-toggle="tab">-</a></li>
-					<li class=""><a href="#5" data-toggle="tab">-</a></li>
+					<li class=""><a href="#2" data-toggle="tab">Sospechoso</a></li>
+					<li class=""><a href="#3" data-toggle="tab">Archivos Adjuntos</a></li>
+					<li class=""><a href="#4" data-toggle="tab">Comentario</a></li>
+					<li class=""><a href="#5" data-toggle="tab">Auditoria</a></li>
 				</ul>
 				<div class="tab-content">
 					<div class="tab-pane active" id="1">
@@ -85,7 +98,7 @@
 						<p>Seccion 2.</p>
 					</div>
 					<div class="tab-pane" id="3">
-						<p>Seccion 3.</p>
+						<jsp:include page="../componentes/archivos.jsp" />
 					</div>
 					<div class="tab-pane" id="4">
 						<p>Seccion 4.</p>

@@ -16,30 +16,39 @@ $(document).on('click','#btnMostrar', function(e){
 function initArchivos(archivos){	
 		$.each(archivos, function(i, archivo) {
 			var imagen = '';
-			if(archivo.tipoArchivo == "image/jpeg"){
+			var btnUsar = '';
+			
+			if(tipoEntidad == 'sospechoso'){
+				btnUsar = btnUsar + '<button class="btn btn-primary btn-mini accion" type="button" id="usarS_'+archivo.idArchivo+'"><i class="icon-user icon-white"></i></button>';
+			}else if(tipoEntidad == 'usuario'){
+				btnUsar = btnUsar + '<button class="btn btn-primary btn-mini accion" type="button" id="usarU_'+archivo.idArchivo+'"><i class="icon-user icon-white"></i></button>';
+			}
+			
+			if(archivo.tipoArchivo == "image/jpeg" | archivo.tipoArchivo == "image/png"){
 				imagen = '<div class="mask"><a href="'+archivo.url+'" rel="prettyPhoto" class="info"><img src="'+archivo.url+'" alt="logo" style="width: 90px; height: 120px;"/></a></div>';
 			}else if(archivo.tipoArchivo == "image/gif"){
 				imagen = '<div class="mask"><a href="'+archivo.url+'" rel="prettyPhoto" class="info"><img src="'+archivo.url+'" alt="logo" style="width: 90px; height: 120px;"/></a></div>';
 			}else{
 				imagen = '<div class="mask"><a href="'+archivo.url+'" rel="prettyPhoto" class="info"><img src="img/hojaBlanca.jpg" alt="logo" style="width: 90px; height: 120px;"/></a></div>';
 			}
+			
 			$("#divMostrarArchivo").append(
 				'<form method="post" id="formEditarArchivo_'+archivo.idArchivo+'">'+
 					'<table class="table table-bordered">'+
 						'<tbody>'+
 						'<tr>'+
-							'<td rowspan="4" style="width: 90px; height: 100px;">'+imagen+'</td>'+
+							'<td rowspan="4" style="width: 90px; height: 100px;">'+imagen+' <input type="text" id="url_'+archivo.idArchivo+'" name="url" value="'+archivo.url+'" style="display: none;"></td>'+
 							'<td>Nombre de Archivo:</td>'+
 							'<td align="center"><span id="tblNombre"><a href="'+archivo.url+'" rel="prettyPhoto" class="info">'+archivo.nombreArchivo+'</a></span></td>'+
 							'<td>Acciones:</td>'+
-							'<td id="acciones_'+archivo.idArchivo+'"><button class="btn btn-danger btn-mini accion" id="separar_'+archivo.idArchivo+'" type="button"><i class="icon-minus icon-white"></i></button> <button class="btn btn-primary btn-mini accion" type="button" id="editar_'+archivo.idArchivo+'"><i class="icon-edit icon-white"></i></button></td>'+
+							'<td id="acciones_'+archivo.idArchivo+'"><button class="btn btn-danger btn-mini accion" id="separar_'+archivo.idArchivo+'" type="button"><i class="icon-minus icon-white"></i></button> <button class="btn btn-primary btn-mini accion" type="button" id="editar_'+archivo.idArchivo+'"><i class="icon-edit icon-white"></i></button> '+btnUsar+'</td>'+
 							'<td id="accionesEditar_'+archivo.idArchivo+'" style="display: none;"><button class="btn btn-success btn-mini accion" id="guardar_'+archivo.idArchivo+'" type="button"><i class="icon-ok icon-white"></i></button> <button class="btn btn-warning btn-mini accion" type="button" id="cancelar_'+archivo.idArchivo+'"><i class="icon-arrow-left icon-white"></i></button></td>'+
 						'</tr>'+
 						'<tr>'+
 							'<td>Tamaño:</td>'+
 							'<td><span id="tblTamanio">'+archivo.tamanio+'</span> KB</td>'+
 							'<td>Tipo Archivo:</td>'+
-							'<td><span id="tblTipoArchivo">'+archivo.tipoArchivo+'</span></td>'+
+							'<td><span id="tblTipoArchivo_'+archivo.idArchivo+'">'+archivo.tipoArchivo+'</span></td>'+
 						'</tr>'+
 						'<tr>'+
 							'<td colspan="1">Titulo Archivo:</td>'+
@@ -118,6 +127,54 @@ $(document).on('click','.accion', function(e){
 				});
 			}			
 		break;
+		case "usarU":
+			if($("#tblTipoArchivo_"+id1).text() == 'image/jpeg' | $("#tblTipoArchivo_"+id1).text() == 'image/png' | $("#tblTipoArchivo_"+id1).text() == 'image/gif'){
+				$.ajax({
+					url: 'asignarArchivo-'+idEntidad,
+			 		type: 'post',
+			 		dataType: 'json',
+			 		data: $("#formEditarArchivo_"+id1).serialize(),
+			 		success: function(perfil){
+			 			$("#alertasArchivos").show();
+						$("#alertasArchivos").append('<div class="alert alert-success" id="alertaVerde">'+
+						 			        '<a class="close" data-dismiss="alert">×</a>'+
+						 			        '<strong id="msgVerde">Imagen asignada correctamente.</strong>'+
+						 			    '</div>');
+			 			initPerfil(perfil);		
+			 		}
+				});
+			}else{
+				$("#alertasArchivos").show();
+				$("#alertasArchivos").append('<div class="alert alert-danger" id="alertaVerde">'+
+				 			        '<a class="close" data-dismiss="alert">×</a>'+
+				 			        '<strong id="msgVerde">No es posible asignar el archivo.</strong>'+
+				 			    '</div>');
+			}			
+		break;
+		case "usarS":
+			if($("#tblTipoArchivo_"+id1).text() == 'image/jpeg' | $("#tblTipoArchivo_"+id1).text() == 'image/png' | $("#tblTipoArchivo_"+id1).text() == 'image/gif'){
+				$.ajax({
+					url: 'asignarArchivoSospechoso-'+idEntidad,
+			 		type: 'post',
+			 		dataType: 'json',
+			 		data: $("#formEditarArchivo_"+id1).serialize(),
+			 		success: function(sospechoso){
+			 			$("#alertasArchivos").show();
+						$("#alertasArchivos").append('<div class="alert alert-success" id="alertaVerde">'+
+						 			        '<a class="close" data-dismiss="alert">×</a>'+
+						 			        '<strong id="msgVerde">Imagen asignada correctamente.</strong>'+
+						 			    '</div>');
+			 			initSospechoso(sospechoso);	
+			 		}
+				});
+			}else{
+				$("#alertasArchivos").show();
+				$("#alertasArchivos").append('<div class="alert alert-danger" id="alertaVerde">'+
+				 			        '<a class="close" data-dismiss="alert">×</a>'+
+				 			        '<strong id="msgVerde">No es posible asignar el archivo.</strong>'+
+				 			    '</div>');
+			}			
+		break;
 	}
 	
 });
@@ -146,6 +203,10 @@ $(document).ready(function(){
 			$("#hdnIdEntidad").val($("#hdnIdInmueble").text());
 			idEntidad = $("#hdnIdInmueble").text();
 		break;
+		case 'vehiculo':
+			$("#hdnIdEntidad").val($("#hdnIdVehiculo").text());
+			idEntidad = $("#hdnIdVehiculo").text();
+		break;
 	}
 
 	$.ajax({
@@ -171,7 +232,6 @@ $(document).ready(function(){
 		    error: function()
 		    {
 		        $("#message").html("<font color='red'> ERROR: unable to upload files</font>");
-		 
 		    }
 	});
 	

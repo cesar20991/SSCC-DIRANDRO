@@ -4,6 +4,13 @@ $(document).ready(function(){
 	$("#aNombreUsuario").empty();
 	$("#aNombreUsuario").text(nombre);
 	
+	var url = '${pageContext.session.getAttribute("url")}';
+	if(url != ''){
+		$("#imagenUsu").append('<img src="'+url+'" style="float: right; width: 90px; height: 80px;" />');
+	}else{
+		$("#imagenUsu").append('<img src="img/skills.png" style="float: right; width: 90px; height: 80px;" />');
+	}
+	
 	switch($("#nombreJsp").val()){
 		case 'perfilPrincipal':
 			$("#rowWelcome").removeClass('welcome');
@@ -84,7 +91,7 @@ $(document).ready(function(){
 					style="margin-bottom: 7px; margin-top: 7px;" /></a>
 			</div>
 			<div class="span8">
-				<img src="img/skills.png" style="float: right;" /> 
+				<span id="imagenUsu"></span> 
 				<span class="header_social"><span class="badge"><a href="toCambiarClave">Cambiar Contraseña</a></span>
 				&nbsp;&nbsp;<span class="badge"><a href="toCrearUsuario">Crear Usuarios</a></span></br> 
 				<span class="badge"><a id="aNombreUsuario" href="toPerfil">&nbsp;</a></span>&nbsp;&nbsp;

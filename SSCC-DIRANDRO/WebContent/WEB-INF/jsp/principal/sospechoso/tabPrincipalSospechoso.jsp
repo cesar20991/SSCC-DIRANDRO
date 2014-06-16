@@ -47,8 +47,13 @@ function initSospechoso(sospechoso){
 	$("#spnProvinciaDeNacimiento").empty();
 	$("#spnDistritoDeNacimiento").empty();
 	$("#spnMultasElectorales").empty();
+	$("#tdImagen").empty();
 	
-	
+	if(sospechoso.urlSospechoso == null){
+		$("#tdImagen").append('<img src="img/skills.png" alt="logo" style="width: 90px; height: 120px;" />');
+	}else{
+		$("#tdImagen").append('<img src="'+sospechoso.urlSospechoso+'" alt="logo" style="width: 90px; height: 120px;" />');
+	}
 	$("#spnCodigoUnicoDeIdentificacion").append(sospechoso.codigoUnicoDeIdentificacion);
 	$("#spnPrimerApellido").append(sospechoso.primerApellido);
 	$("#spnSegundoApellido").append(sospechoso.segundoApellido);

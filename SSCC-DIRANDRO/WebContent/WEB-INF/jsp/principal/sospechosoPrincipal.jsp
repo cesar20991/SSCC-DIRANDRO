@@ -58,7 +58,7 @@ var idEntidad = '';
 					<tr>
 						<td>Código Único de Identificación:</td>
 						<td align="center"><span id="hdrCodigoUnicoDeIdentificacion">&nbsp;</span></td>
-						<td rowspan="5" align="center"><img src="img/skills.png" alt="logo" style="margin-bottom: 7px; margin-top: 7px;" /></td>
+						<td rowspan="5" align="center" style="width: 90px; height: 100px;" id="tdImagen"></td>
 					</tr>
 					<tr>
 						<td>Apellidos y Nombres:</td>
@@ -81,10 +81,11 @@ var idEntidad = '';
 					<li class="active"><a href="#1" data-toggle="tab">Principal</a></li>
 					<li class=""><a href="#2" data-toggle="tab">Datos de Contacto</a></li>
 					<li class=""><a href="#3" data-toggle="tab">Rasgos Particulares</a></li>
+					<li class=""><a href="#7" data-toggle="tab">Bienes</a></li>
+					<li class=""><a href="#8" data-toggle="tab">Casos</a></li>
 					<li class=""><a href="#4" data-toggle="tab">Archivos Adjuntos</a></li>
 					<li class=""><a href="#5" data-toggle="tab">Comentarios</a></li>
 					<li class=""><a href="#6" data-toggle="tab">Auditoría</a></li>
-					<li class=""><a href="#7" data-toggle="tab">Bienes</a></li>
 				</ul>
 				<div class="tab-content" style="margin-left: -3.5%;">
 					<div class="tab-pane active span9" id="1">
@@ -100,10 +101,13 @@ var idEntidad = '';
 						<jsp:include page="../componentes/archivos.jsp" />
 					</div>
 					<div class="tab-pane span9" id="5">
-						<p>Seccion 4.</p>
+						<p>Seccion 5.</p>
 					</div>
 					<div class="tab-pane span9" id="6">
-						<p>Seccion 5.</p>
+						<p>Seccion 6.</p>
+					</div>
+					<div class="tab-pane span9" id="8">
+						<p>Seccion 8.</p>
 					</div>
 					<div class="tab-pane span9" id="7">
 					<jsp:include page="sospechoso/tabBienesPorSospechoso.jsp" />

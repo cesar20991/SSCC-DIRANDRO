@@ -47,6 +47,8 @@ public class Perfil {
 	private String tipoFiscal;
 	@Column(length = 50, nullable = true)
 	private String codigo;
+	@Column(nullable = true)	
+	private String urlPerfil;
 	
 	//Referencias
 	@OneToOne(mappedBy="perfil")		
@@ -195,6 +197,14 @@ public class Perfil {
 
 	public void setCodigo(String codigo) {
 		this.codigo = codigo;
+	}
+
+	public String getUrlPerfil() {
+		return urlPerfil;
+	}
+
+	public void setUrlPerfil(String urlPerfil) {
+		this.urlPerfil = urlPerfil;
 	}
 	
 	

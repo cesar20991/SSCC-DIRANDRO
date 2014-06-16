@@ -115,9 +115,12 @@ $(document).ready(function() {
 	          		</div>
 	       		</div>
 	       		<div class="control-group">
-	          		<label class="control-label">Valor Monetario(S/.): </label>
+	          		<label class="control-label">Valor Monetario: </label>
 	          		<div class="controls">
-	          			<input class="span3" type="text" name="valor"  id="txtValor" data-rule-required="true" data-msg-required="*">
+	          			<div class="input-prepend">
+		          			<span class="add-on">S/.</span>
+	          				<input class="span3" type="text" name="valor"  id="txtValor" data-rule-required="true" data-msg-required="*">
+	          			</div>
 	          		</div>
 	       		</div>	   
 	       		<div class="control-group">
@@ -170,35 +173,50 @@ $(document).ready(function() {
 	       		
 	       		
 	       		<div class="control-group">
-	          		<label class="control-label">Altura(m): </label>
+	          		<label class="control-label">Altura: </label>
 	          		<div class="controls">
-	          			<input class="span2" type="text" name="altura" id="txtAltura" data-rule-required="true" data-msg-required="*">
+	          			<div class="input-append">
+	          				<input class="span2" type="text" name="altura" id="txtAltura" data-rule-required="true" data-msg-required="*">
+	          				<span class="add-on">m</span>
+	          			</div>
 	          		</div>
 	       		</div>
 	       		<div class="control-group">
-	          		<label class="control-label">Longitud(m): </label>
+	          		<label class="control-label">Longitud: </label>
 	          		<div class="controls">
-	          			<input class="span2" type="text" name="longitud" id="txtLongitud" data-rule-required="true" data-msg-required="*">
+	          			<div class="input-append">
+		          			<input class="span2" type="text" name="longitud" id="txtLongitud" data-rule-required="true" data-msg-required="*">
+		          			<span class="add-on">m</span>
+		          		</div>
 	          		</div>
 	       		</div>
 	       		<div class="control-group">
-	          		<label class="control-label">Ancho(m): </label>
+	          		<label class="control-label">Ancho: </label>
 	          		<div class="controls">
-	          			<input class="span2" type="text" name="ancho" id="txtAncho" data-rule-required="true" data-msg-required="*">
+	          			<div class="input-append">
+		          			<input class="span2" type="text" name="ancho" id="txtAncho" data-rule-required="true" data-msg-required="*">
+		          			<span class="add-on">m</span>
+	          			</div>
 	          		</div>
 	       		</div>
 	       		
 	       		
 	       		<div class="control-group">
-	          		<label class="control-label">Peso Bruto(Kg): </label>
+	          		<label class="control-label">Peso Bruto: </label>
 	          		<div class="controls">
-	          			<input class="span2" type="text" name=pesoBruto id="txtPesoBruto" data-rule-required="false">
+	          			<div class="input-append">
+	          				<input class="span2" type="text" name=pesoBruto id="txtPesoBruto" data-rule-required="false">
+	          				<span class="add-on">Kg</span>
+	          			</div>
 	          		</div>
 	       		</div>
 	       		<div class="control-group">
-	          		<label class="control-label">Peso Neto(Kg): </label>
+	          		<label class="control-label">Peso Neto: </label>
 	          		<div class="controls">
-	          			<input class="span2" type="text" name="pesoNeto" id="txtPesoNeto" data-rule-required="false">
+	          			<div class="input-append">
+		          			<input class="span2" type="text" name="pesoNeto" id="txtPesoNeto" data-rule-required="false">
+		          			<span class="add-on">Kg</span>
+	          			</div>
 	          		</div>
 	       		</div>
 	       		

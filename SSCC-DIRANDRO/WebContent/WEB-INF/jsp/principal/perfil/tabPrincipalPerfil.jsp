@@ -7,6 +7,93 @@
 }
 </style>
 <script>
+function initPerfil(perfil){
+	$("#spnPrimerNombe").empty();
+		$("#spnSegundoNombe").empty();
+		$("#hdrPrimerNombe").empty();
+		$("#hdrSegundoNombe").empty();
+		$("#hdrApePaterno").empty();
+		$("#hdrApeMaterno").empty();
+		$("#hdrCodigo").empty();
+		$("#hdrGrado").empty();
+		$("#hdrNCarnet").empty();
+		$("#hdrEntidad").empty();
+		
+		$("#spnApePaterno").empty();
+		$("#spnApeMaterno").empty();
+		$("#spnDni").empty();
+		$("#hrdDni").empty();
+		$("#spnTelefono").empty();
+		$("#hdrTelefono").empty();
+		$("#spnCorreo").empty();
+		$("#hdrCorreo").empty();
+		$("#spnFecNac").empty();
+		$("#spnSexo").empty();
+		$("#spnEntidad").empty();
+		$("#spnCargo").empty();
+		$("#hdrCargo").empty();
+		$("#spnNCarnet").empty();
+		$("#spnGrado").empty();
+		$("#spnRango").empty();
+		$("#tdImagen").empty();
+			
+		$("#spnPrimerNombe").text(perfil.primerNombre);
+		$("#spnSegundoNombe").text(perfil.segundoNombre);
+		$("#hdrPrimerNombe").text(perfil.primerNombre);
+		$("#hdrSegundoNombe").text(perfil.segundoNombre);
+		$("#hdrApePaterno").text(perfil.apePaterno);
+		$("#hdrApeMaterno").text(perfil.apeMaterno);
+		$("#spnApePaterno").text(perfil.apePaterno);
+		$("#spnApeMaterno").text(perfil.apeMaterno);
+		$("#spnDni").text(perfil.dni);
+		$("#hdrDni").text(perfil.dni);
+		$("#spnTelefono").text(perfil.telefono);
+		$("#spnCorreo").text(perfil.correoElectronico);
+		$("#hdrCorreo").text(perfil.correoElectronico);
+		$("#spnFecNac").text(perfil.fecNacimiento);
+		$("#hdrCodigo").text(perfil.codigoPerfil);
+		if(perfil.urlPerfil == null){
+			$("#tdImagen").append('<img src="img/skills.png" alt="logo" style="width: 90px; height: 120px;" />');
+		}else{
+			$("#tdImagen").append('<img src="'+perfil.urlPerfil+'" alt="logo" style="width: 90px; height: 120px;" />');
+		}
+		
+		if(perfil.sexo == 'M'){
+			$("#spnSexo").text('Masculino');
+		}else{
+			$("#spnSexo").text('Femenino');
+		}
+		if(perfil.entidadPerteneciente == 'D'){
+			$("#spnEntidad").text("DIRANDRO");
+			$("#hdrEntidad").text("DIRANDRO");
+			$("#spnCargo").text(perfil.cargo);
+			$("#hdrCargo").text(perfil.cargo);
+			$("#spnGrado").text(perfil.grado);
+			$("#hdrGrado").text(perfil.grado);
+			$("#hdrNCarnet").text(perfil.numeroDeCarnet);
+			$("#spnNCarnet").text(perfil.numeroDeCarnet);
+			$("#spnRango").text(perfil.rango);
+		}else if(perfil.entidadPerteneciente == 'M'){
+			$("#spnEntidad").text("Ministerio Público");
+			$("#hdrEntidad").text("Ministerio Público");
+			$("#divCargo").hide();
+			$("#divGrado").hide();
+			$("#divCarnet").hide();
+			$("#divRango").hide();
+			
+			$("#tdGrado").empty();
+			$("#tdGradoResult").empty();
+			$("#tdNCarnet").empty();
+			$("#tdNCarnetResult").empty();
+			
+			$("#tdCargo").empty();
+			$("#tdCargo").append("Tipo Fiscal");
+			
+			$("#divFiscal").show();
+			$("#hdrCargo").text(perfil.tipoFiscal);
+			$("#spnTipoFiscal").text(perfil.tipoFiscal);
+		}
+}
 $(document).ready(function(){
 
 	var idPerfil;
@@ -22,85 +109,7 @@ $(document).ready(function(){
 	 		dataType: 'json',
 	 		data: '',
 	 		success: function(perfil){
-	 			$("#spnPrimerNombe").empty();
-	 			$("#spnSegundoNombe").empty();
-	 			$("#hdrPrimerNombe").empty();
-	 			$("#hdrSegundoNombe").empty();
-	 			$("#hdrApePaterno").empty();
-	 			$("#hdrApeMaterno").empty();
-	 			$("#hdrCodigo").empty();
-	 			$("#hdrGrado").empty();
-	 			$("#hdrNCarnet").empty();
-	 			$("#hdrEntidad").empty();
-	 			
-	 			$("#spnApePaterno").empty();
-	 			$("#spnApeMaterno").empty();
-	 			$("#spnDni").empty();
-	 			$("#hrdDni").empty();
-	 			$("#spnTelefono").empty();
-	 			$("#hdrTelefono").empty();
-	 			$("#spnCorreo").empty();
-	 			$("#hdrCorreo").empty();
-	 			$("#spnFecNac").empty();
-	 			$("#spnSexo").empty();
-	 			$("#spnEntidad").empty();
-	 			$("#spnCargo").empty();
-	 			$("#hdrCargo").empty();
-	 			$("#spnNCarnet").empty();
-	 			$("#spnGrado").empty();
-	 			$("#spnRango").empty();
-	 				
-	 			$("#spnPrimerNombe").text(perfil.primerNombre);
-	 			$("#spnSegundoNombe").text(perfil.segundoNombre);
-	 			$("#hdrPrimerNombe").text(perfil.primerNombre);
-	 			$("#hdrSegundoNombe").text(perfil.segundoNombre);
-	 			$("#hdrApePaterno").text(perfil.apePaterno);
-	 			$("#hdrApeMaterno").text(perfil.apeMaterno);
-	 			$("#spnApePaterno").text(perfil.apePaterno);
-	 			$("#spnApeMaterno").text(perfil.apeMaterno);
-	 			$("#spnDni").text(perfil.dni);
-	 			$("#hdrDni").text(perfil.dni);
-	 			$("#spnTelefono").text(perfil.telefono);
-	 			$("#spnCorreo").text(perfil.correoElectronico);
-	 			$("#hdrCorreo").text(perfil.correoElectronico);
-	 			$("#spnFecNac").text(perfil.fecNacimiento);
-	 			$("#hdrCodigo").text(perfil.codigoPerfil);
-	 			if(perfil.sexo == 'M'){
-	 				$("#spnSexo").text('Masculino');
-	 			}else{
-	 				$("#spnSexo").text('Femenino');
-	 			}
-	 			if(perfil.entidadPerteneciente == 'D'){
-	 				$("#spnEntidad").text("DIRANDRO");
-	 				$("#hdrEntidad").text("DIRANDRO");
-		 			$("#spnCargo").text(perfil.cargo);
-		 			$("#hdrCargo").text(perfil.cargo);
-		 			$("#spnGrado").text(perfil.grado);
-		 			$("#hdrGrado").text(perfil.grado);
-		 			$("#hdrNCarnet").text(perfil.numeroDeCarnet);
-		 			$("#spnNCarnet").text(perfil.numeroDeCarnet);
-		 			$("#spnRango").text(perfil.rango);
-	 			}else if(perfil.entidadPerteneciente == 'M'){
-	 				$("#spnEntidad").text("Ministerio Público");
-	 				$("#hdrEntidad").text("Ministerio Público");
-	 				$("#divCargo").hide();
-	 				$("#divGrado").hide();
-	 				$("#divCarnet").hide();
-	 				$("#divRango").hide();
-	 				
-	 				$("#tdGrado").empty();
-	 				$("#tdGradoResult").empty();
-	 				$("#tdNCarnet").empty();
-	 				$("#tdNCarnetResult").empty();
-	 				
-	 				$("#tdCargo").empty();
-	 				$("#tdCargo").append("Tipo Fiscal");
-	 				
-	 				$("#divFiscal").show();
-	 				$("#hdrCargo").text(perfil.tipoFiscal);
-	 				$("#spnTipoFiscal").text(perfil.tipoFiscal);
-	 			}			
-	 				 
+	 			initPerfil(perfil);		 				 
 	 		}
 	 	});
 });//# carnet -> sub 8 -> oficiales 6

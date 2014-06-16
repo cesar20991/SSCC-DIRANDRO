@@ -56,6 +56,7 @@ public class SospechosoServiceImpl implements SospechosoService{
 		sb.setTelefonos(s.getTelefonos());
 		sb.setCorreos(s.getCorreos());
 		sb.setDirecciones(s.getDirecciones());
+		sb.setUrlSospechoso(s.getUrlSospechoso());
 		return sb;
 	}
 

@@ -89,7 +89,7 @@ $(document).ready(function() {
 	          		</div>
 	       		</div>
 	       		<div class="control-group">
-	          		<label class="control-label">Valor Monetario(S/.): </label>
+	          		<label class="control-label">Valor Monetario: </label>
 	          		<div class="controls">
 	          			<div class="input-prepend">
 		          			<span class="add-on">S/.</span>
@@ -113,7 +113,7 @@ $(document).ready(function() {
 	          		<div class="controls">
 	          			<div class="input-append">
 	          				<input class="span2" type="text" name="areaTotal" id="txtAreaTotal" data-rule-required="false" data-msg-required="*">
-	          			<span class="add-on">m2</span>
+	          				<span class="add-on">m2</span>
 	          			</div>
 	          		</div>
 	       		</div>
