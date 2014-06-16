@@ -106,9 +106,9 @@ function initSospechoso(sospechoso){
 	//$("#spnGradoInstruccion").append(sospechoso.gradoDeInstruccion);
 }
 
-var flag = false;
+var flag = true;
 $(document).ready(function(){
-	//$(".datepicker").datepicker({dateFormat: 'dd/mm/yy'});
+	$(".datepicker").datepicker({dateFormat: 'dd/mm/yy'});
 	//esto es para que los checkbox del editar esten en blanco cuando se carga la pagina
 	$("#checkFemenino").prop("checked", false);
 	$("#checkMasculino").prop("checked", false);
@@ -414,6 +414,8 @@ $(document).on('change','#txtAlias', function(e){
 	<!-- <section> Formulario editar-->
 		<fieldset class="well" style="display: none; margin-left: 0%;" id="divEditarSospechoso">
 		<div id="alertasSospechosoNuevo" style="display: none;">
+		</div>
+		<div id="alertasSospechosoNuevo2" style="display: none;">
 		</div>
 			<form:form class="form-horizontal span9" id="formEditarSospechoso" action="editarSospechoso" commandName="sospechoso" style="margin-left: -4%;">
 		       	<legend class="span8">

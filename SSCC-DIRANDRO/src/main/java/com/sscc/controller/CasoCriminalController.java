@@ -162,10 +162,15 @@ public class CasoCriminalController {
 	@RequestMapping(value = "getSopechososPorCaso-{idCaso}-{idSospechoso}", method = RequestMethod.POST)
 	@ResponseBody
 	public List<SospechosoBean> getSopechososPorCaso(@PathVariable("idCaso") Integer idCaso,@PathVariable("idSospechoso") Integer idSospechoso){
-			if(casoServ.deshasignarSospechosoDelCaso(idCaso, idSospechoso)){
-				return casoServ.getSospechosoPorCaso(idCaso);
-			}else{
-				return null;
-			}
+		if(casoServ.deshasignarSospechosoDelCaso(idCaso, idSospechoso)){
+			return casoServ.getSospechosoPorCaso(idCaso);
+		}else{
+			return null;
+		}
+	}
+	
+	@RequestMapping("popUpAsignarSospechoso")
+	public String popUpAsignarSospechoso(){
+		return "principal/popUpBuscarSospechoso";	
 	}
 }

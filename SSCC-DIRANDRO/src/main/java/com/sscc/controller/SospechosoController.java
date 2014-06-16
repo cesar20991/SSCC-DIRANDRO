@@ -35,7 +35,7 @@ public class SospechosoController {
 	public String toCrearSospechoso() {
 		return "principal/sospechosoNuevo";
 	}
-	
+		
 	@RequestMapping(value = "crearSospechoso", method = RequestMethod.POST)
 	public String crearSospechoso(@ModelAttribute Sospechoso sospechoso, HttpServletRequest req, HttpSession session, Model model){
 
@@ -87,6 +87,15 @@ public class SospechosoController {
 		return sospechosobean;
 	}
 	
+
+	@RequestMapping(value = "getSopechosos", method = RequestMethod.POST)
+	@ResponseBody
+	public List<SospechosoBean> getSopechosos(){
+
+		return sospechosoServ.getSospechosos();
+		
+	}
+	
 	@RequestMapping(value = "editarDatosContacto", method = RequestMethod.POST)
 	@ResponseBody
 	public SospechosoBean editarDatosContacto(@ModelAttribute Sospechoso sospechoso, HttpServletRequest req, HttpSession session, Model model){
@@ -108,4 +117,5 @@ public class SospechosoController {
 			return false;
 		}
 	}
+	
 }

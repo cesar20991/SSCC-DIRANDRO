@@ -1,5 +1,8 @@
 package com.sscc.service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
@@ -57,7 +60,57 @@ public class SospechosoServiceImpl implements SospechosoService{
 		sb.setCorreos(s.getCorreos());
 		sb.setDirecciones(s.getDirecciones());
 		sb.setUrlSospechoso(s.getUrlSospechoso());
+		sb.setIdSospechoso(s.getIdSospechoso());
 		return sb;
+	}
+	
+
+	@SuppressWarnings("unchecked")
+	public List<SospechosoBean> getSospechosos() {
+		List<SospechosoBean> lsb = new ArrayList<SospechosoBean>(); 
+		Query q = em.createQuery("SELECT s FROM Sospechoso s WHERE s.estado='habilitado'");
+		List<Sospechoso> ls = q.getResultList();
+		
+		for(int i=0;i<ls.size();i++){
+			Sospechoso s = new Sospechoso();
+			SospechosoBean sb = new SospechosoBean();
+			s = ls.get(i);
+			
+			sb.setCodigoUnicoDeIdentificacion(s.getCodigoUnicoDeIdentificacion());
+			sb.setPrimerApellido(s.getPrimerApellido());
+			sb.setSegundoApellido(s.getSegundoApellido());
+			sb.setPreNombres(s.getPreNombres());
+			sb.setAlias(s.getAlias());
+			sb.setCodigo(s.getCodigo());
+			sb.setSexo(s.getSexo());
+			sb.setFechaDeNacimiento(s.getFechaDeNacimiento());
+			sb.setDepartamentoDeNacimiento(s.getDepartamentoDeNacimiento());
+			sb.setProvinciaDeNacimiento(s.getProvinciaDeNacimiento());
+			sb.setDistritoDeNacimiento(s.getDistritoDeNacimiento());
+			sb.setGradoDeInstruccion(s.getGradoDeInstruccion());
+			sb.setEstadoCivil(s.getEstadoCivil());
+			sb.setEstatura(s.getEstatura());
+			sb.setFechaDeInscripcion(s.getFechaDeInscripcion());
+			sb.setNombrePadre(s.getNombrePadre());
+			sb.setNombreMadre(s.getNombreMadre());
+			sb.setFechaDeEmision(s.getFechaDeEmision());
+			sb.setRestriccion(s.getRestriccion());
+			sb.setDomicilio(s.getDomicilio());
+			sb.setDepartamentoDeDomicilio(s.getDepartamentoDeDomicilio());
+			sb.setProvinciaDeDomicilio(s.getProvinciaDeDomicilio());
+			sb.setDistritoDeDomicilio(s.getDistritoDeDomicilio());
+			sb.setMultasElectorales(s.getMultasElectorales());
+			sb.setIdRasgosParticulares(s.getRasgosParticulares().getIdRasgosParticulares());
+			sb.setCelulares(s.getCelulares());
+			sb.setTelefonos(s.getTelefonos());
+			sb.setCorreos(s.getCorreos());
+			sb.setDirecciones(s.getDirecciones());
+			sb.setUrlSospechoso(s.getUrlSospechoso());
+			
+			lsb.add(sb);
+		}
+		
+		return lsb;
 	}
 
 	@Transactional
@@ -230,4 +283,5 @@ public class SospechosoServiceImpl implements SospechosoService{
 		Integer cont = Integer.parseInt(queryCont.getSingleResult().toString());
 		return cont > 0 ? true : false;
 	}
+
 }

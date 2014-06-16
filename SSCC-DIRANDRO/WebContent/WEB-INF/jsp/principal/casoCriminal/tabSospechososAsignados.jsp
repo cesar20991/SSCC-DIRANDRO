@@ -12,6 +12,12 @@ function initSospechososAsignado(sospechosos){
 			}else{
 				imagen = '<img src="'+sospechoso.urlSospechoso+'" alt="logo" style="width: 90px; height: 120px;" />';
 			}
+			var sexo = '';
+			if(sospechoso.sexo == 'M'){
+				sexo = 'Masculino';
+			}else if(sospechoso.sexo == 'F'){
+				sexo = 'Femenino';
+			}
 			
 			$("#divMostrarSospechosos").append(
 					'<table class="table table-bordered table-condensed">'+
@@ -33,7 +39,7 @@ function initSospechososAsignado(sospechosos){
 						'</tr>'+
 						'<tr>'+
 							'<td colspan="2">Sexo:</td>'+
-							'<td colspan="2"><span id="hdrSexo">'+sospechoso.sexo+'</span></td>'+
+							'<td colspan="2"><span id="hdrSexo">'+sexo+'</span></td>'+
 						'</tr>'+
 					'</tbody>'+
 				'</table>');
@@ -214,6 +220,11 @@ function vaciarFormulario(){
 	$("#hdnMultasElectorales").val("");
 }
 
+function popUp(){
+	var caracteristicas = "scrollTo,resizable=1,scrollbars=1,location=0";
+  	nueva=window.open("popUpAsignarSospechoso", 'Popup', caracteristicas);
+  	return false;
+}
 </script>
 <div id="divSospechososAsignados">
 	<div id="alertasMostrarSospechoso" style="display: none;">
@@ -243,7 +254,7 @@ function vaciarFormulario(){
 		       		<div class="control-group">
 		          		<label class="control-label">Código de Sospechoso: </label>
 		          		<div class="controls">
-		          			<input class="span2" type="text" name="codigo" id="txtCodigo"> <button class="btn btn-primary btn-mini asignar" type="button" id="btnBuscarSospechoso"><i class="icon-search icon-white"></i></button>
+		          			<input class="span2" type="text" name="codigo" id="txtCodigo"> <button class="btn btn-primary btn-mini asignar" type="button" id="btnBuscarSospechoso" onclick="popUp()"><i class="icon-search icon-white"></i></button>
 		          			
 		          		</div>
 		       		</div>		       		
