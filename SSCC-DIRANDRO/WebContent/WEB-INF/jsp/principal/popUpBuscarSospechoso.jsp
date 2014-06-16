@@ -61,7 +61,7 @@ $.ajax({
 								'<td>Código Único de Identificación:</td>'+
 								'<td align="center"><span id="hdrCodigoUnicoDeIdentificacion">'+sospechoso.codigoUnicoDeIdentificacion+'</span></td>'+
 								'<td>Acción:</td>'+
-								'<td><button class="btn btn-danger btn-mini asignar" id="" type="button" onlcick="selectAndClose(&#39;'+sospechoso.codigo+'&#39;)"><i class="icon-plus icon-white"></i></button></td>'+
+								'<td><button class="btn btn-danger btn-mini asignar" id="" type="button" onclick="selectAndClose(&#39;'+sospechoso.codigo+'&#39;,&#39;'+sospechoso.codigoUnicoDeIdentificacion+'&#39;,&#39;'+sospechoso.primerApellido+'&#39;,&#39;'+sospechoso.segundoApellido+'&#39;,&#39;'+sospechoso.preNombres+'&#39;,&#39;'+sospechoso.alias+'&#39;,&#39;'+sospechoso.sexo+'&#39;,&#39;'+sospechoso.fechaDeNacimiento+'&#39;,&#39;'+sospechoso.departamentoDeNacimiento+'&#39;,&#39;'+sospechoso.provinciaDeNacimiento+'&#39;,&#39;'+sospechoso.distritoDeNacimiento+'&#39;,&#39;'+sospechoso.gradoDeInstruccion+'&#39;,&#39;'+sospechoso.estadoCivil+'&#39;,&#39;'+sospechoso.estatura+'&#39;,&#39;'+sospechoso.fechaDeInscripcion+'&#39;,&#39;'+sospechoso.nombrePadre+'&#39;,&#39;'+sospechoso.nombreMadre+'&#39;,&#39;'+sospechoso.fechaDeEmision+'&#39;,&#39;'+sospechoso.restriccion+'&#39;,&#39;'+sospechoso.domicilio+'&#39;,&#39;'+sospechoso.departamentoDeDomicilio+'&#39;,&#39;'+sospechoso.provinciaDeDomicilio+'&#39;,&#39;'+sospechoso.distritoDeDomicilio+'&#39;,&#39;'+sospechoso.multasElectorales+'&#39;)"><i class="icon-plus icon-white"></i></button></td>'+
 							'</tr>'+
 							'<tr>'+
 								'<td colspan="2">Apellidos y Nombres:</td>'+
@@ -118,7 +118,6 @@ function selectAndClose(codigo, cui, primerApellido, segundoApellido, prenombres
 	window.opener.$("#txtDistritoDeDomicilio").val(distDomicilio);
 	window.opener.$("#txtMultasElectorales").val(multas);
 	window.opener.$("#hdnMultasElectorales").val(multas);
-	
 	window.close();
 }
 </script>
