@@ -161,7 +161,7 @@ public class SospechosoServiceImpl implements SospechosoService{
 			sospechoso.setDepartamentoDeDomicilio("");
 		}
 		if(sospechoso.getProvinciaDeDomicilio()==null){
-			sospechoso.setDepartamentoDeDomicilio("");
+			sospechoso.setProvinciaDeDomicilio("");
 		}
 		if(sospechoso.getDistritoDeDomicilio()==null){
 			sospechoso.setDistritoDeDomicilio("");
