@@ -81,7 +81,7 @@ $.ajax({
 		}
 	});
 	
-function selectAndClose(codigo, cui, primerApellido, segundoApellido, prenombres, alias, sexo, fecNacimiento, depNacimiento, provNacimiento, distNacimiento, gradoInstruccion, estadoCivil, Estatura){
+function selectAndClose(codigo, cui, primerApellido, segundoApellido, prenombres, alias, sexo, fecNacimiento, depNacimiento, provNacimiento, distNacimiento, gradoInstruccion, estadoCivil, Estatura, fecInscripcion, nomPadre, nomMadre, fecEmision, restriccion, domicilio, depDomicilio, provDomicilio, distDomicilio, multas){
 	window.opener.document.getElementById("lbladdress").innerHTML=address;
 	window.opener.document.getElementById("lblCity").innerHTML=city;
 	window.opener.document.getElementById("lblUsState").innerHTML=usState;

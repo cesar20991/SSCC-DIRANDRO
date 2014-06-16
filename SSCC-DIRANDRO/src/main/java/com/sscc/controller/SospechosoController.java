@@ -79,21 +79,20 @@ public class SospechosoController {
 		return sospechosobean;
 	}
 	
-	@RequestMapping(value = "editarSopechoso", method = RequestMethod.POST)
-	@ResponseBody
-	public SospechosoBean editarSopechoso(@ModelAttribute Sospechoso sospechoso, HttpServletRequest req, HttpSession session, Model model){
-		SospechosoBean sospechosobean = new SospechosoBean();
-		sospechosobean = sospechosoServ.editSospechosoBean(sospechoso);
-		return sospechosobean;
-	}
-	
-
 	@RequestMapping(value = "getSopechosos", method = RequestMethod.POST)
 	@ResponseBody
 	public List<SospechosoBean> getSopechosos(){
 
 		return sospechosoServ.getSospechosos();
 		
+	}
+	
+	@RequestMapping(value = "editarSopechoso", method = RequestMethod.POST)
+	@ResponseBody
+	public SospechosoBean editarSopechoso(@ModelAttribute Sospechoso sospechoso, HttpServletRequest req, HttpSession session, Model model){
+		SospechosoBean sospechosobean = new SospechosoBean();
+		sospechosobean = sospechosoServ.editSospechosoBean(sospechoso);
+		return sospechosobean;
 	}
 	
 	@RequestMapping(value = "editarDatosContacto", method = RequestMethod.POST)
