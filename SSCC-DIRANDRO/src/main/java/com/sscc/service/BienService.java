@@ -21,4 +21,8 @@ public interface BienService {
 	InmuebleBean editInmuebleBean(InmuebleBean inmuebleBean);
 	
 	List<BienBean> getBienesBean();
+	
+	Boolean getPartidaRegistral (String partidaRegistral);
+	//Inmuebles:
+	
 }

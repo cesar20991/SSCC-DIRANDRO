@@ -129,5 +129,15 @@ public class BienController {
 		bienes = bienServ.getBienesBean();
 		return bienes;
 	}
+	//Validaciones-Bienes:
+	@RequestMapping(value = "getPartidaRegistral-{partidaRegistral}", method = RequestMethod.POST)
+	@ResponseBody
+	public Boolean getPartidaRegistral(@PathVariable("partidaRegistral") String partidaRegistral){
+		if(bienServ.getPartidaRegistral(partidaRegistral)){
+			return true;
+		}else{
+			return false;
+		}
+	}
 	
 }

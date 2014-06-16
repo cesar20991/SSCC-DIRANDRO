@@ -71,5 +71,12 @@ public class UsuarioServiceImpl implements UsuarioService {
 		
 		return result;
 	}
+
+	public Boolean getCorreo(String correoElectronico) {
+		Query queryCont = em.createQuery("SELECT COUNT(u) FROM Usuario u WHERE u.correoElectronico =:correoElectronico");
+		queryCont.setParameter("correoElectronico", correoElectronico);
+		Integer cont = Integer.parseInt(queryCont.getSingleResult().toString());
+		return cont > 0 ? true : false;
+	}
 	
 }

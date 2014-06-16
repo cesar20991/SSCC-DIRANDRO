@@ -19,5 +19,5 @@ public interface SospechosoService {
 	
 	Boolean getAlias(String alias);
 	
-	Boolean getCUI(String cui);
+	Boolean getCUI(String codigoUnicoDeIdentificacion);
 }

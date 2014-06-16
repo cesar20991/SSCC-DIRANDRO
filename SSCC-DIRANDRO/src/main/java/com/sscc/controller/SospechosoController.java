@@ -116,5 +116,13 @@ public class SospechosoController {
 			return false;
 		}
 	}
-	
+	@RequestMapping(value = "getCUI-{codigoUnicoDeIdentificacion}", method = RequestMethod.POST)
+	@ResponseBody
+	public Boolean getCUI(@PathVariable("codigoUnicoDeIdentificacion") String codigoUnicoDeIdentificacion){
+		if(sospechosoServ.getCUI(codigoUnicoDeIdentificacion)){
+			return true;
+		}else{
+			return false;
+		}
+	}
 }

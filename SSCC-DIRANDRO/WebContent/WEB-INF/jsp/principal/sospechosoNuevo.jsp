@@ -22,6 +22,8 @@
 <script src="js/bootstrap-collapse.js"></script>
 <script src="js/jquery.validate.min.js"></script>
 <script src="js/validateFecha.js"></script>
+<!-- alertas de colores -->
+<script src="js/bootstrap-alert.js"></script>
 <!-- styles -->
 <link href="css/bootstrap.css" rel="stylesheet">
 <link href="css/bootstrap-responsive.css" rel="stylesheet">
@@ -54,6 +56,7 @@ $(document).on('change','#txtEmision', function(e){
 });
 
 var flag = false;
+var flag2 = false;
 $(document).ready(function() {
 	$( ".datepicker" ).datepicker({ dateFormat: 'dd/mm/yy' });
 	
@@ -92,8 +95,9 @@ $(document).ready(function() {
 			if($("#txtEmision").val() == ''){
 				$("#hdnFecEmi").val('1000-12-12');
 			}
-			//$("#hdnFecEmi").val($("#txtEmision").val());
-			if(flag == true){
+			if(flag == true && flag2 == true){
+				form.submit();
+			}else if($("#txtCodUnico").val() == ''){
 				form.submit();
 			}else{
 				alert("Debe Corregir los datos");
@@ -122,6 +126,27 @@ $(document).on('change','#txtAlias', function(e){
 		}
 	});
 });
+$(document).on('change','#txtCodUnico', function(e){
+	$.ajax({
+		url: 'getCUI-'+$('#txtCodUnico').val(),
+		type: 'post',
+		dataType: 'json',
+		data: '',
+		success: function(sospechoso){
+			if(sospechoso == true){
+				$("#alertasSospechosoNuevo2").show();
+				$("#alertasSospechosoNuevo2").empty();
+				$("#alertasSospechosoNuevo2").append('<div class="alert alert-error" id="alertaVerde">'+
+	 			        '<a class="close" data-dismiss="alert">×</a>'+
+	 			        '<strong id="msgVerde">El Código Único de Identificación usado ya existe en otro sospechoso.</strong>'+
+	 			    '</div>');
+				flag2 = false;
+			}else{
+				flag2 = true;
+			}
+		}
+	});
+});
 </script>
 </head>
 <body>
@@ -136,6 +161,8 @@ $(document).on('change','#txtAlias', function(e){
 	<section class="span9" style="margin-left: 80px;">
 		<fieldset class="well">
 		<div id="alertasSospechosoNuevo" style="display: none;">
+		</div>
+		<div id="alertasSospechosoNuevo2" style="display: none;">
 		</div>
 			<form:form class="form-horizontal" id="formCrearSospechoso" action="crearSospechoso" commandName="sospechoso">
 		       	<legend><span class="colored">///</span> Datos Personales del Sospechoso:</legend>

@@ -291,4 +291,11 @@ public class BienServiceImpl implements BienService {
 		}
 		return dec;
 	}
+
+	public Boolean getPartidaRegistral(String partidaRegistral) {
+		Query queryCont = em.createQuery("SELECT COUNT(b) FROM Bien b WHERE b.partidaRegistral =:partidaRegistral");
+		queryCont.setParameter("partidaRegistral", partidaRegistral);
+		Integer cont = Integer.parseInt(queryCont.getSingleResult().toString());
+		return cont > 0 ? true : false;
+	}
 }

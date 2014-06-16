@@ -277,11 +277,10 @@ public class SospechosoServiceImpl implements SospechosoService{
 		return cont > 0 ? true : false;
 	}
 
-	public Boolean getCUI(String cui) {
+	public Boolean getCUI(String codigoUnicoDeIdentificacion) {
 		Query queryCont = em.createQuery("SELECT COUNT(s) FROM Sospechoso s WHERE s.codigoUnicoDeIdentificacion =:codigoUnicoDeIdentificacion");
-		queryCont.setParameter("codigoUnicoDeIdentificacion", cui);
+		queryCont.setParameter("codigoUnicoDeIdentificacion", codigoUnicoDeIdentificacion);
 		Integer cont = Integer.parseInt(queryCont.getSingleResult().toString());
 		return cont > 0 ? true : false;
 	}
-
 }
