@@ -12,8 +12,11 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.sscc.form.CasoCriminalBean;
+import com.sscc.form.SospechosoBean;
 import com.sscc.model.CasoCriminal;
+import com.sscc.model.CasoPorSospechoso;
 import com.sscc.model.Perfil;
+import com.sscc.model.Sospechoso;
 import com.sscc.model.Usuario;
 import com.sscc.model.CasoPorAgente;
 import com.sscc.util.DateUtil;
@@ -255,4 +258,86 @@ public class CasoCriminalServiceImpl implements CasoCriminalService{
 		
 	}
 
+	@Transactional
+	public Boolean crearSospechosoAlCaso(Integer idCaso, Integer idSospechoso) {
+			
+		CasoPorSospechoso cps = new CasoPorSospechoso();
+		
+		CasoCriminal c = new CasoCriminal();
+		c.setIdCasoCriminal(idCaso);
+		
+		Sospechoso s = new Sospechoso();
+		s.setIdSospechoso(idSospechoso);
+		
+		cps.setCasoCriminal(c);
+		cps.setSospechoso(s);
+		cps.setEstado("habilitado");
+		
+		em.persist(cps);
+	
+		return true;
+	}
+	
+	@Transactional
+	public List<SospechosoBean> getSospechosoPorCaso(Integer idCasoCriminal) {
+		List<SospechosoBean> sbl = new ArrayList<SospechosoBean>();
+		
+		Query qSospechoso = em.createQuery("SELECT s FROM CasoPorSospechoso cps JOIN cps.sospechoso s JOIN cps.casoCriminal c WHERE cps.estado='habilitado' AND s.estado='habilitado' AND c.idCasoCriminal=:idCasoCriminal ORDER BY s.fecCreacionSospechoso DESC");
+		qSospechoso.setParameter("idCasoCriminal", idCasoCriminal);
+		
+		List<Sospechoso> sl = qSospechoso.getResultList();
+		
+		for(int i=0;i<sl.size();i++){
+			SospechosoBean sb = new SospechosoBean();
+			Sospechoso s = new Sospechoso();
+			s = sl.get(i);
+			
+			sb.setCodigoUnicoDeIdentificacion(s.getCodigoUnicoDeIdentificacion());
+			sb.setPrimerApellido(s.getPrimerApellido());
+			sb.setSegundoApellido(s.getSegundoApellido());
+			sb.setPreNombres(s.getPreNombres());
+			sb.setAlias(s.getAlias());
+			sb.setCodigo(s.getCodigo());
+			sb.setSexo(s.getSexo());
+			sb.setFechaDeNacimiento(s.getFechaDeNacimiento());
+			sb.setDepartamentoDeNacimiento(s.getDepartamentoDeNacimiento());
+			sb.setProvinciaDeNacimiento(s.getProvinciaDeNacimiento());
+			sb.setDistritoDeNacimiento(s.getDistritoDeNacimiento());
+			sb.setGradoDeInstruccion(s.getGradoDeInstruccion());
+			sb.setEstadoCivil(s.getEstadoCivil());
+			sb.setEstatura(s.getEstatura());
+			sb.setFechaDeInscripcion(s.getFechaDeInscripcion());
+			sb.setNombrePadre(s.getNombrePadre());
+			sb.setNombreMadre(s.getNombreMadre());
+			sb.setFechaDeEmision(s.getFechaDeEmision());
+			sb.setRestriccion(s.getRestriccion());
+			sb.setDomicilio(s.getDomicilio());
+			sb.setDepartamentoDeDomicilio(s.getDepartamentoDeDomicilio());
+			sb.setProvinciaDeDomicilio(s.getProvinciaDeDomicilio());
+			sb.setDistritoDeDomicilio(s.getDistritoDeDomicilio());
+			sb.setMultasElectorales(s.getMultasElectorales());
+			sb.setIdRasgosParticulares(s.getRasgosParticulares().getIdRasgosParticulares());
+			sb.setCelulares(s.getCelulares());
+			sb.setTelefonos(s.getTelefonos());
+			sb.setCorreos(s.getCorreos());
+			sb.setDirecciones(s.getDirecciones());
+			sb.setUrlSospechoso(s.getUrlSospechoso());
+			sb.setIdSospechoso(s.getIdSospechoso());
+			sbl.add(sb);
+		}
+		
+		return sbl;
+	}
+
+	public Boolean deshasignarSospechosoDelCaso(Integer idCaso, Integer idSospechoso) {
+		try{
+			Query q = em.createQuery("SELECT cps FROM CasoPorSospechoso cps JOIN cps.sospechoso s JOIN cps.casoCriminal c WHERE cps.estado='habilitado' AND s.estado='habilitado' AND c.idCasoCriminal="+idCaso+" AND s.idSospechoso="+idSospechoso);
+			CasoPorSospechoso cps = (CasoPorSospechoso) q.getSingleResult();
+			CasoPorSospechoso cpsEditado = em.merge(cps);
+			cpsEditado.setEstado("dehabilitado");
+			return true;
+		}catch(Exception e){
+			return false;
+		}
+	}
 }

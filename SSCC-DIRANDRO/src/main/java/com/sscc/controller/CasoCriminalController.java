@@ -16,14 +16,20 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.sscc.form.CasoCriminalBean;
+import com.sscc.form.SospechosoBean;
 import com.sscc.model.CasoCriminal;
+import com.sscc.model.Sospechoso;
 import com.sscc.service.CasoCriminalService;
+import com.sscc.service.SospechosoService;
 
 @Controller
 public class CasoCriminalController {
 	
 	@Autowired
 	CasoCriminalService casoServ;
+	
+	@Autowired
+	SospechosoService sospechosoServ;
 	
 	@RequestMapping("toCrearCaso")
 	public String toCrearCaso() {
@@ -135,5 +141,31 @@ public class CasoCriminalController {
 		casoServ.reAsignarPersonalPolicial(idCaso, idPolicia, "deshabilitado");		
 		return true;
 	}
+	
+	@RequestMapping(value = "crearSospechosoAlCaso-{idCaso}", method = RequestMethod.POST)
+	@ResponseBody
+	public List<SospechosoBean> crearSospechosoAlCaso(@ModelAttribute Sospechoso sospechoso, @PathVariable("idCaso") Integer idCaso){
+		Integer idSospechoso = sospechosoServ.crearSospechoso(sospechoso);
+		if(casoServ.crearSospechosoAlCaso(idCaso, idSospechoso)){
+			return casoServ.getSospechosoPorCaso(idCaso);
+		}else{
+			return null;
+		}		
+	}
+	
+	@RequestMapping(value = "getSopechososPorCaso-{idCaso}", method = RequestMethod.POST)
+	@ResponseBody
+	public List<SospechosoBean> getSopechososPorCaso(@PathVariable("idCaso") Integer idCaso){
+			return casoServ.getSospechosoPorCaso(idCaso);
+	}
 
+	@RequestMapping(value = "getSopechososPorCaso-{idCaso}-{idSospechoso}", method = RequestMethod.POST)
+	@ResponseBody
+	public List<SospechosoBean> getSopechososPorCaso(@PathVariable("idCaso") Integer idCaso,@PathVariable("idSospechoso") Integer idSospechoso){
+			if(casoServ.deshasignarSospechosoDelCaso(idCaso, idSospechoso)){
+				return casoServ.getSospechosoPorCaso(idCaso);
+			}else{
+				return null;
+			}
+	}
 }

@@ -69,8 +69,8 @@ var idEntidad = '';
 						<td><span id="hdrAlias">&nbsp;</span></td>
 					</tr>
 					<tr>
-						<td>Caso:</td>
-						<td><span id="hdrCaso">&nbsp;</span></td>
+						<td>Sexo:</td>
+						<td><span id="hdrSexo">&nbsp;</span></td>
 					</tr>
 				</tbody>
 			</table>

@@ -2,21 +2,82 @@
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <script type="text/javascript">
+function initSospechososAsignado(sospechosos){
+	$("#divMostrarSospechosos").empty();
+		$.each(sospechosos, function(i, sospechoso) {
+			var imagen = '';
+			
+			if(sospechoso.urlSospechoso == null){
+				imagen = '<img src="img/skills.png" alt="logo" style="width: 90px; height: 120px;" />';
+			}else{
+				imagen = '<img src="'+sospechoso.urlSospechoso+'" alt="logo" style="width: 90px; height: 120px;" />';
+			}
+			
+			$("#divMostrarSospechosos").append(
+					'<table class="table table-bordered table-condensed">'+
+	 					'<tbody>'+
+						'<tr>'+
+							'<td rowspan="5" align="center" style="width: 90px; height: 100px;" id="tdImagen">'+imagen+'</td>'+
+							'<td>Código Único de Identificación:</td>'+
+							'<td align="center"><span id="hdrCodigoUnicoDeIdentificacion">'+sospechoso.codigoUnicoDeIdentificacion+'</span></td>'+
+							'<td>Acción:</td>'+
+							'<td><button class="btn btn-danger btn-mini asignar" id="cancelarAsigna_'+sospechoso.idSospechoso+'" type="button"><i class="icon-minus icon-white"></i></button></td>'+
+						'</tr>'+
+						'<tr>'+
+							'<td colspan="2">Apellidos y Nombres:</td>'+
+							'<td colspan="2"><span id="hdrPrimerApellido">'+sospechoso.primerApellido+'</span>&nbsp;<span id="hdrSegundoApellido">'+sospechoso.segundoApellido+'</span>&nbsp;<span id="hdrPrenombres">'+sospechoso.preNombres+'</span></td>'+
+						'</tr>'+
+						'<tr>'+
+							'<td colspan="2">Alias:</td>'+
+							'<td colspan="2"><a href="toSospechosoPrincipal-'+sospechoso.idSospechoso+'"><span id="hdrAlias">'+sospechoso.alias+'</span></a></td>'+
+						'</tr>'+
+						'<tr>'+
+							'<td colspan="2">Sexo:</td>'+
+							'<td colspan="2"><span id="hdrSexo">'+sospechoso.sexo+'</span></td>'+
+						'</tr>'+
+					'</tbody>'+
+				'</table>');
+		});
+}
+
+$(document).on('click','.asignar', function(e){
+	var id1 = (this.id).split("_")[0];
+	var id2 = (this.id).split("_")[1];
+	
+	switch(id1){
+		case 'cancelarAsigna':
+			var respuesta = confirm('¿Esta seguro que desea quitar a este sospechoso?');
+			if(respuesta){
+				$.ajax({
+			 		url: 'deshasignarSospechoso-'+$("#hdnIdCaso").text()+"-"+id2,
+			 		type: 'post',
+			 		dataType: 'json',
+			 		data: '',
+			 		success: function(sospechosos){
+			 			initSospechososAsignado(sospechosos);
+			 		}
+			 	});
+			}			
+		break;
+	}
+	
+});
+
 $(document).ready(function(){
 	$(".datepicker").datepicker({dateFormat: 'dd/mm/yy'});
 	//esto es para que los checkbox del editar esten en blanco cuando se carga la pagina
 	$("#checkFemenino").prop("checked", false);
 	$("#checkMasculino").prop("checked", false);
 		
-		/*$.ajax({
-	 		url: 'getSopechoso-'+idSospechoso,
+		$.ajax({
+	 		url: 'getSopechososPorCaso-'+$("#hdnIdCaso").text(),
 	 		type: 'post',
 	 		dataType: 'json',
 	 		data: '',
-	 		success: function(sospechoso){
-	 			initSospechoso(sospechoso);
+	 		success: function(sospechosos){
+	 			initSospechososAsignado(sospechosos);
 	 		}
-	 	});*/
+	 	});
 		
 		/* validacion para editar */
 		$("#formAgregarSospechoso").validate({
@@ -47,25 +108,38 @@ $(document).ready(function(){
 					$("#hdnFecIns").val('1000-12-12');
 				}
 				
-				/*$("#hdnEstatura").val($("#txtEstatura").val());*/
+				$("#hdnEstatura").val($("#txtEstatura").val());
 				$("#hdnCodUnico").val($("#txtCodUnico").val());
+				$("#hdnMultasElectorales").val($("#txtMultasElectorales").val());
 				
 				if($("#txtEmision").val() == ''){
 					$("#hdnFecEmi").val('1000-12-12');
 				}
-				//$("#hdnFecEmi").val($("#txtEmision").val());
+				
 				var idCasoCriminal = $("#hdnIdCaso").text();
 				
-				/*$.ajax({
-			 		url: 'agregarSospechosoAlCaso-'+idCasoCriminal,
-			 		type: 'post',
-			 		dataType: 'json',
-			 		data: $("#formAgregarSospechoso").serialize(),
-			 		success: function(sospechoso){
-			 			$("#divMostrarSospechoso").show();
-			 			$("#divEditarSospechoso").hide();
-			 		}
-			 	});*/
+				if($("#txtCodigo").val() == ''){
+					$.ajax({
+				 		url: 'crearSospechosoAlCaso-'+idCasoCriminal,
+				 		type: 'post',
+				 		dataType: 'json',
+				 		data: $("#formAgregarSospechoso").serialize(),
+				 		success: function(sospechosos){
+				 			$("#divMostrarSospechosoAsignado").show();
+				 			$("#divNuevoSospechoso").hide();
+				 			$("#alertasMostrarSospechoso").show();
+				 			$("#alertasMostrarSospechoso").append('<div class="alert alert-error" id="alertaError">'+
+				 					'<a class="close" data-dismiss="alert">×</a>'+
+				 					'<strong>Se creo y asigno correctamente el sospechoso.</strong>'+
+				 				'</div>');
+				 			vaciarFormulario();
+				 			initSospechososAsignado(sospechosos);
+				 		}
+				 	});
+				}else{
+					
+				}
+				
 			}
 		});
 });
@@ -92,40 +166,88 @@ $(document).on('change','#txtEmision', function(e){
 });
 
 $(document).on('click','#btnCancelAgregarSospechoso', function(e){
-	$("#divMostrarPersonalAsignado").show();
+	$("#divMostrarSospechosoAsignado").show();
 	$("#divNuevoSospechoso").hide();
 });
 
 $(document).on('click','#btnAgregarSospechosoNuevo', function(e){
-	
-	$("#divMostrarPersonalAsignado").hide();
 	$("#divNuevoSospechoso").show();
+	$("#divMostrarSospechosoAsignado").hide();
+	$("#alertasAgregarSospechoso").show();
+	$("#alertasAgregarSospechoso").append('<div class="alert alert-error" id="alertaError">'+
+			'<a class="close" data-dismiss="alert">×</a>'+
+			'<strong>Dejar en blanco el codigo de sospechoso si quiere agregar un sospechoso nuevo.</strong>'+
+		'</div>');
 });
 
+function vaciarFormulario(){
+	$("#txtCodigo").val("");
+	$("#hdnCodUnico").val("");
+	$("#txtCodUnico").val("");
+	$("#txtPrimerApellido").val("");
+	$("#txtSegundoApellido").val("");
+	$("#txtPrenombres").val("");
+	$("#txtAlias").val("");
+	$("#checkMasculino").prop("checked",false);
+	$("#checkFemenino").prop("checked",false);
+	$("#txtFecNac").val("");
+	$("#hdnFecNac").val("");
+	$("#txtDepartamentoDeNacimiento").val("");
+	$("#txtProvinciaDeNacimiento").val("");
+	$("#txtDistritoDeNacimiento").val("");
+	$("#selectGradoInstruccion").val("");
+	$("#sltcEstadoCivil").val("");
+	$("#txtEstatura").val("");
+	$("#hdnEstatura").val("");
+	$("#txtInscripcion").val("");
+	$("#hdnFecIns").val("");
+	$("#txtNombrePadre").val("");
+	$("#txtNombreMadre").val("");
+	$("#txtEmision").val("");
+	$("#hdnFecEmi").val("");
+	$("#txtRestriccion").val("");
+	$("#txtDomicilio").val("");
+	$("#txtDepartamentoDeDomicilio").val("");
+	$("#txtProvinciaDeDomicilio").val("");
+	$("#txtDistritoDeDomicilio").val("");
+	$("#txtMultasElectorales").val("");
+	$("#hdnMultasElectorales").val("");
+}
+
 </script>
-<div id="divPersonalAsignado">
-	<div id="alertasTab2" style="display: none;">
+<div id="divSospechososAsignados">
+	<div id="alertasMostrarSospechoso" style="display: none;">
 	</div>
-	<div id="divMostrarPersonalAsignado">
+	<div id="divMostrarSospechosoAsignado">
 		<form:form class="form-horizontal">
 			<fieldset>
 				<legend>
 					<span class=""><span class="colored">///</span> Sospechosos Asignados al caso:</span>
 					<span class="offset3"><button class="btn btn-primary btn-small asignar" type="button" id="btnAgregarSospechosoNuevo"><i class="icon-edit icon-white"></i> Agregar Sospechoso Nuevo</button></span>
 				</legend>
-				<div id="divMostrarPersonal">
+				<div id="divMostrarSospechosos">
 				
 				</div>
 			</fieldset>
 		</form:form>
 	</div>
 	<div id="divNuevoSospechoso" style="display: none;">
+		<div id="alertasAgregarSospechoso" style="display: none;">
+		</div>		
 		<fieldset class="well">
-			<form:form class="form-horizontal" id="formAgregarSospechoso" action="agregarSospechoso" commandName="sospechoso">
-		       	<legend>
+			<form:form class="form-horizontal span9" id="formAgregarSospechoso" action="agregarSospechoso" commandName="sospechoso">
+		       	<legend class="span8">
 			       	<span class="colored">///</span> Agregar Sospechoso Nuevo:
 		       	</legend>
 		       	<div class="span4">
+		       		<div class="control-group">
+		          		<label class="control-label">Código de Sospechoso: </label>
+		          		<div class="controls">
+		          			<input class="span2" type="text" name="codigo" id="txtCodigo"> <button class="btn btn-primary btn-mini asignar" type="button" id="btnBuscarSospechoso"><i class="icon-search icon-white"></i></button>
+		          			
+		          		</div>
+		       		</div>		       		
+		       		<hr>
 		       		<div class="control-group">
 		          		<label class="control-label" title="Código Único de Identificación">C.U.I: </label>
 		          		<div class="controls">
@@ -183,21 +305,21 @@ $(document).on('click','#btnAgregarSospechosoNuevo', function(e){
 		       		<div class="control-group">
 		          		<label class="control-label">Departamento de Nacimiento: </label>
 		          		<div class="controls">
-		          			<input class="span2" type="text" name="txtDepartamentoNacimiento" id="txtDepartamentoDeNacimiento">
+		          			<input class="span2" type="text" name="departamentoDeNacimiento" id="txtDepartamentoDeNacimiento">
 		          		</div>
 		       		</div>
 		       		<hr>
 		       		<div class="control-group">
 		          		<label class="control-label">Provincia de Nacimiento: </label>
 		          		<div class="controls">
-		          			<input class="span2" type="text" name="txtProvinciaNacimiento" id="txtProvinciaDeNacimiento">
+		          			<input class="span2" type="text" name="provinciaDeNacimiento" id="txtProvinciaDeNacimiento">
 		          		</div>
 		       		</div>
 		       		<hr>
 		       		<div class="control-group">
 		          		<label class="control-label">Distrito de Nacimiento: </label>
 		          		<div class="controls">
-		          			<input class="span2" type="text" name="txtDistritoNacimiento" id="txtDistritoDeNacimiento">
+		          			<input class="span2" type="text" name="distritoDeNacimiento" id="txtDistritoDeNacimiento">
 		          		</div>
 		       		</div>
 		       		<hr>
@@ -213,7 +335,9 @@ $(document).on('click','#btnAgregarSospechosoNuevo', function(e){
 				            </select>
 		          		</div>
 		       		</div>
-		       		<hr>
+		       		
+		       	</div>
+		       	<div class="span4">		       		
 		       		<div class="control-group" id="divGrado">
 		          		<label class="control-label">Estado Civil: </label>
 		          		<div class="controls">
@@ -226,8 +350,7 @@ $(document).on('click','#btnAgregarSospechosoNuevo', function(e){
 				            </select>
 		          		</div>
 		       		</div>
-		       	</div>
-		       	<div class="span4">
+		       		<hr>
 		       		<div class="control-group">
 		          		<label class="control-label">Estatura: </label>
 		          		<div class="controls">
@@ -247,14 +370,14 @@ $(document).on('click','#btnAgregarSospechosoNuevo', function(e){
 		       		<div class="control-group">
 		          		<label class="control-label">Nombre del Padre: </label>
 		          		<div class="controls">
-		          			<input class="span2" type="text" name="txtNombrePadre" id="txtNombrePadre">
+		          			<input class="span2" type="text" name="nombrePadre" id="txtNombrePadre">
 		          		</div>
 		       		</div>
 		       		<hr>
 		       		<div class="control-group">
 		          		<label class="control-label">Nombre de la Madre: </label>
 		          		<div class="controls">
-		          			<input class="span2" type="text" name="txtNombreMadre" id="txtNombreMadre">
+		          			<input class="span2" type="text" name="nombreMadre" id="txtNombreMadre">
 		          		</div>
 		       		</div>
 		       		<hr>
@@ -269,35 +392,35 @@ $(document).on('click','#btnAgregarSospechosoNuevo', function(e){
 		       		<div class="control-group">
 		          		<label class="control-label">Restricción: </label>
 		          		<div class="controls">
-		          			<input class="span2" type="text" name="txtRestriccion" id="txtRestriccion">
+		          			<input class="span2" type="text" name="restriccion" id="txtRestriccion">
 		          		</div>
 		       		</div>
 		       		<hr>
 		       		<div class="control-group">
 		          		<label class="control-label">Domicilio: </label>
 		          		<div class="controls">
-		          			<input class="span2" type="text" name="txtDomicilio" id="txtDomicilio">
+		          			<input class="span2" type="text" name="domicilio" id="txtDomicilio">
 		          		</div>
 		       		</div>
 		       		<hr>
 		       		<div class="control-group">
 		          		<label class="control-label">Departamento de Domicilio: </label>
 		          		<div class="controls">
-		          			<input class="span2" type="text" name="txtDepartamentoDeDomicilio" id="txtDepartamentoDeDomicilio">
+		          			<input class="span2" type="text" name="departamentoDeDomicilio" id="txtDepartamentoDeDomicilio">
 		          		</div>
 		       		</div>
 		       		<hr>
 		       		<div class="control-group">
 		          		<label class="control-label">Provincia de Domicilio: </label>
 		          		<div class="controls">
-		          			<input class="span2" type="text" name="txtProvinciaDeDomicilio" id="txtProvinciaDeDomicilio">
+		          			<input class="span2" type="text" name="provinciaDeDomicilio" id="txtProvinciaDeDomicilio">
 		          		</div>
 		       		</div>
 		       		<hr>
 		       		<div class="control-group">
 		          		<label class="control-label">Distrito de Domicilio: </label>
 		          		<div class="controls">
-		          			<input class="span2" type="text" name="txtDistritoDeDomicilio" id="txtDistritoDeDomicilio">
+		          			<input class="span2" type="text" name="distritoDeDomicilio" id="txtDistritoDeDomicilio">
 		          		</div>
 		       		</div>
 		       		<hr>
@@ -305,11 +428,11 @@ $(document).on('click','#btnAgregarSospechosoNuevo', function(e){
 		          		<label class="control-label">Multas Electorales: </label>
 		          		<div class="controls">
 		          			<input class="span2" type="text" name="txtMultasElectorales" id="txtMultasElectorales">
-		          			<input class="span2" type="hidden" name="txtMultasElectorales" id="txtMultasElectorales">
+		          			<input class="span2" type="hidden" name="multasElectorales" id="hdnMultasElectorales">
 		          		</div>
 		       		</div>
 		       	</div>
-	       		<div class="form-actions span8">
+	       		<div class="form-actions span6">
 		        	<button class="btn btn-success" id="btnGuardar" type="submit"><i class="icon-ok icon-white"></i> Guardar Sospechoso</button>
 		        	<button class="btn btn-danger" type="reset"><i class="icon-refresh icon-white"></i> Reset</button>
 		        	<button class="btn btn-warning" type="button" id="btnCancelAgregarSospechoso"><i class="icon-arrow-left icon-white"></i> Cancel</button>

@@ -5,6 +5,7 @@ import java.util.List;
 import javax.servlet.http.HttpSession;
 
 import com.sscc.form.CasoCriminalBean;
+import com.sscc.form.SospechosoBean;
 import com.sscc.model.CasoCriminal;
 
 public interface CasoCriminalService {
@@ -28,5 +29,11 @@ public interface CasoCriminalService {
 	Boolean asignarPersonalPolicial(Integer idCaso, Integer idPolicia, String estado);
 	
 	Boolean reAsignarPersonalPolicial(Integer idCaso, Integer idPolicia, String estado);
+	
+	Boolean crearSospechosoAlCaso(Integer idCaso, Integer idSospechoso);
+	
+	List<SospechosoBean> getSospechosoPorCaso(Integer idCasoCriminal);
+	
+	Boolean deshasignarSospechosoDelCaso(Integer idCaso, Integer idSospechoso);
 	
 }

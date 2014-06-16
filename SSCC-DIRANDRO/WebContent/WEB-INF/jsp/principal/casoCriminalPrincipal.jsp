@@ -47,6 +47,11 @@ var idEntidad = '';
 		idEntidad = '${pageContext.session.getAttribute("idPerfil")}';
 	}*/
 </script>
+<style>
+.error{
+	color: rgb(255, 0, 0);
+}
+</style>
 <body>
 
 	<!--HEADER-->
@@ -102,7 +107,7 @@ var idEntidad = '';
 						<jsp:include page="casoCriminal/tabPersonalAsignado.jsp" />
 					</div>
 					<div class="tab-pane" id="3">
-						<p>Seccion 2.</p>
+						<jsp:include page="casoCriminal/tabSospechososAsignados.jsp" />
 					</div>
 					<div class="tab-pane" id="4">
 						<p>Seccion 3.</p>

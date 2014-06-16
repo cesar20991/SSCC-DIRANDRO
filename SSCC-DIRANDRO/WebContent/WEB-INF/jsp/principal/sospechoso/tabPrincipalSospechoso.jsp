@@ -14,7 +14,7 @@ function initSospechoso(sospechoso){
 	$("#hdrSegundoApellido").empty();
 	$("#hdrPrenombres").empty();
 	$("#hdrAlias").empty();
-	$("#hdrCaso").empty();
+	$("#hdrSexo").empty();
 	//
 	$("#hdrCodigoUnicoDeIdentificacion").append(sospechoso.codigoUnicoDeIdentificacion);
 	$("#hdrPrimerApellido").append(sospechoso.primerApellido);
@@ -22,7 +22,11 @@ function initSospechoso(sospechoso){
 	$("#hdrPrenombres").append(sospechoso.preNombres);
 	$("#hdrAlias").append(sospechoso.alias);
 	//...FINAL CABECERA
-	//$("#hdrCaso").append(sospechoso.);
+	if(sospechoso.sexo == 'F'){
+		$("#hdrSexo").append("Femenino");
+	}else if(sospechoso.sexo == 'M'){
+		$("#hdrSexo").append("Masculino");
+	}
 	//TAB PRINCIPAL
 	$("#spnCodigoUnicoDeIdentificacion").empty();
 	$("#spnPrimerApellido").empty();
@@ -151,7 +155,8 @@ $(document).ready(function(){
 					$("#hdnFecIns").val('1000-12-12');
 				}
 				
-				/*$("#hdnEstatura").val($("#txtEstatura").val());*/
+				$("#hdnEstatura").val($("#txtEstatura").val());
+				$("#hdnMultasElectorales").val($("#txtMultasElectorales").val());
 				$("#hdnCodUnico").val($("#txtCodUnico").val());
 				
 				if($("#txtEmision").val() == ''){
@@ -407,11 +412,11 @@ $(document).on('change','#txtAlias', function(e){
 	</div>
 		
 	<!-- <section> Formulario editar-->
-		<fieldset class="well" style="display: none;" id="divEditarSospechoso">
+		<fieldset class="well" style="display: none; margin-left: 0%;" id="divEditarSospechoso">
 		<div id="alertasSospechosoNuevo" style="display: none;">
 		</div>
-			<form:form class="form-horizontal" id="formEditarSospechoso" action="editarSospechoso" commandName="sospechoso">
-		       	<legend>
+			<form:form class="form-horizontal span9" id="formEditarSospechoso" action="editarSospechoso" commandName="sospechoso" style="margin-left: -4%;">
+		       	<legend class="span8">
 			       	<span class="colored">///</span> Editar Datos Personales del Sospechoso:
 		       	</legend>
 		       		<input type="hidden" name="idSospechoso" id="hdnIdSospechosoEdit">
@@ -475,21 +480,21 @@ $(document).on('change','#txtAlias', function(e){
 		       		<div class="control-group">
 		          		<label class="control-label">Departamento de Nacimiento: </label>
 		          		<div class="controls">
-		          			<input class="span2" type="text" name="txtDepartamentoNacimiento" id="txtDepartamentoDeNacimiento">
+		          			<input class="span2" type="text" name="departamentoDeNacimiento" id="txtDepartamentoDeNacimiento">
 		          		</div>
 		       		</div>
 		       		<hr>
 		       		<div class="control-group">
 		          		<label class="control-label">Provincia de Nacimiento: </label>
 		          		<div class="controls">
-		          			<input class="span2" type="text" name="txtProvinciaNacimiento" id="txtProvinciaDeNacimiento">
+		          			<input class="span2" type="text" name="provinciaDeNacimiento" id="txtProvinciaDeNacimiento">
 		          		</div>
 		       		</div>
 		       		<hr>
 		       		<div class="control-group">
 		          		<label class="control-label">Distrito de Nacimiento: </label>
 		          		<div class="controls">
-		          			<input class="span2" type="text" name="txtDistritoNacimiento" id="txtDistritoDeNacimiento">
+		          			<input class="span2" type="text" name="distritoDeNacimiento" id="txtDistritoDeNacimiento">
 		          		</div>
 		       		</div>
 		       		<hr>
@@ -539,14 +544,14 @@ $(document).on('change','#txtAlias', function(e){
 		       		<div class="control-group">
 		          		<label class="control-label">Nombre del Padre: </label>
 		          		<div class="controls">
-		          			<input class="span2" type="text" name="txtNombrePadre" id="txtNombrePadre">
+		          			<input class="span2" type="text" name="nombrePadre" id="txtNombrePadre">
 		          		</div>
 		       		</div>
 		       		<hr>
 		       		<div class="control-group">
 		          		<label class="control-label">Nombre de la Madre: </label>
 		          		<div class="controls">
-		          			<input class="span2" type="text" name="txtNombreMadre" id="txtNombreMadre">
+		          			<input class="span2" type="text" name="nombreMadre" id="txtNombreMadre">
 		          		</div>
 		       		</div>
 		       		<hr>
@@ -561,35 +566,35 @@ $(document).on('change','#txtAlias', function(e){
 		       		<div class="control-group">
 		          		<label class="control-label">Restricción: </label>
 		          		<div class="controls">
-		          			<input class="span2" type="text" name="txtRestriccion" id="txtRestriccion">
+		          			<input class="span2" type="text" name="restriccion" id="txtRestriccion">
 		          		</div>
 		       		</div>
 		       		<hr>
 		       		<div class="control-group">
 		          		<label class="control-label">Domicilio: </label>
 		          		<div class="controls">
-		          			<input class="span2" type="text" name="txtDomicilio" id="txtDomicilio">
+		          			<input class="span2" type="text" name="domicilio" id="txtDomicilio">
 		          		</div>
 		       		</div>
 		       		<hr>
 		       		<div class="control-group">
 		          		<label class="control-label">Departamento de Domicilio: </label>
 		          		<div class="controls">
-		          			<input class="span2" type="text" name="txtDepartamentoDeDomicilio" id="txtDepartamentoDeDomicilio">
+		          			<input class="span2" type="text" name="departamentoDeDomicilio" id="txtDepartamentoDeDomicilio">
 		          		</div>
 		       		</div>
 		       		<hr>
 		       		<div class="control-group">
 		          		<label class="control-label">Provincia de Domicilio: </label>
 		          		<div class="controls">
-		          			<input class="span2" type="text" name="txtProvinciaDeDomicilio" id="txtProvinciaDeDomicilio">
+		          			<input class="span2" type="text" name="provinciaDeDomicilio" id="txtProvinciaDeDomicilio">
 		          		</div>
 		       		</div>
 		       		<hr>
 		       		<div class="control-group">
 		          		<label class="control-label">Distrito de Domicilio: </label>
 		          		<div class="controls">
-		          			<input class="span2" type="text" name="txtDistritoDeDomicilio" id="txtDistritoDeDomicilio">
+		          			<input class="span2" type="text" name="distritoDeDomicilio" id="txtDistritoDeDomicilio">
 		          		</div>
 		       		</div>
 		       		<hr>
@@ -597,12 +602,12 @@ $(document).on('change','#txtAlias', function(e){
 		          		<label class="control-label">Multas Electorales: </label>
 		          		<div class="controls">
 		          			<input class="span2" type="text" name="txtMultasElectorales" id="txtMultasElectorales">
-		          			<input class="span2" type="hidden" name="txtMultasElectorales" id="txtMultasElectorales">
+		          			<input class="span2" type="hidden" name="multasElectorales" id="txtMultasElectorales">
 		          		</div>
 		       		</div>
 		       	</div>
 		       		<!-- Aqui cierra mario-->
-	       		<div class="form-actions span8">
+	       		<div class="form-actions span6">
 		        	<button class="btn btn-success" id="btnGuardar" type="submit"><i class="icon-ok icon-white"></i> Guardar Sospechoso</button>
 		        	<button class="btn btn-danger" type="reset"><i class="icon-refresh icon-white"></i> Reset</button>
 		        	<button class="btn btn-warning" type="button" id="btnCancelEditar"><i class="icon-arrow-left icon-white"></i> Cancel</button>
