@@ -93,7 +93,6 @@ var idEntidad = '';
 					<li class="active"><a href="#1" data-toggle="tab">Principal</a></li>
 					<li class=""><a href="#2" data-toggle="tab">Personal Asignado</a></li>
 					<li class=""><a href="#3" data-toggle="tab">Sospechosos</a></li>
-					<li class=""><a href="#4" data-toggle="tab">Bienes</a></li>
 					<li class=""><a href="#5" data-toggle="tab">Archivos Adjuntos</a></li>
 					<li class=""><a href="#6" data-toggle="tab">Comentarios</a></li>
 					<li class=""><a href="#7" data-toggle="tab">Auditoría</a></li>
@@ -108,9 +107,6 @@ var idEntidad = '';
 					</div>
 					<div class="tab-pane" id="3">
 						<jsp:include page="casoCriminal/tabSospechososAsignados.jsp" />
-					</div>
-					<div class="tab-pane" id="4">
-						<p>Seccion 3.</p>
 					</div>
 					<div class="tab-pane" id="5">
 						<jsp:include page="../componentes/archivos.jsp" />

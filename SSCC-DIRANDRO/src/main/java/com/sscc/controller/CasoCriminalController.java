@@ -153,15 +153,25 @@ public class CasoCriminalController {
 		}		
 	}
 	
+	@RequestMapping(value = "crearSospechosoExistenteAlCaso-{idCaso}-{idSospechoso}", method = RequestMethod.POST)
+	@ResponseBody
+	public List<SospechosoBean> crearSospechosoExistenteAlCaso(@PathVariable("idSospechoso") Integer idSospechoso, @PathVariable("idCaso") Integer idCaso){
+		if(casoServ.crearSospechosoExistenteAlCaso(idCaso, idSospechoso)){
+			return casoServ.getSospechosoPorCaso(idCaso);
+		}else{
+			return null;
+		}		
+	}
+	
 	@RequestMapping(value = "getSopechososPorCaso-{idCaso}", method = RequestMethod.POST)
 	@ResponseBody
 	public List<SospechosoBean> getSopechososPorCaso(@PathVariable("idCaso") Integer idCaso){
 			return casoServ.getSospechosoPorCaso(idCaso);
 	}
 
-	@RequestMapping(value = "getSopechososPorCaso-{idCaso}-{idSospechoso}", method = RequestMethod.POST)
+	@RequestMapping(value = "deshasignarSospechoso-{idCaso}-{idSospechoso}", method = RequestMethod.POST)
 	@ResponseBody
-	public List<SospechosoBean> getSopechososPorCaso(@PathVariable("idCaso") Integer idCaso,@PathVariable("idSospechoso") Integer idSospechoso){
+	public List<SospechosoBean> deshasignarSospechoso(@PathVariable("idCaso") Integer idCaso,@PathVariable("idSospechoso") Integer idSospechoso){
 		if(casoServ.deshasignarSospechosoDelCaso(idCaso, idSospechoso)){
 			return casoServ.getSospechosoPorCaso(idCaso);
 		}else{

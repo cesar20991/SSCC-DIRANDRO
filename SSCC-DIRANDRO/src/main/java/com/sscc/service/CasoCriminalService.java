@@ -32,6 +32,8 @@ public interface CasoCriminalService {
 	
 	Boolean crearSospechosoAlCaso(Integer idCaso, Integer idSospechoso);
 	
+	Boolean crearSospechosoExistenteAlCaso(Integer idCaso, Integer idSospechoso);
+	
 	List<SospechosoBean> getSospechosoPorCaso(Integer idCasoCriminal);
 	
 	Boolean deshasignarSospechosoDelCaso(Integer idCaso, Integer idSospechoso);

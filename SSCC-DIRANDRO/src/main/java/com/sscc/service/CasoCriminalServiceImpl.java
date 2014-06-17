@@ -260,7 +260,6 @@ public class CasoCriminalServiceImpl implements CasoCriminalService{
 
 	@Transactional
 	public Boolean crearSospechosoAlCaso(Integer idCaso, Integer idSospechoso) {
-			
 		CasoPorSospechoso cps = new CasoPorSospechoso();
 		
 		CasoCriminal c = new CasoCriminal();
@@ -279,10 +278,37 @@ public class CasoCriminalServiceImpl implements CasoCriminalService{
 	}
 	
 	@Transactional
+	public Boolean crearSospechosoExistenteAlCaso(Integer idCaso, Integer idSospechoso) {
+		boolean result = true;
+		Query qSospechoso = em.createQuery("SELECT COUNT(cps.idCasoPorSospechoso) FROM CasoPorSospechoso cps JOIN cps.sospechoso s JOIN cps.casoCriminal c WHERE c.idCasoCriminal ="+idCaso+" AND s.idSospechoso="+idSospechoso+" AND cps.estado='habilitado'");
+		Integer count = Integer.parseInt(qSospechoso.getSingleResult().toString());
+		if(count == 0){
+			CasoPorSospechoso cps = new CasoPorSospechoso();
+			
+			CasoCriminal c = new CasoCriminal();
+			c.setIdCasoCriminal(idCaso);
+			
+			Sospechoso s = new Sospechoso();
+			s.setIdSospechoso(idSospechoso);
+			
+			cps.setCasoCriminal(c);
+			cps.setSospechoso(s);
+			cps.setEstado("habilitado");
+			System.err.println("CREO");
+			em.persist(cps);
+		
+			result = true;
+		}else if(count > 0){
+			result = false;
+		}
+		return result;
+	}
+	
+	@Transactional
 	public List<SospechosoBean> getSospechosoPorCaso(Integer idCasoCriminal) {
 		List<SospechosoBean> sbl = new ArrayList<SospechosoBean>();
 		
-		Query qSospechoso = em.createQuery("SELECT s FROM CasoPorSospechoso cps JOIN cps.sospechoso s JOIN cps.casoCriminal c WHERE cps.estado='habilitado' AND s.estado='habilitado' AND c.idCasoCriminal=:idCasoCriminal ORDER BY s.fecCreacionSospechoso DESC");
+		Query qSospechoso = em.createQuery("SELECT s FROM CasoPorSospechoso cps JOIN cps.sospechoso s JOIN cps.casoCriminal c WHERE cps.estado='habilitado' AND c.idCasoCriminal=:idCasoCriminal ORDER BY s.fecCreacionSospechoso DESC");
 		qSospechoso.setParameter("idCasoCriminal", idCasoCriminal);
 		
 		List<Sospechoso> sl = qSospechoso.getResultList();
@@ -329,12 +355,13 @@ public class CasoCriminalServiceImpl implements CasoCriminalService{
 		return sbl;
 	}
 
+	@Transactional
 	public Boolean deshasignarSospechosoDelCaso(Integer idCaso, Integer idSospechoso) {
 		try{
-			Query q = em.createQuery("SELECT cps FROM CasoPorSospechoso cps JOIN cps.sospechoso s JOIN cps.casoCriminal c WHERE cps.estado='habilitado' AND s.estado='habilitado' AND c.idCasoCriminal="+idCaso+" AND s.idSospechoso="+idSospechoso);
+			Query q = em.createQuery("SELECT cps FROM CasoPorSospechoso cps JOIN cps.sospechoso s JOIN cps.casoCriminal c WHERE cps.estado='habilitado' AND c.idCasoCriminal="+idCaso+" AND s.idSospechoso="+idSospechoso);
 			CasoPorSospechoso cps = (CasoPorSospechoso) q.getSingleResult();
 			CasoPorSospechoso cpsEditado = em.merge(cps);
-			cpsEditado.setEstado("dehabilitado");
+			cpsEditado.setEstado("deshabilitado");
 			return true;
 		}catch(Exception e){
 			return false;

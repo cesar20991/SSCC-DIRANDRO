@@ -134,7 +134,7 @@ $(document).ready(function(){
 				 			$("#divMostrarSospechosoAsignado").show();
 				 			$("#divNuevoSospechoso").hide();
 				 			$("#alertasMostrarSospechoso").show();
-				 			$("#alertasMostrarSospechoso").append('<div class="alert alert-error" id="alertaError">'+
+				 			$("#alertasMostrarSospechoso").append('<div class="alert alert-success" id="alertaError">'+
 				 					'<a class="close" data-dismiss="alert">×</a>'+
 				 					'<strong>Se creo y asigno correctamente el sospechoso.</strong>'+
 				 				'</div>');
@@ -143,7 +143,31 @@ $(document).ready(function(){
 				 		}
 				 	});
 				}else{
-					
+					$.ajax({
+				 		url: 'crearSospechosoExistenteAlCaso-'+idCasoCriminal+"-"+$("#txtIdSospechosoAux").val(),
+				 		type: 'post',
+				 		dataType: 'json',
+				 		data: '',
+				 		success: function(sospechosos){
+				 			if(sospechosos == null){
+				 				$("#alertasMostrarSospechoso").show();
+					 			$("#alertasMostrarSospechoso").append('<div class="alert alert-error" id="alertaError">'+
+					 					'<a class="close" data-dismiss="alert">×</a>'+
+					 					'<strong>Ya esta asignado este sospechoso.</strong>'+
+					 				'</div>');
+				 			}else{
+				 				$("#divMostrarSospechosoAsignado").show();
+					 			$("#divNuevoSospechoso").hide();
+					 			$("#alertasMostrarSospechoso").show();
+					 			$("#alertasMostrarSospechoso").append('<div class="alert alert-success" id="alertaError">'+
+					 					'<a class="close" data-dismiss="alert">×</a>'+
+					 					'<strong>Se asigno correctamente el sospechoso.</strong>'+
+					 				'</div>');
+					 			vaciarFormulario();
+					 			initSospechososAsignado(sospechosos);	
+				 			}				 			
+				 		}
+				 	});
 				}
 				
 			}
@@ -174,6 +198,7 @@ $(document).on('change','#txtEmision', function(e){
 $(document).on('click','#btnCancelAgregarSospechoso', function(e){
 	$("#divMostrarSospechosoAsignado").show();
 	$("#divNuevoSospechoso").hide();
+	vaciarFormulario();
 });
 
 $(document).on('click','#btnAgregarSospechosoNuevo', function(e){
@@ -255,7 +280,7 @@ function popUp(){
 		          		<label class="control-label">Código de Sospechoso: </label>
 		          		<div class="controls">
 		          			<input class="span2" type="text" name="codigo" id="txtCodigo"> <button class="btn btn-primary btn-mini asignar" type="button" id="btnBuscarSospechoso" onclick="popUp()"><i class="icon-search icon-white"></i></button>
-		          			
+		          			<input type="hidden" id="txtIdSospechosoAux">
 		          		</div>
 		       		</div>		       		
 		       		<hr>

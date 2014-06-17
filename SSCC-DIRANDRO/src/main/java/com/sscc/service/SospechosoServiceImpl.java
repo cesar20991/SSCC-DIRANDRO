@@ -106,6 +106,7 @@ public class SospechosoServiceImpl implements SospechosoService{
 			sb.setCorreos(s.getCorreos());
 			sb.setDirecciones(s.getDirecciones());
 			sb.setUrlSospechoso(s.getUrlSospechoso());
+			sb.setIdSospechoso(s.getIdSospechoso());
 			
 			lsb.add(sb);
 		}

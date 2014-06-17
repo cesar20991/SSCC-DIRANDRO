@@ -61,7 +61,7 @@ $.ajax({
 								'<td>Código Único de Identificación:</td>'+
 								'<td align="center"><span id="hdrCodigoUnicoDeIdentificacion">'+sospechoso.codigoUnicoDeIdentificacion+'</span></td>'+
 								'<td>Acción:</td>'+
-								'<td><button class="btn btn-danger btn-mini asignar" id="" type="button" onclick="selectAndClose(&#39;'+sospechoso.codigo+'&#39;,&#39;'+sospechoso.codigoUnicoDeIdentificacion+'&#39;,&#39;'+sospechoso.primerApellido+'&#39;,&#39;'+sospechoso.segundoApellido+'&#39;,&#39;'+sospechoso.preNombres+'&#39;,&#39;'+sospechoso.alias+'&#39;,&#39;'+sospechoso.sexo+'&#39;,&#39;'+sospechoso.fechaDeNacimiento+'&#39;,&#39;'+sospechoso.departamentoDeNacimiento+'&#39;,&#39;'+sospechoso.provinciaDeNacimiento+'&#39;,&#39;'+sospechoso.distritoDeNacimiento+'&#39;,&#39;'+sospechoso.gradoDeInstruccion+'&#39;,&#39;'+sospechoso.estadoCivil+'&#39;,&#39;'+sospechoso.estatura+'&#39;,&#39;'+sospechoso.fechaDeInscripcion+'&#39;,&#39;'+sospechoso.nombrePadre+'&#39;,&#39;'+sospechoso.nombreMadre+'&#39;,&#39;'+sospechoso.fechaDeEmision+'&#39;,&#39;'+sospechoso.restriccion+'&#39;,&#39;'+sospechoso.domicilio+'&#39;,&#39;'+sospechoso.departamentoDeDomicilio+'&#39;,&#39;'+sospechoso.provinciaDeDomicilio+'&#39;,&#39;'+sospechoso.distritoDeDomicilio+'&#39;,&#39;'+sospechoso.multasElectorales+'&#39;)"><i class="icon-plus icon-white"></i></button></td>'+
+								'<td><button class="btn btn-danger btn-mini asignar" id="" type="button" onclick="selectAndClose(&#39;'+sospechoso.idSospechoso+'&#39;, &#39;'+sospechoso.codigo+'&#39;,&#39;'+sospechoso.codigoUnicoDeIdentificacion+'&#39;,&#39;'+sospechoso.primerApellido+'&#39;,&#39;'+sospechoso.segundoApellido+'&#39;,&#39;'+sospechoso.preNombres+'&#39;,&#39;'+sospechoso.alias+'&#39;,&#39;'+sospechoso.sexo+'&#39;,&#39;'+sospechoso.fechaDeNacimiento+'&#39;,&#39;'+sospechoso.departamentoDeNacimiento+'&#39;,&#39;'+sospechoso.provinciaDeNacimiento+'&#39;,&#39;'+sospechoso.distritoDeNacimiento+'&#39;,&#39;'+sospechoso.gradoDeInstruccion+'&#39;,&#39;'+sospechoso.estadoCivil+'&#39;,&#39;'+sospechoso.estatura+'&#39;,&#39;'+sospechoso.fechaDeInscripcion+'&#39;,&#39;'+sospechoso.nombrePadre+'&#39;,&#39;'+sospechoso.nombreMadre+'&#39;,&#39;'+sospechoso.fechaDeEmision+'&#39;,&#39;'+sospechoso.restriccion+'&#39;,&#39;'+sospechoso.domicilio+'&#39;,&#39;'+sospechoso.departamentoDeDomicilio+'&#39;,&#39;'+sospechoso.provinciaDeDomicilio+'&#39;,&#39;'+sospechoso.distritoDeDomicilio+'&#39;,&#39;'+sospechoso.multasElectorales+'&#39;)"><i class="icon-plus icon-white"></i></button></td>'+
 							'</tr>'+
 							'<tr>'+
 								'<td colspan="2">Apellidos y Nombres:</td>'+
@@ -81,7 +81,8 @@ $.ajax({
 		}
 	});
 	
-function selectAndClose(codigo, cui, primerApellido, segundoApellido, prenombres, alias, sexo, fecNacimiento, depNacimiento, provNacimiento, distNacimiento, gradoInstruccion, estadoCivil, estatura, fecInscripcion, nomPadre, nomMadre, fecEmision, restriccion, domicilio, depDomicilio, provDomicilio, distDomicilio, multas){
+function selectAndClose(idSospechoso, codigo, cui, primerApellido, segundoApellido, prenombres, alias, sexo, fecNacimiento, depNacimiento, provNacimiento, distNacimiento, gradoInstruccion, estadoCivil, estatura, fecInscripcion, nomPadre, nomMadre, fecEmision, restriccion, domicilio, depDomicilio, provDomicilio, distDomicilio, multas){
+	window.opener.$("#txtIdSospechosoAux").val(idSospechoso);
 	window.opener.$("#txtCodigo").val(codigo);
 	window.opener.$("#hdnCodUnico").val(cui);
 	window.opener.$("#txtCodUnico").val(cui);
@@ -96,8 +97,15 @@ function selectAndClose(codigo, cui, primerApellido, segundoApellido, prenombres
 		window.opener.$("#checkMasculino").prop("checked",true);
 	}	
 	
-	window.opener.$("#txtFecNac").val(fecNacimiento);
-	window.opener.$("#hdnFecNac").val(fecNacimiento);
+	if(fecNacimiento == 'null'){
+		window.opener.$("#txtFecNac").val("");
+		window.opener.$("#hdnFecNac").val("");
+	}else{
+		var fecN = fecNacimiento.split("-");
+		window.opener.$("#txtFecNac").val(fecN[2]+"/"+fecN[1]+"/"+fecN[0]);
+		window.opener.$("#hdnFecNac").val(fecN[2]+"/"+fecN[1]+"/"+fecN[0]);
+	}
+	
 	window.opener.$("#txtDepartamentoDeNacimiento").val(depNacimiento);
 	window.opener.$("#txtProvinciaDeNacimiento").val(provNacimiento);
 	window.opener.$("#txtDistritoDeNacimiento").val(distNacimiento);
@@ -105,12 +113,26 @@ function selectAndClose(codigo, cui, primerApellido, segundoApellido, prenombres
 	window.opener.$("#sltcEstadoCivil").val(estadoCivil);
 	window.opener.$("#txtEstatura").val(estatura);
 	window.opener.$("#hdnEstatura").val(estatura);
-	window.opener.$("#txtInscripcion").val(fecInscripcion);
-	window.opener.$("#hdnFecIns").val(fecInscripcion);
+	if(fecInscripcion == 'null'){
+		window.opener.$("#txtInscripcion").val("");
+		window.opener.$("#hdnFecIns").val("");
+	}else{
+		var fecI = fecInscripcion.split("-");
+		window.opener.$("#txtInscripcion").val(fecI[2]+"/"+fecI[1]+"/"+fecI[0]);
+		window.opener.$("#hdnFecIns").val(fecI[2]+"/"+fecI[1]+"/"+fecI[0]);
+	}
+	
 	window.opener.$("#txtNombrePadre").val(nomPadre);
 	window.opener.$("#txtNombreMadre").val(nomMadre);
-	window.opener.$("#txtEmision").val(fecEmision);
-	window.opener.$("#hdnFecEmi").val(fecEmision);
+	if(fecEmision == 'null'){
+		window.opener.$("#txtEmision").val("");
+		window.opener.$("#hdnFecEmi").val("");
+	}else{
+		var fecE = fecEmision.split("-");
+		window.opener.$("#txtEmision").val(fecE[2]+"/"+fecE[1]+"/"+fecE[0]);
+		window.opener.$("#hdnFecEmi").val(fecE[2]+"/"+fecE[1]+"/"+fecE[0]);
+	}
+	
 	window.opener.$("#txtRestriccion").val(restriccion);
 	window.opener.$("#txtDomicilio").val(domicilio);
 	window.opener.$("#txtDepartamentoDeDomicilio").val(depDomicilio);
