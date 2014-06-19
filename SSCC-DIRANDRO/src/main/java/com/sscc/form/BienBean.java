@@ -10,7 +10,18 @@ public class BienBean {
 
 	private Integer id;
 	private String codigo;
+	
+	
 	private Integer tipoBien;
+	private String tipo;
+	
+	
+	public String getTipo() {
+		return tipo;
+	}
+	public void setTipo(String tipo) {
+		this.tipo = tipo;
+	}
 	public Integer getIdBien() {
 		return idBien;
 	}

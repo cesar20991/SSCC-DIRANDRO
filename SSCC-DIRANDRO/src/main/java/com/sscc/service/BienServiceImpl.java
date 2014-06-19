@@ -263,9 +263,11 @@ public class BienServiceImpl implements BienService {
 			if(bien.getInmueble()!=null){
 				bb.setTipoBien(1);
 				bb.setCodigo(bien.getInmueble().getCodigo());
+				bb.setTipo("Inmueble");
 			}else if(bien.getVehiculo()!=null){
 				bb.setTipoBien(2);
 				bb.setCodigo(bien.getVehiculo().getCodigo());
+				bb.setTipo("Vehiculo");
 			}
 			lBien.add(bb);
 		}

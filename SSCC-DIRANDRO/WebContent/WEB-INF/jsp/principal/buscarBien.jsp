@@ -36,7 +36,9 @@ function initAsignaBienes(bienes){
 			$("#tblBody").append('<tr>');
 				$("#tblBody").append('<td>'+bien.codigo+'<input type="hidden" name="idBien" id="hdnBien_'+indiceBien+'" value="'+bien.idBien+'"></td>');
 				$("#tblBody").append('<td><span id="spnPartidaRegistral_'+indiceBien+'">'+bien.partidaRegistral+'</span></td>'+
-						'<td><span id="spnValor_'+indiceBien+'">'+bien.valor+'</span></td>');
+						'<td><span id="spnValor_'+indiceBien+'">'+bien.valor+'</span></td>'+
+						'<td><span id="spnTipo_'+indiceBien+'">'+bien.tipo+'</span></td>'+
+						'<td><span id="spnEstado_'+indiceBien+'">-</span></td>');
 				$("#tblBody").append('<td id="btnAsignar_'+indiceBien+'">'+
 						'<button class="btn btn-primary asignar" id="asignar_'+indiceBien+'"><i class="icon-edit icon-white"></i> Asignar</button>'+
 						'</td>'+
@@ -119,7 +121,9 @@ $(document).ready(function(){
 						<th>Codigo</th>
 						<th>Nro. Partida Registral</th>
 						<th>Valor Monetario(S/.)</th>
+						<th>Tipo de Bien</th>
 						<th>Estado</th>
+						<th>Acción</th>
 					</tr>
 				</thead>
 				<tbody id="tblBody">
