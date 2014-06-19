@@ -12,6 +12,11 @@ public class CasoCriminalBean {
 	private String importancia;
 	private String estado;
 	private Timestamp fecCreacion;
+	private Integer diasDiligenciasPreliminares;
+	private Timestamp fecDiligenciasPre;
+	private String cometarioPausaDoc;
+	private String estadoAnterior;
+	private String cometarioPausaNCaso;
 	
 	//usuario
 	private String correoElectronico;
@@ -126,5 +131,35 @@ public class CasoCriminalBean {
 	}
 	public void setImportancia(String importancia) {
 		this.importancia = importancia;
+	}
+	public Integer getDiasDiligenciasPreliminares() {
+		return diasDiligenciasPreliminares;
+	}
+	public void setDiasDiligenciasPreliminares(Integer diasDiligenciasPreliminares) {
+		this.diasDiligenciasPreliminares = diasDiligenciasPreliminares;
+	}
+	public Timestamp getFecDiligenciasPre() {
+		return fecDiligenciasPre;
+	}
+	public void setFecDiligenciasPre(Timestamp fecDiligenciasPre) {
+		this.fecDiligenciasPre = fecDiligenciasPre;
+	}
+	public String getCometarioPausaDoc() {
+		return cometarioPausaDoc;
+	}
+	public void setCometarioPausaDoc(String cometarioPausaDoc) {
+		this.cometarioPausaDoc = cometarioPausaDoc;
+	}
+	public String getEstadoAnterior() {
+		return estadoAnterior;
+	}
+	public void setEstadoAnterior(String estadoAnterior) {
+		this.estadoAnterior = estadoAnterior;
+	}
+	public String getCometarioPausaNCaso() {
+		return cometarioPausaNCaso;
+	}
+	public void setCometarioPausaNCaso(String cometarioPausaNCaso) {
+		this.cometarioPausaNCaso = cometarioPausaNCaso;
 	}
 }

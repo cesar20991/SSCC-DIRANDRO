@@ -30,7 +30,7 @@
 <!-- alertas de colores -->
 <script src="js/bootstrap-alert.js"></script>
 <!-- mapas -->
-<script src="http://maps.google.com/maps/api/js?sensor=false"></script>
+<!-- <script src="http://maps.google.com/maps/api/js?sensor=false"></script> -->
 <!-- modal -->
 <script src="js/bootstrap-modal.js"></script>
 <!-- styles -->
@@ -43,11 +43,78 @@
 <script type="text/javascript">
 var tipoEntidad = "casoCriminal";
 var idEntidad = '';
-	/*if($("#hdnIdPerfil").text() != ""){
-		idEntidad = $("#hdnIdPerfil").text();
-	}else{
-		idEntidad = '${pageContext.session.getAttribute("idPerfil")}';
-	}*/
+
+$(document).on('click','#btnAsignarDiligencias', function(e){
+	$.ajax({
+ 		url: 'toDiligenciasPre-'+$("#hdnIdCaso").text(),
+ 		type: 'post',
+ 		dataType: 'json',
+ 		data: $("#editarCaso").serialize(),
+ 		success: function(caso){
+ 			initCasoCriminal(caso);
+ 		}
+ 	});
+});
+//cambia el estado a pausa por documentacion
+$(document).on('click','#btnPasusaDoc', function(e){
+	$.ajax({
+ 		url: 'toPausaDoc-'+$("#hdnIdCaso").text(),
+ 		type: 'post',
+ 		dataType: 'json',
+ 		data: '',
+ 		success: function(caso){
+ 			initCasoCriminal(caso);
+ 		}
+ 	});
+});
+//para dejar el comentario de pausa por docs
+$(document).on('click','#btnComentarioPausaDoc', function(e){
+	$.ajax({
+ 		url: 'dejarComentarioPausaDoc-'+$("#hdnIdCaso").text(),
+ 		type: 'post',
+ 		dataType: 'json',
+ 		data: $("#editarComentario").serialize(),
+ 		success: function(caso){
+ 			initCasoCriminal(caso);
+ 		}
+ 	});
+});
+//remover pausa
+$(document).on('click','#btnRemoverPausa', function(e){
+	$.ajax({
+ 		url: 'removerPausa-'+$("#hdnIdCaso").text(),
+ 		type: 'post',
+ 		dataType: 'json',
+ 		data: '',
+ 		success: function(caso){
+ 			initCasoCriminal(caso);
+ 		}
+ 	});
+});
+//para dejar el comentario de pausa por docs
+$(document).on('click','#btnPasusaNCaso', function(e){
+	$.ajax({
+ 		url: 'toPausaNCaso-'+$("#hdnIdCaso").text(),
+ 		type: 'post',
+ 		dataType: 'json',
+ 		data: '',
+ 		success: function(caso){
+ 			initCasoCriminal(caso);
+ 		}
+ 	});
+});
+//para dejar el comentario de pausa por docs
+$(document).on('click','#btnComentarioPausaNCaso', function(e){
+	$.ajax({
+ 		url: 'dejarComentarioPausaNCaso-'+$("#hdnIdCaso").text(),
+ 		type: 'post',
+ 		dataType: 'json',
+ 		data: $("#editarComentarioNCaso").serialize(),
+ 		success: function(caso){
+ 			initCasoCriminal(caso);
+ 		}
+ 	});
+});
 </script>
 <style>
 .error{
@@ -68,6 +135,8 @@ var idEntidad = '';
 			<c:forEach items="${casoList}" var="caso">
 				<span id="hdnIdCaso" style="display: none;"><c:out value="${caso.idCasoCriminal}" /></span>
 			</c:forEach>
+			<div id="divAlertarCasoCriminal" style="display: none;">
+			</div>
 			<table class="table table-bordered table-condensed">
 				<tbody>
 					<tr>
@@ -96,9 +165,7 @@ var idEntidad = '';
 					<tr>
 						<td>Acciones:</td>
 						<td id="tdBotones">
-							<button class="btn btn-small btn-success" id="btnGuardar" href="#myModal" data-toggle="modal"><i class="icon-ok icon-white"></i> Diligencias Preliminares</button>
-							<button class="btn btn-small btn-info" id="btnGuardar" type="submit"><i class="icon-pause icon-white"></i> Pausa por Falta de Documentos</button>
-							<button class="btn btn-small btn-info" id="btnGuardar" type="submit"><i class="icon-pause icon-white"></i> Pausa por Nuevo Caso</button>
+							
 						</td>
 					</tr>
 				</tbody>
@@ -111,24 +178,66 @@ var idEntidad = '';
 		        <a class="close" data-dismiss="modal">×</a>
 		        <h3>Seleccionar dias para las diligencias preliminares</h3>
 	        </div>
-            <div class="modal-body">
-            	<label class="control-label">Seleccione la cantidad de dias:</label>
-            	<div class="controls inline">
-            		<select class="span2">
-	                	<option>20</option>
-	                	<option>40</option>
-	                	<option>60</option>
-	                	<option>80</option>
-	                	<option>100</option>
-	              	</select>
-            	</div>            	
-            </div>
+	        <form:form id="editarCaso">
+		        <div class="modal-body">
+	            	<label class="control-label">Seleccione la cantidad de dias:</label>
+	            	<div class="controls inline">
+	            		<select class="span2" name="diasDiligenciasPreliminares">
+		                	<option>20</option>
+		                	<option>40</option>
+		                	<option>60</option>
+		                	<option>80</option>
+		                	<option>100</option>
+		              	</select>
+	            	</div>            	
+	            </div>
+	        </form:form>
           <div class="modal-footer">
-	          <a href="#" class="btn btn-success">Save changes</a>
-	          <a href="#" class="btn" data-dismiss="modal">Cancelar</a>
+	          <a id="btnAsignarDiligencias" class="btn btn-success" data-dismiss="modal">Asignar dias</a>
+	          <a class="btn" data-dismiss="modal">Cancelar</a>
           </div>
         </div>
         <!-- /MODAL -->
+        <!-- MODAL PAUSA -->
+		<div id="myModalPausaDoc" class="modal hide fade" style="display: none;">
+	        <div class="modal-header">
+		        <a class="close" data-dismiss="modal">×</a>
+		        <h3>¿Desea Dejar un comentario?</h3>
+	        </div>
+	        <form:form id="editarComentario">
+		        <div class="modal-body">
+	            	<label class="control-label">Comentario:</label>
+	            	<div class="controls inline">
+	            		<textarea class="input-xlarge span3" name="cometarioPausaDoc" id="txtCometarioPausaDoc" rows="8" style="width: 90%;"></textarea>
+	            	</div>            	
+	            </div>
+	        </form:form>
+          <div class="modal-footer">
+	          <a id="btnComentarioPausaDoc" class="btn btn-success" data-dismiss="modal">Guardar Comentario</a>
+	          <a class="btn" data-dismiss="modal">Cancelar</a>
+          </div>
+        </div>
+        <!-- /MODAL PAUSA -->
+        <!-- MODAL PAUSA NUEVO CASO -->
+		<div id="myModalPausaNCaso" class="modal hide fade" style="display: none;">
+	        <div class="modal-header">
+		        <a class="close" data-dismiss="modal">×</a>
+		        <h3>¿Desea Dejar un comentario?</h3>
+	        </div>
+	        <form:form id="editarComentarioNCaso">
+		        <div class="modal-body">
+	            	<label class="control-label">Comentario:</label>
+	            	<div class="controls inline">
+	            		<textarea class="input-xlarge span3" name="cometarioPausaNCaso" id="txtCometarioPausaNCaso" rows="8" style="width: 90%;"></textarea>
+	            	</div>            	
+	            </div>
+	        </form:form>
+          <div class="modal-footer">
+	          <a id="btnComentarioPausaNCaso" class="btn btn-success" data-dismiss="modal">Guardar Comentario</a>
+	          <a class="btn" data-dismiss="modal">Cancelar</a>
+          </div>
+        </div>
+        <!-- /MODAL PAUSA NUEVO CASO  -->
         <!-- TABS -->
 		<section class="span9" style="margin-left: 7%;">
 			<div class="tabbable" style="margin-top: -6%;">
@@ -136,10 +245,10 @@ var idEntidad = '';
 					<li class="active"><a href="#1" data-toggle="tab">Principal</a></li>
 					<li class=""><a href="#2" data-toggle="tab">Personal Asignado</a></li>
 					<li class=""><a href="#3" data-toggle="tab">Sospechosos</a></li>
-					<li class=""><a href="#5" data-toggle="tab">Archivos Adjuntos</a></li>
-					<li class=""><a href="#6" data-toggle="tab">Comentarios</a></li>
-					<li class=""><a href="#7" data-toggle="tab">Auditoría</a></li>
-					<li class=""><a href="#8" data-toggle="tab">Rutas</a></li>
+					<li class=""><a href="#4" data-toggle="tab">Archivos Adjuntos</a></li>
+					<li class=""><a href="#5" data-toggle="tab">Comentarios</a></li>
+					<li class=""><a href="#6" data-toggle="tab">Auditoría</a></li>
+					<li class=""><a href="#7" data-toggle="tab">Rutas</a></li>
 				</ul>
 				<div class="tab-content">
 					<div class="tab-pane active" id="1">
@@ -151,17 +260,17 @@ var idEntidad = '';
 					<div class="tab-pane" id="3">
 						<jsp:include page="casoCriminal/tabSospechososAsignados.jsp" />
 					</div>
-					<div class="tab-pane" id="5">
+					<div class="tab-pane" id="4">
 						<jsp:include page="../componentes/archivos.jsp" />
 					</div>
-					<div class="tab-pane" id="6">
+					<div class="tab-pane" id="5">
 						<p>Seccion 6.</p>
 					</div>
-					<div class="tab-pane" id="7">
+					<div class="tab-pane" id="6">
 						<p>Seccion 7.</p>
 					</div>
-					<div class="tab-pane" id="8">
-						<jsp:include page="casoCriminal/tabRutas.jsp" />
+					<div class="tab-pane" id="7">
+						<%-- <jsp:include page="casoCriminal/tabRutas.jsp" /> --%>
 					</div>
 				</div>
 			</div>

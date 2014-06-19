@@ -163,6 +163,66 @@ public class CasoCriminalController {
 		}		
 	}
 	
+	@RequestMapping(value = "toDiligenciasPre-{idCaso}", method = RequestMethod.POST)
+	@ResponseBody
+	public CasoCriminalBean crearSospechosoExistenteAlCaso(@ModelAttribute CasoCriminal casoCriminal, @PathVariable("idCaso") Integer idCaso){
+		if(casoServ.toDiligenciasPre(casoCriminal, idCaso)){
+			return casoServ.getCasoCriminalBean(idCaso);
+		}else{
+			return null;
+		}		
+	}
+	
+	@RequestMapping(value = "toPausaDoc-{idCaso}", method = RequestMethod.POST)
+	@ResponseBody
+	public CasoCriminalBean toPausaDoc(@PathVariable("idCaso") Integer idCaso){
+		if(casoServ.toPausaDocumentacion(idCaso)){
+			return casoServ.getCasoCriminalBean(idCaso);
+		}else{
+			return null;
+		}		
+	}
+	
+	@RequestMapping(value = "toPausaNCaso-{idCaso}", method = RequestMethod.POST)
+	@ResponseBody
+	public CasoCriminalBean toPausaNCaso(@PathVariable("idCaso") Integer idCaso){
+		if(casoServ.toPausaNuevoCaso(idCaso)){
+			return casoServ.getCasoCriminalBean(idCaso);
+		}else{
+			return null;
+		}		
+	}
+	
+	@RequestMapping(value = "removerPausa-{idCaso}", method = RequestMethod.POST)
+	@ResponseBody
+	public CasoCriminalBean removerPausa(@PathVariable("idCaso") Integer idCaso){
+		if(casoServ.removerPausa(idCaso)){
+			return casoServ.getCasoCriminalBean(idCaso);
+		}else{
+			return null;
+		}		
+	}
+	
+	@RequestMapping(value = "dejarComentarioPausaDoc-{idCaso}", method = RequestMethod.POST)
+	@ResponseBody
+	public CasoCriminalBean dejarComentarioPausaDoc(@ModelAttribute CasoCriminal casoCriminal, @PathVariable("idCaso") Integer idCaso){
+		if(casoServ.comentarioPausaDoc(casoCriminal, idCaso)){
+			return casoServ.getCasoCriminalBean(idCaso);
+		}else{
+			return null;
+		}		
+	}
+	
+	@RequestMapping(value = "dejarComentarioPausaNCaso-{idCaso}", method = RequestMethod.POST)
+	@ResponseBody
+	public CasoCriminalBean dejarComentarioPausaNCaso(@ModelAttribute CasoCriminal casoCriminal, @PathVariable("idCaso") Integer idCaso){
+		if(casoServ.comentarioPausaNCaso(casoCriminal, idCaso)){
+			return casoServ.getCasoCriminalBean(idCaso);
+		}else{
+			return null;
+		}		
+	}
+	
 	@RequestMapping(value = "getSopechososPorCaso-{idCaso}", method = RequestMethod.POST)
 	@ResponseBody
 	public List<SospechosoBean> getSopechososPorCaso(@PathVariable("idCaso") Integer idCaso){

@@ -82,6 +82,10 @@ public class CasoCriminalServiceImpl implements CasoCriminalService{
 		cb.setSegundoNombre(p.getSegundoNombre());
 		cb.setTipoFiscal(p.getTipoFiscal());
 		cb.setIdPerfil(p.getIdPerfil());
+		cb.setFecDiligenciasPre(c.getFecDiligenciasPre());
+		cb.setDiasDiligenciasPreliminares(c.getDiasDiligenciasPreliminares());
+		cb.setCometarioPausaDoc(c.getCometarioPausaDoc());
+		cb.setCometarioPausaNCaso(c.getCometarioPausaNCaso());
 		
 		return cb;
 	}
@@ -190,7 +194,7 @@ public class CasoCriminalServiceImpl implements CasoCriminalService{
 	@SuppressWarnings("unchecked")
 	public List<CasoCriminalBean> getLastCasosCriminales(HttpSession session) {
 		List<CasoCriminalBean> listCR = new ArrayList<CasoCriminalBean>();
-		Query q =em.createNativeQuery("SELECT cr.idcasocriminal,cr.codigo, c.importancia FROM casocriminal cr ORDER BY cr.fecCreacion DESC");
+		Query q =em.createNativeQuery("SELECT cr.idcasocriminal,cr.codigo, cr.importancia FROM casocriminal cr ORDER BY cr.fecCreacion DESC");
 		//Query q =em.createNativeQuery("select  cr.idcasocriminal,cr.codigo from casocriminal cr where cr.feccreacion between (CURRENT_TIMESTAMP - interval '15 days') AND (CURRENT_TIMESTAMP)");
 		q.setMaxResults(15);
 		List<String[]> rowsCR = q.getResultList();
@@ -384,6 +388,92 @@ public class CasoCriminalServiceImpl implements CasoCriminalService{
 			CasoPorSospechoso cps = (CasoPorSospechoso) q.getSingleResult();
 			CasoPorSospechoso cpsEditado = em.merge(cps);
 			cpsEditado.setEstado("deshabilitado");
+			return true;
+		}catch(Exception e){
+			return false;
+		}
+	}
+
+	@Transactional
+	public Boolean toDiligenciasPre(CasoCriminal casoCriminal, Integer idCaso) {
+		try{
+			CasoCriminal c = em.find(CasoCriminal.class, idCaso);
+			CasoCriminal cEdit = em.merge(c);
+
+			cEdit.setDiasDiligenciasPreliminares(casoCriminal.getDiasDiligenciasPreliminares());
+			cEdit.setEstado("Diligencias Preliminares");
+			DateUtil d = new DateUtil();
+			cEdit.setFecDiligenciasPre(d.hoyTimestamp());
+			return true;
+		}catch(Exception e){
+			return false;
+		}
+	}
+	
+	@Transactional
+	public Boolean toPausaDocumentacion(Integer idCaso) {
+		try{
+			CasoCriminal c = em.find(CasoCriminal.class, idCaso);
+			CasoCriminal cEdit = em.merge(c);
+			cEdit.setEstadoAnterior(c.getEstado());
+			cEdit.setEstado("Pausa por Falta de Documentos");
+
+			return true;
+		}catch(Exception e){
+			return false;
+		}
+	}
+	
+	@Transactional
+	public Boolean toPausaNuevoCaso(Integer idCaso) {
+		try{
+			CasoCriminal c = em.find(CasoCriminal.class, idCaso);
+			CasoCriminal cEdit = em.merge(c);
+			cEdit.setEstadoAnterior(c.getEstado());
+			cEdit.setEstado("Pausa por Nuevo Caso");
+
+			return true;
+		}catch(Exception e){
+			return false;
+		}
+	}
+	
+	@Transactional
+	public Boolean removerPausa(Integer idCaso) {
+		try{
+			CasoCriminal c = em.find(CasoCriminal.class, idCaso);
+			CasoCriminal cEdit = em.merge(c);
+			cEdit.setEstado(c.getEstadoAnterior());
+			cEdit.setEstadoAnterior("");
+			cEdit.setCometarioPausaDoc(null);
+			cEdit.setCometarioPausaNCaso(null);
+
+			return true;
+		}catch(Exception e){
+			return false;
+		}
+	}
+	
+	@Transactional
+	public Boolean comentarioPausaDoc(CasoCriminal casoCriminal, Integer idCaso) {
+		try{
+			CasoCriminal c = em.find(CasoCriminal.class, idCaso);
+			CasoCriminal cEdit = em.merge(c);
+			cEdit.setCometarioPausaDoc(casoCriminal.getCometarioPausaDoc());
+
+			return true;
+		}catch(Exception e){
+			return false;
+		}
+	}
+	
+	@Transactional
+	public Boolean comentarioPausaNCaso(CasoCriminal casoCriminal, Integer idCaso) {
+		try{
+			CasoCriminal c = em.find(CasoCriminal.class, idCaso);
+			CasoCriminal cEdit = em.merge(c);
+			cEdit.setCometarioPausaNCaso(casoCriminal.getCometarioPausaNCaso());
+
 			return true;
 		}catch(Exception e){
 			return false;

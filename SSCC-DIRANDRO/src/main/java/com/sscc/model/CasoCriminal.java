@@ -33,7 +33,15 @@ public class CasoCriminal {
 	@Column(nullable = false)
 	private Timestamp fecCreacion;
 	@Column(nullable = true)
-	private Double diasDiligenciasPreliminares;
+	private Integer diasDiligenciasPreliminares;
+	@Column(nullable = true)
+	private Timestamp fecDiligenciasPre;
+	@Column(length = 1000, nullable = true)
+	private String cometarioPausaDoc;
+	@Column(length = 1000, nullable = true)
+	private String cometarioPausaNCaso;
+	@Column(length = 30, nullable = true)
+	private String estadoAnterior;
 	
 	@ManyToOne
 	@JoinColumn(name = "idUsuario")
@@ -123,17 +131,41 @@ public class CasoCriminal {
 	public void setArchivos(Collection<Archivo> archivos) {
 		this.archivos = archivos;
 	}
-	public Double getDiasDiligenciasPreliminares() {
-		return diasDiligenciasPreliminares;
-	}
-	public void setDiasDiligenciasPreliminares(Double diasDiligenciasPreliminares) {
-		this.diasDiligenciasPreliminares = diasDiligenciasPreliminares;
-	}
 	public String getImportancia() {
 		return importancia;
 	}
 	public void setImportancia(String importancia) {
 		this.importancia = importancia;
+	}
+	public Integer getDiasDiligenciasPreliminares() {
+		return diasDiligenciasPreliminares;
+	}
+	public void setDiasDiligenciasPreliminares(Integer diasDiligenciasPreliminares) {
+		this.diasDiligenciasPreliminares = diasDiligenciasPreliminares;
+	}
+	public Timestamp getFecDiligenciasPre() {
+		return fecDiligenciasPre;
+	}
+	public void setFecDiligenciasPre(Timestamp fecDiligenciasPre) {
+		this.fecDiligenciasPre = fecDiligenciasPre;
+	}
+	public String getCometarioPausaDoc() {
+		return cometarioPausaDoc;
+	}
+	public void setCometarioPausaDoc(String cometarioPausaDoc) {
+		this.cometarioPausaDoc = cometarioPausaDoc;
+	}
+	public String getEstadoAnterior() {
+		return estadoAnterior;
+	}
+	public void setEstadoAnterior(String estadoAnterior) {
+		this.estadoAnterior = estadoAnterior;
+	}
+	public String getCometarioPausaNCaso() {
+		return cometarioPausaNCaso;
+	}
+	public void setCometarioPausaNCaso(String cometarioPausaNCaso) {
+		this.cometarioPausaNCaso = cometarioPausaNCaso;
 	}
 	
 }

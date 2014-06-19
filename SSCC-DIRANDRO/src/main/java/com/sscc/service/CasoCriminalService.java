@@ -38,4 +38,16 @@ public interface CasoCriminalService {
 	
 	Boolean deshasignarSospechosoDelCaso(Integer idCaso, Integer idSospechoso);
 	
+	Boolean toDiligenciasPre(CasoCriminal casoCriminal, Integer idCaso);
+	
+	Boolean toPausaDocumentacion(Integer idCaso);
+	
+	Boolean toPausaNuevoCaso(Integer idCaso);
+	
+	Boolean comentarioPausaDoc(CasoCriminal casoCriminal, Integer idCaso);
+	
+	Boolean comentarioPausaNCaso(CasoCriminal casoCriminal, Integer idCaso);
+	
+	Boolean removerPausa(Integer idCaso);
+	
 }
