@@ -31,6 +31,8 @@
 <script src="js/bootstrap-alert.js"></script>
 <!-- mapas -->
 <script src="http://maps.google.com/maps/api/js?sensor=false"></script>
+<!-- modal -->
+<script src="js/bootstrap-modal.js"></script>
 <!-- styles -->
 <link href="css/bootstrap.css" rel="stylesheet">
 <link href="css/bootstrap-responsive.css" rel="stylesheet">
@@ -62,7 +64,7 @@ var idEntidad = '';
 	<jsp:include page="../componentes/menu.jsp" />
 	<!--/MENU-->
 	<div class="container inner_content">
-		<section class="span9" style="margin-left: 80px;">
+		<section class="span9" style="margin-left: 7%;">
 			<c:forEach items="${casoList}" var="caso">
 				<span id="hdnIdCaso" style="display: none;"><c:out value="${caso.idCasoCriminal}" /></span>
 			</c:forEach>
@@ -87,8 +89,49 @@ var idEntidad = '';
 				</tbody>
 			</table>
 		</section>
-		<section class="span9" style="margin-left: 80px;">
-			<div class="tabbable" style="margin-bottom: 9px;">
+		<!-- Acciones -->
+		<section class="span9" style="margin-left: 7%; height: 1px;">
+			<table class="table table-bordered table-condensed" style="margin-top: -6%;">
+				<tbody>
+					<tr>
+						<td>Acciones:</td>
+						<td id="tdBotones">
+							<button class="btn btn-small btn-success" id="btnGuardar" href="#myModal" data-toggle="modal"><i class="icon-ok icon-white"></i> Diligencias Preliminares</button>
+							<button class="btn btn-small btn-info" id="btnGuardar" type="submit"><i class="icon-pause icon-white"></i> Pausa por Falta de Documentos</button>
+							<button class="btn btn-small btn-info" id="btnGuardar" type="submit"><i class="icon-pause icon-white"></i> Pausa por Nuevo Caso</button>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</section>
+		<!-- /Acciones -->
+		<!-- MODAL -->
+		<div id="myModal" class="modal hide fade" style="display: none;">
+	        <div class="modal-header">
+		        <a class="close" data-dismiss="modal">×</a>
+		        <h3>Seleccionar dias para las diligencias preliminares</h3>
+	        </div>
+            <div class="modal-body">
+            	<label class="control-label">Seleccione la cantidad de dias:</label>
+            	<div class="controls inline">
+            		<select class="span2">
+	                	<option>20</option>
+	                	<option>40</option>
+	                	<option>60</option>
+	                	<option>80</option>
+	                	<option>100</option>
+	              	</select>
+            	</div>            	
+            </div>
+          <div class="modal-footer">
+	          <a href="#" class="btn btn-success">Save changes</a>
+	          <a href="#" class="btn" data-dismiss="modal">Cancelar</a>
+          </div>
+        </div>
+        <!-- /MODAL -->
+        <!-- TABS -->
+		<section class="span9" style="margin-left: 7%;">
+			<div class="tabbable" style="margin-top: -6%;">
 				<ul class="nav nav-tabs">
 					<li class="active"><a href="#1" data-toggle="tab">Principal</a></li>
 					<li class=""><a href="#2" data-toggle="tab">Personal Asignado</a></li>

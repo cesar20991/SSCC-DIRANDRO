@@ -59,7 +59,7 @@
 		<div class="span9 columns">
 			<a href="toLogin">Login</a><br />
 		</div>
-		<div class="span9 columns">
+		<!-- <div class="span9 columns">
 			<a href="toUpload">uploadFile</a><br />
 		</div>
 		<div class="span9 columns">
@@ -67,7 +67,7 @@
 		</div>
 		<div class="span9 columns">
 			<a href="toRutas">rutas</a><br />
-		</div>
+		</div> -->
 		<!-- /FORMUALARIO -->
 	</div>
 	<!--/MAIN CONTENT AREA-->

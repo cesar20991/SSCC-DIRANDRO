@@ -30,6 +30,8 @@ public class CasoCriminal {
 	private String estado;
 	@Column(nullable = false)
 	private Timestamp fecCreacion;
+	@Column(nullable = true)
+	private Double diasDiligenciasPreliminares;
 	
 	@ManyToOne
 	@JoinColumn(name = "idUsuario")
@@ -118,6 +120,12 @@ public class CasoCriminal {
 	}
 	public void setArchivos(Collection<Archivo> archivos) {
 		this.archivos = archivos;
+	}
+	public Double getDiasDiligenciasPreliminares() {
+		return diasDiligenciasPreliminares;
+	}
+	public void setDiasDiligenciasPreliminares(Double diasDiligenciasPreliminares) {
+		this.diasDiligenciasPreliminares = diasDiligenciasPreliminares;
 	}
 	
 }
