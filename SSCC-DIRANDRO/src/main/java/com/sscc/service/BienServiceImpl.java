@@ -14,8 +14,10 @@ import com.sscc.form.BienBean;
 import com.sscc.form.InmuebleBean;
 import com.sscc.form.VehiculoBean;
 import com.sscc.model.Bien;
+import com.sscc.model.BienPorSospechoso;
 import com.sscc.model.Inmueble;
 import com.sscc.model.Perfil;
+import com.sscc.model.Sospechoso;
 import com.sscc.model.Usuario;
 import com.sscc.model.Vehiculo;
 import com.sscc.util.DateUtil;
@@ -297,5 +299,19 @@ public class BienServiceImpl implements BienService {
 		queryCont.setParameter("partidaRegistral", partidaRegistral);
 		Integer cont = Integer.parseInt(queryCont.getSingleResult().toString());
 		return cont > 0 ? true : false;
+	}
+	
+	@Transactional
+	public boolean asignarBienToSospechoso(Integer idBien, Integer idSospechoso) {
+		BienPorSospechoso bs=  new BienPorSospechoso();
+		Bien bien = new Bien();
+		bien.setIdBien(idBien);
+		Sospechoso sospechoso = new Sospechoso();
+		sospechoso.setIdSospechoso(idSospechoso);
+		bs.setBien(bien);
+		bs.setSospechoso(sospechoso);
+		bs.setEstado("habilitado");
+		em.persist(bs);
+		return true;
 	}
 }

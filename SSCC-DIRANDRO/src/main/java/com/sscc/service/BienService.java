@@ -22,6 +22,8 @@ public interface BienService {
 	
 	List<BienBean> getBienesBean();
 	
+	boolean asignarBienToSospechoso(Integer idBien , Integer idSospechoso);
+	
 	Boolean getPartidaRegistral (String partidaRegistral);
 	//Inmuebles:
 	

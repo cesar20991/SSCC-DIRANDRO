@@ -57,43 +57,13 @@ function getBienesInit(){
  		data: '',
  		success: function(bienes){
  			initAsignaBienes(bienes);
- 			/*$.each(casos, function(i, caso) {
- 				$.ajax({
- 	 		 		url: 'getJefeAsignado-'+caso.idCasoCriminal,
- 	 		 		type: 'post',
- 	 		 		dataType: 'json',
- 	 		 		data: '',
- 	 		 		success: function(jefe){
- 	 		 			$("#spnJefeDeUnidad_"+i).empty();
- 	 		 			if(jefe.nombreCompleto == null){
- 							$("#spnJefeDeUnidad_"+i).append('');
- 	 		 			}else{
- 	 		 				$("#spnJefeDeUnidad_"+i).append(jefe.nombreCompleto);
- 	 		 			}
- 	 		 		}
- 	 		 	});
- 			}); */			
  		}
  	});	
 }
 
 $(document).ready(function(){
 	getBienesInit();
-	/*
-	var llenarCombo = "";
-	$.ajax({
- 		url: 'getJefesDeUnidad',
- 		type: 'post',
- 		dataType: 'json',
- 		data: '',
- 		success: function(jefes){
- 			llenarCombo = llenarCombo + '<option value="">No Precisa</option>';
- 			$.each(jefes, function(i, jefe) {
- 				llenarCombo = llenarCombo + '<option value="'+jefe.idUsuario+'">'+jefe.nombreCompleto+'</option>';
- 			});
- 		}
- 	});	
- 	
+
 	$(document).on('click','.asignar', function(e){
 		var id = this.id;
 		var idA = id.split("_")[0];
@@ -101,51 +71,36 @@ $(document).ready(function(){
 		
 		switch(idA){
 			case 'asignar':
-				$("#jefeDeUnidad_"+idN).hide();
-				$("#jefeDeUnidadCombo_"+idN).show();
-				$("#slctJefe_"+idN).empty();
-				$("#slctJefe_"+idN).append(llenarCombo);
-				$("#slctJefe_"+idN).val($("#spnJefeDeUnidad_"+idN).text());
-				
 				$("#btnAsignar_"+idN).hide();
 				$("#btnAccion_"+idN).show();
 			break;
-			case 'CancelarAsigna':
-				$("#jefeDeUnidad_"+idN).show();
-				$("#jefeDeUnidadCombo_"+idN).hide();
-				
+			case 'CancelarAsigna':				
 				$("#btnAsignar_"+idN).show();
 				$("#btnAccion_"+idN).hide();
 			break;
 			case 'GuardarAsigna':
-				if($("#slctJefe_"+idN).val() != ''){
+				var idSospechoso = $("#hdnIdSospechoso").text();
 					$.ajax({
-				 		url: 'asignarCaso-'+$("#hdnCaso_"+idN).val()+"-"+$("#slctJefe_"+idN).val(),
+				 		url: 'asignarBienToSospechoso-'+$("#hdnBien_"+idN).val()+"-"+idSospechoso,
 				 		type: 'post',
 				 		dataType: 'json',
 				 		data: '',
-				 		success: function(casos){
-				 			getCasosInit();
-				 			$("#alertasAsignarCaso").show();
-				 			$("#alertasAsignarCaso").append('<div class="alert alert-success" id="alertaVerde">'+
-									 			        '<a class="close" data-dismiss="alert">×</a>'+
-									 			        '<strong id="msgVerde">Asignado Correctamente.</strong>'+
-									 			    '</div>');
+				 		success: function(resultado){
+				 			if(resultado){
+				 				alert("Bien asignado");
+				 				getBienesInit();
+				 			}else{
+				 				alert("no se pudo asignar");
+				 			}
 				 		}
 				 	});
-				}else{
-					$("#alertasAsignarCaso").show();
-		 			$("#alertasAsignarCaso").append('<div class="alert alert-error" id="alertaVerde">'+
-							 			        '<a class="close" data-dismiss="alert">×</a>'+
-							 			        '<strong id="msgVerde">Debe Seleccionar a un Jefe de Unidad.</strong>'+
-							 			    '</div>');	
-				}								
+											
 			break;
 		}
 		
 		
 	});
-	*/
+	
 });
 </script>
 </head>

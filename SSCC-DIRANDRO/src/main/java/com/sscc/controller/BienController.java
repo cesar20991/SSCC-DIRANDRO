@@ -35,6 +35,12 @@ public class BienController {
 		return "principal/buscarBien";
 	}
 	
+	@RequestMapping(value ="asignarBienToSospechoso-{idBien}-{idSospechoso}",method= RequestMethod.POST)
+	@ResponseBody
+	public Boolean toBuscarBien(@PathVariable("idBien")Integer idBien,@PathVariable("idSospechoso")Integer idSospechoso) {
+		return bienServ.asignarBienToSospechoso(idBien, idSospechoso);
+	}
+	
 	
 	// Metodos para el Inmueble
 	@RequestMapping("toRegistrarInmueble")
