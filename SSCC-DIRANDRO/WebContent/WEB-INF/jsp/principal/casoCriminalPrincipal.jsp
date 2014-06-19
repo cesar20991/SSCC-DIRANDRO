@@ -30,7 +30,7 @@
 <!-- alertas de colores -->
 <script src="js/bootstrap-alert.js"></script>
 <!-- mapas -->
-<!-- <script src="http://maps.google.com/maps/api/js?sensor=false"></script> -->
+ <script src="http://maps.google.com/maps/api/js?sensor=false"></script> 
 <!-- modal -->
 <script src="js/bootstrap-modal.js"></script>
 <!-- styles -->
@@ -270,7 +270,7 @@ $(document).on('click','#btnComentarioPausaNCaso', function(e){
 						<p>Seccion 7.</p>
 					</div>
 					<div class="tab-pane" id="7">
-						<%-- <jsp:include page="casoCriminal/tabRutas.jsp" /> --%>
+						<jsp:include page="casoCriminal/tabRutas.jsp" />
 					</div>
 				</div>
 			</div>

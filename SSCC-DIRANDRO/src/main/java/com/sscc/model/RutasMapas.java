@@ -1,5 +1,6 @@
 package com.sscc.model;
 
+import java.sql.Timestamp;
 import java.util.Collection;
 
 import javax.persistence.Column;
@@ -29,12 +30,20 @@ public class RutasMapas {
 	private String wp;	
 	@Column(length = 60, nullable = true)	
 	private String nombre;
-	@Column(length = 180, nullable = false)
-	private String comentarios;
+	@Column(length = 180, nullable = true)
+	private String comentario;
+	@Column(length = 30, nullable = false)
+	private String estado;
+	@Column(nullable = false)
+	private Timestamp fecCreacion;
 	
 	@ManyToOne
 	@JoinColumn(name = "idCasoCriminal")
 	private CasoCriminal casoCriminal;
+	
+	@ManyToOne
+	@JoinColumn(name = "idUsuario")
+	private Usuario usuario;
 	
 	
 	public Integer getIdRuta() {
@@ -79,17 +88,35 @@ public class RutasMapas {
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
-	public String getComentarios() {
-		return comentarios;
-	}
-	public void setComentarios(String comentarios) {
-		this.comentarios = comentarios;
-	}
 	public CasoCriminal getCasoCriminal() {
 		return casoCriminal;
 	}
 	public void setCasoCriminal(CasoCriminal casoCriminal) {
 		this.casoCriminal = casoCriminal;
+	}
+	public String getEstado() {
+		return estado;
+	}
+	public void setEstado(String estado) {
+		this.estado = estado;
+	}
+	public Timestamp getFecCreacion() {
+		return fecCreacion;
+	}
+	public void setFecCreacion(Timestamp fecCreacion) {
+		this.fecCreacion = fecCreacion;
+	}
+	public String getComentario() {
+		return comentario;
+	}
+	public void setComentario(String comentario) {
+		this.comentario = comentario;
+	}
+	public Usuario getUsuario() {
+		return usuario;
+	}
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
 	}
 	
 	

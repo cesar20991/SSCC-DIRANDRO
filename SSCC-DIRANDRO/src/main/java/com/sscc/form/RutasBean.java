@@ -1,5 +1,7 @@
 package com.sscc.form;
 
+import java.sql.Timestamp;
+
 public class RutasBean {
 	
 	private Integer idRuta;
@@ -11,6 +13,8 @@ public class RutasBean {
 	private String wp;
 	private String nombre;
 	private String comentarios;
+	private String estado;
+	private Timestamp fecCreacion;
 	
 	
 	public Integer getIdRuta() {
@@ -60,6 +64,18 @@ public class RutasBean {
 	}
 	public void setComentarios(String comentarios) {
 		this.comentarios = comentarios;
+	}
+	public String getEstado() {
+		return estado;
+	}
+	public void setEstado(String estado) {
+		this.estado = estado;
+	}
+	public Timestamp getFecCreacion() {
+		return fecCreacion;
+	}
+	public void setFecCreacion(Timestamp fecCreacion) {
+		this.fecCreacion = fecCreacion;
 	}
 	
 	
