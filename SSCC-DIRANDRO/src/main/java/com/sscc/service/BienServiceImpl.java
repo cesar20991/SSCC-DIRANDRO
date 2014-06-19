@@ -315,4 +315,11 @@ public class BienServiceImpl implements BienService {
 		em.persist(bs);
 		return true;
 	}
+	//
+	public Boolean getPlaca(String placa) {
+		Query queryCont = em.createQuery("SELECT COUNT(v) FROM Vehiculo v WHERE v.placa LIKE:placa");
+		queryCont.setParameter("placa", placa);
+		Integer cont = Integer.parseInt(queryCont.getSingleResult().toString());
+		return cont > 0 ? true : false;
+	}
 }

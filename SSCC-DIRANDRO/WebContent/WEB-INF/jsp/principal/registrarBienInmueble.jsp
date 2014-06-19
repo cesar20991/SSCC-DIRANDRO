@@ -34,6 +34,7 @@
 }
 </style>
 <script>
+var flag = false;
 $(document).ready(function() {
 	$( ".datepicker" ).datepicker({ dateFormat: 'dd/mm/yy' });
 	
@@ -63,7 +64,33 @@ $(document).ready(function() {
 			antiguedad:"Solo números"
 		},
 		submitHandler: function(form){			
-			form.submit();
+			//form.submit();
+			if(flag == true){
+				form.submit();
+			}else{
+				alert("Debe Corregir los datos");
+			}
+		}
+	});
+});
+$(document).on('change','#txtPartida', function(e){
+	$.ajax({
+		url: 'getPartidaRegistral-'+$('#txtPartida').val(),
+		type: 'post',
+		dataType: 'json',
+		data: '',
+		success: function(bien){
+			if(bien == true){
+				$("#alertasBienNuevo").show();
+				$("#alertasBienNuevo").empty();
+				$("#alertasBienNuevo").append('<div class="alert alert-error" id="alertaVerde">'+
+	 			        '<a class="close" data-dismiss="alert">×</a>'+
+	 			        '<strong id="msgVerde">Partida Registral usado ya existe.</strong>'+
+	 			    '</div>');
+				flag = false;
+			}else{
+				flag = true;
+			}
 		}
 	});
 });
@@ -80,6 +107,8 @@ $(document).ready(function() {
 <div class="container inner_content">
 	<section class="span9" style="margin-left: 80px;">
 		<fieldset class="well">
+		<div id="alertasBienNuevo" style="display: none;">
+		</div>
 			<form:form class="form-horizontal" id="formRegistrarBien" action="registrarInmueble" commandName="bien">
 		       	<legend><span class="colored">///</span> Bien:</legend>
 	       		<div class="control-group">

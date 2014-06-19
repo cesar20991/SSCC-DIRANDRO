@@ -211,5 +211,4 @@ public class PerfilServiceImpl implements PerfilService {
 		Integer cont = Integer.parseInt(queryCont.getSingleResult().toString());
 		return cont > 0 ? true : false;
 	}
-
 }

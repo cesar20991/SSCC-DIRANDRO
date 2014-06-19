@@ -25,6 +25,6 @@ public interface BienService {
 	boolean asignarBienToSospechoso(Integer idBien , Integer idSospechoso);
 	
 	Boolean getPartidaRegistral (String partidaRegistral);
-	//Inmuebles:
-	
+	//Vehicular:
+	Boolean getPlaca (String placa);
 }

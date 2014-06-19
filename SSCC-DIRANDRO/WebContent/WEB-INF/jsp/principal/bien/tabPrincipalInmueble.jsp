@@ -45,6 +45,7 @@ function initInmueble(inmueble){
 	$("#spnAntiguedad").append(inmueble.antiguedad);
 	
 }
+var flag = false;
 $(document).ready(function(){
 	var idInmueble = $("#hdnIdInmueble").text();
 	$.ajax({
@@ -84,20 +85,23 @@ $(document).ready(function(){
 		},
 		submitHandler:function(form){
 			$("#hdnIdInmuebleAux").val($("#hdnIdInmueble").text());
-			$.ajax({
-		 		url: 'editarInmueble',
-		 		type: 'post',
-		 		dataType: 'json',
-		 		data: $("#formEditarInmueble").serialize(),
-		 		success: function(inmueble){
-		 			initInmueble(inmueble);
-		 			$("#divMostrarInmueble").show();
-		 			$("#divEditarInmueble").hide();
-		 		}
-		 	});
+			if(flag == true){
+				$.ajax({
+			 		url: 'editarInmueble',
+			 		type: 'post',
+			 		dataType: 'json',
+			 		data: $("#formEditarInmueble").serialize(),
+			 		success: function(inmueble){
+			 			initInmueble(inmueble);
+			 			$("#divMostrarInmueble").show();
+			 			$("#divEditarInmueble").hide();
+			 		}
+			 	});
+			}else{
+				alert("Debe Corregir los datos");
+			}
 		}
 	});
-	
 });
 $(document).on('click','#btnEditarInmueble', function(e){
 	//TABS A OCULTAR Y MOSTRAR
@@ -121,7 +125,27 @@ $(document).on('click','#btnCancelEditar', function(e){
 	$("#divEditarInmueble").hide();
 	$("#divMostrarInmueble").show();
 });
-
+$(document).on('change','#txtPartida', function(e){
+	$.ajax({
+		url: 'getPartidaRegistral-'+$('#txtPartida').val(),
+		type: 'post',
+		dataType: 'json',
+		data: '',
+		success: function(bien){
+			if(bien == true){
+				$("#alertasBienNuevo").show();
+				$("#alertasBienNuevo").empty();
+				$("#alertasBienNuevo").append('<div class="alert alert-error" id="alertaVerde">'+
+	 			        '<a class="close" data-dismiss="alert">×</a>'+
+	 			        '<strong id="msgVerde">Partida Registral usado ya existe.</strong>'+
+	 			    '</div>');
+				flag = false;
+			}else{
+				flag = true;
+			}
+		}
+	});
+});
 </script>
 <div id="divInmueble">
 	<div id="divMostrarInmueble">
@@ -202,6 +226,8 @@ $(document).on('click','#btnCancelEditar', function(e){
 </div>
 <!-- EDITAR CAOS CRIMINAL -->
 	<fieldset class="well" style="display: none;" id="divEditarInmueble">
+	<div id="alertasBienNuevo" style="display: none;">
+	</div>
 		<form:form class="form-horizontal" id="formEditarInmueble" action="editarInmueble" commandName="bien">
 				<input type="hidden" name="idInmueble" id="hdnIdInmuebleAux">
 				<legend>

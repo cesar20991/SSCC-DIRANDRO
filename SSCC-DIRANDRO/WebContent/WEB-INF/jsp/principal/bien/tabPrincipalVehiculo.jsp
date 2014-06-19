@@ -71,6 +71,8 @@ function initVehiculo(vehiculo){
 	$("#spnFecFabricacion").append(fec.split("-")[2]+"/"+fec.split("-")[1]+"/"+fec.split("-")[0]);
 	
 }
+var flag = true;
+var flag2 = true;
 $(document).ready(function(){
 	var idVehiculo = $("#hdnIdVehiculo").text();
 	$.ajax({
@@ -130,20 +132,23 @@ $( ".datepicker" ).datepicker({ dateFormat: 'dd/mm/yy' });
 		},
 		submitHandler: function(form){			
 			$("#hdnIdVehiculoAux").val($("#hdnIdVehiculo").text());
-			$.ajax({
-		 		url: 'editarVehiculo',
-		 		type: 'post',
-		 		dataType: 'json',
-		 		data: $("#formEditarVehiculo").serialize(),
-		 		success: function(vehiculo){
-		 			initVehiculo(vehiculo);
-		 			$("#divMostrarVehiculo").show();
-		 			$("#divEditarVehiculo").hide();
-		 		}
-		 	});
+			if(flag == true && flag2 == true){
+				$.ajax({
+			 		url: 'editarVehiculo',
+			 		type: 'post',
+			 		dataType: 'json',
+			 		data: $("#formEditarVehiculo").serialize(),
+			 		success: function(vehiculo){
+			 			initVehiculo(vehiculo);
+			 			$("#divMostrarVehiculo").show();
+			 			$("#divEditarVehiculo").hide();
+			 		}
+			 	});
+			}else{
+				alert("Debe Corregir los datos");
+			}
 		}
 	});
-	
 });
 $(document).on('click','#btnEditarInmueble', function(e){
 	//TABS A OCULTAR Y MOSTRAR
@@ -178,7 +183,48 @@ $(document).on('click','#btnCancelEditar', function(e){
 	$("#divEditarVehiculo").hide();
 	$("#divMostrarVehiculo").show();
 });
-
+$(document).on('change','#txtPartida', function(e){
+	$.ajax({
+		url: 'getPartidaRegistral-'+$('#txtPartida').val(),
+		type: 'post',
+		dataType: 'json',
+		data: '',
+		success: function(bien){
+			if(bien == true){
+				$("#alertasBienNuevo").show();
+				$("#alertasBienNuevo").empty();
+				$("#alertasBienNuevo").append('<div class="alert alert-error" id="alertaVerde">'+
+	 			        '<a class="close" data-dismiss="alert">×</a>'+
+	 			        '<strong id="msgVerde">Partida Registral usado ya existe.</strong>'+
+	 			    '</div>');
+				flag = false;
+			}else{
+				flag = true;
+			}
+		}
+	});
+});
+$(document).on('change','#txtPlaca', function(e){
+	$.ajax({
+		url: 'getPlaca-'+$('#txtPlaca').val(),
+		type: 'post',
+		dataType: 'json',
+		data: '',
+		success: function(bien){
+			if(bien == true){
+				$("#alertasBienNuevo2").show();
+				$("#alertasBienNuevo2").empty();
+				$("#alertasBienNuevo2").append('<div class="alert alert-error" id="alertaVerde">'+
+	 			        '<a class="close" data-dismiss="alert">×</a>'+
+	 			        '<strong id="msgVerde">Placa usada ya existe.</strong>'+
+	 			    '</div>');
+				flag = false;
+			}else{
+				flag = true;
+			}
+		}
+	});
+});
 </script>
 <div id="divVehiculo">
 	<div id="divMostrarVehiculo">
@@ -313,6 +359,10 @@ $(document).on('click','#btnCancelEditar', function(e){
 </div>
 <!-- EDITAR CAOS CRIMINAL -->
 	<fieldset class="well" style="display: none;" id="divEditarVehiculo">
+	<div id="alertasBienNuevo" style="display: none;">
+	</div>
+	<div id="alertasBienNuevo2" style="display: none;">
+	</div>
 		<form:form class="form-horizontal" id="formEditarVehiculo" action="editarVehiculo" commandName="editarVehiculo">
 				<input type="hidden" name="idVehiculo" id="hdnIdVehiculoAux">
 				<legend>

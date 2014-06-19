@@ -81,7 +81,9 @@ $(document).on('click','#radioM', function(e){
 /*$(document).on('click','#btnGuardar', function(e){
 	$("#formCrearUsuario").submit();
 });*/
-
+var flag = false;
+var flag2 = false;
+var flag3 = false;
 $(document).ready(function() {
 	$("#chkFiscal").prop("checked", false);
 	$("#chkFiscalSup").prop("checked", false);
@@ -103,7 +105,77 @@ $(document).ready(function() {
 			$("#hdnCorreo").val($("#txtCorreo").val());
 			$("#hdnDni").val($("#txtDni").val());
 			
-			form.submit();
+			//form.submit();
+			if(flag == true && flag2 == true && flag3 == true){
+				form.submit();
+			}else if($("#txtDni").val() == '' || $("#txtNumeroDeCarnet").val() == '' || $("#txtCorreo").val() == ''){
+				form.submit();
+			}else{
+				alert("Debe Corregir los datos");
+			}
+		}
+	});
+});
+$(document).on('change','#txtDni', function(e){
+	$.ajax({
+		url: 'getDni-'+$('#txtDni').val(),
+		type: 'post',
+		dataType: 'json',
+		data: '',
+		success: function(perfil){
+			if(perfil == true){
+				$("#alertasDniNuevo").show();
+				$("#alertasDniNuevo").empty();
+				$("#alertasDniNuevo").append('<div class="alert alert-error" id="alertaVerde">'+
+	 			        '<a class="close" data-dismiss="alert">×</a>'+
+	 			        '<strong id="msgVerde">El D.N.I usado ya existe.</strong>'+
+	 			    '</div>');
+				flag = false;
+			}else{
+				flag = true;
+			}
+		}
+	});
+});
+$(document).on('change','#txtNumeroDeCarnet', function(e){
+	$.ajax({
+		url: 'getNumeroCarnet-'+$('#txtNumeroDeCarnet').val(),
+		type: 'post',
+		dataType: 'json',
+		data: '',
+		success: function(perfil){
+			if(perfil == true){
+				$("#alertasCarnetNuevo").show();
+				$("#alertasCarnetNuevo").empty();
+				$("#alertasCarnetNuevo").append('<div class="alert alert-error" id="alertaVerde">'+
+	 			        '<a class="close" data-dismiss="alert">×</a>'+
+	 			        '<strong id="msgVerde">Número de Carnet usado ya existe.</strong>'+
+	 			    '</div>');
+				flag = false;
+			}else{
+				flag = true;
+			}
+		}
+	});
+});
+$(document).on('change','#txtCorreo', function(e){
+	$.ajax({
+		url: 'getCorreo-'+$('#txtCorreo').val(),
+		type: 'post',
+		dataType: 'json',
+		data: '',
+		success: function(usuario){
+			if(usuario == true){
+				$("#alertasCorreoNuevo").show();
+				$("#alertasCorreoNuevo").empty();
+				$("#alertasCorreoNuevo").append('<div class="alert alert-error" id="alertaVerde">'+
+	 			        '<a class="close" data-dismiss="alert">×</a>'+
+	 			        '<strong id="msgVerde">Correo usado ya existe.</strong>'+
+	 			    '</div>');
+				flag = false;
+			}else{
+				flag = true;
+			}
 		}
 	});
 });
@@ -120,6 +192,12 @@ $(document).ready(function() {
 	<div class="container inner_content">
 		<section class="span9" style="margin-left: 80px;">
 			<fieldset class="well">
+			<div id="alertasDniNuevo" style="display: none;">
+			</div>
+			<div id="alertasCarnetNuevo" style="display: none;">
+			</div>
+			<div id="alertasCorreoNuevo" style="display: none;">
+			</div>
 				<form:form class="form-horizontal" id="formCrearUsuario"
 					action="crearUsuario" commandName="perfil">
 					<legend>

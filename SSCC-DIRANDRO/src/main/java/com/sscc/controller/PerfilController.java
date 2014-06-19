@@ -106,7 +106,7 @@ public class PerfilController {
 		perfilbean = perfilServ.getPersonalPolicial(idCasoCriminal);
 		return perfilbean;
 	}
-	//Validaciones-PERFIL:
+	//Validaciones_Perfil:
 	@RequestMapping(value = "getDni-{dni}", method = RequestMethod.POST)
 	@ResponseBody
 	public Boolean getDni(@PathVariable("dni") String dni){
@@ -116,7 +116,7 @@ public class PerfilController {
 			return false;
 		}
 	}
-	@RequestMapping(value = "getDni-{numeroDeCarnet}", method = RequestMethod.POST)
+	@RequestMapping(value = "getNumeroCarnet-{numeroDeCarnet}", method = RequestMethod.POST)
 	@ResponseBody
 	public Boolean getNumeroCarnet(@PathVariable("numeroDeCarnet") String numeroDeCarnet){
 		if(perfilServ.getNumeroCarnet(numeroDeCarnet)){

@@ -42,6 +42,8 @@ $(document).on('change','#txtFecFabricacion', function(e){
 		$("#hdnFecFab").val("");
 	}
 });
+var flag = false;
+var flag2= false;
 $(document).ready(function() {
 	$( ".datepicker" ).datepicker({ dateFormat: 'dd/mm/yy' });
 	
@@ -89,7 +91,55 @@ $(document).ready(function() {
 			fecFabricacion: "Debe tener formato de fecha dd/mm/aaaa"
 		},
 		submitHandler: function(form){			
-			form.submit();
+			//form.submit();
+			if(flag == true && flag2 == true){
+				form.submit();
+			}else{
+				alert("Debe Corregir los datos");
+			}
+		}
+	});
+});
+$(document).on('change','#txtPartida', function(e){
+	$.ajax({
+		url: 'getPartidaRegistral-'+$('#txtPartida').val(),
+		type: 'post',
+		dataType: 'json',
+		data: '',
+		success: function(bien){
+			if(bien == true){
+				$("#alertasBienNuevo").show();
+				$("#alertasBienNuevo").empty();
+				$("#alertasBienNuevo").append('<div class="alert alert-error" id="alertaVerde">'+
+	 			        '<a class="close" data-dismiss="alert">×</a>'+
+	 			        '<strong id="msgVerde">Partida Registral usado ya existe.</strong>'+
+	 			    '</div>');
+				flag = false;
+			}else{
+				flag = true;
+			}
+		}
+	});
+});
+//
+$(document).on('change','#txtPlaca', function(e){
+	$.ajax({
+		url: 'getPlaca-'+$('#txtPlaca').val(),
+		type: 'post',
+		dataType: 'json',
+		data: '',
+		success: function(bien){
+			if(bien == true){
+				$("#alertasBienNuevo2").show();
+				$("#alertasBienNuevo2").empty();
+				$("#alertasBienNuevo2").append('<div class="alert alert-error" id="alertaVerde">'+
+	 			        '<a class="close" data-dismiss="alert">×</a>'+
+	 			        '<strong id="msgVerde">Placa usada ya existe.</strong>'+
+	 			    '</div>');
+				flag = false;
+			}else{
+				flag = true;
+			}
 		}
 	});
 });
@@ -106,6 +156,10 @@ $(document).ready(function() {
 <div class="container inner_content">
 	<section class="span9" style="margin-left: 80px;">
 		<fieldset class="well">
+		<div id="alertasBienNuevo" style="display: none;">
+		</div>
+		<div id="alertasBienNuevo2" style="display: none;">
+		</div>
 			<form:form class="form-horizontal" id="formRegistrarBien" action="registrarVehiculo" commandName="bien">
 		       	<legend><span class="colored">///</span> Bien:</legend>
 	       		<div class="control-group">

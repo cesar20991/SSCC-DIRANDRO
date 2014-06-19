@@ -78,5 +78,4 @@ public class UsuarioServiceImpl implements UsuarioService {
 		Integer cont = Integer.parseInt(queryCont.getSingleResult().toString());
 		return cont > 0 ? true : false;
 	}
-	
 }

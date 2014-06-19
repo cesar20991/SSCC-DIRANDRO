@@ -139,7 +139,7 @@ public class BienController {
 		bienes = bienServ.getBienesBean();
 		return bienes;
 	}
-	//Validaciones-Bienes:
+	//Validaciones_Bienes:
 	@RequestMapping(value = "getPartidaRegistral-{partidaRegistral}", method = RequestMethod.POST)
 	@ResponseBody
 	public Boolean getPartidaRegistral(@PathVariable("partidaRegistral") String partidaRegistral){
@@ -149,5 +149,13 @@ public class BienController {
 			return false;
 		}
 	}
-	
+	@RequestMapping(value = "getPlaca-{placa}", method = RequestMethod.POST)
+	@ResponseBody
+	public Boolean getPlaca(@PathVariable("placa") String placa){
+		if(bienServ.getPlaca(placa)){
+			return true;
+		}else{
+			return false;
+		}
+	}
 }

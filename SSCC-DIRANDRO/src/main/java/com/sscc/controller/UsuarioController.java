@@ -83,7 +83,7 @@ public class UsuarioController {
 		
 		return resultado;
 	}
-	//Validaciones-Usuario:
+	//Validaciones_Usuario:
 	@RequestMapping(value = "getCorreo-{correoElectronico}", method = RequestMethod.POST)
 	@ResponseBody
 	public Boolean getCorreo(@PathVariable("correoElectronico") String correoElectronico){
@@ -93,4 +93,5 @@ public class UsuarioController {
 			return false;
 		}
 	}
+	
 }
