@@ -2,12 +2,15 @@ package com.sscc.service;
 
 import java.util.List;
 
+import com.sscc.form.CasoCriminalBean;
 import com.sscc.form.SospechosoBean;
 import com.sscc.model.Sospechoso;
 
 public interface SospechosoService {
 
 	SospechosoBean getSospechosoBean(Integer idSospechoso);
+	
+	List<CasoCriminalBean> getCasosDelSospechoso(Integer idSospechoso);
 	
 	List<SospechosoBean> getSospechosos();
 	

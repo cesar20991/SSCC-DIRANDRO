@@ -15,12 +15,22 @@ function initCasoCriminal(caso){
 		$("#spnReferencia").empty();
 		$("#spnAsunto").empty();
 		$("#spnDescripcion").empty();
+		$("#spnPrioridad").empty();
 			 				
-		$("#hdrCodigoCaso").append(caso.codigo);
+		var importancia = '';
+		if(caso.importancia != ''){
+			importancia += caso.importancia;
+			$("#hdrCodigoCaso").append(caso.codigo+" (" +importancia+")");
+		}else{
+			importancia = '';
+			$("#hdrCodigoCaso").append(caso.codigo);
+		}
+
 		$("#hdrEstado").append(caso.estado);
 		$("#hdrReferencia").append(caso.referencia);
-		$("#hdrCreador").append('<a href="toPerfil-'+caso.idPerfil+'">'+caso.primerNombre+ ' ' +caso.segundoNombre+ ' ' +caso.apePaterno+ ' ' +caso.apeMaterno+ '('+caso.tipoFiscal+')</a>');
+		$("#hdrCreador").append('<a href="toPerfil-'+caso.idPerfil+'">'+caso.primerNombre+ ' ' +caso.segundoNombre+ ' ' +caso.apePaterno+ ' ' +caso.apeMaterno+ '</a>');
 		$("#hdrFecCreacion").text(timeStampFormatted(caso.fecCreacion));
+		$("#spnPrioridad").append(importancia);
 		
 		$("#spnCodigo").append(caso.codigo);
 		$("#spnEstado").append(caso.estado);
@@ -68,6 +78,7 @@ $(document).on('click','#btnEditarCasoCriminal', function(e){
 	$("#txtAsunto").val($("#spnAsunto").text());
 	$("#txtReferencia").val($("#spnReferencia").text());
 	$("#txtDescription").val($("#spnDescripcion").text());
+	$("#sltcImportancia").val($("#spnPrioridad").text());
 	
 	$("#divMostrarCasoCriminal").hide();
 	$("#divEditarCasoCriminal").show();
@@ -124,6 +135,12 @@ $(document).on('click','#btnCancelEditar', function(e){
 					<p id="spnDescripcion">&nbsp;</p>
 				</div>
 			</div>
+			<div class="control-group">
+				<label class="control-label">Prioridad: </label>
+				<div class="controls">
+					<p id="spnPrioridad">&nbsp;</p>
+				</div>
+			</div>
 		</fieldset>
 	</form:form>
 </div>
@@ -152,6 +169,17 @@ $(document).on('click','#btnCancelEditar', function(e){
 	          		<label class="control-label">Description: </label>
 	          		<div class="controls">
 	          			<textarea class="input-xlarge" name="descripcion" id="txtDescription" rows="8" data-rule-required="true" data-msg-required="*"></textarea>
+	          		</div>
+	       		</div>
+	       		<div class="control-group">
+	          		<label class="control-label">Prioridad: </label>
+	          		<div class="controls">
+	          			<select class="span3" name="importancia" id="sltcImportancia">
+	          				<option value="">No Precisa</option>
+	          				<option>Alta</option>
+	          				<option>Media</option>
+	          				<option>Baja</option>
+			            </select>
 	          		</div>
 	       		</div>
 				<!-- BOTONES -->

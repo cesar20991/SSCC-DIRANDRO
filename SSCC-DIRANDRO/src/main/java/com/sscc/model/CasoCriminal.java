@@ -26,6 +26,8 @@ public class CasoCriminal {
 	private String referencia;
 	@Column(length = 1000, nullable = false)
 	private String descripcion;
+	@Column(length = 90, nullable = true)
+	private String importancia;
 	@Column(length = 30, nullable = false)
 	private String estado;
 	@Column(nullable = false)
@@ -126,6 +128,12 @@ public class CasoCriminal {
 	}
 	public void setDiasDiligenciasPreliminares(Double diasDiligenciasPreliminares) {
 		this.diasDiligenciasPreliminares = diasDiligenciasPreliminares;
+	}
+	public String getImportancia() {
+		return importancia;
+	}
+	public void setImportancia(String importancia) {
+		this.importancia = importancia;
 	}
 	
 }

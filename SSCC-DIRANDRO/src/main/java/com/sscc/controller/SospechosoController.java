@@ -79,6 +79,14 @@ public class SospechosoController {
 		return sospechosobean;
 	}
 	
+	@RequestMapping(value = "getCasosDelSospechoso-{idSospechoso}", method = RequestMethod.POST)
+	@ResponseBody
+	public List<CasoCriminalBean> getCasosDelSospechoso(@PathVariable("idSospechoso") Integer idSospechoso){
+		List<CasoCriminalBean> sospechosobean = new ArrayList<CasoCriminalBean>();
+		sospechosobean = sospechosoServ.getCasosDelSospechoso(idSospechoso);
+		return sospechosobean;
+	}
+	
 	@RequestMapping(value = "getSopechosos", method = RequestMethod.POST)
 	@ResponseBody
 	public List<SospechosoBean> getSopechosos(){

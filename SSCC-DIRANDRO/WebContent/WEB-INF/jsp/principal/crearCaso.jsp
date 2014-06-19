@@ -79,6 +79,18 @@ $(document).ready(function() {
 	          			<textarea class="input-xlarge" name="descripcion" id="txtDescription" rows="5" data-rule-required="true" data-msg-required="*"></textarea>
 	          		</div>
 	       		</div>
+	       		<hr>
+	       		<div class="control-group">
+	          		<label class="control-label">Prioridad: </label>
+	          		<div class="controls">
+	          			<select class="span3" name="importancia">
+	          				<option value="">No Precisa</option>
+	          				<option>Alta</option>
+	          				<option>Media</option>
+	          				<option>Baja</option>
+			            </select>
+	          		</div>
+	       		</div>
 	       		<div class="form-actions">
 		        	<button class="btn btn-success" id="btnCrear" type="submit"><i class="icon-ok icon-white"></i> Crear Caso Criminal</button>
 		        	<button class="btn btn-danger" type="reset"><i class="icon-refresh icon-white"></i> Reset</button>

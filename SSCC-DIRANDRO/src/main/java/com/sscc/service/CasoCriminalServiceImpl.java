@@ -39,6 +39,11 @@ public class CasoCriminalServiceImpl implements CasoCriminalService{
 		Usuario u = new Usuario();
 		u.setIdUsuario(idUsuario);
 		caso.setUsuario(u);
+		if(caso.getImportancia() == null){
+			caso.setImportancia("");
+		}else{
+			caso.setImportancia(caso.getImportancia());
+		}
 		
 		//grabar en la BD
 		em.persist(caso);
@@ -73,6 +78,7 @@ public class CasoCriminalServiceImpl implements CasoCriminalService{
 		cb.setIdCasoCriminal(c.getIdCasoCriminal());
 		cb.setPrimerNombre(p.getPrimerNombre());
 		cb.setReferencia(c.getReferencia());
+		cb.setImportancia(c.getImportancia());
 		cb.setSegundoNombre(p.getSegundoNombre());
 		cb.setTipoFiscal(p.getTipoFiscal());
 		cb.setIdPerfil(p.getIdPerfil());
@@ -83,7 +89,7 @@ public class CasoCriminalServiceImpl implements CasoCriminalService{
 	@SuppressWarnings("unchecked")
 	public List<CasoCriminalBean> getCasosCriminalBean() {
 		List<CasoCriminalBean> cbl = new ArrayList<CasoCriminalBean>();
-		Query qCasos = em.createQuery("SELECT c.idCasoCriminal, c.codigo, c.referencia FROM CasoCriminal c");
+		Query qCasos = em.createQuery("SELECT c.idCasoCriminal, c.codigo, c.referencia, c.importancia FROM CasoCriminal c");
 		List<Object[]> c = qCasos.getResultList();
 
 		for(int i = 0; i < c.size(); i++){
@@ -92,6 +98,11 @@ public class CasoCriminalServiceImpl implements CasoCriminalService{
 			cb.setIdCasoCriminal((Integer)cc[0]);
 			cb.setCodigo((String)cc[1]);
 			cb.setReferencia((String)cc[2]);
+			if((String)cc[3] != null){
+				cb.setImportancia((String)cc[3]);
+			}else{
+				cb.setImportancia("");
+			}			
 			cbl.add(cb);
 		}
 		
@@ -101,7 +112,7 @@ public class CasoCriminalServiceImpl implements CasoCriminalService{
 	@SuppressWarnings("unchecked")
 	public List<CasoCriminalBean> getCasosCriminalBeanPersonal() {
 		List<CasoCriminalBean> cbl = new ArrayList<CasoCriminalBean>();
-		Query qCasos = em.createQuery("SELECT c.idCasoCriminal, c.codigo, c.referencia FROM CasoCriminal c ");
+		Query qCasos = em.createQuery("SELECT c.idCasoCriminal, c.codigo, c.referencia, c.importancia FROM CasoCriminal c ");
 		List<Object[]> c = qCasos.getResultList();
 		for(int i = 0; i < c.size(); i++){
 			CasoCriminalBean cb = new CasoCriminalBean();
@@ -109,6 +120,11 @@ public class CasoCriminalServiceImpl implements CasoCriminalService{
 			cb.setIdCasoCriminal((Integer)cc[0]);
 			cb.setCodigo((String)cc[1]);
 			cb.setReferencia((String)cc[2]);
+			if((String)cc[3] != null){
+				cb.setImportancia((String)cc[3]);
+			}else{
+				cb.setImportancia("");
+			}
 			cbl.add(cb);
 		}
 		
@@ -174,7 +190,7 @@ public class CasoCriminalServiceImpl implements CasoCriminalService{
 	@SuppressWarnings("unchecked")
 	public List<CasoCriminalBean> getLastCasosCriminales(HttpSession session) {
 		List<CasoCriminalBean> listCR = new ArrayList<CasoCriminalBean>();
-		Query q =em.createNativeQuery("SELECT cr.idcasocriminal,cr.codigo FROM casocriminal cr ORDER BY cr.fecCreacion DESC");
+		Query q =em.createNativeQuery("SELECT cr.idcasocriminal,cr.codigo, c.importancia FROM casocriminal cr ORDER BY cr.fecCreacion DESC");
 		//Query q =em.createNativeQuery("select  cr.idcasocriminal,cr.codigo from casocriminal cr where cr.feccreacion between (CURRENT_TIMESTAMP - interval '15 days') AND (CURRENT_TIMESTAMP)");
 		q.setMaxResults(15);
 		List<String[]> rowsCR = q.getResultList();
@@ -183,6 +199,11 @@ public class CasoCriminalServiceImpl implements CasoCriminalService{
 			Object[] obj = rowsCR.get(i);
 			crBean.setIdCasoCriminal((Integer)obj[0]);
 			crBean.setCodigo((String)obj[1]);
+			if((String)obj[2] != null){
+				crBean.setImportancia((String)obj[2]);
+			}else{
+				crBean.setImportancia("");
+			}
 			listCR.add(crBean);
 		}
 		return listCR;
@@ -196,6 +217,7 @@ public class CasoCriminalServiceImpl implements CasoCriminalService{
 		editadoC.setAsunto(caso.getAsunto());
 		editadoC.setReferencia(caso.getReferencia());
 		editadoC.setDescripcion(caso.getDescripcion());
+		editadoC.setImportancia(caso.getImportancia());
 		
 		return getCasoCriminalBean(caso.getIdCasoCriminal());
 	}

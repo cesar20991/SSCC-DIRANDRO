@@ -10,9 +10,13 @@ import javax.persistence.Query;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.sscc.form.CasoCriminalBean;
 import com.sscc.form.SospechosoBean;
+import com.sscc.model.CasoCriminal;
+import com.sscc.model.Perfil;
 import com.sscc.model.RasgosParticulares;
 import com.sscc.model.Sospechoso;
+import com.sscc.model.Usuario;
 import com.sscc.util.DateUtil;
 
 @Service
@@ -283,5 +287,35 @@ public class SospechosoServiceImpl implements SospechosoService{
 		queryCont.setParameter("codigoUnicoDeIdentificacion", codigoUnicoDeIdentificacion);
 		Integer cont = Integer.parseInt(queryCont.getSingleResult().toString());
 		return cont > 0 ? true : false;
+	}
+
+
+	public List<CasoCriminalBean> getCasosDelSospechoso(Integer idSospechoso) {
+		List<CasoCriminalBean> listCR = new ArrayList<CasoCriminalBean>();
+		Query query = em.createQuery("SELECT c FROM CasoPorSospechoso cps JOIN cps.sospechoso s JOIN cps.casoCriminal c WHERE s.idSospechoso="+idSospechoso+" AND cps.estado='habilitado'");
+		
+		List<CasoCriminal> cc = query.getResultList();
+		for(int i=0;i<cc.size();i++){
+			CasoCriminalBean cb = new CasoCriminalBean();
+			CasoCriminal c = cc.get(i);
+			Perfil p = c.getUsuario().getPerfil();
+			Usuario u = c.getUsuario();
+			cb.setIdCasoCriminal(c.getIdCasoCriminal());
+			cb.setAsunto(c.getAsunto());
+			cb.setCodigo(c.getCodigo());
+			cb.setCorreoElectronico(u.getContrasena());
+			cb.setDescripcion(c.getDescripcion());
+			cb.setImportancia(c.getImportancia());
+			cb.setEstado(c.getEstado());
+			cb.setFecCreacion(c.getFecCreacion());
+			cb.setIdCasoCriminal(c.getIdCasoCriminal());
+			cb.setNombreCompleto(p.getPrimerNombre()+" "+p.getSegundoNombre()+" "+p.getApePaterno()+" "+p.getApeMaterno());
+			cb.setReferencia(c.getReferencia());
+			cb.setTipoFiscal(p.getTipoFiscal());
+			cb.setIdPerfil(p.getIdPerfil());
+			listCR.add(cb);
+		}
+		
+		return listCR;
 	}
 }

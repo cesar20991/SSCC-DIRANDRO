@@ -179,6 +179,16 @@ public class CasoCriminalController {
 		}
 	}
 	
+	@RequestMapping(value = "deshasignarCasoDelSospechoso-{idCaso}-{idSospechoso}", method = RequestMethod.POST)
+	@ResponseBody
+	public List<CasoCriminalBean> deshasignarCasoDelSospechoso(@PathVariable("idCaso") Integer idCaso,@PathVariable("idSospechoso") Integer idSospechoso){
+		if(casoServ.deshasignarSospechosoDelCaso(idCaso, idSospechoso)){
+			return sospechosoServ.getCasosDelSospechoso(idSospechoso);
+		}else{
+			return null;
+		}
+	}
+	
 	@RequestMapping("popUpAsignarSospechoso")
 	public String popUpAsignarSospechoso(){
 		return "principal/popUpBuscarSospechoso";	

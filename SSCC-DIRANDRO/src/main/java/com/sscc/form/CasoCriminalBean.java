@@ -9,6 +9,7 @@ public class CasoCriminalBean {
 	private String asunto;
 	private String referencia;
 	private String descripcion;
+	private String importancia;
 	private String estado;
 	private Timestamp fecCreacion;
 	
@@ -119,5 +120,11 @@ public class CasoCriminalBean {
 	}
 	public void setIdUsuario(Integer idUsuario) {
 		this.idUsuario = idUsuario;
+	}
+	public String getImportancia() {
+		return importancia;
+	}
+	public void setImportancia(String importancia) {
+		this.importancia = importancia;
 	}
 }

@@ -163,6 +163,7 @@ public class PerfilServiceImpl implements PerfilService {
 			pb.setIdUsuario(p.get(i).getUsuario().getIdUsuario());
 			pb.setIdPerfil(p.get(i).getIdPerfil());
 			pb.setNombreCompleto(p.get(i).getPrimerNombre()+" "+p.get(i).getSegundoNombre()+" "+p.get(i).getApePaterno()+" "+p.get(i).getApeMaterno());
+			pb.setGrado(p.get(i).getGrado());
 			pbl.add(pb);
 		}
 		
