@@ -31,7 +31,11 @@ public class BienController {
 	
 	@RequestMapping("toBuscarBien-{idSospechoso}")
 	public String toBuscarBien(@PathVariable("idSospechoso")Integer idSospechoso, Model model ) {
-		model.addAttribute("idSospechoso", idSospechoso);
+		List<SospechosoBean> sospechosoList = new ArrayList<SospechosoBean>();
+		SospechosoBean s = new SospechosoBean();
+		s.setIdSospechoso(idSospechoso);
+		sospechosoList.add(s);
+		model.addAttribute("sospechosoList", sospechosoList);
 		return "principal/buscarBien";
 	}
 	

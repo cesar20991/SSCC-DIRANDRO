@@ -110,6 +110,9 @@ $(document).ready(function(){
 		<section class="span9" style="margin-left: 80px;">
 		<div id="alertasAsignarCaso" style="display: none;">
 		</div>
+			<c:forEach items="${sospechosoList}" var="sospechoso">
+				<span id="hdnIdSospechoso" style="display: none;"><c:out value="${sospechoso.idSospechoso}" /></span>
+			</c:forEach>
 			<table class="table table-bordered" id="tblBienes">
 				<thead>
 					<tr>

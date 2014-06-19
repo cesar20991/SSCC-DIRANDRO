@@ -304,10 +304,9 @@ public class BienServiceImpl implements BienService {
 	@Transactional
 	public boolean asignarBienToSospechoso(Integer idBien, Integer idSospechoso) {
 		BienPorSospechoso bs=  new BienPorSospechoso();
-		Bien bien = new Bien();
-		bien.setIdBien(idBien);
-		Sospechoso sospechoso = new Sospechoso();
-		sospechoso.setIdSospechoso(idSospechoso);
+		Bien bien = em.find(Bien.class, idBien);
+		System.out.print("ID = "+idSospechoso);
+		Sospechoso sospechoso = em.find(Sospechoso.class, idSospechoso);
 		bs.setBien(bien);
 		bs.setSospechoso(sospechoso);
 		bs.setEstado("habilitado");
