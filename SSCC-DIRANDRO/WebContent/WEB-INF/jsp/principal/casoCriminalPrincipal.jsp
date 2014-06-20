@@ -9,7 +9,8 @@
 <title>SSCC - DIRANDRO - Caso Criminal</title>
 <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+<!-- mapas -->
+ <script src="http://maps.google.com/maps/api/js?sensor=false"></script>
 <!-- para que funcione el jquery -->
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 <!-- para que funcione el jquery de la plantilla -->
@@ -19,9 +20,11 @@
 <!-- tabs -->
 <script src="js/bootstrap-tab.js"></script>
 <!-- datepicker librerias -->
-<link rel="stylesheet" href="//code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">
+<script src="js/jquery-ui.js"></script>
+<link href="css/smoothness/jquery-ui.css" rel="stylesheet">
+<!-- <link rel="stylesheet" href="//code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">
 <script src="//code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
-<link rel="stylesheet" href="/resources/demos/style.css">
+<link rel="stylesheet" href="/resources/demos/style.css"> -->
 <script src="http://malsup.github.com/jquery.form.js"></script>
 <!-- validacion -->
 <script src="js/jquery.validate.min.js"></script>
@@ -29,8 +32,7 @@
 <script src="js/formatDates.js"></script>
 <!-- alertas de colores -->
 <script src="js/bootstrap-alert.js"></script>
-<!-- mapas -->
- <script src="http://maps.google.com/maps/api/js?sensor=false"></script> 
+ 
 <!-- modal -->
 <script src="js/bootstrap-modal.js"></script>
 <!-- styles -->

@@ -21,9 +21,11 @@
 <!-- para los archivos -->
 <script src="http://malsup.github.com/jquery.form.js"></script>
 <!-- datepicker librerias -->
-<link rel="stylesheet" href="//code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">
+<script src="js/jquery-ui.js"></script>
+<link href="css/smoothness/jquery-ui.css" rel="stylesheet">
+<!-- <link rel="stylesheet" href="//code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">
 <script src="//code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
-<link rel="stylesheet" href="/resources/demos/style.css">
+<link rel="stylesheet" href="/resources/demos/style.css"> -->
 <!-- validacion -->
 <script src="js/jquery.validate.min.js"></script>
 <script src="js/validateFecha.js"></script>

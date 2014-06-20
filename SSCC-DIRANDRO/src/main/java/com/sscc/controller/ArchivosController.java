@@ -46,7 +46,7 @@ public class ArchivosController {
 		
 		if(archivoServ.guardarArchivos(files, request, res, tipoEntidad, idEntidad)){
 			archivos = archivoServ.getArchivosByEntidad(tipoEntidad, idEntidad);
-		}
+		}      
 		
 		return archivos;
 	}

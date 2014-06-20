@@ -93,7 +93,7 @@ $(document).ready(function(){
  	});
 	
 });
-
+var JefeDeUnidad = 0;
 function iniPersonalAsignadoPorCaso(idCaso){
 	$.ajax({
  		url: 'getPersonalAsignado-'+idCaso,
@@ -105,6 +105,8 @@ function iniPersonalAsignadoPorCaso(idCaso){
 			$.each(policias, function(i, policia){
 				if(policia.cargo != 'Jefe de Unidad'){
 					botonQuitar = '<button class="btn btn-danger btn-mini asignar" id="CancelarAsigna_'+i+'" type="button"><i class="icon-minus icon-white"></i></button>';
+				}else{
+					JefeDeUnidad++;
 				}
 				$("#divMostrarPersonal").append('<table class="table table-bordered table-condensed" id="tblAsignado_'+i+'">'+
 													'<tbody>'+

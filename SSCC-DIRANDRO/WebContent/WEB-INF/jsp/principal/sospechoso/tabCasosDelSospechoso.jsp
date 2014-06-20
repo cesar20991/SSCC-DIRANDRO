@@ -31,7 +31,7 @@ function initCasoDelSospechoso(casos){
 						'<td colspan="2">Referencia:</td>'+
 						'<td colspan="2"><span id="hdrReferencia">'+caso.referencia+'</span></td>'+
 						'<td>Fecha de Creacion:</td>'+
-						'<td><span id="hdrFecCreacion">'+caso.fecCreacion+'</span></td>'+
+						'<td><span id="hdrFecCreacion">'+timeStampFormatted(caso.fecCreacion)+'</span></td>'+
 					'</tr>'+
 					'<tr>'+
 						'<td>Creado por:</td>'+
