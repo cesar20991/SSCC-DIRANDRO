@@ -109,7 +109,7 @@ public class PerfilController {
 	//Validaciones_Perfil:
 	@RequestMapping(value = "getDni-{dni}", method = RequestMethod.POST)
 	@ResponseBody
-	public Boolean getDni(@PathVariable("dni") String dni){
+	public Boolean getDni(@PathVariable("dni") Integer dni){
 		if(perfilServ.getDni(dni)){
 			return true;
 		}else{
@@ -118,7 +118,7 @@ public class PerfilController {
 	}
 	@RequestMapping(value = "getNumeroCarnet-{numeroDeCarnet}", method = RequestMethod.POST)
 	@ResponseBody
-	public Boolean getNumeroCarnet(@PathVariable("numeroDeCarnet") String numeroDeCarnet){
+	public Boolean getNumeroCarnet(@PathVariable("numeroDeCarnet") Integer numeroDeCarnet){
 		if(perfilServ.getNumeroCarnet(numeroDeCarnet)){
 			return true;
 		}else{

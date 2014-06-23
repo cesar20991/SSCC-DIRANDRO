@@ -167,5 +167,4 @@ public class CasoCriminal {
 	public void setCometarioPausaNCaso(String cometarioPausaNCaso) {
 		this.cometarioPausaNCaso = cometarioPausaNCaso;
 	}
-	
 }

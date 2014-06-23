@@ -94,6 +94,7 @@ public class Sospechoso {
 	
 	@OneToMany(mappedBy = "sospechoso")
 	private Collection<Archivo> archivos;
+
 	
 	public Integer getIdSospechoso() {
 		return idSospechoso;

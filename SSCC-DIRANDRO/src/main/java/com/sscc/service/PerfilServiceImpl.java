@@ -198,14 +198,14 @@ public class PerfilServiceImpl implements PerfilService {
 		return pbl;
 	}
 
-	public Boolean getDni(String dni) {
+	public Boolean getDni(Integer dni) {
 		Query queryCont = em.createQuery("SELECT COUNT(p) FROM Perfil p WHERE p.dni =:dni");
 		queryCont.setParameter("dni", dni);
 		Integer cont = Integer.parseInt(queryCont.getSingleResult().toString());
 		return cont > 0 ? true : false;
 	}
 
-	public Boolean getNumeroCarnet(String numeroDeCarnet) {
+	public Boolean getNumeroCarnet(Integer numeroDeCarnet) {
 		Query queryCont = em.createQuery("SELECT COUNT(p) FROM Perfil p WHERE p.numeroDeCarnet =:numeroDeCarnet");
 		queryCont.setParameter("numeroDeCarnet", numeroDeCarnet);
 		Integer cont = Integer.parseInt(queryCont.getSingleResult().toString());

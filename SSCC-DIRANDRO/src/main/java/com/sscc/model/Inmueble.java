@@ -160,7 +160,4 @@ public class Inmueble {
 	public void setArchivos(Collection<Archivo> archivos) {
 		this.archivos = archivos;
 	}
-	
-	
-	
 }

@@ -107,7 +107,7 @@ var idEntidad = '';
 						<jsp:include page="../componentes/archivos.jsp" />
 					</div>
 					<div class="tab-pane" id="4">
-						<p>Seccion 4.</p>
+						<jsp:include page="../componentes/tabComentarios.jsp" />
 					</div>
 					<div class="tab-pane" id="5">
 						<p>Seccion 5.</p>

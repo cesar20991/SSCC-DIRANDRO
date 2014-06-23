@@ -81,9 +81,9 @@ $(document).on('click','#radioM', function(e){
 /*$(document).on('click','#btnGuardar', function(e){
 	$("#formCrearUsuario").submit();
 });*/
-var flag = false;
-var flag2 = false;
-var flag3 = false;
+var flag = true;
+var flag2 = true;
+var flag3 = true;
 $(document).ready(function() {
 	$("#chkFiscal").prop("checked", false);
 	$("#chkFiscalSup").prop("checked", false);

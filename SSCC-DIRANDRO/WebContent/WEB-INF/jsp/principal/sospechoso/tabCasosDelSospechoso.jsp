@@ -12,7 +12,14 @@ function initCasoDelSospechoso(casos){
 	$.each(casos, function(i, caso) {
 		var importancia = '';
 		if(caso.importancia != ''){
-			importancia += "("+caso.importancia+")";
+
+			if(caso.importancia == 'Baja'){
+				importancia += '( <span class="label">'+caso.importancia+'</span> )';
+			}else if(caso.importancia == 'Media'){
+				importancia += '( <span class="label label-warning">'+caso.importancia+'</span> )';
+			}else if(caso.importancia == 'Alta'){
+				importancia += '( <span class="label label-important">'+caso.importancia+'</span> )';
+			}
 		}else{
 			importancia = '';
 		}

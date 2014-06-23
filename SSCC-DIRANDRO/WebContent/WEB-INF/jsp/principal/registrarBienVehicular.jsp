@@ -44,8 +44,8 @@ $(document).on('change','#txtFecFabricacion', function(e){
 		$("#hdnFecFab").val("");
 	}
 });
-var flag = false;
-var flag2= false;
+var flag = true;
+var flag2= true;
 $(document).ready(function() {
 	$( ".datepicker" ).datepicker({ dateFormat: 'dd/mm/yy' });
 	

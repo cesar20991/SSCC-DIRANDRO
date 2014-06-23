@@ -75,7 +75,7 @@ public class Vehiculo {
 	private Bien bien;
 	
 	@OneToMany(mappedBy = "inmueble")
-	private Collection<Archivo> vehiculo;
+	private Collection<Archivo> archivos;
 
 	public Integer getIdVehiculo() {
 		return idVehiculo;
@@ -229,13 +229,11 @@ public class Vehiculo {
 		this.bien = bien;
 	}
 
-	public Collection<Archivo> getVehiculo() {
-		return vehiculo;
+	public Collection<Archivo> getArchivos() {
+		return archivos;
 	}
 
-	public void setVehiculo(Collection<Archivo> vehiculo) {
-		this.vehiculo = vehiculo;
+	public void setArchivos(Collection<Archivo> archivos) {
+		this.archivos = archivos;
 	}
-	
-	
 }

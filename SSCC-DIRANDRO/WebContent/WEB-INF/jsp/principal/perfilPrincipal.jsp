@@ -5,7 +5,6 @@
 
 <html>
 <head>
-<meta charset="utf-8">
 <title>SSCC - DIRANDRO - Principal</title>
 <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -21,6 +20,10 @@
 <script src="http://malsup.github.com/jquery.form.js"></script>
 <!-- alertas de colores -->
 <script src="js/bootstrap-alert.js"></script>
+<!-- validacion -->
+<script src="js/jquery.validate.min.js"></script>
+<script src="js/validateFecha.js"></script>
+<script src="js/formatDates.js"></script>
 <!-- styles -->
 <link href="css/bootstrap.css" rel="stylesheet">
 <link href="css/bootstrap-responsive.css" rel="stylesheet">
@@ -97,7 +100,7 @@ var idEntidad = '';
 						<jsp:include page="../componentes/archivos.jsp" />
 					</div>
 					<div class="tab-pane" id="3">
-						<p>Comentarios.</p>
+						<jsp:include page="../componentes/tabComentarios.jsp" />
 					</div>
 				</div>
 			</div>

@@ -21,6 +21,6 @@ public interface PerfilService {
 	
 	List<PerfilBean> getPersonalPolicial(Integer idCasoCriminal);
 	
-	Boolean getDni (String dni);
-	Boolean getNumeroCarnet (String numeroDeCarnet);
+	Boolean getDni (Integer dni);
+	Boolean getNumeroCarnet (Integer numeroDeCarnet);
 }

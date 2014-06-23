@@ -7,7 +7,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.sscc.form.ArchivoBean;
-import com.sscc.form.PerfilBean;
 import com.sscc.form.adjuntoBean;
 import com.sscc.model.Archivo;
 

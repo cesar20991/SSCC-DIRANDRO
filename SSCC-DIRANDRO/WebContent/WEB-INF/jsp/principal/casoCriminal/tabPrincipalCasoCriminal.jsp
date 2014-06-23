@@ -19,8 +19,15 @@ function initCasoCriminal(caso){
 			 				
 		var importancia = '';
 		if(caso.importancia != ''){
-			importancia += caso.importancia;
-			$("#hdrCodigoCaso").append(caso.codigo+" ("+importancia+")");
+			
+			if(caso.importancia == 'Baja'){
+				importancia += '<span class="label">'+caso.importancia+'</span>';
+			}else if(caso.importancia == 'Media'){
+				importancia += '<span class="label label-warning">'+caso.importancia+'</span>';
+			}else if(caso.importancia == 'Alta'){
+				importancia += '<span class="label label-important">'+caso.importancia+'</span>';
+			}
+			$("#hdrCodigoCaso").append(caso.codigo+" ( "+importancia+" )");
 		}else{
 			importancia = '';
 			$("#hdrCodigoCaso").append(caso.codigo);
