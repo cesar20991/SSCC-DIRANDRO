@@ -24,6 +24,8 @@
 <script src="js/bootstrap-collapse.js"></script>
 <script src="js/jquery.validate.min.js"></script>
 <script src="js/validateFecha.js"></script>
+<!-- alertas de colores -->
+<script src="js/bootstrap-alert.js"></script>
 <!-- styles -->
 <link href="css/bootstrap.css" rel="stylesheet">
 <link href="css/bootstrap-responsive.css" rel="stylesheet">
