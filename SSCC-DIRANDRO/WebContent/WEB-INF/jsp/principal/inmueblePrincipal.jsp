@@ -49,6 +49,11 @@ var idEntidad = '';
 	}else{
 		idEntidad = '${pageContext.session.getAttribute("idPerfil")}';
 	}*/
+	$(document).on('change','#hdrAreaTotal', function(e){
+		if($("#hdrAreaTotal").val('')){
+			$("#hdrAreaTotal").val('---');
+		}
+	});
 </script>
 <body>
 

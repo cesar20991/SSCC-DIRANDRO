@@ -45,15 +45,15 @@ $(document).ready(function() {
 	$("#formRegistrarBien").validate({
 		rules:{
 			partidaRegistral:{required:true, minlength: 8, maxlength: 8},
-			valor:{required:true,doubleNumber:true},
-			descripcion:{required:true, minlength: 10,maxlength: 250},
-			areaTotal:{required:true,doubleNumber:true},
-			areaConstruido:{required:true,doubleNumber:true},
-			areaCercado:{required:true,doubleNumber:true},
-			pisos:{number:true},
-			ambientes:{number:true},
+			valor:{required:false,doubleNumber:true},
+			descripcion:{required:false, minlength: 10,maxlength: 250},
+			areaTotal:{required:false,doubleNumber:true},
+			areaConstruido:{required:false,doubleNumber:true},
+			areaCercado:{required:false,doubleNumber:true},
+			pisos:{required:false, number:true},
+			ambientes:{required:false, number:true},
 			direccion:{required:true, maxlength:100},
-			antiguedad:{number:true}
+			antiguedad:{required:false, number:true}
 		},
 		messages:{
 			partidaRegistral:"Complete los 8 carácteres",
