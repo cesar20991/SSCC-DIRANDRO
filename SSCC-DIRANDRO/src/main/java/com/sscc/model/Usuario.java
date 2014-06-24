@@ -42,6 +42,9 @@ public class Usuario {
 	private Collection<Bien> bienes;
 	
 	@OneToMany(mappedBy = "usuario")
+	private Collection<Mueble> muebles;
+	
+	@OneToMany(mappedBy = "usuario")
 	private Collection<Archivo> archivos;
 	
 	@OneToMany(mappedBy = "usuario")
