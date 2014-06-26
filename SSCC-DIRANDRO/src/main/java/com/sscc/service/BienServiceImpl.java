@@ -322,4 +322,33 @@ public class BienServiceImpl implements BienService {
 		Integer cont = Integer.parseInt(queryCont.getSingleResult().toString());
 		return cont > 0 ? true : false;
 	}
+
+	public List<BienBean> getBienesPorSopechoso(Integer idSospechoso) {
+		List<BienBean> lBb = new ArrayList<BienBean>();
+		System.out.println("Bienes");
+		Query qBienes = em.createQuery("SELECT b FROM BienPorSospechoso bps JOIN bps.bien b JOIN bps.sospechoso s WHERE bps.estado='habilitado' AND s.idSospechoso=:idSospechoso ORDER BY  b.fecCreacion DESC");
+		qBienes.setParameter("idSospechoso", idSospechoso);
+		
+		List<Bien> lB =  qBienes.getResultList();
+		System.out.println("Bienes = "+lB.size());
+		for(Bien b : lB){
+			BienBean bb = new BienBean();
+			bb.setIdBien(b.getIdBien());
+			bb.setPartidaRegistral(b.getPartidaRegistral());
+			bb.setDescripcion(b.getDescripcion());
+			bb.setValor(b.getValor());
+			if(b.getInmueble()!=null){
+				bb.setTipoBien(1);
+				bb.setCodigo(b.getInmueble().getCodigo());
+				bb.setTipo("Inmueble");
+			}else if(b.getVehiculo()!=null){
+				bb.setTipoBien(2);
+				bb.setCodigo(b.getVehiculo().getCodigo());
+				bb.setTipo("Vehiculo");
+			}
+			lBb.add(bb);
+		}
+		
+		return lBb;
+	}
 }

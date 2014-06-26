@@ -39,6 +39,14 @@ public class BienController {
 		return "principal/popUpAsignarBien";
 	}
 	
+	@RequestMapping(value = "getBienesPorSospechoso-{idSospechoso}", method = RequestMethod.POST)
+	@ResponseBody
+	public List<BienBean> getBienesPorSospechoso(@PathVariable("idSospechoso") Integer idSospechoso){
+		System.out.println("IdSospechoso = "+idSospechoso);	
+		return bienServ.getBienesPorSopechoso(idSospechoso);
+	}
+
+	
 	@RequestMapping(value ="asignarBienToSospechoso-{idBien}-{idSospechoso}",method= RequestMethod.POST)
 	@ResponseBody
 	public Boolean toBuscarBien(@PathVariable("idBien")Integer idBien,@PathVariable("idSospechoso")Integer idSospechoso) {
