@@ -207,27 +207,48 @@ $(document).ready(function(){
 		}
 	});
 	
-//CREO QE AQUI ME EQUIVOCO.... CREO!!! Xd	
-	$("#formAcopio").validate({
+	$("#formPuntosAcopio").validate({
 		submitHandler: function(form){
 			$.ajax({
-				url: 'asignarAcopiosAcasos-'+$("#hdnIdCaso").text(),
+				url: 'asignarRutasAcasos-'+$("#hdnIdCaso").text(),
 		 		type: 'post',
 		 		dataType: 'json',
-		 		data: $("#formAcopio").serialize(),
-		 		success: function(acopios){
-		 			//initRutas(caso);
-		 			//$("#divRutasAsignado").show();
-		 			//$("#divNuevaRuta").hide();
-		 			//$("#alertasMapa").show();
-// 		 			$("#alertasMapa").append('<div class="alert alert-success" id="alertaVerde">'+
-// 						 			        '<a class="close" data-dismiss="alert">×</a>'+
-// 						 			        '<strong id="msgVerde">Guardado Correctamente</strong>'+
-// 						 			    '</div>');
+		 		data: $("#formPuntosAcopio").serialize(),
+		 		success: function(rutas){
+		 			initRutas(rutas);
+		 			$("#divRutasAsignado").show();
+		 			$("#divNuevPuntoAcopio").hide();
+		 			$("#alertasMapa").show();
+		 			$("#alertasMapa").append('<div class="alert alert-success" id="alertaVerde">'+
+						 			        '<a class="close" data-dismiss="alert">×</a>'+
+						 			        '<strong id="msgVerde">Guardado Correctamente</strong>'+
+						 			    '</div>');
 		 		}
 			});
 		}
 	});
+	
+//CREO QE AQUI ME EQUIVOCO.... CREO!!! Xd	
+// 	$("#formAcopio").validate({
+// 		submitHandler: function(form){
+// 			$.ajax({
+// 				url: 'asignarAcopiosAcasos-'+$("#hdnIdCaso").text(),
+// 		 		type: 'post',
+// 		 		dataType: 'json',
+// 		 		data: $("#formAcopio").serialize(),
+// 		 		success: function(acopios){
+// 		 			//initRutas(caso);
+// 		 			//$("#divRutasAsignado").show();
+// 		 			//$("#divNuevaRuta").hide();
+// 		 			//$("#alertasMapa").show();
+// // 		 			$("#alertasMapa").append('<div class="alert alert-success" id="alertaVerde">'+
+// // 						 			        '<a class="close" data-dismiss="alert">×</a>'+
+// // 						 			        '<strong id="msgVerde">Guardado Correctamente</strong>'+
+// // 						 			    '</div>');
+// 		 		}
+// 			});
+// 		}
+// 	});
 	
 	function vaciarFormulario(){
 		$("#inicio1").val("");
@@ -241,8 +262,8 @@ $(document).ready(function(){
 	function vaciarPuntos(){
 		$("#lat").val("");
 		$("#long").val("");
-		$("#txtTitulo2").val("");
-		$("#txtDescripcion2").val("");		
+		$("#txtTitulo").val("");
+		$("#txtDescripcion").val("");		
 	}
 });
 </script>
@@ -345,12 +366,9 @@ $(document).ready(function(){
 <!-- ============ PUNTOS DE ACOPIO ============== -->
 <div id="divNuevPuntoAcopio" style="display:none;">
 <fieldset>
-	<form:form class="form-horizontal span9" id="formAcopio" action="crearAcopio" commandName="PuntosAcopio">
+	<form:form class="form-horizontal span9" id="formPuntosAcopio" action="crearRuta" commandName="RutasMapas">
 	<button class="btn btn-primary btn-small" type="button" onClick="initialize()">Reset</button>
 	 
-<!-- 	<label>Direcci&oacute;n</label> -->
-<!-- 	<input type="text" id="direccion" name="direccion" value=""/>  -->
-<!-- 	<button id="pasar">Pasar al mapa</button> -->
 	<div class="control-group">
 		<label class="control-label">Dirección: </label>
 		<div class="controls">
@@ -366,25 +384,25 @@ $(document).ready(function(){
 	<div class="control-group">
 		<label class="control-label">Latitud: </label>
 		<div class="controls">
-			<input name="lat" id="lat" type="text" value="" class="span3">
+			<input name="inicioLat" id="lat" type="text" value="" class="span3">
 		</div>
 	</div>
 	<div class="control-group">
 		<label class="control-label">Longitud: </label>
 		<div class="controls">
-			<input name="lng" id="long" type="text" value="" class="span3">
+			<input name="inicioLong" id="long" type="text" value="" class="span3">
 		</div>
 	</div>
 	<div class="control-group">
 		<label class="control-label">Título: </label>
 		<div class="controls">
-			<input id="txtTitulo2" type="text" value="" name="nombre2" class="span3">
+			<input id="txtTitulo" type="text" value="" name="nombre" class="span3">
 		</div>
 	</div>
 	<div class="control-group">
 		<label class="control-label">Descripción: </label>
 		<div class="controls">
-			<input id="txtDescripcion2" type="text" value="" name="comentario2" class="span3">
+			<input id="txtDescripcion" type="text" value="" name="comentario" class="span3">
 		</div>
 	</div>	
 	<div class="form-actions span6">
