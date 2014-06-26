@@ -57,6 +57,9 @@ public class CasoCriminal {
 	private Collection<RutasMapas> rutasMapas;
 	
 	@OneToMany(mappedBy = "casoCriminal")
+	private Collection<PuntoAcopio> puntoAcopio;
+	
+	@OneToMany(mappedBy = "casoCriminal")
 	private Collection<Archivo> archivos;
 	
 	public Integer getIdCasoCriminal() {
@@ -121,10 +124,18 @@ public class CasoCriminal {
 	}
 	public Collection<RutasMapas> getRutasMapas() {
 		return rutasMapas;
-	}
+	}	
 	public void setRutasMapas(Collection<RutasMapas> rutasMapas) {
 		this.rutasMapas = rutasMapas;
 	}
+	//puntos
+	public Collection<PuntoAcopio> getPuntoAcopio() {
+		return puntoAcopio;
+	}	
+	public void setPuntoAcopio(Collection<PuntoAcopio> puntoAcopio) {
+		this.puntoAcopio = puntoAcopio;
+	}
+	//
 	public Collection<Archivo> getArchivos() {
 		return archivos;
 	}
