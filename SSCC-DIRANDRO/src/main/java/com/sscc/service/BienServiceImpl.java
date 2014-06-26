@@ -308,8 +308,8 @@ public class BienServiceImpl implements BienService {
 		
 		try {
 			Query q = em
-					.createQuery("SELECT bps FROM BienPorSospechoso bps  WHERE bps.idBien="
-							+ idBien + " AND bps.idSospechoso=" + idSospechoso);
+					.createQuery("SELECT bps FROM BienPorSospechoso bps JOIN bps.bien b JOIN bps.sospechoso s WHERE bps.estado='deshabilitado' AND b.idBien="
+							+ idBien + " AND s.idSospechoso=" + idSospechoso);
 			BienPorSospechoso bps = (BienPorSospechoso) q.getSingleResult();
 			BienPorSospechoso bpsEditado = em.merge(bps);
 			bpsEditado.setEstado("habilitado");
