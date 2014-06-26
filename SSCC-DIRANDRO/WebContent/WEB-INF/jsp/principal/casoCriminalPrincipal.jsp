@@ -117,6 +117,51 @@ $(document).on('click','#btnComentarioPausaNCaso', function(e){
  		}
  	});
 });
+//para dejar el comentario de pausa por docs
+$(document).on('click','#btnCalificacionFiscal', function(e){
+	if(contarInformes >= 1){
+		$.ajax({
+	 		url: 'calificacionFiscal-'+$("#hdnIdCaso").text(),
+	 		type: 'post',
+	 		dataType: 'json',
+	 		data: '',
+	 		success: function(caso){
+	 			initCasoCriminal(caso);
+	 		}
+	 	});
+	}else{
+		$("#divAlertarCasoCriminal").show();
+			$("#divAlertarCasoCriminal").append('<div class="alert alert-success" id="alertaVerde">'+
+			 			        '<a class="close" data-dismiss="alert">×</a>'+
+			 			       ' <strong>No ha cargado el Informe policial para la calificación.</strong>'+
+			 			    '</div>');
+	}
+});
+//para dejar el comentario de pausa por docs
+$(document).on('click','#btnCerrarCaso', function(e){
+	$.ajax({
+ 		url: 'cerrarCaso-'+$("#hdnIdCaso").text(),
+ 		type: 'post',
+ 		dataType: 'json',
+ 		data: '',
+ 		success: function(caso){
+ 			initCasoCriminal(caso);
+ 		}
+ 	});
+});
+
+//para dejar el comentario de cerrar caso
+$(document).on('click','#btnComentarioCerrarCaso', function(e){
+	$.ajax({
+ 		url: 'dejarComentarioCerrarCaso-'+$("#hdnIdCaso").text(),
+ 		type: 'post',
+ 		dataType: 'json',
+ 		data: $("#editarComentarioCerrarCaso").serialize(),
+ 		success: function(caso){
+ 			initCasoCriminal(caso);
+ 		}
+ 	});
+});
 </script>
 <style>
 .error{
@@ -216,6 +261,26 @@ $(document).on('click','#btnComentarioPausaNCaso', function(e){
 	        </form:form>
           <div class="modal-footer">
 	          <a id="btnComentarioPausaDoc" class="btn btn-success" data-dismiss="modal">Guardar Comentario</a>
+	          <a class="btn" data-dismiss="modal">Cancelar</a>
+          </div>
+        </div>
+        <!-- /MODAL PAUSA -->
+        <!-- MODAL PAUSA -->
+		<div id="myModalCerrarCaso" class="modal hide fade" style="display: none;">
+	        <div class="modal-header">
+		        <a class="close" data-dismiss="modal">×</a>
+		        <h3>¿Desea Dejar un comentario?</h3>
+	        </div>
+	        <form:form id="editarComentarioCerrarCaso">
+		        <div class="modal-body">
+	            	<label class="control-label">Comentario:</label>
+	            	<div class="controls inline">
+	            		<textarea class="input-xlarge span3" name="cometarioPausaDoc" id="txtCometarioPausaDoc" rows="8" style="width: 90%;"></textarea>
+	            	</div>            	
+	            </div>
+	        </form:form>
+          <div class="modal-footer">
+	          <a id="btnComentarioCerrarCaso" class="btn btn-success" data-dismiss="modal">Guardar Comentario</a>
 	          <a class="btn" data-dismiss="modal">Cancelar</a>
           </div>
         </div>

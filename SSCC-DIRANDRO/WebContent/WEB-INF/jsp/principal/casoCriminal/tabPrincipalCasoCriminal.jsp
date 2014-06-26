@@ -45,10 +45,15 @@ function initCasoCriminal(caso){
 		$("#spnReferencia").append(caso.referencia);
 		$("#spnAsunto").append(caso.asunto);
 		$("#spnDescripcion").append(caso.descripcion);
-		
+		//alert(caso.estado);
 		if(caso.estado == 'Activo'){
 			$("#alertaPausaDocs").remove();
 			$("#alertaPausaNCaso").remove();
+			
+			$("#tdBotones").empty();
+			$("#tdBotones").append('<button class="btn btn-small btn-success" id="btnDiligenciasPre" href="#myModal" data-toggle="modal"><i class="icon-ok icon-white"></i> Diligencias Preliminares</button>'+
+					' <button class="btn btn-small btn-info" id="btnPasusaDoc" href="#myModalPausaDoc" data-toggle="modal"><i class="icon-pause icon-white"></i> Pausa por Falta de Documentos</button>'+
+					' <button class="btn btn-small btn-info" id="btnPasusaNCaso" href="#myModalPausaNCaso" data-toggle="modal"><i class="icon-pause icon-white"></i> Pausa por Nuevo Caso</button>');
 
 			//la alerta celeste de personal asignado esta en el tabPersonalAsignado	
 		}else if(caso.estado == 'Diligencias Preliminares'){
@@ -87,6 +92,27 @@ function initCasoCriminal(caso){
 					 			        'Comentraio: <strong id="msgVerde">'+caso.cometarioPausaNCaso+'</strong>'+
 					 			    '</div>');				
 			}
+		}else if(caso.estado == 'Calificacion Fiscal'){
+			$("#divAlertarCasoCriminal").show();
+ 			$("#divAlertarCasoCriminal").append('<div class="alert alert-info" id="alertaPausaNCaso">'+
+				 			        '<a class="close" data-dismiss="alert">×</a>'+
+				 			        '<strong id="msgVerde"> Cambio de estado a Calificacion por Fiscal a Cargo.</strong>'+
+				 			    '</div>');
+ 			
+			$("#tdBotones").empty();
+			//$("#tdBotones").prepend(' <button class="btn btn-small btn-success" id="btnDiligenciasPreAmpliatorio" href="#myModalPlazoAmp" data-toggle="modal"><i class="icon-exclamation-sign icon-white"></i> Aviso Fiscal Superior</button>');
+			$("#tdBotones").prepend('<button class="btn btn-small btn-success" id="btnCerrarCaso" href="#myModalCerrarCaso" data-toggle="modal"><i class="icon-remove icon-white"></i> Cerrar Caso</button>');
+			$("#tdBotones").append(' <button class="btn btn-small btn-info" id="btnPasusaDoc" href="#myModalPausaDoc" data-toggle="modal"><i class="icon-pause icon-white"></i> Pausa por Falta de Documentos</button>');
+			$("#tdBotones").append(' <button class="btn btn-small btn-info" id="btnPasusaNCaso" href="#myModalPausaNCaso" data-toggle="modal"><i class="icon-pause icon-white"></i> Pausa por Nuevo Caso</button>');
+		}else if(caso.estado == 'Calificacion Fiscal'){
+			$("#divAlertarCasoCriminal").show();
+ 			$("#divAlertarCasoCriminal").append('<div class="alert alert-info" id="alertaPausaNCaso">'+
+				 			        '<a class="close" data-dismiss="alert">×</a>'+
+				 			        '<strong id="msgVerde"> '+caso.cometarioCerrarCaso+'</strong>'+
+				 			    '</div>');
+ 			
+ 			$("#tdBotones").empty();
+			$("#tdBotones").prepend(' <button class="btn btn-small btn-success" id="btnDiligenciasPreAmpliatorio" href="#myModalPlazoAmp" data-toggle="modal"><i class="icon-exclamation-sign icon-white"></i> Aviso Fiscal Superior</button>');
 		}
 		
 		///fecha de las diligencias

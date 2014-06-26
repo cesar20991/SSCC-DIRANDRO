@@ -40,6 +40,8 @@ public class CasoCriminal {
 	private String cometarioPausaDoc;
 	@Column(length = 1000, nullable = true)
 	private String cometarioPausaNCaso;
+	@Column(length = 1000, nullable = true)
+	private String cometarioCerrarCaso;
 	@Column(length = 30, nullable = true)
 	private String estadoAnterior;
 	
@@ -177,5 +179,11 @@ public class CasoCriminal {
 	}
 	public void setCometarioPausaNCaso(String cometarioPausaNCaso) {
 		this.cometarioPausaNCaso = cometarioPausaNCaso;
+	}
+	public String getCometarioCerrarCaso() {
+		return cometarioCerrarCaso;
+	}
+	public void setCometarioCerrarCaso(String cometarioCerrarCaso) {
+		this.cometarioCerrarCaso = cometarioCerrarCaso;
 	}
 }

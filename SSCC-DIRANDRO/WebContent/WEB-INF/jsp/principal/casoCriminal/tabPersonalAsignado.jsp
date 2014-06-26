@@ -148,10 +148,7 @@ function iniPersonalAsignadoPorCaso(idCaso){
 									 			        'Recuerde Asignar un <strong>Jefe de unidad</strong> y al personal policial.'+
 									 			    '</div>');
 			}else if(jefeDeUnidad > 0 && policiasInv > 0){
-				$("#tdBotones").empty();
-				$("#tdBotones").append('<button class="btn btn-small btn-success" id="btnDiligenciasPre" href="#myModal" data-toggle="modal"><i class="icon-ok icon-white"></i> Diligencias Preliminares</button>'+
-						' <button class="btn btn-small btn-info" id="btnPasusaDoc" href="#myModalPausaDoc" data-toggle="modal"><i class="icon-pause icon-white"></i> Pausa por Falta de Documentos</button>'+
-						' <button class="btn btn-small btn-info" id="btnPasusaNCaso" href="#myModalPausaNCaso" data-toggle="modal"><i class="icon-pause icon-white"></i> Pausa por Nuevo Caso</button>');
+				$("#divAlertarCasoCriminal").empty();
 			}
  		}
  	});

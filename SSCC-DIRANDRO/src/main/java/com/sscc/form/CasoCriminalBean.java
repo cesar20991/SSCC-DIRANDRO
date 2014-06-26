@@ -17,6 +17,7 @@ public class CasoCriminalBean {
 	private String cometarioPausaDoc;
 	private String estadoAnterior;
 	private String cometarioPausaNCaso;
+	private String cometarioCerrarCaso;
 	
 	//usuario
 	private String correoElectronico;
@@ -161,5 +162,11 @@ public class CasoCriminalBean {
 	}
 	public void setCometarioPausaNCaso(String cometarioPausaNCaso) {
 		this.cometarioPausaNCaso = cometarioPausaNCaso;
+	}
+	public String getCometarioCerrarCaso() {
+		return cometarioCerrarCaso;
+	}
+	public void setCometarioCerrarCaso(String cometarioCerrarCaso) {
+		this.cometarioCerrarCaso = cometarioCerrarCaso;
 	}
 }

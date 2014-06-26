@@ -173,6 +173,36 @@ public class CasoCriminalController {
 		}		
 	}
 	
+	@RequestMapping(value = "calificacionFiscal-{idCaso}", method = RequestMethod.POST)
+	@ResponseBody
+	public CasoCriminalBean calificacionFiscal(@PathVariable("idCaso") Integer idCaso){
+		if(casoServ.toCalificacionFiscal(idCaso)){
+			return casoServ.getCasoCriminalBean(idCaso);
+		}else{
+			return null;
+		}		
+	}
+	
+	@RequestMapping(value = "cerrarCaso-{idCaso}", method = RequestMethod.POST)
+	@ResponseBody
+	public CasoCriminalBean cerrarCaso(@PathVariable("idCaso") Integer idCaso){
+		if(casoServ.toCalificacionFiscal(idCaso)){
+			return casoServ.getCasoCriminalBean(idCaso);
+		}else{
+			return null;
+		}		
+	}
+	
+	@RequestMapping(value = "dejarComentarioCerrarCaso-{idCaso}", method = RequestMethod.POST)
+	@ResponseBody
+	public CasoCriminalBean dejarComentarioCerrarCaso(@ModelAttribute CasoCriminal casoCriminal, @PathVariable("idCaso") Integer idCaso){
+		if(casoServ.comentarioPausaDoc(casoCriminal, idCaso)){
+			return casoServ.getCasoCriminalBean(idCaso);
+		}else{
+			return null;
+		}		
+	}
+	
 	@RequestMapping(value = "toPausaDoc-{idCaso}", method = RequestMethod.POST)
 	@ResponseBody
 	public CasoCriminalBean toPausaDoc(@PathVariable("idCaso") Integer idCaso){
