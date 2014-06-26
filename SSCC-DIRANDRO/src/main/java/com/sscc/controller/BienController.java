@@ -49,8 +49,11 @@ public class BienController {
 	
 	@RequestMapping(value ="asignarBienToSospechoso-{idBien}-{idSospechoso}",method= RequestMethod.POST)
 	@ResponseBody
-	public Boolean toBuscarBien(@PathVariable("idBien")Integer idBien,@PathVariable("idSospechoso")Integer idSospechoso) {
-		return bienServ.asignarBienToSospechoso(idBien, idSospechoso);
+	public List<BienBean> toBuscarBien(@PathVariable("idBien")Integer idBien,@PathVariable("idSospechoso")Integer idSospechoso) {
+		if(bienServ.asignarBienToSospechoso(idBien, idSospechoso)){
+			return bienServ.getBienesPorSopechoso(idSospechoso);
+		}
+		return null;
 	}
 	
 	@RequestMapping(value = "desAsignarBienToSospechoso-{idSospechoso}-{idBien}", method = RequestMethod.POST)
