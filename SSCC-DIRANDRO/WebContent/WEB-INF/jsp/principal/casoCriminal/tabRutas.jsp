@@ -53,11 +53,11 @@ var map2 = null;
 var geocoder = null;
 var marker = null;
          
-jQuery(document).ready(function(){
-     lat = jQuery('#lat').val();
-     lng = jQuery('#long').val();
+$(document).ready(function(){
+     lat = $('#lat').val();
+     lng = $('#long').val();
 	     
-     jQuery('#pasar').click(function(){
+     $('#pasar').click(function(){
         codeAddress();
         return false;
      });	 
@@ -104,9 +104,9 @@ jQuery(document).ready(function(){
     });
   } 
     
-  function updatePosition(latLng){
-       jQuery('#lat').val(latLng.lat());
-       jQuery('#long').val(latLng.lng());
+  function updatePosition(latLng2){
+       $('#lat').val(latLng2.lat());
+       $('#long').val(latLng2.lng());
   }  
 	
 //============================================================================FIN DE PUNTOS DE ACOPIO
