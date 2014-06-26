@@ -93,7 +93,8 @@ $(document).ready(function(){
  	});
 	
 });
-var JefeDeUnidad = 0;
+var jefeDeUnidad = 0;
+var policiasInv = 0;
 function iniPersonalAsignadoPorCaso(idCaso){
 	$.ajax({
  		url: 'getPersonalAsignado-'+idCaso,
@@ -105,8 +106,9 @@ function iniPersonalAsignadoPorCaso(idCaso){
 			$.each(policias, function(i, policia){
 				if(policia.cargo != 'Jefe de Unidad'){
 					botonQuitar = '<button class="btn btn-danger btn-mini asignar" id="CancelarAsigna_'+i+'" type="button"><i class="icon-minus icon-white"></i></button>';
+					policiasInv++;
 				}else{
-					JefeDeUnidad++;
+					jefeDeUnidad++;
 				}
 				$("#divMostrarPersonal").append('<table class="table table-bordered table-condensed" id="tblAsignado_'+i+'">'+
 													'<tbody>'+
@@ -139,6 +141,18 @@ function iniPersonalAsignadoPorCaso(idCaso){
 												'</table>');
 				botonQuitar = '';
 			});
+			if((jefeDeUnidad == 0 && policiasInv == 0) || (jefeDeUnidad == 0) || (policiasInv == 0)){
+				$("#divAlertarCasoCriminal").show();
+	 			$("#divAlertarCasoCriminal").append('<div class="alert alert-info" id="alertaVerde">'+
+									 			        '<a class="close" data-dismiss="alert">×</a>'+
+									 			        'Recuerde Asignar un <strong>Jefe de unidad</strong> y al personal policial.'+
+									 			    '</div>');
+			}else if(jefeDeUnidad > 0 && policiasInv > 0){
+				$("#tdBotones").empty();
+				$("#tdBotones").append('<button class="btn btn-small btn-success" id="btnDiligenciasPre" href="#myModal" data-toggle="modal"><i class="icon-ok icon-white"></i> Diligencias Preliminares</button>'+
+						' <button class="btn btn-small btn-info" id="btnPasusaDoc" href="#myModalPausaDoc" data-toggle="modal"><i class="icon-pause icon-white"></i> Pausa por Falta de Documentos</button>'+
+						' <button class="btn btn-small btn-info" id="btnPasusaNCaso" href="#myModalPausaNCaso" data-toggle="modal"><i class="icon-pause icon-white"></i> Pausa por Nuevo Caso</button>');
+			}
  		}
  	});
 }

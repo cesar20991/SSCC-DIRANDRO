@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.sscc.form.PuntoAcopioBean;
 import com.sscc.form.RutasBean;
 import com.sscc.model.RutasMapas;
 import com.sscc.service.RutasService;
@@ -36,6 +37,16 @@ public class RutasController {
 		}
 		
 		return rutas;
+	}
+	
+	@RequestMapping(value="getTabRubas-{idCasoCriminal}", method= RequestMethod.POST)
+	@ResponseBody
+	public List<RutasBean> getTabRubas(@PathVariable("idCasoCriminal") Integer idCasoCriminal, HttpServletRequest request, HttpSession session){
+		List<RutasBean> rutas = new ArrayList<RutasBean>();
+				
+		rutas = rutaServ.getRutasBean(idCasoCriminal);
+		
+		return rutas; 
 	}
 
 }

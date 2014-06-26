@@ -111,9 +111,9 @@ jQuery(document).ready(function(){
 	
 //============================================================================FIN DE PUNTOS DE ACOPIO
 
-function initRutas(caso){
+function initRutas(rutas){
 	$("#divMostrarRutas").empty();
-		$.each(caso, function(i, caso) {			
+		$.each(rutas, function(i, ruta) {			
 			
 			$("#divMostrarRutas").append(
 					'<table class="table table-bordered table-condensed">'+
@@ -130,7 +130,7 @@ function initRutas(caso){
 						'</tr>'+
 						'<tr>'+
 							'<td colspan="2">Descripción:</td>'+
-							'<td colspan="2">'+ruta.comentario+'</td>'+
+							'<td colspan="2">'+ruta.comentarios+'</td>'+
 						'</tr>'+
 					'</tbody>'+
 				'</table>');
@@ -140,7 +140,15 @@ function initRutas(caso){
 $(document).ready(function(){
 	goma();
 	
-	
+	$.ajax({
+		url: 'getTabRubas-'+$("#hdnIdCaso").text(),
+		type: 'post',
+		dataType: 'json',
+		data: '',
+		success: function(rutas){
+			initRutas(rutas);
+		}
+	});
 // 	$.ajax({
 //  		url: 'asignarRutasAcasos-'+$("#hdnIdCaso").text(),
 //  		type: 'post',
@@ -186,7 +194,7 @@ $(document).ready(function(){
 		 		dataType: 'json',
 		 		data: $("#formRuta").serialize(),
 		 		success: function(rutas){
-		 			initRutas(caso);
+		 			initRutas(rutas);
 		 			$("#divRutasAsignado").show();
 		 			$("#divNuevaRuta").hide();
 		 			$("#alertasMapa").show();
