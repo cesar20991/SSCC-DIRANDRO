@@ -32,6 +32,9 @@ public class Mueble {
 	@Column(nullable=false)
 	private Double valor;
 
+	@Column(nullable=false)
+	private String estado;
+	
 	@ManyToOne
 	@JoinColumn(name = "idUsuario")
 	private Usuario usuario;
@@ -101,6 +104,14 @@ public class Mueble {
 
 	public void setValor(Double valor) {
 		this.valor = valor;
+	}
+
+	public String getEstado() {
+		return estado;
+	}
+
+	public void setEstado(String estado) {
+		this.estado = estado;
 	}
 	
 	

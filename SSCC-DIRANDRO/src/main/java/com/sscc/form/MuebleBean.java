@@ -9,6 +9,7 @@ public class MuebleBean {
 	private Integer tipo;
 	private String nombreTipo;
 	private Double valor;
+	private String estado;
 
 	// usuario
 	private String correoElectronico;
@@ -21,6 +22,15 @@ public class MuebleBean {
 	private String tipoFiscal;
 	private Integer idUsuario;
 	private String nombreCompleto;
+	
+	
+	
+	public String getEstado() {
+		return estado;
+	}
+	public void setEstado(String estado) {
+		this.estado = estado;
+	}
 	public Integer getIdMueble() {
 		return idMueble;
 	}

@@ -19,7 +19,7 @@
 		var height = 500;
 		var top = (h - height) / 2;
 		var left = (w - width) / 2;
-		window.open("toBuscarBien-"+idSospechoso, "_blank",
+		window.open("popUpAsignarBien-"+idSospechoso, "_blank",
 				"directories=no, status=no, menubar=no,scrollbars=yes, resizable=no,width="
 						+ width + ", height=" + height + ", top=" + top
 						+ ", left=" + left);

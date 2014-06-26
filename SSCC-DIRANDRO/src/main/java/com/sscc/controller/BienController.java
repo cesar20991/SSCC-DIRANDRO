@@ -29,14 +29,14 @@ public class BienController {
 	@Autowired
 	BienService bienServ;
 	
-	@RequestMapping("toBuscarBien-{idSospechoso}")
+	@RequestMapping("popUpAsignarBien-{idSospechoso}")
 	public String toBuscarBien(@PathVariable("idSospechoso")Integer idSospechoso, Model model ) {
 		List<SospechosoBean> sospechosoList = new ArrayList<SospechosoBean>();
 		SospechosoBean s = new SospechosoBean();
 		s.setIdSospechoso(idSospechoso);
 		sospechosoList.add(s);
 		model.addAttribute("sospechosoList", sospechosoList);
-		return "principal/buscarBien";
+		return "principal/popUpAsignarBien";
 	}
 	
 	@RequestMapping(value ="asignarBienToSospechoso-{idBien}-{idSospechoso}",method= RequestMethod.POST)
