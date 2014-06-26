@@ -12,7 +12,7 @@ public class PuntoAcopioBean {
 	private String estado;
 	private Timestamp fecCreacion;
 	
-	
+	 
 	
 	public Integer getIdAcopio() {
 		return idAcopio;

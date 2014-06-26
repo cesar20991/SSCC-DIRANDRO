@@ -102,7 +102,7 @@ jQuery(document).ready(function(){
           alert("No podemos encontrar la direcci&oacute;n, error: " + status);
       }
     });
-  }
+  } 
     
   function updatePosition(latLng){
        jQuery('#lat').val(latLng.lat());

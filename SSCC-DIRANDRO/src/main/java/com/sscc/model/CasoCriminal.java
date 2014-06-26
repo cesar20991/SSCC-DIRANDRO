@@ -128,7 +128,7 @@ public class CasoCriminal {
 	public void setRutasMapas(Collection<RutasMapas> rutasMapas) {
 		this.rutasMapas = rutasMapas;
 	}
-	//puntos
+	//puntos 
 	public Collection<PuntoAcopio> getPuntoAcopio() {
 		return puntoAcopio;
 	}	

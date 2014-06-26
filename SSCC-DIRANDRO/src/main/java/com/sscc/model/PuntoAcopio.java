@@ -38,7 +38,7 @@ public class PuntoAcopio {
 	private Usuario usuario;
 	
 	
-	
+	 
 	
 
 	public Integer getIdAcopio() {

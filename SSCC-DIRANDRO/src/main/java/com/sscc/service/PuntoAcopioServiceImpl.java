@@ -33,7 +33,7 @@ public class PuntoAcopioServiceImpl implements PuntoAcopioService{
 		rb.setNombre(rp.getNombre());
 		
 		return rb;
-	}
+	} 
 	
 	@SuppressWarnings("unchecked")
 	public List<PuntoAcopioBean> getPuntoAcopiosBean(Integer idCasoCriminal) {

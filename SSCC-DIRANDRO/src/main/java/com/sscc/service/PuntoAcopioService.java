@@ -18,4 +18,4 @@ public interface PuntoAcopioService {
 	
 	Boolean guardarAcopio(PuntoAcopio acopio, HttpSession session, Integer idCasoCriminal);
 
-}
+} 
