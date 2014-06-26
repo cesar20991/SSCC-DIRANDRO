@@ -29,4 +29,6 @@ public interface BienService {
 	Boolean getPlaca (String placa);
 	
 	List<BienBean> getBienesPorSopechoso(Integer idSospechoso);
+	
+	Boolean desAsignarBienToSospechoso(Integer idSospechoso, Integer idBien);
 }

@@ -53,6 +53,15 @@ public class BienController {
 		return bienServ.asignarBienToSospechoso(idBien, idSospechoso);
 	}
 	
+	@RequestMapping(value = "desAsignarBienToSospechoso-{idSospechoso}-{idBien}", method = RequestMethod.POST)
+	@ResponseBody
+	public List<BienBean> desAsignarBienToSospechoso(@PathVariable("idSospechoso") Integer idSospechoso,@PathVariable("idBien") Integer idBien){
+		if(bienServ.desAsignarBienToSospechoso(idSospechoso, idBien)){
+			return bienServ.getBienesPorSopechoso(idSospechoso);
+		}else{
+			return null;
+		}
+	}
 	
 	// Metodos para el Inmueble
 	@RequestMapping("toRegistrarInmueble")

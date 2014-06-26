@@ -30,9 +30,9 @@
 					'<tr>'+
 						'<td rowspan="5" align="center" style="width: 90px; height: 100px;" id="tdImagen">'+imagen+'</td>'+
 						'<td>Código:</td>'+
-						'<td align="center"><span id="hdrCodigo">'+bien.codigo+'</span></td>'+
+						'<td><span id="hdrCodigo">'+bien.codigo+'</span></td>'+
 						'<td>Acción:</td>'+
-						'<td><button class="btn btn-danger btn-mini asignar" id="cancelarAsigna_'+bien.idBien+'" type="button"><i class="icon-minus icon-white"></i></button></td>'+
+						'<td><button class="btn btn-danger btn-mini asignar" id="cancelarAsignaBien_'+bien.idBien+'" type="button"><i class="icon-minus icon-white"></i></button></td>'+
 					'</tr>'+
 					'<tr>'+
 						'<td>Partida Registral:</td>'+
@@ -54,6 +54,30 @@
 			'</table>');
 		});
 	}
+	
+	$(document).on('click','.asignar', function(e){
+		var id1 = (this.id).split("_")[0];
+		var id2 = (this.id).split("_")[1];
+		
+		switch(id1){
+			case 'cancelarAsignaBien':
+				var respuesta = confirm('¿Esta seguro que desea quitar este bien?');
+				if(respuesta){
+					$.ajax({
+				 		url: 'desAsignarBienToSospechoso-'+$("#hdnIdSospechoso").text()+"-"+id2,
+				 		type: 'post',
+				 		dataType: 'json',
+				 		data: '',
+				 		success: function(bienes){
+				 			initBienesAsignado(bienes);
+				 		}
+				 	});
+				}			
+			break;
+		}
+		
+	});
+	
 	$(document).ready(function(){
 		$.ajax({
 	 		url: 'getBienesPorSospechoso-'+$("#hdnIdSospechoso").text(),
