@@ -39,12 +39,32 @@ public class BienController {
 		return "principal/popUpAsignarBien";
 	}
 	
+	@RequestMapping(value = "getBienesPorSospechoso-{idSospechoso}", method = RequestMethod.POST)
+	@ResponseBody
+	public List<BienBean> getBienesPorSospechoso(@PathVariable("idSospechoso") Integer idSospechoso){
+		System.out.println("IdSospechoso = "+idSospechoso);	
+		return bienServ.getBienesPorSopechoso(idSospechoso);
+	}
+
+	
 	@RequestMapping(value ="asignarBienToSospechoso-{idBien}-{idSospechoso}",method= RequestMethod.POST)
 	@ResponseBody
-	public Boolean toBuscarBien(@PathVariable("idBien")Integer idBien,@PathVariable("idSospechoso")Integer idSospechoso) {
-		return bienServ.asignarBienToSospechoso(idBien, idSospechoso);
+	public List<BienBean> toBuscarBien(@PathVariable("idBien")Integer idBien,@PathVariable("idSospechoso")Integer idSospechoso) {
+		if(bienServ.asignarBienToSospechoso(idBien, idSospechoso)){
+			return bienServ.getBienesPorSopechoso(idSospechoso);
+		}
+		return null;
 	}
 	
+	@RequestMapping(value = "desAsignarBienToSospechoso-{idSospechoso}-{idBien}", method = RequestMethod.POST)
+	@ResponseBody
+	public List<BienBean> desAsignarBienToSospechoso(@PathVariable("idSospechoso") Integer idSospechoso,@PathVariable("idBien") Integer idBien){
+		if(bienServ.desAsignarBienToSospechoso(idSospechoso, idBien)){
+			return bienServ.getBienesPorSopechoso(idSospechoso);
+		}else{
+			return null;
+		}
+	}
 	
 	// Metodos para el Inmueble
 	@RequestMapping("toRegistrarInmueble")

@@ -411,6 +411,20 @@ public class CasoCriminalServiceImpl implements CasoCriminalService{
 	}
 	
 	@Transactional
+	public Boolean toCalificacionFiscal(Integer idCaso) {
+		try{
+			CasoCriminal c = em.find(CasoCriminal.class, idCaso);
+			CasoCriminal cEdit = em.merge(c);
+
+			cEdit.setEstado("Conclusion de la Investigacion");
+
+			return true;
+		}catch(Exception e){
+			return false;
+		}
+	}
+	
+	@Transactional
 	public Boolean toPausaDocumentacion(Integer idCaso) {
 		try{
 			CasoCriminal c = em.find(CasoCriminal.class, idCaso);
@@ -460,6 +474,19 @@ public class CasoCriminalServiceImpl implements CasoCriminalService{
 			CasoCriminal c = em.find(CasoCriminal.class, idCaso);
 			CasoCriminal cEdit = em.merge(c);
 			cEdit.setCometarioPausaDoc(casoCriminal.getCometarioPausaDoc());
+
+			return true;
+		}catch(Exception e){
+			return false;
+		}
+	}
+	
+	@Transactional
+	public Boolean comentarioCerrarCaso(CasoCriminal casoCriminal, Integer idCaso) {
+		try{
+			CasoCriminal c = em.find(CasoCriminal.class, idCaso);
+			CasoCriminal cEdit = em.merge(c);
+			cEdit.setCometarioCerrarCaso(casoCriminal.getCometarioPausaDoc());
 
 			return true;
 		}catch(Exception e){

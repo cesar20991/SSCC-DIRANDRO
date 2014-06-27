@@ -77,9 +77,6 @@ public class RutasServiceImpl implements RutasService{
 			return true;
 		}catch(Exception e){
 			return false;
-		}
-		
+		}	
 	}
-	
-	
 }

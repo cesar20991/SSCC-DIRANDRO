@@ -12,12 +12,14 @@ $(document).on('click','#btnMostrar', function(e){
 	$("#btnOcultar").show();
 	$("#btnMostrar").hide();
 });
-
+var contarInformes = 0;
 function initArchivos(archivos){	
 		$.each(archivos, function(i, archivo) {
 			var imagen = '';
 			var btnUsar = '';
-			
+			if(archivo.tituloArchivo == 'Informe Policial'){
+				contarInformes++;
+			}
 			if(tipoEntidad == 'sospechoso'){
 				btnUsar = btnUsar + '<button class="btn btn-primary btn-mini accion" type="button" id="usarS_'+archivo.idArchivo+'"><i class="icon-user icon-white"></i></button>';
 			}else if(tipoEntidad == 'usuario'){

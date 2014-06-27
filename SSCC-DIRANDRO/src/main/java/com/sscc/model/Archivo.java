@@ -25,7 +25,7 @@ public class Archivo {
 	private String nombreArchivo;
 	@Column(length = 60, nullable = true)	
 	private String tipo;///por siaca
-	@Column(length = 30, nullable = true)	
+	@Column(length = 100, nullable = true)	
 	private String tipoArchivo;
 	@Column(nullable = true)	
 	private String url;

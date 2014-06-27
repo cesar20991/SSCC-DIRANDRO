@@ -53,8 +53,7 @@
 													+ '</span></td>'
 													+ '<td><span id="spnTipo_'+indiceBien+'">'
 													+ bien.tipo
-													+ '</span></td>'
-													+ '<td><span id="spnEstado_'+indiceBien+'">-</span></td>');
+													+ '</span></td>');
 							$("#tblBody")
 									.append(
 											'<td id="btnAsignar_'+indiceBien+'">'
@@ -121,13 +120,9 @@
 															dataType : 'json',
 															data : '',
 															success : function(
-																	resultado) {
-																if (resultado) {
-																	alert("Bien asignado");
-																	getBienesInit();
-																} else {
-																	alert("no se pudo asignar");
-																}
+																	bienes) {
+																window.opener.initBienesAsignado(bienes);
+																window.close();
 															}
 														});
 
@@ -158,7 +153,6 @@
 							<th>Nro. Partida Registral</th>
 							<th>Valor Monetario(S/.)</th>
 							<th>Tipo de Bien</th>
-							<th>Estado</th>
 							<th>Acción</th>
 						</tr>
 					</thead>
