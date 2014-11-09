@@ -30,7 +30,7 @@ public class MuebleServiceImpl implements MuebleService{
 		Mueble m = new Mueble();
 		m.setUsuario(usuario);
 		m.setDescripcion(get(mb.getDescripcion()));
-		m.setTipo(get(mb.getTipo()));
+		//m.setTipo(get(mb.getTipo()));
 		m.setNombreTipo(get(mb.getNombreTipo()));
 		m.setValor(get(mb.getValor()));
 		m.setEstado("habilitado");
@@ -53,7 +53,7 @@ public class MuebleServiceImpl implements MuebleService{
 		mb.setCodigo(m.getCodigo());
 		mb.setValor(m.getValor());
 		mb.setNombreTipo(m.getNombreTipo());
-		mb.setTipo(m.getTipo());
+		//mb.setTipo(m.getTipo());
 		
 		Usuario u = m.getUsuario();
 		Perfil p = u.getPerfil();
@@ -73,7 +73,7 @@ public class MuebleServiceImpl implements MuebleService{
 		m = em.merge(m);
 		
 		m.setDescripcion(get(mb.getDescripcion()));
-		m.setTipo(get(mb.getTipo()));
+		//m.setTipo(get(mb.getTipo()));
 		m.setNombreTipo(get(mb.getNombreTipo()));
 		m.setValor(get(mb.getValor()));
 		m.setEstado(get(mb.getEstado()));
@@ -93,7 +93,7 @@ public class MuebleServiceImpl implements MuebleService{
 			mb.setCodigo(m.getCodigo());
 			mb.setValor(m.getValor());
 			mb.setNombreTipo(m.getNombreTipo());
-			mb.setTipo(m.getTipo());
+			//mb.setTipo(m.getTipo());
 			
 			Usuario u = m.getUsuario();
 			Perfil p = u.getPerfil();

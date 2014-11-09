@@ -16,6 +16,7 @@ import com.sscc.form.SospechosoBean;
 import com.sscc.model.CasoCriminal;
 import com.sscc.model.CasoPorSospechoso;
 import com.sscc.model.Perfil;
+import com.sscc.model.RasgosParticulares;
 import com.sscc.model.Sospechoso;
 import com.sscc.model.Usuario;
 import com.sscc.model.CasoPorAgente;
@@ -505,5 +506,26 @@ public class CasoCriminalServiceImpl implements CasoCriminalService{
 		}catch(Exception e){
 			return false;
 		}
+	}
+	
+	public List<CasoCriminalBean> getCasoCriminalBuscar() {
+		List<CasoCriminalBean> ccbl = new ArrayList<CasoCriminalBean>();
+		Query query = em.createQuery("SELECT c FROM CasoCriminal c");
+		
+		List<CasoCriminal> cl = query.getResultList();
+		for(int i=0;i<cl.size();i++){
+			CasoCriminalBean ccb = new CasoCriminalBean();
+			CasoCriminal c = cl.get(i);
+			ccb.setIdCasoCriminal(c.getIdCasoCriminal());
+			ccb.setCodigo(c.getCodigo());
+			ccb.setAsunto(c.getAsunto());
+			ccb.setReferencia(c.getReferencia());
+			ccb.setDescripcion(c.getDescripcion());
+			ccb.setImportancia(c.getImportancia());
+			ccb.setEstado(c.getEstado());
+			ccb.setFecCreacion(c.getFecCreacion());
+			ccbl.add(ccb);
+		}
+		return ccbl;
 	}
 }

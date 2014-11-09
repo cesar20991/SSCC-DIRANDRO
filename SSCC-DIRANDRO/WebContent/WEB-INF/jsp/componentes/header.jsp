@@ -87,8 +87,7 @@ $(document).ready(function(){
 	<div class="container">
 		<div class="row">
 			<div class="span4 logo">
-				<a href="toPantallaPrincipal"><img src="img/logo.png" alt="logo"
-					style="margin-bottom: 7px; margin-top: 7px;" /></a>
+				<a href="toPantallaPrincipal"><img src="img/logo.png" alt="logo" style="margin-bottom: 7px; margin-top: 7px;"/></a>
 			</div>
 			<div class="span8">
 				<span id="imagenUsu"></span> 
@@ -101,9 +100,7 @@ $(document).ready(function(){
 	</div>
 </header>
 <!--WELCOME AREA-->
-<input type="hidden"
-	value="<%=request.getServletPath().substring(request.getServletPath().lastIndexOf("/")+1,request.getServletPath().lastIndexOf(".") )%>"
-	id="nombreJsp" />
+<input type="hidden" value="<%=request.getServletPath().substring(request.getServletPath().lastIndexOf("/")+1,request.getServletPath().lastIndexOf(".") )%>" id="nombreJsp"/>
 <div class="gray_bg">
 	<div class="container">
 		<div class="row welcome" style="margin-top: 0px;" id="rowWelcome">

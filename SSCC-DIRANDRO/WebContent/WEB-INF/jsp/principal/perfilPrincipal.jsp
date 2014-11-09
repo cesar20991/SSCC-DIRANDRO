@@ -9,27 +9,23 @@
 <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<!-- para que funcione el jquery -->
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-<!-- para que funcione el jquery de la plantilla -->
-<script src="js/jquery.js"></script>
-<!-- para el menu -->
-<script src="js/bootstrap-collapse.js"></script>
-<!-- tabs -->
-<script src="js/bootstrap-tab.js"></script>
-<script src="http://malsup.github.com/jquery.form.js"></script>
-<!-- alertas de colores -->
-<script src="js/bootstrap-alert.js"></script>
-<!-- validacion -->
+<link href="css/bootstrap.min.css" rel="stylesheet">
+<link href="css/plugins/metisMenu/metisMenu.min.css" rel="stylesheet">
+<link href="css/plugins/timeline.css" rel="stylesheet">
+<link href="css/sb-admin-2.css" rel="stylesheet">
+<link href="css/plugins/morris.css" rel="stylesheet">
+<link href="font-awesome-4.1.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+<!-- js -->
+<script src="js/jquery-1.11.0.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/plugins/metisMenu/metisMenu.min.js"></script>
+<script src="js/sb-admin-2.js"></script>
 <script src="js/jquery.validate.min.js"></script>
 <script src="js/validateFecha.js"></script>
 <script src="js/formatDates.js"></script>
-<!-- styles -->
-<link href="css/bootstrap.css" rel="stylesheet">
-<link href="css/bootstrap-responsive.css" rel="stylesheet">
-<link href="css/docs.css" rel="stylesheet">
-<link href="js/google-code-prettify/prettify.css" rel="stylesheet">
-<link rel="stylesheet" href="css/prettyPhoto.css" type="text/css" media="screen" title="prettyPhoto main stylesheet" charset="utf-8" />
+<script src="http://malsup.github.com/jquery.form.js"></script>
+
 </head>
 <script type="text/javascript">
 var tipoEntidad = "usuario";
@@ -41,49 +37,86 @@ var idEntidad = '';
 	}*/
 </script>
 <body>
-
+<div id="wrapper">
 	<!--HEADER-->
-	<jsp:include page="../componentes/header.jsp" />
+	<jsp:include page="../componentes/newHeader.jsp" />
 	<!--/HEADER-->
 	<!--CENTRO-->
-	<!--MENU-->
-	<jsp:include page="../componentes/menu.jsp" />
-	<!--/MENU-->
-	<div class="container inner_content">
+	<div id="page-wrapper" style="min-height: 393px;">
+		<div class="row">
+			<c:forEach items="${perfilList}" var="perfil">
+				<span id="hdnIdPerfil" style="display: none;"><c:out value="${perfil.idPerfil}" /></span>
+				<span id="hdnEntidad" style="display: none;"><c:out value="${perfil.entidadPerteneciente}"/></span>
+			</c:forEach>
+			<div class="col-lg-12" id="titulo">
+				<h2 class="page-header">Sistema de Seguimiento de Casos Criminales para la DIRANDRO</h2>
+			</div>			
+			<div class="col-lg-12">
+				<table class="table table-striped table-bordered table-hover">
+					<tbody>
+						<tr>
+							<td>Nombre Completo:</td>
+							<td align="center"><span id="hdrPrimerNombe"></span>&nbsp;<span id="hdrSegundoNombe"></span>&nbsp;<span id="hdrApePaterno"></span>&nbsp;<span id="hdrApeMaterno"></span></td>
+							<td>Codigo de Usuario:</td>
+							<td><span id="hdrCodigo"></span></td>
+							<td rowspan="4" align="center" style="width: 10%; height: 50%;" id="tdImagen"></td>
+						</tr>
+						<tr>
+							<td id="tdCargo">Cargo:</td>
+							<td><span id="hdrCargo">&nbsp;</span></td>
+							<td id="tdGrado">Grado:</td>
+							<td id="tdGradoResult"><span id="hdrGrado"></span></td>
+						</tr>
+						<tr>
+							<td>Número de DNI:</td>
+							<td><span id="hdrDni">&nbsp;</span></td>
+							<td id="tdNCarnet">N° Carnet:</td>
+							<td id="tdNCarnetResult"><span id="hdrNCarnet"></span></td>
+						</tr>
+						<tr>
+							<td>Correo Electrónico:</td>
+							<td><span id="hdrCorreo">&nbsp;</span></td>
+							<td>Entidad:</td>
+							<td><span id="hdrEntidad"></span></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			<div class="col-lg-12">
+				<ul class="nav nav-tabs">
+	                <li class="active"><a href="#liPrincipal" data-toggle="tab">Principal</a></li>
+	                <li class=""><a href="#liArchivosAdjuntos" data-toggle="tab">Archivos Adjuntos</a></li>
+	                <li class=""><a href="#liComentarios" data-toggle="tab">Comentarios</a></li>
+	            </ul>
+	            <div class="tab-content">
+	            	<div class="tab-pane fade active in" id="liPrincipal">
+                        <!-- <h4>Home Tab</h4> -->
+                        <jsp:include page="perfil/tabPrincipalPerfil.jsp" />
+                    </div>
+                    <div class="tab-pane fade" id="liArchivosAdjuntos">
+                        <!-- <h4>Home Tab</h4> -->
+                        <jsp:include page="../componentes/archivos.jsp" />
+                    </div>
+                    <div class="tab-pane fade" id="liComentarios">
+                        <!-- <h4>Home Tab</h4> -->
+                        <jsp:include page="../componentes/tabComentarios.jsp" />
+                    </div>
+	            </div>
+			</div>
+		</div>
+	</div>
+	<!-- /CENTRO -->
+</div>
+	
+	<!--CENTRO-->
+
+	<%-- <div class="container inner_content">
 		<c:forEach items="${perfilList}" var="perfil">
 			<span id="hdnIdPerfil" style="display: none;"><c:out value="${perfil.idPerfil}" /></span>
 			<span id="hdnEntidad" style="display: none;"><c:out value="${perfil.entidadPerteneciente}" /></span>
 		</c:forEach>
 		<section class="span9" style="margin-left: 80px;">
-			<table class="table table-bordered table-condensed">
-				<tbody>
-					<tr>
-						<td>Nombre Completo:</td>
-						<td align="center"><span id="hdrPrimerNombe"></span>&nbsp;<span id="hdrSegundoNombe"></span>&nbsp;<span id="hdrApePaterno"></span>&nbsp;<span id="hdrApeMaterno"></span></td>
-						<td>Codigo de Usuario:</td>
-						<td><span id="hdrCodigo"></span></td>
-						<td rowspan="4" align="center" style="width: 90px; height: 100px;" id="tdImagen"></td>
-					</tr>
-					<tr>
-						<td id="tdCargo">Cargo:</td>
-						<td><span id="hdrCargo">&nbsp;</span></td>
-						<td id="tdGrado">Grado:</td>
-						<td id="tdGradoResult"><span id="hdrGrado"></span></td>
-					</tr>
-					<tr>
-						<td>Número de DNI:</td>
-						<td><span id="hdrDni">&nbsp;</span></td>
-						<td id="tdNCarnet">N° Carnet:</td>
-						<td id="tdNCarnetResult"><span id="hdrNCarnet"></span></td>
-					</tr>
-					<tr>
-						<td>Correo Electrónico:</td>
-						<td><span id="hdrCorreo">&nbsp;</span></td>
-						<td>Entidad:</td>
-						<td><span id="hdrEntidad"></span></td>
-					</tr>
-				</tbody>
-			</table>
+			
 		</section>
 		<section class="span9" style="margin-left: 80px;">
 			<div class="tabbable" style="margin-bottom: 9px;">
@@ -94,7 +127,7 @@ var idEntidad = '';
 				</ul>
 				<div class="tab-content">
 					<div class="tab-pane active" id="1">
-						<jsp:include page="perfil/tabPrincipalPerfil.jsp" />
+						
 					</div>
 					<div class="tab-pane" id="2">
 						<jsp:include page="../componentes/archivos.jsp" />
@@ -105,10 +138,8 @@ var idEntidad = '';
 				</div>
 			</div>
 		</section>
-	</div>
+	</div> --%>
 	<!--/CENTRO-->
-	<!-- sticky footer -->
-	<jsp:include page="../componentes/footer.jsp" />
-	<!-- /sticky footer -->
+
 </body>
 </html>

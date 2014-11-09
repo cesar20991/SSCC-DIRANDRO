@@ -3,6 +3,7 @@ package com.sscc.service;
 import java.util.List;
 
 import com.sscc.form.CasoCriminalBean;
+import com.sscc.form.PerfilBean;
 import com.sscc.form.SospechosoBean;
 import com.sscc.model.Sospechoso;
 
@@ -23,4 +24,6 @@ public interface SospechosoService {
 	Boolean getAlias(String alias);
 	
 	Boolean getCUI(String codigoUnicoDeIdentificacion);
+	
+	List<SospechosoBean> getSospechososBuscar();
 }

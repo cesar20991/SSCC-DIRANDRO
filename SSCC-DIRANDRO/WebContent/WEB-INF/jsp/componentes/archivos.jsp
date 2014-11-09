@@ -21,9 +21,9 @@ function initArchivos(archivos){
 				contarInformes++;
 			}
 			if(tipoEntidad == 'sospechoso'){
-				btnUsar = btnUsar + '<button class="btn btn-primary btn-mini accion" type="button" id="usarS_'+archivo.idArchivo+'"><i class="icon-user icon-white"></i></button>';
+				btnUsar = btnUsar + '<button class="btn btn-outline btn-primary btn-circle accion" type="button" id="usarS_'+archivo.idArchivo+'"><i class="fa fa-user fa-fw"></i></button>';
 			}else if(tipoEntidad == 'usuario'){
-				btnUsar = btnUsar + '<button class="btn btn-primary btn-mini accion" type="button" id="usarU_'+archivo.idArchivo+'"><i class="icon-user icon-white"></i></button>';
+				btnUsar = btnUsar + '<button class="btn btn-outline btn-primary btn-circle accion" type="button" id="usarU_'+archivo.idArchivo+'"><i class="fa fa-user fa-fw"></i></button>';
 			}
 			
 			if(archivo.tipoArchivo == "image/jpeg" | archivo.tipoArchivo == "image/png"){
@@ -36,15 +36,15 @@ function initArchivos(archivos){
 			
 			$("#divMostrarArchivo").append(
 				'<form method="post" id="formEditarArchivo_'+archivo.idArchivo+'">'+
-					'<table class="table table-bordered">'+
+					'<table class="table table-bordered table-hover">'+
 						'<tbody>'+
 						'<tr>'+
 							'<td rowspan="4" style="width: 90px; height: 100px;">'+imagen+' <input type="text" id="url_'+archivo.idArchivo+'" name="url" value="'+archivo.url+'" style="display: none;"></td>'+
 							'<td>Nombre de Archivo:</td>'+
 							'<td align="center"><span id="tblNombre"><a href="'+archivo.url+'" rel="prettyPhoto" class="info">'+archivo.nombreArchivo+'</a></span></td>'+
 							'<td>Acciones:</td>'+
-							'<td id="acciones_'+archivo.idArchivo+'"><button class="btn btn-danger btn-mini accion" id="separar_'+archivo.idArchivo+'" type="button"><i class="icon-minus icon-white"></i></button> <button class="btn btn-primary btn-mini accion" type="button" id="editar_'+archivo.idArchivo+'"><i class="icon-edit icon-white"></i></button> '+btnUsar+'</td>'+
-							'<td id="accionesEditar_'+archivo.idArchivo+'" style="display: none;"><button class="btn btn-success btn-mini accion" id="guardar_'+archivo.idArchivo+'" type="button"><i class="icon-ok icon-white"></i></button> <button class="btn btn-warning btn-mini accion" type="button" id="cancelar_'+archivo.idArchivo+'"><i class="icon-arrow-left icon-white"></i></button></td>'+
+							'<td id="acciones_'+archivo.idArchivo+'"><button class="btn btn-outline btn-danger btn-circle accion" id="separar_'+archivo.idArchivo+'" type="button"><i class="fa fa-times fa-fw"></i></button> <button class="btn btn-outline btn-primary btn-circle accion" type="button" id="editar_'+archivo.idArchivo+'"><i class="fa fa-edit fa-fw"></i></button> '+btnUsar+'</td>'+
+							'<td id="accionesEditar_'+archivo.idArchivo+'" style="display: none;"><button class="btn btn-outline btn-success btn-circle accion" id="guardar_'+archivo.idArchivo+'" type="button"><i class="fa fa-check"></i></button> <button class="btn btn-outline btn-warning btn-circle accion" type="button" id="cancelar_'+archivo.idArchivo+'"><i class="fa fa-arrow-left"></i></button></td>'+
 						'</tr>'+
 						'<tr>'+
 							'<td>Tamaño:</td>'+
@@ -54,11 +54,11 @@ function initArchivos(archivos){
 						'</tr>'+
 						'<tr>'+
 							'<td colspan="1">Titulo Archivo:</td>'+
-							'<td colspan="3"><span id="tblTitulo_'+archivo.idArchivo+'">'+archivo.tituloArchivo+'</span> <input type="text" id="txtTitulo_'+archivo.idArchivo+'" name="tituloArchivo" style="display: none;"></td>'+
+							'<td colspan="3"><span id="tblTitulo_'+archivo.idArchivo+'">'+archivo.tituloArchivo+'</span> <input type="text" id="txtTitulo_'+archivo.idArchivo+'" name="tituloArchivo" style="display: none;" class="form-control"></td>'+
 						'</tr>'+
 						'<tr>'+
 							'<td colspan="1">Descripcion:</td>'+
-							'<td colspan="3"><span id="tblDescripcion_'+archivo.idArchivo+'">'+archivo.descripcion+'</span> <textarea class="input-xlarge" name="descripcion" id="txtDescripcion_'+archivo.idArchivo+'" rows="5" style="display: none;"></textarea></td>'+
+							'<td colspan="3"><span id="tblDescripcion_'+archivo.idArchivo+'">'+archivo.descripcion+'</span> <textarea  class="form-control" name="descripcion" id="txtDescripcion_'+archivo.idArchivo+'" rows="5" style="display: none;"></textarea></td>'+
 						'</tr>'+
 					'</tbody>'+
 				'</table>'+
@@ -242,37 +242,47 @@ $(document).ready(function(){
 <div id="alertasArchivos" style="display: none;">
 </div>
 <div id="divArchivo">
-	<div id="divGuardarArchivo">
-		<form:form method="post" action="newArchivo" enctype="multipart/form-data" id="formArchivos">
-			<legend>
-				<span class=""><span class="colored">///</span> Subir Archivos</span>
-				<span class="offset3">
-					<button class="btn btn-small" type="button" id="btnOcultar"><i class="icon-chevron-up"></i> Ocultar</button>
-					<button class="btn btn-small" type="button" id="btnMostrar" style="display: none;"><i class="icon-chevron-down"></i> Mostrar</button>
-				</span>
-			</legend>
-			<div id="formularioGuardar">
-				<div class="controls">
-		        	<input class="input-file" type="file" name="files" multiple="multiple"/>
-		        	<!-- <div id="progress">
-				        <div id="bar"></div>
-				        <div id="percent">0%</div>
-					</div> -->
-					
-		        	<input type="hidden" id="hdnTipoEntidad" name="tipoEntidad">
-		        	<input type="hidden" id="hdnIdEntidad" name="idEntidad">
-		        	
-		        	<div id="message"></div>
-		        </div>	    
-			    <div class="form-actions">
-		        	<button type="submit" class="btn btn-success" id="guardarArchivos"><i class="icon-tags icon-white"></i> Guardar Archivos</button>
-		        </div>
+<div class="panel panel-default">
+	<div class="panel-heading">
+		/// Subir Archivos
+		<div class="pull-right">
+			<div class="btn-group">
+				<button class="btn btn-outline btn-default btn-sm" type="button" id="btnOcultar"><i class="icon-chevron-up"></i> Ocultar</button>
+				<button class="btn btn-outline btn-default btn-sm" type="button" id="btnMostrar" style="display: none;"><i class="icon-chevron-down"></i> Mostrar</button>
 			</div>
-		    <!-- <input type="submit" name="new"/> -->
-		    
-		</form:form>
+		</div>
 	</div>
-	<div id="divMostrarArchivo">
+	<div class="panel-body">
+		<div id="divGuardarArchivo">
+			<form:form method="post" action="newArchivo" enctype="multipart/form-data" id="formArchivos">
+				<div id="formularioGuardar">
+					<div class="form-group">
+			        	<input class="input-file" type="file" name="files" multiple="multiple"/>
+			        	<!-- <div id="progress">
+					        <div id="bar"></div>
+					        <div id="percent">0%</div>
+						</div> -->
+						
+			        	<input type="hidden" id="hdnTipoEntidad" name="tipoEntidad">
+			        	<input type="hidden" id="hdnIdEntidad" name="idEntidad">
+			        	
+			        	<div id="message"></div>
+			        </div>	    
+				    <div class="form-actions">
+			        	<button type="submit" class="btn btn-outline btn-success" id="guardarArchivos"><i class="fa fa-check"></i> Guardar Archivos</button>
+			        </div>
+				</div>
+			    <!-- <input type="submit" name="new"/> -->
+			    
+			</form:form>
+		</div>
+		<hr>
+		<div id="divMostrarArchivo">
 		
+		</div>
 	</div>
+</div>
+	
+		
+	
 </div>

@@ -40,6 +40,11 @@ public class PerfilController {
 		return "principal/cambiarClave";
 	}
 	
+	@RequestMapping("toBuscarPersonal")
+	public String toBuscarPersonal() {
+		return "principal/buscarPersonalPolicial";
+	}
+	
 	@RequestMapping(value = "getPerfil-{idPerfil}", method = RequestMethod.POST)
 	@ResponseBody
 	public PerfilBean getPerfil(@PathVariable("idPerfil") Integer idperfil){
@@ -56,6 +61,17 @@ public class PerfilController {
 		
 
 		return "redirect:toPerfil-"+pf.getIdPerfil();
+	}
+	
+	@RequestMapping(value = "editarUsuario-{idPerfil}", method = RequestMethod.POST)
+	@ResponseBody
+	public PerfilBean crearUsuario(@ModelAttribute Perfil perfil,@PathVariable("idPerfil") Integer idperfil, HttpServletRequest req, HttpSession session, Model model){
+		String correo = req.getParameter("correo");
+		perfil.setIdPerfil(idperfil);
+		PerfilBean pf = perfilServ.editUsuario(perfil, correo);
+		
+
+		return getPerfil(idperfil);
 	}
 	
 	@RequestMapping("toPerfil-{idPerfil}")
@@ -83,6 +99,16 @@ public class PerfilController {
 		perfilbean = perfilServ.getPersonalPolicial();
 		return perfilbean;
 	}
+	
+	@RequestMapping(value = "getPersonalPolicialBuscar", method = RequestMethod.POST)
+	@ResponseBody
+	public List<PerfilBean> getPersonalPolicialBuscar(){
+		List<PerfilBean> perfilbean = new ArrayList<PerfilBean>();
+		perfilbean = perfilServ.getPersonalPolicialBuscar();
+		//perfilbean.addAll(perfilServ.getJefesDeUnidad());
+		return perfilbean;
+	}
+	
 	@RequestMapping(value = "getJefeAsignado-{idCasoCriminal}", method = RequestMethod.POST)
 	@ResponseBody
 	public PerfilBean getJefesPorCaso(@PathVariable("idCasoCriminal") Integer idCasoCriminal){

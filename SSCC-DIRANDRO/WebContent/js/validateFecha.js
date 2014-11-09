@@ -6,7 +6,7 @@ jQuery.validator.addMethod(
         // put your own logic here, this is just a (crappy) example
         return this.optional(element) || value.match(/^\d\d?\/\d\d?\/\d\d\d\d$/);
     },
-    "Please enter a date in the format dd/mm/yyyy."
+    "El formato correcto de fecha es dd/mm/yyyy."
 );
 
 //validacion para numeros double, ahora solo tiene 2 decimales y cuando quieres aumentar aumentas el 1,2 a 1,3 por ejemplo.

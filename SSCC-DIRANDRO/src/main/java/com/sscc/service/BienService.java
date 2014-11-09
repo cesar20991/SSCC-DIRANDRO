@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.sscc.form.BienBean;
 import com.sscc.form.InmuebleBean;
+import com.sscc.form.SospechosoBean;
 import com.sscc.form.VehiculoBean;
 import com.sscc.model.Bien;
 import com.sscc.model.Inmueble;
@@ -31,4 +32,8 @@ public interface BienService {
 	List<BienBean> getBienesPorSopechoso(Integer idSospechoso);
 	
 	Boolean desAsignarBienToSospechoso(Integer idSospechoso, Integer idBien);
+	
+	List<InmuebleBean> getInmueblesBuscar();
+	
+	List<VehiculoBean> getVehiculosBuscar();
 }

@@ -10,33 +10,25 @@
 <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<!-- para que funcione el jquery -->
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-<!-- para que funcione el jquery de la plantilla -->
-<script src="js/jquery.js"></script>
-<!-- datepicker librerias -->
-<script src="js/jquery-ui.js"></script>
-<link href="css/smoothness/jquery-ui.css" rel="stylesheet">
-<!-- <link rel="stylesheet" href="//code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">
-<script src="//code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
-<link rel="stylesheet" href="/resources/demos/style.css"> -->
-<!-- para el menu -->
-<script src="js/bootstrap-collapse.js"></script>
+<!-- styles -->
+<link href="css/bootstrap.min.css" rel="stylesheet">
+<link href="css/datepicker.css" rel="stylesheet">
+<link href="css/plugins/metisMenu/metisMenu.min.css" rel="stylesheet">
+<link href="css/plugins/timeline.css" rel="stylesheet">
+<link href="css/sb-admin-2.css" rel="stylesheet">
+<link href="css/plugins/morris.css" rel="stylesheet">
+<link href="font-awesome-4.1.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+<!-- js -->
+<script src="js/jquery-1.11.0.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/bootstrap-datepicker.js"></script>
+<script src="js/bootstrap-datepicker.es.js"></script>
+<script src="js/plugins/metisMenu/metisMenu.min.js"></script>
+<script src="js/sb-admin-2.js"></script>
 <script src="js/jquery.validate.min.js"></script>
 <script src="js/validateFecha.js"></script>
-<!-- alertas de colores -->
-<script src="js/bootstrap-alert.js"></script>
-<!-- styles -->
-<link href="css/bootstrap.css" rel="stylesheet">
-<link href="css/bootstrap-responsive.css" rel="stylesheet">
-<link href="css/docs.css" rel="stylesheet">
-<link href="js/google-code-prettify/prettify.css" rel="stylesheet">
-<link rel="stylesheet" href="css/prettyPhoto.css" type="text/css" media="screen" title="prettyPhoto main stylesheet" charset="utf-8" />
-<style>
-.error{
-	color: rgb(255, 0, 0);
-}
-</style>
+
 <script>
 $(document).on('change','#txtFecNac', function(e){
 	if($("#txtFecNac").val() != ''){
@@ -60,7 +52,15 @@ $(document).on('change','#txtEmision', function(e){
 var flag = false;
 var flag2 = false;
 $(document).ready(function() {
-	$( ".datepicker" ).datepicker({ dateFormat: 'dd/mm/yy' });
+	
+	$('#sandbox-container .input-group.date').datepicker({
+		format: "dd/mm/yyyy",
+		language: "es",
+	    autoclose: true,
+	    todayHighlight: true
+	});
+	
+	//$( ".datepicker" ).datepicker({ dateFormat: 'dd/mm/yy' });
 	
 	$("#formCrearSospechoso").validate({
 		rules:{
@@ -152,219 +152,171 @@ $(document).on('change','#txtCodUnico', function(e){
 </script>
 </head>
 <body>
-<!--HEADER-->
-<jsp:include page="../componentes/header.jsp"/>
-<!--/HEADER-->
-<!--CENTRO-->
-<!--MENU-->
-<jsp:include page="../componentes/menu.jsp"/>
-<!--/MENU-->
-<div class="container inner_content">
-	<section class="span9" style="margin-left: 80px;">
-		<fieldset class="well">
-		<div id="alertasSospechosoNuevo" style="display: none;">
-		</div>
-		<div id="alertasSospechosoNuevo2" style="display: none;">
-		</div>
-			<form:form class="form-horizontal" id="formCrearSospechoso" action="crearSospechoso" commandName="sospechoso">
-		       	<legend><span class="colored">///</span> Datos Personales del Sospechoso:</legend>
-		       	<div class="span4">
-		       		<div class="control-group">
-		          		<label class="control-label" title="Código Único de Identificación">C.U.I: </label>
-		          		<div class="controls">
-		          			<input class="span2" type="text" name="txtCodUnico" id="txtCodUnico">
-		          			<input class="span2" type="hidden" name="codigoUnicoDeIdentificacion" id="hdnCodUnico">
-		          		</div>
-		       		</div>
-		       		<hr>
-		       		<div class="control-group">
-		          		<label class="control-label">Primer Apellido: </label>
-		          		<div class="controls">
-		          			<input class="span2" type="text" name="primerApellido">
-		          		</div>
-		       		</div>
-		       		<hr>
-		       		<div class="control-group">
-		          		<label class="control-label">Segundo Apellido: </label>
-		          		<div class="controls">
-		          			<input class="span2" type="text" name="segundoApellido">
-		          		</div>
-		       		</div>
-		       		<hr>
-		       		<div class="control-group">
-		          		<label class="control-label">Prenombres: </label>
-		          		<div class="controls">
-		          			<input class="span2" type="text" name="preNombres">
-		          		</div>
-		       		</div>
-		       		<hr>
-		       		<div class="control-group">
-		          		<label class="control-label">Alias: </label>
-		          		<div class="controls">
-		          			<input class="span2" type="text" name="alias" id="txtAlias" data-rule-required="true" data-msg-required="*">
-		          		</div>
-		       		</div>
-		       		<hr>
-		       		<div class="control-group">
-		          		<label class="control-label">Sexo: </label>
-		          		<label class="checkbox inline">
-		          			<input type="radio" name="sexo" id="" value="M">Masculino
-		          		</label>
-		          		<label class="checkbox inline">
-		          			<input type="radio" name="sexo" id="" value="F">Femenino
-		          		</label>
-		       		</div>
-		       		<hr>
-		       		<div class="control-group">
-		          		<label class="control-label">Fecha de Nacimiento: </label>
-		          		<div class="controls">
-		          			<input class="span2 datepicker" type="text" name="txtFecNac" id="txtFecNac">
-		          			<input class="span2" type="hidden" name="fechaDeNacimiento" id="hdnFecNac">
-		          		</div>
-		       		</div>
-		       		<hr>
-		       		<div class="control-group">
-		          		<label class="control-label">Departamento de Nacimiento: </label>
-		          		<div class="controls">
-		          			<input class="span2" type="text" name="departamentoDeNacimiento">
-		          		</div>
-		       		</div>
-		       		<hr>
-		       		<div class="control-group">
-		          		<label class="control-label">Provincia de Nacimiento: </label>
-		          		<div class="controls">
-		          			<input class="span2" type="text" name="provinciaDeNacimiento">
-		          		</div>
-		       		</div>
-		       		<hr>
-		       		<div class="control-group">
-		          		<label class="control-label">Distrito de Nacimiento: </label>
-		          		<div class="controls">
-		          			<input class="span2" type="text" name="distritoDeNacimiento">
-		          		</div>
-		       		</div>
-		       		<hr>
-		       		<div class="control-group">
-		          		<label class="control-label">Grado de Instrucción: </label>
-		          		<div class="controls">
-		          			<select class="span2" name="gradoDeInstruccion">
+<div id="wrapper">
+	<!--HEADER-->
+	<jsp:include page="../componentes/newHeader.jsp"/>
+	<!--/HEADER-->
+	<div id="page-wrapper" style="min-height: 393px;">
+		<div class="row">
+		
+			<div class="col-lg-12" id="titulo">
+				<h2 class="page-header">Sistema de Seguimiento de Casos Criminales para la DIRANDRO</h2>
+			</div>
+			
+			<div class="panel panel-default col-md-12">
+				<div class="panel-heading">
+					/// Datos Personales del Sospechoso:
+				</div>
+				<div class="panel-body">
+				<div id="alertasSospechosoNuevo" style="display: none;">
+				</div>
+				<div id="alertasSospechosoNuevo2" style="display: none;">
+				</div>
+				<form:form class="form-horizontal" id="formCrearSospechoso" action="crearSospechoso" commandName="sospechoso">
+					<div class="col-lg-5">
+						<div class="form-group">
+			          		<label title="Código Único de Identificación">C.U.I: </label>
+		          			<input class="form-control" type="text" name="txtCodUnico" id="txtCodUnico">
+			       		</div>
+			       		<input class="span2" type="hidden" name="codigoUnicoDeIdentificacion" id="hdnCodUnico">
+			       		<div class="form-group">
+			          		<label>Primer Apellido: </label>
+			          		<input class="form-control" type="text" name="primerApellido">
+			       		</div>
+			       		<div class="form-group">
+			          		<label>Segundo Apellido: </label>
+			          		<input class="form-control" type="text" name="segundoApellido">
+			       		</div>
+			       		<div class="form-group">
+			          		<label>Prenombres: </label>
+			          		<input class="form-control" type="text" name="preNombres">
+			       		</div>
+			       		<div class="form-group">
+			          		<label>Alias: </label>
+			          		<input class="form-control" type="text" name="alias" id="txtAlias" data-rule-required="true" data-msg-required="*">
+			       		</div>
+			       		<div class="form-group">
+			          		<label>Sexo: </label>
+			          		<label class="radio-inline">
+			          			<input type="radio" name="sexo" id="" value="M">Masculino
+			          		</label>
+			          		<label class="radio-inline">
+			          			<input type="radio" name="sexo" id="" value="F">Femenino
+			          		</label>
+			       		</div>
+			       		<div class="form-group">
+			          		<label>Fecha de Nacimiento: </label>
+			          		<div id="sandbox-container">
+				          		<div class="input-group date">
+			          				<input class="form-control" type="text" name="txtFecNac" id="txtFecNac">
+			          				<span class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>
+			          			</div>
+		          			</div>
+			       		</div>
+			       		<input class="span2" type="hidden" name="fechaDeNacimiento" id="hdnFecNac">
+			       		<div class="form-group">
+			          		<label class="control-label">Departamento de Nacimiento: </label>
+			          		<input class="form-control" type="text" name="departamentoDeNacimiento">
+			       		</div>
+			       		<div class="form-group">
+			          		<label>Provincia de Nacimiento: </label>
+				          	<input class="form-control" type="text" name="provinciaDeNacimiento">
+			       		</div>
+			       		<div class="form-group">
+			          		<label>Distrito de Nacimiento: </label>
+			          		<input class="form-control" type="text" name="distritoDeNacimiento">
+			       		</div>
+			       		<div class="form-group">
+			          		<label>Grado de Instrucción: </label>
+		          			<select class="form-control" name="gradoDeInstruccion">
 		          				<option value="">No Precisa</option>
 		          				<option>Preescolar</option>
 		          				<option>Primaria</option>
 		          				<option>Secundaria</option>
 		          				<option>Superior</option>
 				            </select>
-		          		</div>
-		       		</div>
-		       		<hr>
-		       		<div class="control-group" id="divGrado">
-		          		<label class="control-label">Estado Civil: </label>
-		          		<div class="controls">
-		          			<select class="span2" name="estadoCivil" id="sltcEstadoCivil">
+			       		</div>
+			       		<div class="form-group">
+			          		<label>Estado Civil: </label>
+		          			<select class="form-control" name="estadoCivil" id="sltcEstadoCivil">
 		          				<option value="">No Precisa</option>
 		          				<option>Casado</option>
 		          				<option>Divorciado</option>
 		          				<option>Soltero</option>
 		          				<option>Viudo</option>
 				            </select>
-		          		</div>
+			       		</div>
+					</div>
+					<div class="col-lg-5 col-md-offset-1">
+						<div class="form-group">
+			          		<label>Estatura: </label>
+		          			<input class="form-control" type="text" name="txtEstatura" id="txtEstatura">
+			       		</div>
+		          		<input class="span2" type="hidden" name="estatura" id="hdnEstatura">
+		          		<!-- <div class="form-group">
+			          		<label>Fecha de Inscripción: </label>
+			          		<div id="sandbox-container">
+				          		<div class="input-group date">
+			          				<input class="form-control" type="text" name="txtInscripcion" id="txtInscripcion">
+			          				<span class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>
+			          			</div>
+		          			</div>
+			       		</div>
+			       		<input class="span2" type="hidden" name="fechaDeInscripcion" id="hdnFecIns"> -->
+			       		<div class="form-group">
+			          		<label>Nombre del Padre: </label>
+			          		<input class="form-control" type="text" name="nombrePadre">
+			       		</div>
+			       		<div class="form-group">
+			          		<label>Nombre de la Madre: </label>
+			          		<input class="form-control" type="text" name="nombreMadre">
+			       		</div>
+			       		<!-- <div class="form-group">
+			          		<label>Fecha de Emisión: </label>
+			          		<div id="sandbox-container">
+				          		<div class="input-group date">
+			          				<input class="form-control" type="text" name="txtEmision" id="txtEmision">
+			          				<span class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>
+			          			</div>
+		          			</div>
+			       		</div>
+			       		<input class="span2" type="hidden" name="fechaDeEmision" id="hdnFecEmi"> -->
+			       		<div class="form-group">
+			          		<label>Restricción: </label>
+			          		<input class="form-control" type="text" name="restriccion">
+			       		</div>
+			       		<div class="form-group">
+			          		<label>Domicilio: </label>
+			          		<input class="form-control" type="text" name="domicilio">
+			       		</div>
+			       		<div class="form-group">
+			          		<label>Departamento de Domicilio: </label>
+			          		<input class="form-control" type="text" name="departamentoDeDomicilio">
+			       		</div>
+			       		<div class="form-group">
+			          		<label>Provincia de Domicilio: </label>
+			          		<input class="form-control" type="text" name="provinciaDeDomicilio">
+			       		</div>
+			       		<div class="form-group">
+			          		<label>Distrito de Domicilio: </label>
+			          			<input class="form-control" type="text" name="distritoDeDomicilio">
+			       		</div>
+			       		<div class="form-group">
+			          		<label>Multas Electorales: </label>
+			          		<input class="form-control" type="text" name="multasElectoraleso">
+			       		</div>
+					</div>		
+					<hr class="col-lg-12">			
+		       		<div class="well col-lg-12">		       		
+		       			<button class="btn btn-outline btn-success" id="btnGuardar" type="submit"><i class="fa fa-check"></i> Guardar Sospechoso</button>
+		        		<button class="btn btn-outline btn-danger" type="reset"><i class="fa fa-refresh fa-fw"></i> Reset</button>
 		       		</div>
-		       	</div>
-		       	<div class="span4">
-		       		<div class="control-group">
-		          		<label class="control-label">Estatura: </label>
-		          		<div class="controls">
-		          			<input class="span2" type="text" name="txtEstatura" id="txtEstatura">
-		          			<input class="span2" type="hidden" name="estatura" id="hdnEstatura">
-		          		</div>
-		       		</div>
-		       		<hr>
-		       		<div class="control-group">
-		          		<label class="control-label">Fecha de Inscripción: </label>
-		          		<div class="controls">
-		          			<input class="span2 datepicker" type="text" name="txtInscripcion" id="txtInscripcion">
-		          			<input class="span2" type="hidden" name="fechaDeInscripcion" id="hdnFecIns">
-		          		</div>
-		       		</div>
-		       		<hr>
-		       		<div class="control-group">
-		          		<label class="control-label">Nombre del Padre: </label>
-		          		<div class="controls">
-		          			<input class="span2" type="text" name="nombrePadre">
-		          		</div>
-		       		</div>
-		       		<hr>
-		       		<div class="control-group">
-		          		<label class="control-label">Nombre de la Madre: </label>
-		          		<div class="controls">
-		          			<input class="span2" type="text" name="nombreMadre">
-		          		</div>
-		       		</div>
-		       		<hr>
-		       		<div class="control-group">
-		          		<label class="control-label">Fecha de Emisión: </label>
-		          		<div class="controls">
-		          			<input class="span2 datepicker" type="text" name="txtEmision" id="txtEmision">
-		          			<input class="span2" type="hidden" name="fechaDeEmision" id="hdnFecEmi">
-		          		</div>
-		       		</div>
-		       		<hr>
-		       		<div class="control-group">
-		          		<label class="control-label">Restricción: </label>
-		          		<div class="controls">
-		          			<input class="span2" type="text" name="restriccion">
-		          		</div>
-		       		</div>
-		       		<hr>
-		       		<div class="control-group">
-		          		<label class="control-label">Domicilio: </label>
-		          		<div class="controls">
-		          			<input class="span2" type="text" name="domicilio">
-		          		</div>
-		       		</div>
-		       		<hr>
-		       		<div class="control-group">
-		          		<label class="control-label">Departamento de Domicilio: </label>
-		          		<div class="controls">
-		          			<input class="span2" type="text" name="departamentoDeDomicilio">
-		          		</div>
-		       		</div>
-		       		<hr>
-		       		<div class="control-group">
-		          		<label class="control-label">Provincia de Domicilio: </label>
-		          		<div class="controls">
-		          			<input class="span2" type="text" name="provinciaDeDomicilio">
-		          		</div>
-		       		</div>
-		       		<hr>
-		       		<div class="control-group">
-		          		<label class="control-label">Distrito de Domicilio: </label>
-		          		<div class="controls">
-		          			<input class="span2" type="text" name="distritoDeDomicilio">
-		          		</div>
-		       		</div>
-		       		<hr>
-		       		<div class="control-group">
-		          		<label class="control-label">Multas Electorales: </label>
-		          		<div class="controls">
-		          			<input class="span2" type="text" name="multasElectoraleso">
-		          		</div>
-		       		</div>
-		       	</div>
-		       	<span class="span9">
-		       		<div class="form-actions">
-			        	<button class="btn btn-success" id="btnGuardar" type="submit"><i class="icon-ok icon-white"></i> Guardar Sospechoso</button>
-			        	<button class="btn btn-danger" type="reset"><i class="icon-refresh icon-white"></i> Reset</button>
-			        </div> 
-		       	</span>	
-		       		 
-			</form:form>
-		</fieldset>
-	</section>
+				</form:form>				
+				</div>
+			</div>
+		</div>
+	</div>
 </div>
-<!--/CENTRO-->
-<!-- sticky footer -->
-<jsp:include page="../componentes/footer.jsp"/>
-<!-- /sticky footer -->
+
 </body>
 </html>

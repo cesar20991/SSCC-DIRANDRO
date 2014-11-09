@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.sscc.form.CasoCriminalBean;
+import com.sscc.form.PerfilBean;
 import com.sscc.form.SospechosoBean;
 import com.sscc.model.RasgosParticulares;
 import com.sscc.model.Sospechoso;
@@ -34,6 +35,11 @@ public class SospechosoController {
 	@RequestMapping("toCrearSospechoso")
 	public String toCrearSospechoso() {
 		return "principal/sospechosoNuevo";
+	}
+	
+	@RequestMapping("toBuscarSospechosos")
+	public String toBuscarSospechosos() {
+		return "principal/buscarSospechosos";
 	}
 		
 	@RequestMapping(value = "crearSospechoso", method = RequestMethod.POST)
@@ -132,5 +138,13 @@ public class SospechosoController {
 		}else{
 			return false;
 		}
+	}
+	//buscar
+	@RequestMapping(value = "getSospechososBuscar", method = RequestMethod.POST)
+	@ResponseBody
+	public List<SospechosoBean> getSospechososBuscar(){
+		List<SospechosoBean> sospechosoB = new ArrayList<SospechosoBean>();
+		sospechosoB = sospechosoServ.getSospechososBuscar();
+		return sospechosoB;
 	}
 }

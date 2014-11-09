@@ -11,9 +11,13 @@ public interface PerfilService {
 	
 	PerfilBean crearUsuario(Perfil perfil, String correo);
 	
+	PerfilBean editUsuario(Perfil perfil, String correo);
+	
 	List<PerfilBean> getJefesDeUnidad();
 	
 	List<PerfilBean> getPersonalPolicial();
+	
+	List<PerfilBean> getPersonalPolicialBuscar();
 	
 	PerfilBean getJefesPorCaso(Integer idCasoCriminal);
 	

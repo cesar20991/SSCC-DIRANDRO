@@ -54,4 +54,6 @@ public interface CasoCriminalService {
 	
 	Boolean removerPausa(Integer idCaso);
 	
+	List<CasoCriminalBean> getCasoCriminalBuscar();
+	
 }

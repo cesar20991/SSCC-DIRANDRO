@@ -85,7 +85,13 @@ $(document).ready(function(){
  		}
  	});
 	
-$( ".datepicker" ).datepicker({ dateFormat: 'dd/mm/yy' });
+//$( ".datepicker" ).datepicker({ dateFormat: 'dd/mm/yy' });
+	$('#sandbox-container .input-group.date').datepicker({
+		format: "dd/mm/yyyy",
+		language: "es",
+	    autoclose: true,
+	    todayHighlight: true
+	});
 	
 	$("#formEditarVehiculo").validate({
 		rules:{
@@ -228,296 +234,228 @@ $(document).on('change','#txtPlaca', function(e){
 </script>
 <div id="divVehiculo">
 	<div id="divMostrarVehiculo">
-	<form:form class="form-horizontal">
-		<fieldset>
-			<legend>
-				<span class=""><span class="colored">///</span> Datos del Bien Vehicular:</span>
-				<span class="offset3"><button class="btn btn-primary btn-small" type="button" id="btnEditarInmueble"><i class="icon-edit"></i> Editar</button></span>
-			</legend>
-			<div class="control-group" >
-				<label class="control-label">Codigo: </label>
-				<div class="controls">
-					<span id="spnCodigo">&nbsp;</span>
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<span>/// Datos del Bien Vehicular:</span>
+				<div class="pull-right">
+					<div class="btn-group">
+						<button class="btn btn-outline btn-primary btn-sm" type="button" id="btnEditarInmueble"><i class="fa fa-edit fa-fw"></i> Editar</button>
+					</div>
 				</div>
 			</div>
-			<div class="control-group">
-				<label class="control-label">Partida Registral: </label>
-				<div class="controls">
-					<span id="spnPartida">&nbsp;</span>
+			<div class="panel-body" id="divPerfilMostrar">
+				<div class="col-lg-6">
+					<div class="form-group" >
+						<label >Codigo: </label>
+						<span id="spnCodigo">&nbsp;</span>
+					</div>
+					<div class="form-group">
+						<label >Partida Registral: </label>
+						<span id="spnPartida">&nbsp;</span>
+					</div>
+					<div class="form-group" >
+						<label >Valor Monetario: </label>
+						S/. <span id="spnValor">&nbsp;</span>
+					</div>
+					<div class="form-group">
+						<label >Descripcion: </label>
+						<span id="spnDescripcion">&nbsp;</span>
+					</div>
+					<div class="form-group">
+						<label >Marca: </label>
+						<span id="spnMarca">&nbsp;</span>
+					</div>
+					<div class="form-group">
+						<label >Modelo: </label>
+						<span id="spnModelo">&nbsp;</span>
+					</div>
+					<div class="form-group">
+						<label >Color: </label>
+						<span id="spnColor">&nbsp;</span>
+					</div>
+					<div class="form-group">
+						<label >Placa: </label>
+						<span id="spnPlaca">&nbsp;</span>
+					</div>
+					<div class="form-group">
+						<label >Chasis: </label>
+						<span id="spnChasis">&nbsp;</span>
+					</div>
+					<div class="form-group">
+						<label >Motor: </label>
+						<span id="spnMotor">&nbsp;</span>
+					</div>
 				</div>
+				<div class="col-lg-6">
+					<div class="form-group">
+						<label >Altura: </label>
+						<span id="spnAltura">&nbsp;</span> m
+					</div>
+					<div class="form-group">
+						<label >Longitud: </label>
+						<span id="spnLongitud">&nbsp;</span> m
+					</div>
+					<div class="form-group">
+						<label >Ancho: </label>
+						<span id="spnAncho">&nbsp;</span> m
+					</div>
+					<div class="form-group">
+						<label >Peso Bruto: </label>
+						<span id="spnPesoBruto">&nbsp;</span> Kg
+					</div>
+					<div class="form-group">
+						<label >Peso Neto: </label>
+						<span id="spnPesoNeto">&nbsp;</span> Kg
+					</div>
+					<div class="form-group">
+						<label >Ruedas: </label>
+						<span id="spnRuedas">&nbsp;</span>
+					</div>
+					<div class="form-group">
+						<label >Ejes: </label>
+						<span id="spnEjes">&nbsp;</span>
+					</div>
+					<div class="form-group">
+						<label >Pasajeros: </label>
+						<span id="spnPasajeros">&nbsp;</span>
+					</div>
+					<div class="form-group">
+						<label >Asientos: </label>
+						<span id="spnAsientos">&nbsp;</span>
+					</div>
+					<div class="form-group">
+						<label >Fecha de Fabricación: </label>
+						<span id="spnFecFabricacion">&nbsp;</span>
+					</div>
+				</div>				
 			</div>
-			<div class="control-group" >
-				<label class="control-label">Valor Monetario: </label>
-				<div class="controls">
-					S/. <span id="spnValor">&nbsp;</span>
-				</div>
-			</div>
-			<div class="control-group">
-				<label class="control-label">Descripcion: </label>
-				<div class="controls">
-					<span id="spnDescripcion">&nbsp;</span>
-				</div>
-			</div>
-			<div class="control-group">
-				<label class="control-label">Marca: </label>
-				<div class="controls">
-					<span id="spnMarca">&nbsp;</span>
-				</div>
-			</div>
-			<div class="control-group">
-				<label class="control-label">Modelo: </label>
-				<div class="controls">
-					<span id="spnModelo">&nbsp;</span>
-				</div>
-			</div>
-			<div class="control-group">
-				<label class="control-label">Color: </label>
-				<div class="controls">
-					<span id="spnColor">&nbsp;</span>
-				</div>
-			</div>
-			<div class="control-group">
-				<label class="control-label">Placa: </label>
-				<div class="controls">
-					<span id="spnPlaca">&nbsp;</span>
-				</div>
-			</div>
-			<div class="control-group">
-				<label class="control-label">Chasis: </label>
-				<div class="controls">
-					<span id="spnChasis">&nbsp;</span>
-				</div>
-			</div>
-			<div class="control-group">
-				<label class="control-label">Motor: </label>
-				<div class="controls">
-					<span id="spnMotor">&nbsp;</span>
-				</div>
-			</div>
-			<div class="control-group">
-				<label class="control-label">Altura: </label>
-				<div class="controls">
-					<span id="spnAltura">&nbsp;</span> m
-				</div>
-			</div>
-			<div class="control-group">
-				<label class="control-label">Longitud: </label>
-				<div class="controls">
-					<span id="spnLongitud">&nbsp;</span> m
-				</div>
-			</div>
-			<div class="control-group">
-				<label class="control-label">Ancho: </label>
-				<div class="controls">
-					<span id="spnAncho">&nbsp;</span> m
-				</div>
-			</div>
-			<div class="control-group">
-				<label class="control-label">Peso Bruto: </label>
-				<div class="controls">
-					<span id="spnPesoBruto">&nbsp;</span> Kg
-				</div>
-			</div>
-			<div class="control-group">
-				<label class="control-label">Peso Neto: </label>
-				<div class="controls">
-					<span id="spnPesoNeto">&nbsp;</span> Kg
-				</div>
-			</div>
-			<div class="control-group">
-				<label class="control-label">Ruedas: </label>
-				<div class="controls">
-					<span id="spnRuedas">&nbsp;</span>
-				</div>
-			</div>
-			<div class="control-group">
-				<label class="control-label">Ejes: </label>
-				<div class="controls">
-					<span id="spnEjes">&nbsp;</span>
-				</div>
-			</div>
-			<div class="control-group">
-				<label class="control-label">Pasajeros: </label>
-				<div class="controls">
-					<span id="spnPasajeros">&nbsp;</span>
-				</div>
-			</div>
-			<div class="control-group">
-				<label class="control-label">Asientos: </label>
-				<div class="controls">
-					<span id="spnAsientos">&nbsp;</span>
-				</div>
-			</div>
-			<div class="control-group">
-				<label class="control-label">Fecha de Fabricación: </label>
-				<div class="controls">
-					<span id="spnFecFabricacion">&nbsp;</span>
-				</div>
-			</div>
-		</fieldset>
-	</form:form>
+		</div>
 </div>
 <!-- EDITAR CAOS CRIMINAL -->
-	<fieldset class="well" style="display: none;" id="divEditarVehiculo">
-	<div id="alertasBienNuevo" style="display: none;">
-	</div>
-	<div id="alertasBienNuevo2" style="display: none;">
-	</div>
-		<form:form class="form-horizontal" id="formEditarVehiculo" action="editarVehiculo" commandName="editarVehiculo">
-				<input type="hidden" name="idVehiculo" id="hdnIdVehiculoAux">
-				<legend>
-			       	<span class="colored">///</span> Editar Bien Vehicular:
-		       	</legend>
-		       	<div class="control-group">
-	          		<label class="control-label">Partida Registral: </label>
-	          		<div class="controls">
-	          			<input class="span3" type="text" name="partidaRegistral" id="txtPartida" data-rule-required="true" data-msg-required="*">
-	          		</div>
-	       		</div>
-	       		<div class="control-group">
-	          		<label class="control-label">Valor Monetario: </label>
-	          		<div class="controls">
-	          			<div class="input-prepend">
-		          			<span class="add-on">S/.</span>
-	          				<input class="span3" type="text" name="valor" id="txtValor" data-rule-required="true" data-msg-required="*">
+	<div style="display: none;" id="divEditarVehiculo">
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<span>/// Editar Bien Vehicular:</span>
+			</div>
+			<div class="panel-body" id="divPerfilMostrar">
+			<div id="alertasBienNuevo" style="display: none;">
+			</div>
+			<div id="alertasBienNuevo2" style="display: none;">
+			</div>
+			<form:form class="form-horizontal" id="formEditarVehiculo" action="editarVehiculo" commandName="editarVehiculo">
+				<div class="col-lg-5">				
+					<input type="hidden" name="idVehiculo" id="hdnIdVehiculoAux">
+					<div class="form-group">
+		          		<label >Partida Registral: </label>
+		          		<input class="form-control" type="text" name="partidaRegistral" id="txtPartida" data-rule-required="true" data-msg-required="*">
+		       		</div>
+		       		<div class="form-group">
+		          		<label >Valor Monetario: </label>
+	          			<div class="input-prepend input-group">
+		          			<span class="input-group-addon">S/.</span>
+	          				<input class="form-control" type="text" name="valor" id="txtValor" data-rule-required="true" data-msg-required="*">
 	          			</div>
-	          		</div>
+		       		</div>
+		       		<div class="form-group">
+		          		<label >Descripcion: </label>
+		          		<textarea class="form-control" name="descripcion" id="txtDescripcion" rows="3" data-rule-required="true" data-msg-required="*"></textarea>
+		       		</div>
+		       		<div class="form-group">
+		          		<label >Marca: </label>
+		          		<input class="form-control" type="text" name="marca" id="txtMarca" data-rule-required="true" data-msg-required="*">
+		       		</div>
+		       		<div class="form-group">
+		          		<label >Modelo: </label>
+		          		<input class="form-control" type="text" name="modelo" id="txtModelo" data-rule-required="false">
+		       		</div>
+		       		<div class="form-group">
+		          		<label >Color: </label>
+		          		<input class="form-control" type="text" name="color" id="txtColor" data-rule-required="true" data-msg-required="*">
+		       		</div>		       		
+		       		<div class="form-group">
+		          		<label >Placa: </label>
+		          		<input class="form-control" type="text" name="placa" id="txtPlaca" data-rule-required="true" data-msg-required="*">
+		       		</div>
+		       		<div class="form-group">
+		          		<label >Chasis: </label>
+		          		<input class="form-control" type="text" name="chasis" id="txtChasis" data-rule-required="false">
+		       		</div>		       		
+		       		<div class="form-group">
+		          		<label >Motor: </label>
+		          		<input class="form-control" type="text" name="motor" id="txtMotor" data-rule-required="false">
+		       		</div>
 	       		</div>
-	       		<div class="control-group">
-	          		<label class="control-label">Descripcion: </label>
-	          		<div class="controls">
-	          			<textarea class="input-xlarge" name="descripcion" id="txtDescripcion" rows="3" style="width: 400px" data-rule-required="true" data-msg-required="*"></textarea>
-	          		</div>
-	       		</div>
-	       		<hr>
-	       		
-	       		<!-- Bien del tipo vehiculo -->
-	       		<div class="control-group">
-	          		<label class="control-label">Marca: </label>
-	          		<div class="controls">
-	          			<input class="span3" type="text" name="marca" id="txtMarca" data-rule-required="true" data-msg-required="*">
-	          		</div>
-	       		</div>
-	       		<div class="control-group">
-	          		<label class="control-label">Modelo: </label>
-	          		<div class="controls">
-	          			<input class="span3" type="text" name="modelo" id="txtModelo" data-rule-required="false">
-	          		</div>
-	       		</div>
-	       		<div class="control-group">
-	          		<label class="control-label">Color: </label>
-	          		<div class="controls">
-	          			<input class="span2" type="text" name="color" id="txtColor" data-rule-required="true" data-msg-required="*">
-	          		</div>
-	       		</div>
-	       		
-	       		<div class="control-group">
-	          		<label class="control-label">Placa: </label>
-	          		<div class="controls">
-	          			<input class="span3" type="text" name="placa" id="txtPlaca" data-rule-required="true" data-msg-required="*">
-	          		</div>
-	       		</div>
-	       		<div class="control-group">
-	          		<label class="control-label">Chasis: </label>
-	          		<div class="controls">
-	          			<input class="span3" type="text" name="chasis" id="txtChasis" data-rule-required="false">
-	          		</div>
-	       		</div>
-	       		
-	       		<div class="control-group">
-	          		<label class="control-label">Motor: </label>
-	          		<div class="controls">
-	          			<input class="span3" type="text" name="motor" id="txtMotor" data-rule-required="false">
-	          		</div>
-	       		</div>
-	       		
-	       		
-	       		<div class="control-group">
-	          		<label class="control-label">Altura: </label>
-	          		<div class="controls">
-	          			<div class="input-append">
-	          				<input class="span2" type="text" name="altura" id="txtAltura" data-rule-required="true" data-msg-required="*">
-	          				<span class="add-on">m</span>
+	       		<div class="col-lg-5 col-md-offset-1">
+		       		<div class="form-group">
+		          		<label >Altura: </label>
+	          			<div class="input-append input-group">
+	          				<input class="form-control" type="text" name="altura" id="txtAltura" data-rule-required="true" data-msg-required="*">
+	          				<span class="input-group-addon">m</span>
 	          			</div>
-	          		</div>
-	       		</div>
-	       		<div class="control-group">
-	          		<label class="control-label">Longitud: </label>
-	          		<div class="controls">
-	          			<div class="input-append">
-	          				<input class="span2" type="text" name="longitud" id="txtLongitud" data-rule-required="true" data-msg-required="*">
-	          				<span class="add-on">m</span>
+		       		</div>
+		       		<div class="form-group">
+		          		<label >Longitud: </label>
+	          			<div class="input-append input-group">
+	          				<input class="form-control" type="text" name="longitud" id="txtLongitud" data-rule-required="true" data-msg-required="*">
+	          				<span class="input-group-addon">m</span>
 	          			</div>
-	          		</div>
-	       		</div>
-	       		<div class="control-group">
-	          		<label class="control-label">Ancho: </label>
-	          		<div class="controls">
-	          			<div class="input-append">
-	          				<input class="span2" type="text" name="ancho" id="txtAncho" data-rule-required="true" data-msg-required="*">
-	          				<span class="add-on">m</span>
+		       		</div>
+		       		<div class="form-group">
+		          		<label >Ancho: </label>
+	          			<div class="input-append input-group">
+	          				<input class="form-control" type="text" name="ancho" id="txtAncho" data-rule-required="true" data-msg-required="*">
+	          				<span class="input-group-addon">m</span>
 	          			</div>
-	          		</div>
-	       		</div>
-	       		
-	       		
-	       		<div class="control-group">
-	          		<label class="control-label">Peso Bruto: </label>
-	          		<div class="controls">
-	          			<div class="input-append">
-	          				<input class="span2" type="text" name=pesoBruto id="txtPesoBruto" data-rule-required="false">
-	          				<span class="add-on">Kg</span>
+		       		</div>
+		       		<div class="form-group">
+		          		<label >Peso Bruto: </label>
+	          			<div class="input-append input-group">
+	          				<input class="form-control" type="text" name=pesoBruto id="txtPesoBruto" data-rule-required="false">
+	          				<span class="input-group-addon">Kg</span>
 	          			</div>
-	          		</div>
-	       		</div>
-	       		<div class="control-group">
-	          		<label class="control-label">Peso Neto: </label>
-	          		<div class="controls">
-	          			<div class="input-append">
-	          				<input class="span2" type="text" name="pesoNeto" id="txtPesoNeto" data-rule-required="false">
-	          				<span class="add-on">Kg</span>
+		       		</div>
+		       		<div class="form-group">
+		          		<label >Peso Neto: </label>
+	          			<div class="input-append input-group">
+	          				<input class="form-control" type="text" name="pesoNeto" id="txtPesoNeto" data-rule-required="false">
+	          				<span class="input-group-addon">Kg</span>
 	          			</div>
-	          		</div>
+		       		</div>		       		
+		       		<div class="form-group">
+		          		<label >Ruedas: </label>
+		          		<input class="form-control" type="text" name="ruedas" id="txtRuedas" data-rule-required="false">
+		       		</div>
+		       		<div class="form-group">
+		          		<label >Ejes: </label>
+		          		<input class="form-control" type="text" name="ejes" id="txtEjes" data-rule-required="false">
+		       		</div>		       		
+		       		<div class="form-group">
+		          		<label >Pasajeros: </label>
+		          		<input class="form-control" type="text" name="pasajeros" id="txtPasajeros" data-rule-required="false">
+		       		</div>
+		       		<div class="form-group">
+		          		<label >Asientos: </label>
+		          		<input class="form-control" type="text" name="asientos" id="txtAsientos" data-rule-required="false">
+		       		</div>
+		       		<div class="form-group">
+		          		<label >Fecha de Fabricación: </label>
+		          		<div id="sandbox-container">
+					          <div class="input-group date">
+		          				<input class="form-control datepicker" type="text" name="txtFecFabricacion" id="txtFecFabricacion" data-rule-required="true" data-msg-required="*">
+		          				<span class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>
+		          			</div>
+		          		</div>
+		       		</div>
+		       		<input class="span2" type="hidden" name="fecFabricacion" id="hdnFecFab">		       		
+				</div>
+				<hr class="col-lg-12">			
+	       		<div class="well col-lg-12">
+	       			<button class="btn btn-outline btn-success" id="btnGuardar" type="submit"><i class="fa fa-check"></i> Guardar</button>
+			        <button class="btn btn-outline btn-danger" type="reset"><i class="fa fa-refresh fa-fw"></i> Reset</button>
+			        <button class="btn btn-outline btn-warning" type="button" id="btnCancelEditar"><i class="fa fa-arrow-left"></i> Cancel</button>
 	       		</div>
-	       		
-	       		<div class="control-group">
-	          		<label class="control-label">Ruedas: </label>
-	          		<div class="controls">
-	          			<input class="span1" type="text" name="ruedas" id="txtRuedas" data-rule-required="false">
-	          		</div>
-	       		</div>
-	       		<div class="control-group">
-	          		<label class="control-label">Ejes: </label>
-	          		<div class="controls">
-	          			<input class="span1" type="text" name="ejes" id="txtEjes" data-rule-required="false">
-	          		</div>
-	       		</div>
-	       		
-	       		<div class="control-group">
-	          		<label class="control-label">Pasajeros: </label>
-	          		<div class="controls">
-	          			<input class="span1" type="text" name="pasajeros" id="txtPasajeros" data-rule-required="false">
-	          		</div>
-	       		</div>
-	       		<div class="control-group">
-	          		<label class="control-label">Asientos: </label>
-	          		<div class="controls">
-	          			<input class="span1" type="text" name="asientos" id="txtAsientos" data-rule-required="false">
-	          		</div>
-	       		</div>
-	       		<div class="control-group">
-	          		<label class="control-label">Fecha de Fabricación: </label>
-	          		<div class="controls">
-	          			<input class="span2 datepicker" type="text" name="txtFecFabricacion" id="txtFecFabricacion" data-rule-required="true" data-msg-required="*">
-	          			<input class="span2" type="hidden" name="fecFabricacion" id="hdnFecFab">
-	          		</div>
-	       		</div>
-				<!-- BOTONES -->
-				<div class="form-actions">
-					<button class="btn btn-success" id="btnGuardar" type="submit"><i class="icon-ok icon-white"></i> Guardar</button>
-			        <button class="btn btn-danger" type="reset"><i class="icon-refresh icon-white"></i> Reset</button>
-			        <button class="btn btn-warning" type="button" id="btnCancelEditar"><i class="icon-arrow-left icon-white"></i> Cancel</button>
-			    </div>
 			</form:form>
-		</fieldset>
+			</div>
+		</div>
+	</div>
 </div>

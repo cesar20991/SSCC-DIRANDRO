@@ -18,6 +18,9 @@
 	<mvc:resources mapping="/ico/**" location="/ico/" />
 	<mvc:resources mapping="/img/**" location="/img/" />
 	<mvc:resources mapping="/images/**" location="/images/" />
+	<mvc:resources mapping="/less/**" location="/less/" />
+	<mvc:resources mapping="/fonts/**" location="/fonts/" />
+	<mvc:resources mapping="/font-awesome-4.1.0/**" location="/font-awesome-4.1.0/" />
 
 	<bean id="jspViewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<property name="viewClass" value="org.springframework.web.servlet.view.JstlView" />
@@ -84,8 +87,7 @@
 		<prop key="hibernate.show_sql">true</prop> <prop key="hibernate.ejb.naming_strategy">org.hibernate.cfg.ImprovedNamingStrategy</prop> 
 		change this to 'verify' before running as a production app <prop key="hibernate.hbm2ddl.auto">update</prop> 
 		</props> </property> </bean> -->
-	<bean id="entityManagerFactory"
-		class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
+	<bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
 		<property name="dataSource" ref="dataSource" />
 		<property name="jpaVendorAdapter">
 			<bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter" />

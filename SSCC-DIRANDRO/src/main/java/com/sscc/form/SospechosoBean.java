@@ -36,6 +36,7 @@ public class SospechosoBean {
 	private String estado;
 	private Timestamp fecCreacionSospechoso;
 	private String urlSospechoso;
+	private String nombreCompleto;
 	
 	///Rasgos Particulares
 	private Integer idRasgosParticulares;
@@ -313,5 +314,11 @@ public class SospechosoBean {
 	}
 	public void setUrlSospechoso(String urlSospechoso) {
 		this.urlSospechoso = urlSospechoso;
+	}
+	public String getNombreCompleto() {
+		return nombreCompleto;
+	}
+	public void setNombreCompleto(String nombreCompleto) {
+		this.nombreCompleto = nombreCompleto;
 	}
 }

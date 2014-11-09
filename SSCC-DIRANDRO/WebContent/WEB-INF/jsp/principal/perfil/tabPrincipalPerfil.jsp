@@ -1,11 +1,7 @@
 <%@taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<style>
-.controls {
-	margin-top: 3px;
-}
-</style>
+
 <script>
 function initPerfil(perfil){
 	$("#spnPrimerNombe").empty();
@@ -112,87 +108,315 @@ $(document).ready(function(){
 	 			initPerfil(perfil);		 				 
 	 		}
 	 	});
+		
+		$("#formEditarUsuario").validate({
+			rules:{
+				txtNumeroDeCarnet:  {required: true, number: true, minlength: 6, maxlength: 8},
+				txtCorreo: {required: true, email:true},
+				txtDni: {required: true, number: true, minlength: 8, maxlength: 8}
+			},
+			messages:{
+				txtNumeroDeCarnet : "Solo Números, con 8 digitos",
+				txtCorreo : "Debe ser un Correo Electronico",
+				txtDni : "Solo Números de 8 digitos"
+			},
+			submitHandler: function(form){
+				
+				$("#hdnNumeroDeCarnet").val($("#txtNumeroDeCarnet").val());
+				$("#hdnCorreo").val($("#txtCorreo").val());
+				$("#hdnDni").val($("#txtDni").val());
+				
+				$.ajax({
+			 		url: 'editarUsuario-'+$("#hdnIdPerfil").text(),
+			 		type: 'post',
+			 		dataType: 'json',
+			 		data: $("#formEditarUsuario").serialize(),
+			 		success: function(perfil){
+			 			initPerfil(perfil);
+			 			$("#divPerfilMostrar").show();
+			 			$("#btnEditarPerfil").show();
+			 			$("#divPerfilEditar").hide();
+			 		}
+			 	});
+				//if(flag == true && flag2 == true && flag3 == true){
+					//form.submit();
+				/*}else if($("#txtDni").val() == '' || $("#txtNumeroDeCarnet").val() == '' || $("#txtCorreo").val() == ''){
+					form.submit();
+				}else{
+					alert("Debe Corregir los datos");
+				}*/
+			}
+		});
+		
 });//# carnet -> sub 8 -> oficiales 6
+
+$(document).on('click','#btnEditarPerfil', function(e){
+	$("#divPerfilMostrar").hide();
+	$("#btnEditarPerfil").hide();
+	$("#divPerfilEditar").show();
+	$("#rangoOficial").prop("checked", false);
+	$("#rangoSubOficial").prop("checked", false);
+	$("#sexoM").prop("checked", false);
+	$("#sexoF").prop("checked", false);
+	$("#chkFiscal").prop("checked", true);
+	$("#chkFiscalSup").prop("checked", true);
+	//
+	$("#txtPrimerNombre").val($("#spnPrimerNombe").text());
+	$("#txtSegundoNombre").val($("#spnSegundoNombe").text());
+	$("#txtApePaterno").val($("#spnApePaterno").text());
+	$("#txtApeMaterno").val($("#spnApeMaterno").text());
+	$("#txtDni").val($("#spnDni").text());
+	
+	if('${pageContext.session.getAttribute("entidad")}' == 'D'){
+		$("#lblEntidad").text('DIRANDRO');
+		
+		$("#txtCargo").val($("#spnCargo").text());
+		if($("#spnRango").text() == 'Oficial'){
+			$("#rangoOficial").prop("checked", true);
+			$("#sltcGrado").empty();
+			$("#sltcGrado").append('<option>Alfz. PNP</option><option>Tnte. PNP</option><option>Cap. PNP</option>'+
+					'<option>May. PNP</option><option>Cmdte PNP</option><option>Crnel PNP</option><option>Gral. PNP</option>');
+		}else if($("#spnRango").text() == 'Sub Oficial'){
+			$("#rangoSubOficial").prop("checked", true);
+			$("#sltcGrado").empty();
+			$("#sltcGrado").append('<option>SO3 PNP</option><option>SO2 PNP</option><option>SO1 PNP</option>'+
+			'<option>SOT3 PNP</option><option>SOT2 PNP</option><option>SOT1 PNP</option><option>SOB PNP</option><option>SOS PNP</option>');
+		}
+		
+		$("#sltcGrado").val($("#spnGrado").text());
+		$("#txtNumeroDeCarnet").val($("#spnNCarnet").text());
+		
+	}else if('${pageContext.session.getAttribute("entidad")}' == 'M'){
+		$("#lblEntidad").text('Ministerio Público');
+		
+		$("#divCargo").hide();
+		$("#divRango").hide();
+		$("#divFiscalEdit").show();
+		$("#divGrado").hide();
+		$("#divNCarnet").hide();
+		
+		if($("#spnTipoFiscal").text() == 'Fiscal'){
+			$("#chkFiscal").prop("checked", true);
+		}else if($("#spnTipoFiscal").text() == 'Fiscal Superior'){
+			$("#chkFiscalSup").prop("checked", true);
+		}
+	}
+
+	
+	$("#txtTelefono").val($("#spnTelefono").text());
+	$("#txtCorreo").val($("#spnCorreo").text());
+	
+	if($("#spnSexo").text() == 'Masculino'){
+		$("#sexoM").prop("checked", true);
+	}else if($("#spnSexo").text() == 'Femenino'){
+		$("#sexoF").prop("checked", true);
+	}
+});
+
+$(document).on('click','#rangoOficial', function(e){
+	$("#sltcGrado").empty();
+	$("#sltcGrado").append('<option>Alfz. PNP</option><option>Tnte. PNP</option><option>Cap. PNP</option>'+
+			'<option>May. PNP</option><option>Cmdte PNP</option><option>Crnel PNP</option><option>Gral. PNP</option>');
+});
+
+$(document).on('click','#rangoSubOficial', function(e){
+	$("#sltcGrado").empty();
+	$("#sltcGrado").append('<option>SO3 PNP</option><option>SO2 PNP</option><option>SO1 PNP</option>'+
+	'<option>SOT3 PNP</option><option>SOT2 PNP</option><option>SOT1 PNP</option><option>SOB PNP</option><option>SOS PNP</option>');
+});
+
+$(document).on('click','#btnCancelEditarUsuario', function(e){
+	$("#divPerfilMostrar").show();
+	$("#btnEditarPerfil").show();
+	$("#divPerfilEditar").hide();
+});
 </script>
-<div id="divMostrarDatos">
-	<form:form class="form-horizontal">
-		<fieldset>
-			<legend>
-				<span class="span3"><span class="colored">///</span> Datos Personales:</span>
-				<span class="span2 offset3"><button class="btn btn-primary btn-small" type="button"><i class="icon-edit"></i> Editar</button></span>
-			</legend>
-			<div class="control-group">
-				<label class="control-label">Nombres: </label>
-				<div class="controls">
-					<span id="spnPrimerNombe">&nbsp;</span>&nbsp;<span id="spnSegundoNombe">&nbsp;</span>
+<div id="divMostrarDatos" class="">
+<div class="panel panel-default">
+	<div class="panel-heading">
+		<span>/// Datos Personales:</span>
+		<div class="pull-right">
+			<div class="btn-group">
+				<button class="btn btn-outline btn-primary btn-sm" type="button" id="btnEditarPerfil"><i class="fa fa-edit fa-fw"></i> Editar</button>
+			</div>
+		</div>
+	</div>
+	<div class="panel-body" id="divPerfilMostrar">
+		<div class="col-lg-6">
+			<div class="form-group">
+				<label>Nombres: </label>
+				<label class="radio-inline"><span id="spnPrimerNombe">&nbsp;</span>&nbsp;<span id="spnSegundoNombe">&nbsp;</span></label>
+			</div>
+			<div class="form-group">
+				<label>Apellidos: </label>
+				<label class="radio-inline"><span id="spnApePaterno">&nbsp;</span>&nbsp;<span id="spnApeMaterno">&nbsp;</span></label>
+			</div>
+			<div class="form-group" id="divCarnet">
+				<label>Numero de CIP: </label>
+				<label class="radio-inline"><span id="spnNCarnet">&nbsp;</span></label>
+			</div>
+			<div class="form-group">
+				<label>DNI: </label>
+				<label class="radio-inline"><span id="spnDni">&nbsp;</span></label>
+			</div>
+			<div class="form-group">
+				<label>Entidad: </label>
+				<label class="radio-inline"><span id="spnEntidad">&nbsp;</span></label>
+			</div>
+			<div class="form-group" id="divRango">
+				<label>Jerarquía: </label>
+				<label class="radio-inline"><span id="spnRango">&nbsp;</span></label>
+			</div>
+		</div>
+		<div class="col-lg-6">
+			<div class="form-group" id="divGrado">
+				<label>Grado: </label>
+				<label class="radio-inline"><span id="spnGrado">&nbsp;</span></label>
+			</div>
+			<div class="form-group" id="divCargo">
+				<label>Cargo: </label>
+				<label class="radio-inline"><span id="spnCargo">&nbsp;</span></label>
+			</div>
+			<div class="form-group" id="divFiscal" style="display: none;">
+				<label>Tipo Fiscal: </label> 
+				<label class="radio-inline"><span id="spnTipoFiscal">&nbsp;</span></label>
+			</div>
+			<div class="form-group">
+				<label>Telefono: </label>
+				<label class="radio-inline"><span id="spnTelefono">&nbsp;</span></label>
+			</div>
+			<div class="form-group">
+				<label>Corre Electrónico: </label>
+				<label class="radio-inline"><span id="spnCorreo">&nbsp;</span></label>
+			</div>
+			<div class="form-group">
+				<label>Sexo: </label>
+				<label class="radio-inline"><span id="spnSexo">&nbsp;</span></label>
+			</div>
+		</div>			
+	</div>
+	<div class="panel-body" id="divPerfilEditar" style="display: none;">
+		<form:form class="form-horizontal" id="formEditarUsuario" action="editarUsuario" commandName="perfil">
+			<div class="col-lg-6 col-md-offset-1">
+				<div class="form-group">
+					<label>Primer Nombre: </label>
+					<div class="form-group">
+						<input type="text" name="primerNombre" id="txtPrimerNombre" data-rule-required="true" data-msg-required="*" class="form-control">
+					</div>
+				</div>
+				<div class="form-group">
+					<label>Segundo Nombre: </label>
+					<div class="form-group">
+						<input type="text" name="segundoNombre" id="txtSegundoNombre" class="form-control">
+					</div>
+				</div>
+				<div class="form-group" id="divCarnet">
+					<label>Apellido Paterno: </label>
+					<div class="form-group">
+						<input type="text" name="apePaterno" id="txtApePaterno" data-rule-required="true" data-msg-required="*" class="form-control"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label>Apellidos Materno: </label>
+					<div class="form-group">
+						<input type="text" name="apeMaterno" id="txtApeMaterno" data-rule-required="true" data-msg-required="*" class="form-control">
+					</div>
+				</div>
+				<div class="form-group">
+					<label>DNI: </label>
+					<div class="form-group">
+						<input type="text" name="txtDni" id="txtDni"  class="form-control">
+						<input class="span2" type="hidden" name="dni" id="hdnDni">
+					</div>
+				</div>
+				<div class="form-group" id="divRango">
+					<label>Entidad: </label>
+					<label class="radio-inline" id="lblEntidad">DIRANDRO</label>
+				</div>
+				<div class="form-group" id="divCargo">
+					<label>Cargo: </label>
+					<div class="form-group">
+						<select name="cargo" id="txtCargo" data-rule-required="true" data-msg-required="*" class="form-control">
+							<option>Jefe de Unidad</option>
+							<option>Superior</option>
+							<option>Investigador</option>
+						</select>
+					</div>
+				</div>
+				<div class="form-group" id="divRango">
+					<label>Jerarquía: </label>
+					<label class="radio-inline">  
+						<input type="radio" name="rango" id="rangoOficial" value="Oficial" checked>Oficial
+					</label> 
+					<label class="radio-inline">  
+						<input type="radio" name="rango" id="rangoSubOficial" value="Sub Oficial">Sub Oficial
+					</label>
+				</div>
+				<div class="form-group" id="divFiscalEdit" style="display: none;">
+					<label>Tipo Fiscal: </label> 
+					<label class="radio-inline"> 
+						<input type="radio" name="tipoFiscal" id="chkFiscal" value="Fiscal" checked>Fiscal
+					</label> 
+					<label class="radio-inline"> 
+						<input type="radio" name="tipoFiscal" id="chkFiscalSup" value="Fiscal Superior">Fiscal Superior
+					</label>
+				</div>
+				<div class="form-group" id="divGrado">
+					<label>Grado: </label>
+					<div class="form-group">
+						<select name="grado" id="sltcGrado" data-rule-required="true" data-msg-required="*" class="form-control">
+							<option>Alfz. PNP</option>
+							<option>Tnte. PNP</option>
+							<option>Cap. PNP</option>
+							<option>May. PNP</option>
+							<option>Cmdte PNP</option>
+							<option>Crnel PNP</option>
+							<option>Gral. PNP</option>
+						</select>
+					</div>
+				</div>
+				<div class="form-group" id="divNCarnet">
+					<label>Numero de Carnet: </label>
+					<div class="form-group input-group">
+						<span class="input-group-addon">CIP N°</span>
+						<input class="form-control" type="text" id="txtNumeroDeCarnet" name="txtNumeroDeCarnet">
+					</div>
+					<input type="hidden" name="numeroDeCarnet" id="hdnNumeroDeCarnet">
+				</div>
+				<div class="form-group">
+					<label>Telefono: </label>
+					<div class="form-group">
+						<input type="text" id="txtTelefono" name="telefono" class="form-control">
+					</div>
+				</div>
+				<div class="form-group">
+					<label>Corre Electrónico: </label>
+					<div class="form-group input-group">
+						<span class="input-group-addon">@</span>
+						<input class="form-control" type="text" id="txtCorreo" name="txtCorreo"> 
+					</div>
+					<input class="form-control" type="hidden" id="hdnCorreo" name="correo">
+				</div>
+				<div class="form-group">
+					<label>Sexo: </label> 
+					<label class="radio-inline"> 
+						<input type="radio" name="sexo" id="sexoM" value="M" checked>Masculino
+					</label> 
+					<label class="radio-inline"> 
+						<input type="radio" name="sexo" id="sexoF" value="F">Femenino
+					</label>
+				</div>
+				<hr>
+				<div class="well">
+					<button class="btn btn-outline btn-success" id="btnGuardar" type="submit"><i class="fa fa-check"></i> Guardar Usuario </button>
+					<button class="btn btn-outline btn-danger" type="reset"><i class="fa fa-refresh fa-fw"></i> Reset</button>
+					<button class="btn btn-outline btn-warning" type="button" id="btnCancelEditarUsuario"><i class="fa fa-arrow-left"></i> Cancel</button>
 				</div>
 			</div>
-			<div class="control-group">
-				<label class="control-label">Apellidos: </label>
-				<div class="controls">
-					<span id="spnApePaterno">&nbsp;</span>&nbsp;<span id="spnApeMaterno">&nbsp;</span>
-				</div>
-			</div>
-			<div class="control-group" id="divCarnet">
-				<label class="control-label">Numero de Carnet: </label>
-				<div class="controls">
-					CIP N° <span id="spnNCarnet">&nbsp;</span>
-				</div>
-			</div>
-			<div class="control-group">
-				<label class="control-label">DNI: </label>
-				<div class="controls">
-					<span id="spnDni">&nbsp;</span>
-				</div>
-			</div>
-			<div class="control-group">
-				<label class="control-label">Entidad: </label>
-				<div class="controls">
-					<span id="spnEntidad">&nbsp;</span>
-				</div>
-			</div>
-			<div class="control-group" id="divRango">
-				<label class="control-label">Rango: </label>
-				<div class="controls">
-					<span id="spnRango">&nbsp;</span>
-				</div>
-			</div>
-			<div class="control-group" id="divGrado">
-				<label class="control-label">Grado: </label>
-				<div class="controls">
-					<span id="spnGrado">&nbsp;</span>
-				</div>
-			</div>
-			<div class="control-group" id="divCargo">
-				<label class="control-label">Cargo: </label>
-				<div class="controls">
-					<span id="spnCargo">&nbsp;</span>
-				</div>
-			</div>
-			<div class="control-group" id="divFiscal" style="display: none;">
-				<label class="control-label">Tipo Fiscal: </label> 
-				<label class="controls"> 
-					<span id="spnTipoFiscal">&nbsp;</span>
-				</label>
-			</div>
-			<div class="control-group">
-				<label class="control-label">Telefono: </label>
-				<div class="controls">
-					<span id="spnTelefono">&nbsp;</span>
-				</div>
-			</div>
-			<div class="control-group">
-				<label class="control-label">Corre Electrónico: </label>
-				<div class="controls">
-					<span id="spnCorreo">&nbsp;</span>
-				</div>
-			</div>
-			<div class="control-group">
-				<label class="control-label">Sexo: </label>
-				<div class="controls">
-					<span id="spnSexo">&nbsp;</span>
-				</div>
-			</div>
-		</fieldset>
-	</form:form>
+		</form:form>			
+	</div>
+</div>
+	
+	
+	
 </div>

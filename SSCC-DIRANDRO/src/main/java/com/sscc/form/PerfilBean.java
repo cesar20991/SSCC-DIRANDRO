@@ -31,6 +31,7 @@ public class PerfilBean {
 	private String tipoFiscal;
 	private String codigoPerfil;
 	private String urlPerfil;
+	private String casoAsignado;
 	
 	public Integer getIdUsuario() {
 		return idUsuario;
@@ -181,6 +182,12 @@ public class PerfilBean {
 	}
 	public void setUrlPerfil(String urlPerfil) {
 		this.urlPerfil = urlPerfil;
+	}
+	public String getCasoAsignado() {
+		return casoAsignado;
+	}
+	public void setCasoAsignado(String casoAsignado) {
+		this.casoAsignado = casoAsignado;
 	}
 	
 }

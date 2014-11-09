@@ -69,12 +69,15 @@ public class Vehiculo {
 
 	@Column(nullable = false)
 	private Date fecFabricacion;
+	
+	@Column(nullable = true)	
+	private String urlVehiculo;
 
 	@OneToOne
 	@JoinColumn(name = "idBien")
 	private Bien bien;
 	
-	@OneToMany(mappedBy = "inmueble")
+	@OneToMany(mappedBy = "vehiculo")
 	private Collection<Archivo> archivos;
 
 	public Integer getIdVehiculo() {
@@ -235,5 +238,13 @@ public class Vehiculo {
 
 	public void setArchivos(Collection<Archivo> archivos) {
 		this.archivos = archivos;
+	}
+
+	public String getUrlVehiculo() {
+		return urlVehiculo;
+	}
+
+	public void setUrlVehiculo(String urlVehiculo) {
+		this.urlVehiculo = urlVehiculo;
 	}
 }

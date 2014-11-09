@@ -11,7 +11,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.sscc.form.PerfilBean;
+import com.sscc.form.SospechosoBean;
 import com.sscc.model.Perfil;
+import com.sscc.model.Sospechoso;
 import com.sscc.model.Usuario;
 import com.sscc.util.DateUtil;
 
@@ -96,6 +98,28 @@ public class PerfilServiceImpl implements PerfilService {
 		
 		return pf;
 	}
+	
+	@Transactional
+	public PerfilBean editUsuario(Perfil perfil, String correo) {
+		Perfil p = em.find(Perfil.class, perfil.getIdPerfil());
+		Perfil editado = em.merge(p);
+		
+		editado.setApeMaterno(perfil.getApeMaterno());
+		editado.setApePaterno(perfil.getApePaterno());
+		editado.setCargo(perfil.getCargo());
+		editado.setDni(perfil.getDni());
+		editado.setGrado(perfil.getGrado());
+		editado.setNumeroDeCarnet(perfil.getNumeroDeCarnet());
+		editado.setPrimerNombre(perfil.getPrimerNombre());
+		editado.setRango(perfil.getRango());
+		editado.setSegundoNombre(perfil.getSegundoNombre());
+		editado.setSexo(perfil.getSexo());
+		editado.setTelefono(perfil.getTelefono());
+		editado.getUsuario().setCorreoElectronico(correo);
+		editado.setTipoFiscal(perfil.getTipoFiscal());
+		
+		return getPerfil(editado.getIdPerfil());
+	}
 
 	@SuppressWarnings("unchecked")
 	public List<PerfilBean> getJefesDeUnidad() {
@@ -109,6 +133,25 @@ public class PerfilServiceImpl implements PerfilService {
 			pb.setIdUsuario(p.get(i).getUsuario().getIdUsuario());
 			pb.setIdPerfil(p.get(i).getIdPerfil());
 			pb.setNombreCompleto(p.get(i).getPrimerNombre()+" "+p.get(i).getSegundoNombre()+" "+p.get(i).getApePaterno()+" "+p.get(i).getApeMaterno());
+			pb.setCargo(p.get(i).getCargo());
+			pb.setCodigoPerfil(p.get(i).getCodigo());
+			pb.setDni(p.get(i).getDni());
+			pb.setCorreoElectronico(p.get(i).getUsuario().getCorreoElectronico());
+			if(p.get(i).getEntidadPerteneciente().equals("D")){
+				pb.setEntidadPerteneciente("DIRANDRO");
+			}else{
+				pb.setEntidadPerteneciente("Ministerio Público");
+			}
+			pb.setGrado(p.get(i).getGrado());
+			pb.setNumeroDeCarnet(p.get(i).getNumeroDeCarnet());
+			pb.setRango(p.get(i).getRango());
+			pb.setSexo(p.get(i).getSexo());
+			pb.setTelefono(p.get(i).getTelefono());
+			if(p.get(i).getUrlPerfil() == null){
+				pb.setUrlPerfil("img/skills.png");
+			}else{
+				pb.setUrlPerfil(p.get(i).getUrlPerfil());				
+			}
 			pbl.add(pb);
 		}
 		
@@ -119,7 +162,7 @@ public class PerfilServiceImpl implements PerfilService {
 	public List<PerfilBean> getPersonalPolicial() {
 		List<PerfilBean> pbl = new ArrayList<PerfilBean>();
 		List<Perfil> p = new ArrayList<Perfil>();
-		Query qCasos = em.createQuery("SELECT p FROM Perfil p WHERE p.estado='habilitado' AND (p.cargo='Superior' OR p.cargo='Investigador')");
+		Query qCasos = em.createQuery("SELECT p FROM Perfil p JOIN p.usuario u WHERE p.estado='habilitado' AND (p.cargo='Superior' OR p.cargo='Investigador')");
 		p = qCasos.getResultList();
 		
 		for(int i = 0; i < p.size(); i++){
@@ -127,6 +170,70 @@ public class PerfilServiceImpl implements PerfilService {
 			pb.setIdUsuario(p.get(i).getUsuario().getIdUsuario());
 			pb.setIdPerfil(p.get(i).getIdPerfil());
 			pb.setNombreCompleto(p.get(i).getPrimerNombre()+" "+p.get(i).getSegundoNombre()+" "+p.get(i).getApePaterno()+" "+p.get(i).getApeMaterno());
+			pb.setCorreoElectronico(p.get(i).getUsuario().getCorreoElectronico());
+			pb.setCargo(p.get(i).getCargo());
+			pb.setDni(p.get(i).getDni());
+			pb.setNumeroDeCarnet(p.get(i).getNumeroDeCarnet());
+			if(p.get(i).getEntidadPerteneciente().equals("D")){
+				pb.setEntidadPerteneciente("DIRANDRO");
+			}else{
+				pb.setEntidadPerteneciente("Ministerio Público");
+			}
+			pb.setGrado(p.get(i).getGrado());
+			pb.setRango(p.get(i).getRango());
+			pb.setSexo(p.get(i).getSexo());
+			pb.setTelefono(p.get(i).getTelefono());
+			if(p.get(i).getUrlPerfil() == null){
+				pb.setUrlPerfil("img/skills.png");
+			}else{
+				pb.setUrlPerfil(p.get(i).getUrlPerfil());				
+			}
+			pbl.add(pb);
+		}
+		
+		return pbl;
+	}
+	
+	@SuppressWarnings("unchecked")
+	public List<PerfilBean> getPersonalPolicialBuscar() {
+		List<PerfilBean> pbl = new ArrayList<PerfilBean>();
+		List<Perfil> p = new ArrayList<Perfil>();
+		Query qPersonal = em.createQuery("SELECT " +
+										"u.idUsuario, p.idPerfil, p.primerNombre, p.segundoNombre, p.apePaterno, p.apeMaterno, " +
+										"u.correoElectronico, p.cargo, p.dni, p.numeroDeCarnet, p.entidadPerteneciente, " +
+										"p.grado, p.rango, p.sexo, p.telefono, p.urlPerfil, c.codigo, c.referencia " +
+				" FROM Perfil p JOIN p.usuario u LEFT JOIN u.cpa cpa LEFT JOIN cpa.casoCriminal c WHERE p.estado='habilitado')");
+		List<Object[]> rows = qPersonal.getResultList();
+		//p = qCasos.getResultList();
+		
+		//for(int i = 0; i < p.size(); i++){
+		for (int x = 0; x < rows.size(); x++) {
+			Object[] obj = rows.get(x);
+			PerfilBean pb = new PerfilBean();
+			
+			pb.setIdUsuario((Integer)obj[0]);			
+			pb.setIdPerfil((Integer)obj[1]);
+			
+			pb.setNombreCompleto((String)obj[2]+" "+(String)obj[3]+" "+(String)obj[4]+" "+(String)obj[5]);
+			pb.setCorreoElectronico((String)obj[6]);
+			pb.setCargo((String)obj[7]);
+			pb.setDni((Integer)obj[8]);
+			pb.setNumeroDeCarnet((Integer)obj[9]);
+			if(((String)obj[10]).equals("D")){
+				pb.setEntidadPerteneciente("DIRANDRO");
+			}else{
+				pb.setEntidadPerteneciente("Ministerio Público");
+			}
+			pb.setGrado((String)obj[11]);
+			pb.setRango((String)obj[12]);
+			pb.setSexo((String)obj[13]);
+			pb.setTelefono((String)obj[14]);
+			if((String)obj[15] == null){
+				pb.setUrlPerfil("img/skills.png");
+			}else{
+				pb.setUrlPerfil((String)obj[15]);				
+			}
+			pb.setCasoAsignado((String)obj[16]+"("+(String)obj[17]+")");
 			pbl.add(pb);
 		}
 		
@@ -191,6 +298,7 @@ public class PerfilServiceImpl implements PerfilService {
 			pb.setPrimerNombre(p.get(i).getPrimerNombre());
 			pb.setSegundoNombre(p.get(i).getSegundoNombre());
 			pb.setCorreoElectronico(p.get(i).getUsuario().getCorreoElectronico());
+			pb.setUrlPerfil(p.get(i).getUrlPerfil());
 			//pb.setNombreCompleto(p.get(i).getPrimerNombre()+" "+p.get(i).getSegundoNombre()+" "+p.get(i).getApePaterno()+" "+p.get(i).getApeMaterno());
 			pbl.add(pb);
 		}

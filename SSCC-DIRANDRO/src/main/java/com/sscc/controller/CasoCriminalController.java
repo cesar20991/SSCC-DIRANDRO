@@ -283,4 +283,14 @@ public class CasoCriminalController {
 	public String popUpAsignarSospechoso(){
 		return "principal/popUpBuscarSospechoso";	
 	}
+	
+	//buscar
+	@RequestMapping(value = "getCasosCriminales", method = RequestMethod.POST)
+	@ResponseBody
+	public List<CasoCriminalBean> getCasosCriminales(){
+		List<CasoCriminalBean> casoB = new ArrayList<CasoCriminalBean>();
+		casoB = casoServ.getCasoCriminalBuscar();
+		return casoB;
+	}
+	
 }

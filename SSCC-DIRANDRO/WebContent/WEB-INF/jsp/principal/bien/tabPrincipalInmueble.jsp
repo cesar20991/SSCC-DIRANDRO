@@ -85,7 +85,7 @@ $(document).ready(function(){
 		},
 		submitHandler:function(form){
 			$("#hdnIdInmuebleAux").val($("#hdnIdInmueble").text());
-			if(flag == true){
+			//if(flag == true){
 				$.ajax({
 			 		url: 'editarInmueble',
 			 		type: 'post',
@@ -97,9 +97,9 @@ $(document).ready(function(){
 			 			$("#divEditarInmueble").hide();
 			 		}
 			 	});
-			}else{
+			/*}else{
 				alert("Debe Corregir los datos");
-			}
+			}*/
 		}
 	});
 });
@@ -149,175 +149,140 @@ $(document).on('change','#txtPartida', function(e){
 </script>
 <div id="divInmueble">
 	<div id="divMostrarInmueble">
-	<form:form class="form-horizontal">
-		<fieldset>
-			<legend>
-				<span class=""><span class="colored">///</span> Datos del Bien Inmueble:</span>
-				<span class="offset3"><button class="btn btn-primary btn-small" type="button" id="btnEditarInmueble"><i class="icon-edit"></i> Editar</button></span>
-			</legend>
-			<div class="control-group" >
-				<label class="control-label">Codigo: </label>
-				<div class="controls">
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<span>/// Datos del Bien Inmueble:</span>
+				<div class="pull-right">
+					<div class="btn-group">
+						<button class="btn btn-outline btn-primary btn-sm" type="button" id="btnEditarInmueble"><i class="fa fa-edit fa-fw"></i> Editar</button>
+					</div>
+				</div>
+			</div>
+			<div class="panel-body" id="divPerfilMostrar">
+				<div class="form-group">
+					<label >Codigo: </label>
 					<span id="spnCodigo">&nbsp;</span>
 				</div>
-			</div>
-			<div class="control-group">
-				<label class="control-label">Partida Registral: </label>
-				<div class="controls">
+				<div class="form-group">
+					<label >Partida Registral: </label>
 					<span id="spnPartida">&nbsp;</span>
 				</div>
-			</div>
-			<div class="control-group" >
-				<label class="control-label">Valor Monetario: </label>
-				<div class="controls">
+				<div class="form-group" >
+					<label >Valor Monetario: </label>
 					S/. <span id="spnValor">&nbsp;</span>
 				</div>
-			</div>
-			<div class="control-group">
-				<label class="control-label">Descripcion: </label>
-				<div class="controls">
+				<div class="form-group">
+					<label >Descripcion: </label>
 					<span id="spnDescripcion">&nbsp;</span>
 				</div>
-			</div>
-			<div class="control-group">
-				<label class="control-label">Area total: </label>
-				<div class="controls">
+				<div class="form-group">
+					<label >Area total: </label>
 					<span id="spnAreaTotal">&nbsp;</span> m2
 				</div>
-			</div>
-			<div class="control-group">
-				<label class="control-label">Area cercado: </label>
-				<div class="controls">
+				<div class="form-group">
+					<label >Area cercado: </label>
 					<span id="spnAreaCercado">&nbsp;</span> m2
 				</div>
-			</div>
-			<div class="control-group">
-				<label class="control-label">Area construido: </label>
-				<div class="controls">
+				<div class="form-group">
+					<label >Area construido: </label>
 					<span id="spnAreaConstruido">&nbsp;</span> m2
 				</div>
-			</div>
-			<div class="control-group">
-				<label class="control-label">Pisos: </label>
-				<div class="controls">
+				<div class="form-group">
+					<label >Pisos: </label>
 					<span id="spnPisos">&nbsp;</span>
 				</div>
-			</div>
-			<div class="control-group">
-				<label class="control-label">Ambientes: </label>
-				<div class="controls">
+				<div class="form-group">
+					<label >Ambientes: </label>
 					<span id="spnAmbientes">&nbsp;</span>
 				</div>
-			</div>
-			<div class="control-group">
-				<label class="control-label">Dirección: </label>
-				<div class="controls">
+				<div class="form-group">
+					<label >Dirección: </label>
 					<span id="spnDireccion">&nbsp;</span>
 				</div>
-			</div>
-			<div class="control-group">
-				<label class="control-label">Antigüedad: </label>
-				<div class="controls">
+				<div class="form-group">
+					<label >Antigüedad: </label>
 					<span id="spnAntiguedad">&nbsp;</span> años
 				</div>
 			</div>
-		</fieldset>
-	</form:form>
+		</div>
 </div>
 <!-- EDITAR CAOS CRIMINAL -->
-	<fieldset class="well" style="display: none;" id="divEditarInmueble">
-	<div id="alertasBienNuevo" style="display: none;">
-	</div>
-		<form:form class="form-horizontal" id="formEditarInmueble" action="editarInmueble" commandName="bien">
+<div style="display: none;" id="divEditarInmueble">
+	<div class="panel panel-default">
+		<div class="panel-heading">
+			/// Editar Bien Inmueble:
+		</div>
+		<div class="panel-body" id="divPerfilMostrar">
+		<div id="alertasBienNuevo" style="display: none;">
+		</div>
+		<div class="col-lg-10">
+			<form:form class="form-horizontal" id="formEditarInmueble" action="editarInmueble" commandName="bien">
 				<input type="hidden" name="idInmueble" id="hdnIdInmuebleAux">
-				<legend>
-			       	<span class="colored">///</span> Editar Bien Inmueble:
-		       	</legend>
-		       	<div class="control-group">
-	          		<label class="control-label">Partida Registral: </label>
-	          		<div class="controls">
-	          			<input class="span3" type="text" name="partidaRegistral" id="txtPartida" data-rule-required="true" data-msg-required="*">
+				<div class="form-group">
+	          		<label >Partida Registral: </label>
+	          		<input class="form-control" type="text" name="partidaRegistral" id="txtPartida" data-rule-required="true" data-msg-required="*">
+	       		</div>
+	       		<div class="form-group">
+	          		<label >Valor Monetario: </label>
+	         			<div class="input-prepend input-group">
+	          			<span class="input-group-addon">S/.</span>
+	          			<input class="form-control" type="text" name="valor" id="txtValor" data-rule-required="true" data-msg-required="*">
 	          		</div>
 	       		</div>
-	       		<div class="control-group">
-	          		<label class="control-label">Valor Monetario: </label>
-	          		<div class="controls">
-	          			<div class="input-prepend">
-		          			<span class="add-on">S/.</span>
-		          			<input class="span3" type="text" name="valor" id="txtValor" data-rule-required="true" data-msg-required="*">
-		          		</div>
-	          		</div>
+	       		<div class="form-group">
+	          		<label >Descripcion: </label>
+	          		<textarea class="form-control" name="descripcion" id="txtDescripcion" rows="3" data-rule-required="true" data-msg-required="*"></textarea>
 	       		</div>
-	       		<div class="control-group">
-	          		<label class="control-label">Descripcion: </label>
-	          		<div class="controls">
-	          			<textarea class="input-xlarge" name="descripcion" id="txtDescripcion" rows="3" style="width: 400px" data-rule-required="true" data-msg-required="*"></textarea>
-	          		</div>
-	       		</div>
-	       		<hr>
-	       
-	       		
 	       		<!-- Bien del tipo inmueble -->
-	       		<div class="control-group" id="divATotal">
-	          		<label class="control-label">Area total: </label>
-	          		<div class="controls">
-	          			<div class="input-append">
-		          			<input class="span2" type="text" name="areaTotal" id="txtAreaTotal" data-rule-required="false" data-msg-required="*">
-		          			<span class="add-on">m2</span>
-	          			</div>	          			
-	          		</div>
+	       		<div class="form-group" id="divATotal">
+	          		<label >Area total: </label>
+	         			<div class="input-append input-group">
+	          			<input class="form-control" type="text" name="areaTotal" id="txtAreaTotal" data-rule-required="false" data-msg-required="*">
+	          			<span class="input-group-addon">m2</span>
+	         			</div>	
 	       		</div>
-	       		<div class="control-group" id="divACercado">
-	          		<label class="control-label">Area Cercado: </label>
-	          		<div class="controls">
-	          			<div class="input-append">
-	          				<input class="span2" type="text" name="areaCercado" id="txtAreaCercado" data-rule-required="false" data-msg-required="*">
-	          				<span class="add-on">m2</span>
-	          			</div>	          			
-	          		</div>
+	       		<div class="form-group" id="divACercado">
+	          		<label >Area Cercado: </label>
+	         			<div class="input-append input-group">
+	         				<input class="form-control" type="text" name="areaCercado" id="txtAreaCercado" data-rule-required="false" data-msg-required="*">
+	         				<span class="input-group-addon">m2</span>
+	         			</div>	
 	       		</div>
-	       		<div class="control-group" id="divAConstruido">
-	          		<label class="control-label">Area Construido: </label>
-	          		<div class="controls">
-	          			<div class="input-append">
-	          				<input class="span2" type="text" name="areaConstruido" id="txtAreaConstruido" data-rule-required="false" data-msg-required="*">
-	          				<span class="add-on">m2</span>
-	          			</div>	          			
-	          		</div>
+	       		<div class="form-group" id="divAConstruido">
+	          		<label >Area Construido: </label>
+	         			<div class="input-append input-group">
+	         				<input class="form-control" type="text" name="areaConstruido" id="txtAreaConstruido" data-rule-required="false" data-msg-required="*">
+	         				<span class="input-group-addon">m2</span>
+	         			</div>	
 	       		</div>
-	       		<div class="control-group" id="divPisos">
-	          		<label class="control-label">Pisos: </label>
-	          		<div class="controls">
-	          			<input class="span1" type="text" name="pisos" id="txtPisos" data-rule-required="true" data-msg-required="*">
-	          		</div>
+	       		<div class="form-group" id="divPisos">
+	          		<label >Pisos: </label>
+	          		<input class="form-control" type="text" name="pisos" id="txtPisos" data-rule-required="true" data-msg-required="*">
 	       		</div>
-	       		<div class="control-group" id="divAmbientes">
-	          		<label class="control-label">Ambientes: </label>
-	          		<div class="controls">
-	          			<input class="span1" type="text" name="ambientes" id="txtAmbientes" data-rule-required="true" data-msg-required="*">
-	          		</div>
+	       		<div class="form-group" id="divAmbientes">
+	          		<label >Ambientes: </label>
+	          		<input class="form-control" type="text" name="ambientes" id="txtAmbientes" data-rule-required="true" data-msg-required="*">
 	       		</div>
-	       		<div class="control-group" id="divDireccion">
-	          		<label class="control-label">Dirección: </label>
-	          		<div class="controls">
-	          			<input class="span4" type="text" name="direccion" id="txtDireccion" data-rule-required="true" data-msg-required="*">
-	          		</div>
+	       		<div class="form-group" id="divDireccion">
+	          		<label >Dirección: </label>
+	          		<input class="form-control" type="text" name="direccion" id="txtDireccion" data-rule-required="true" data-msg-required="*">
 	       		</div>
-	       		<div class="control-group" id="divAntiguedad">
-	          		<label class="control-label">Antigüedad: </label>
-	          		<div class="controls">
-	          			<div class="input-append">
-	          				<input class="span4" type="text" name="antiguedad" id="txtAntiguedad" data-rule-required="true" data-msg-required="*">
-	          				<span class="add-on">años</span>
-	          			</div>	          			
-	          		</div>
+	       		<div class="form-group" id="divAntiguedad">
+	          		<label >Antigüedad: </label>
+         			<div class="input-append input-group">
+         				<input class="form-control" type="text" name="antiguedad" id="txtAntiguedad" data-rule-required="true" data-msg-required="*">
+         				<span class="input-group-addon">años</span>
+         			</div>	
 	       		</div>
-				<!-- BOTONES -->
-				<div class="form-actions">
-					<button class="btn btn-success" id="btnGuardar" type="submit"><i class="icon-ok icon-white"></i> Guardar</button>
-			        <button class="btn btn-danger" type="reset"><i class="icon-refresh icon-white"></i> Reset</button>
-			        <button class="btn btn-warning" type="button" id="btnCancelEditar"><i class="icon-arrow-left icon-white"></i> Cancel</button>
-			    </div>
+	       		<hr class="col-lg-12">			
+	       		<div class="well col-lg-12">
+	       			<button class="btn btn-outline btn-success" id="btnGuardar" type="submit"><i class="fa fa-check"></i> Guardar</button>
+			        <button class="btn btn-outline btn-danger" type="reset"><i class="fa fa-refresh fa-fw"></i> Reset</button>
+			        <button class="btn btn-outline btn-warning" type="button" id="btnCancelEditar"><i class="fa fa-arrow-left"></i> Cancel</button>
+	       		</div>
 			</form:form>
-		</fieldset>
+		</div>			
+		</div>
+	</div>		
+	</div>
 </div>

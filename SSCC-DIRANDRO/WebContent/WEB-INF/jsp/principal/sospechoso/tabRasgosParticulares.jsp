@@ -158,193 +158,185 @@ function initRasgosParticulares(rasgosParticulares){
 	//RADIO BUTTONS PARA LA APARICION DE LOS TEXT AREA
 	$(document).on('click','#radioTSi', function(e){
 		$("#txtTatuajes").show();
-		$("#lblTatuajes").css("margin-top","87px");
+		//$("#lblTatuajes").css("margin-top","87px");
 	});
 	$(document).on('click','#radioTNo', function(e){
 		$("#txtTatuajes").hide();
 		$("#txtTatuajes").val("");
-		$("#lblTatuajes").css("margin-top","0px");
+		//$("#lblTatuajes").css("margin-top","0px");
 	});
 	
 	$(document).on('click','#radioLSi', function(e){
 		$("#txtLunares").show();
-		$("#lblLunares").css("margin-top","87px");
+		//$("#lblLunares").css("margin-top","87px");
 	});
 	$(document).on('click','#radioLNo', function(e){
 		$("#txtLunares").hide();
-		$("#lblLunares").css("margin-top","0px");
+		//$("#lblLunares").css("margin-top","0px");
 	});
 	
 	$(document).on('click','#radioCSi', function(e){
 		$("#txtCicatrices").show();
-		$("#lblCicatrices").css("margin-top","87px");
+		//$("#lblCicatrices").css("margin-top","87px");
 	});
 	$(document).on('click','#radioCNo', function(e){
 		$("#txtCicatrices").hide();
-		$("#lblCicatrices").css("margin-top","0px");
+		//$("#lblCicatrices").css("margin-top","0px");
 	});
 	
 	$(document).on('click','#radioDSi', function(e){
 		$("#txtDeficiencias").show();
-		$("#lblDeficiencias").css("margin-top","87px");
+		//$("#lblDeficiencias").css("margin-top","87px");
 	});
 	$(document).on('click','#radioDNo', function(e){
 		$("#txtDeficiencias").hide();
-		$("#lblDeficiencias").css("margin-top","0px");
+		//$("#lblDeficiencias").css("margin-top","0px");
 	});
 	
 	$(document).on('click','#radioOSi', function(e){
 		$("#txtOtros").show();
-		$("#lblOtros").css("margin-top","87px");
+		//$("#lblOtros").css("margin-top","87px");
 	});
 	$(document).on('click','#radioONo', function(e){
 		$("#txtOtros").hide();
-		$("#lblOtros").css("margin-top","0px");
+		//$("#lblOtros").css("margin-top","0px");
 	});
 </script>
 <body>
 <!-- MOSTRAR RASGOS PARTICULARES -->
 	<div id="divMostrarRasgosParticulares">
 		<div id="divMostrarRasgos">
-			<form:form class="form-horizontal">
-				<legend>
-		       		<span class=""><span class="colored">///</span> Rasgos Particulares del Sospechoso:</span>
-		       		<span class="offset3"><button class="btn btn-primary" type="button" id="btnEditarRasgos"><i class="icon-edit"></i> Editar</button></span>
-	       		</legend>
-	       		<div class="control-group">
-	          		<label class="control-label">Tatuajes: </label>
-	          		<div class="controls">
-	          			<span id="spnTatuajes">&nbsp;</span>
-	          		</div>
-	          		<br/>
-	          		<div class="controls">
-	          			<span id="spntextoTatuajes"></span>
-	          		</div>
-	       		</div>
-	       		<hr/>
-	       		<div class="control-group">
-	          		<label class="control-label">Lunares: </label>
-	          		<div class="controls">
-	          			<span id="spnLunares">&nbsp;</span>
-	          		</div>
-	          		<br/>
-	          		<div class="controls">
-	          			<span id="spntextoLunares"></span>
-	          		</div>
-	       		</div>
-	       		<hr/>
-	       		<div class="control-group">
-	          		<label class="control-label">Cicatrices: </label>
-	          		<div class="controls">
-	          			<span id="spnCicatrices">&nbsp;</span>
-	          		</div>
-	          		<br/>
-	          		<div class="controls">
-	          			<span id="spntextoCicatrices"></span>
-	          		</div>
-	       		</div>
-	       		<hr/>
-	       		<div class="control-group">
-	          		<label class="control-label">Deficiencias: </label>
-	          		<div class="controls">
-	          			<span id="spnDeficiencias">&nbsp;</span>
-	          		</div>
-	          		<br/>
-	          		<div class="controls">
-	          			<span id="spntextoDeficiencias"></span>
-	          		</div>
-	       		</div>
-	       		<hr/>
-	       		<div class="control-group">
-	          		<label class="control-label">Otros: </label>
-	          		<div class="controls">
-	          			<span id="spnOtros">&nbsp;</span>
-	          		</div>
-	          		<div class="controls">
-	          			<span id="spntextoOtros"></span>
-	          		</div>
-	       		</div>
-			</form:form>
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<span>/// Rasgos Particulares del Sospechoso:</span>
+					<div class="pull-right">
+						<div class="btn-group">
+							<button class="btn btn-outline btn-primary btn-sm" type="button" id="btnEditarRasgos"><i class="fa fa-edit fa-fw"></i> Editar</button>
+						</div>
+					</div>
+				</div>
+				<div class="panel-body" id="divPerfilMostrar">
+					<div class="form-group">
+		          		<label>Tatuajes: </label>
+		          		<span id="spnTatuajes">&nbsp;</span>
+		          		<br/>
+		          		<span id="spntextoTatuajes"></span>
+		       		</div>
+		       		<hr/>
+		       		<div class="form-group">
+		          		<label>Lunares: </label>
+		          		<span id="spnLunares">&nbsp;</span>
+		          		<br/>
+		          		<span id="spntextoLunares"></span>
+		       		</div>
+		       		<hr/>
+		       		<div class="form-group">
+		          		<label>Cicatrices: </label>
+		          		<span id="spnCicatrices">&nbsp;</span>
+		          		<br/>
+		          		<span id="spntextoCicatrices"></span>
+		       		</div>
+		       		<hr/>
+		       		<div class="form-group">
+		          		<label>Deficiencias: </label>
+		          		<span id="spnDeficiencias">&nbsp;</span>
+		          		<br/>
+		          		<span id="spntextoDeficiencias"></span>
+		       		</div>
+		       		<hr/>
+		       		<div class="form-group">
+		          		<label>Otros: </label>
+		          		<span id="spnOtros">&nbsp;</span>
+		          		<br/>
+		          		<span id="spntextoOtros"></span>
+		       		</div>
+				</div>
+			</div>
 		</div>
+		
 		<!-- EDITAR RASGOS PARTICULARES -->
-		<fieldset class="well" style="display: none;" id="divEditarRasgos">
-			<form:form class="form-horizontal" id="formEditarRasgos" action="editarRasgos" commandName="rasgosParticulares">
-				<input type="hidden" name="idSospechosoAux" id="hdnIdSospechosoRasgos">
-				<legend>
-			       	<span class="colored">///</span> Editar Rasgos Particulares del Sospechoso:
-		       	</legend>
-		       	<div class="control-group">
-					<label class="control-label" id="lblTatuajes">Tatuajes: </label> 
-					<label class="checkbox inline"> 
-						<input type="radio" name="tatuaje" id="radioTSi" value="SI">SÍ
-					</label> 
-					<label class="checkbox inline"> 
-						<input type="radio" name="tatuaje" id="radioTNo" value="NO" checked>NO
-					</label>
-					<label class="checkbox inline">
-						<textarea rows="10" cols="40" name="textoTatuaje" id="txtTatuajes"></textarea>
-					</label>
+		<div style="display: none;" id="divEditarRasgos">
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					/// Editar Rasgos Particulares del Sospechoso:
 				</div>
-				<hr/>
-				<div class="control-group">
-					<label class="control-label" id="lblLunares">Lunares: </label> 
-					<label class="checkbox inline"> 
-						<input type="radio" name="lunares" id="radioLSi" value="SI">SÍ
-					</label> 
-					<label class="checkbox inline"> 
-						<input type="radio" name="lunares" id="radioLNo" value="NO" checked>NO
-					</label>
-					<label class="checkbox inline"> 
-						<textarea rows="10" cols="40" name="textoLunares" id="txtLunares"></textarea>
-					</label>
+				<div class="panel-body" id="divPerfilMostrar">
+					<form:form class="form-horizontal" id="formEditarRasgos" action="editarRasgos" commandName="rasgosParticulares">
+					<input type="hidden" name="idSospechosoAux" id="hdnIdSospechosoRasgos">
+						<div class="form-group">
+							<label id="lblTatuajes">Tatuajes: </label> 
+							<label class="radio-inline"> 
+								<input type="radio" name="tatuaje" id="radioTSi" value="SI">SÍ
+							</label> 
+							<label class="radio-inline"> 
+								<input type="radio" name="tatuaje" id="radioTNo" value="NO" checked>NO
+							</label>
+							<label class="radio-inline">
+								<textarea class="form-control" name="textoTatuaje" id="txtTatuajes"></textarea>
+							</label>
+						</div>
+						<hr/>
+						<div class="form-group">
+							<label id="lblLunares">Lunares: </label> 
+							<label class="radio-inline"> 
+								<input type="radio" name="lunares" id="radioLSi" value="SI">SÍ
+							</label> 
+							<label class="radio-inline"> 
+								<input type="radio" name="lunares" id="radioLNo" value="NO" checked>NO
+							</label>
+							<label class="radio-inline"> 
+								<textarea class="form-control" name="textoLunares" id="txtLunares"></textarea>
+							</label>
+						</div>
+						<hr/>
+						<div class="form-group">
+							<label id="lblCicatrices">Cicatrices: </label> 
+							<label class="radio-inline"> 
+								<input type="radio" name="cicatrices" id="radioCSi" value="SI">SÍ
+							</label> 
+							<label class="radio-inline"> 
+								<input type="radio" name="cicatrices" id="radioCNo" value="NO" checked>NO
+							</label>
+							<label class="radio-inline">
+								<textarea class="form-control" name="textoCicatrices" id="txtCicatrices"></textarea>
+							</label>
+						</div>
+						<hr/>
+						<div class="form-group">
+							<label id="lblDeficiencias">Deficiencias: </label> 
+							<label class="radio-inline"> 
+								<input type="radio" name="deficiencias" id="radioDSi" value="SI">SÍ
+							</label> 
+							<label class="radio-inline"> 
+								<input type="radio" name="deficiencias" id="radioDNo" value="NO" checked>NO
+							</label>
+							<label class="radio-inline">
+								<textarea class="form-control" name="textoDeficiencias" id="txtDeficiencias"></textarea>
+							</label>
+						</div>
+						<hr/>
+						<div class="form-group">
+							<label id="lblOtros">Otros: </label> 
+							<label class="radio-inline"> 
+								<input type="radio" name="otros" id="radioOSi" value="SI">SÍ
+							</label> 
+							<label class="radio-inline"> 
+								<input type="radio" name="otros" id="radioONo" value="NO" checked>NO
+							</label>
+							<label class="radio-inline">
+								<textarea class="form-control" name="textoOtros" id="txtOtros"></textarea>
+							</label>
+						</div>
+						<!-- BOTONES -->
+						<div class="well">
+							<button class="btn btn-outline btn-success" id="btnGuardar" type="submit"><i class="fa fa-check"></i> Guardar</button>
+					        <button class="btn btn-outline btn-danger" type="reset"><i class="fa fa-refresh fa-fw"></i> Reset</button>
+					        <button class="btn btn-outline btn-warning" type="button" id="btnCancelEditar"><i class="fa fa-arrow-left"></i> Cancel</button>
+					    </div>
+					</form:form>
 				</div>
-				<hr/>
-				<div class="control-group">
-					<label class="control-label" id="lblCicatrices">Cicatrices: </label> 
-					<label class="checkbox inline"> 
-						<input type="radio" name="cicatrices" id="radioCSi" value="SI">SÍ
-					</label> 
-					<label class="checkbox inline"> 
-						<input type="radio" name="cicatrices" id="radioCNo" value="NO" checked>NO
-					</label>
-					<label class="checkbox inline">
-						<textarea rows="10" cols="40" name="textoCicatrices" id="txtCicatrices"></textarea>
-					</label>
-				</div>
-				<hr/>
-				<div class="control-group">
-					<label class="control-label" id="lblDeficiencias">Deficiencias: </label> 
-					<label class="checkbox inline"> 
-						<input type="radio" name="deficiencias" id="radioDSi" value="SI">SÍ
-					</label> 
-					<label class="checkbox inline"> 
-						<input type="radio" name="deficiencias" id="radioDNo" value="NO" checked>NO
-					</label>
-					<label class="checkbox inline">
-						<textarea rows="10" cols="40" name="textoDeficiencias" id="txtDeficiencias"></textarea>
-					</label>
-				</div>
-				<hr/>
-				<div class="control-group">
-					<label class="control-label" id="lblOtros">Otros: </label> 
-					<label class="checkbox inline"> 
-						<input type="radio" name="otros" id="radioOSi" value="SI">SÍ
-					</label> 
-					<label class="checkbox inline"> 
-						<input type="radio" name="otros" id="radioONo" value="NO" checked>NO
-					</label>
-					<label class="checkbox inline">
-						<textarea rows="10" cols="40" name="textoOtros" id="txtOtros"></textarea>
-					</label>
-				</div>
-				<!-- BOTONES -->
-				<div class="form-actions">
-					<button class="btn btn-success" id="btnGuardar" type="submit"><i class="icon-ok icon-white"></i> Guardar</button>
-			        <button class="btn btn-danger" type="reset"><i class="icon-refresh icon-white"></i> Reset</button>
-			        <button class="btn btn-warning" type="button" id="btnCancelEditar"><i class="icon-arrow-left icon-white"></i> Cancel</button>
-			    </div>
-			</form:form>
-		</fieldset>
+			</div>
+		</div>
 	</div>
 </body>
 </html>

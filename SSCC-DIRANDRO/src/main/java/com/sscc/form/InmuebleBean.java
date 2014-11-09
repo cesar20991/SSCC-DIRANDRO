@@ -31,6 +31,7 @@ public class InmuebleBean {
 	private String apeMaterno;
 	private String tipoFiscal;
 	private Integer idUsuario;
+	private Integer idSospechoso;
 	private String nombreCompleto;
 
 	
@@ -224,6 +225,14 @@ public class InmuebleBean {
 
 	public void setValor(Double valor) {
 		this.valor = valor;
+	}
+
+	public Integer getIdSospechoso() {
+		return idSospechoso;
+	}
+
+	public void setIdSospechoso(Integer idSospechoso) {
+		this.idSospechoso = idSospechoso;
 	}
 
 }

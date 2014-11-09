@@ -10,31 +10,21 @@
 <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<!-- para que funcione el jquery -->
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-<!-- para que funcione el jquery de la plantilla -->
-<script src="js/jquery.js"></script>
-<!-- datepicker librerias -->
-<script src="js/jquery-ui.js"></script>
-<link href="css/smoothness/jquery-ui.css" rel="stylesheet">
-<!-- <link rel="stylesheet" href="//code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">
-<script src="//code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
-<link rel="stylesheet" href="/resources/demos/style.css"> -->
-<!-- para el menu -->
-<script src="js/bootstrap-collapse.js"></script>
-<script src="js/jquery.validate.min.js"></script>
-<script src="js/validateFecha.js"></script>
 <!-- styles -->
-<link href="css/bootstrap.css" rel="stylesheet">
-<link href="css/bootstrap-responsive.css" rel="stylesheet">
-<link href="css/docs.css" rel="stylesheet">
-<link href="js/google-code-prettify/prettify.css" rel="stylesheet">
-<link rel="stylesheet" href="css/prettyPhoto.css" type="text/css" media="screen" title="prettyPhoto main stylesheet" charset="utf-8" />
-<style>
-.error{
-	color: rgb(255, 0, 0);
-}
-</style>
+<link href="css/bootstrap.min.css" rel="stylesheet">
+<link href="css/plugins/metisMenu/metisMenu.min.css" rel="stylesheet">
+<link href="css/plugins/timeline.css" rel="stylesheet">
+<link href="css/sb-admin-2.css" rel="stylesheet">
+<link href="css/plugins/morris.css" rel="stylesheet">
+<link href="font-awesome-4.1.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+<!-- js -->
+<script src="js/jquery-1.11.0.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/plugins/metisMenu/metisMenu.min.js"></script>
+<script src="js/sb-admin-2.js"></script>
+<script src="js/jquery.validate.min.js"></script>
+
 <script>
 $(document).ready(function() {
 	
@@ -47,64 +37,53 @@ $(document).ready(function() {
 </script>
 </head>
 <body>
-<!--HEADER-->
-<jsp:include page="../componentes/header.jsp"/>
-<!--/HEADER-->
-<!--CENTRO-->
-<!--MENU-->
-<jsp:include page="../componentes/menu.jsp"/>
-<!--/MENU-->
-<div class="container inner_content">
-	<section class="span9" style="margin-left: 80px;">
-		<fieldset class="well">
-			<form:form class="form-horizontal" id="formCrearCaso" action="crearCaso" commandName="caso">
-		       	<legend>
-		       		<span class="colored">///</span> Caso Criminal:
-		       	</legend>
-	       		<div class="control-group">
-	          		<label class="control-label">Asunto: </label>
-	          		<div class="controls">
-	          			<input class="span3" type="text" name="asunto" id="txtAsunto" data-rule-required="true" data-msg-required="*">
-	          		</div>
-	       		</div>
-	       		<hr>
-	       		<div class="control-group">
-	          		<label class="control-label" title="Nombre Clave">Referencia: </label>
-	          		<div class="controls">
-	          			<input class="span3" type="text" name="referencia" id="txtReferencia" data-rule-required="true" data-msg-required="*">
-	          		</div>
-	       		</div>
-	       		<hr>
-	       		<div class="control-group">
-	          		<label class="control-label">Descripción: </label>
-	          		<div class="controls">
-	          			<textarea class="input-xlarge" name="descripcion" id="txtDescription" rows="5" data-rule-required="true" data-msg-required="*"></textarea>
-	          		</div>
-	       		</div>
-	       		<hr>
-	       		<div class="control-group">
-	          		<label class="control-label">Prioridad: </label>
-	          		<div class="controls">
-	          			<select class="span3" name="importancia">
-	          				<option value="">No Precisa</option>
-	          				<option>Alta</option>
-	          				<option>Media</option>
-	          				<option>Baja</option>
-			            </select>
-	          		</div>
-	       		</div>
-	       		<div class="form-actions">
-		        	<button class="btn btn-success" id="btnCrear" type="submit"><i class="icon-ok icon-white"></i> Crear Caso Criminal</button>
-		        	<button class="btn btn-danger" type="reset"><i class="icon-refresh icon-white"></i> Reset</button>
-		        </div> 		       		 
-			</form:form>
-		</fieldset>
-	</section>
+<div id="wrapper">
+	<!--HEADER-->
+	<jsp:include page="../componentes/newHeader.jsp"/>
+	<!--/HEADER-->
+	<!--CENTRO-->
+	<div id="page-wrapper" style="min-height: 393px;">
+		<div class="row">
+			<div class="col-lg-12" id="titulo">
+				<h2 class="page-header">Sistema de Seguimiento de Casos Criminales para la DIRANDRO</h2>
+			</div>
+			<div class="panel panel-default col-md-6 col-md-offset-1">
+				<div class="panel-heading">
+					/// Caso Criminal:
+				</div>
+				<div class="panel-body">
+					<form:form class="form-horizontal" id="formCrearCaso" action="crearCaso" commandName="caso">
+						<div class="form-group">
+			          		<label>Asunto: </label>
+			          		<input class="form-control" type="text" name="asunto" id="txtAsunto" data-rule-required="true" data-msg-required="*">
+			       		</div>
+			       		<div class="form-group">
+			          		<label title="Nombre Clave">Referencia: </label>
+			          		<input class="form-control" type="text" name="referencia" id="txtReferencia" data-rule-required="true" data-msg-required="*">
+			       		</div>
+			       		<div class="form-group">
+			          		<label>Descripción: </label>
+			          		<textarea class="form-control" name="descripcion" id="txtDescription" rows="5" data-rule-required="true" data-msg-required="*"></textarea>
+			       		</div>
+			       		<div class="form-group">
+			          		<label>Prioridad: </label>
+		          			<select class="form-control" name="importancia">
+		          				<option value="">No Precisa</option>
+		          				<option>Alta</option>
+		          				<option>Media</option>
+		          				<option>Baja</option>
+				            </select>
+			       		</div>
+			       		<hr>
+						<div class="well">
+							<button class="btn btn-outline btn-success" id="btnCrear" type="submit"><i class="fa fa-check"></i> Crear Caso Criminal</button>
+			        		<button class="btn btn-outline btn-danger" type="reset"><i class="fa fa-refresh fa-fw"></i> Reset</button>
+						</div>
+					</form:form>
+				</div>
+			</div>
+		</div>
+	</div>
 </div>
-<!-- AGREGADO 29/05/14 -->
-<!--/CENTRO-->
-<!-- sticky footer -->
-<jsp:include page="../componentes/footer.jsp"/>
-<!-- /sticky footer -->
 </body>
 </html>

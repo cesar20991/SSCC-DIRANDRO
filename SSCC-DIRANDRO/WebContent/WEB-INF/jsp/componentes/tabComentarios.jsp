@@ -14,12 +14,12 @@ function initComentarios(comentarios){
 		}
 		$("#divMostrarComentarios").append(
 			'<div class="well">'+
-				'<table class="table table-bordered table-condensed">'+
+				'<table class="table table-bordered table-hover">'+
 					'<tbody>'+
 						'<tr>'+
 							'<td rowspan="3" style="width: 90px; height: 100px;"><img src="'+url+'" alt="logo" style="width: 90px; height: 120px;"></td>'+
 							'<td colspan="2"><a href="toPerfil-'+comentario.idPerfil+'">'+comentario.nombreCompleto+'</a></td>'+
-							'<td><button type="button" class="btn btn-success comentario" id="responderComentario_'+comentario.idComentario+'"><i class="icon-comment icon-white"></i> Responder</button></td>'+
+							'<td><button type="button" class="btn btn-outline btn-success btn-circle comentario" id="responderComentario_'+comentario.idComentario+'"><i class="fa fa-envelope fa-fw"></i></button></td>'+
 						'</tr>'+
 						'<tr>'+
 							'<td colspan="3">Mensaje ('+comentario.visibilidad+'):</td>'+
@@ -30,26 +30,24 @@ function initComentarios(comentarios){
 						'<tr id="trTA_'+comentario.idComentario+'" style="display: none;">'+
 							'<td colspan="4">'+
 									'<form id="formComentarios_'+comentario.idComentario+'">'+
-									'<textarea class="span8" name="comentario" id="txtComentario_'+comentario.idComentario+'" data-rule-required="true" data-msg-required="*"></textarea>'+
+									'<textarea class="form-control" name="comentario" id="txtComentario_'+comentario.idComentario+'" data-rule-required="true" data-msg-required="*"></textarea>'+
 			        	
-						        	'<div class="control-group">'+
-						        		'<label class="control-label">Visibilidad:</label>'+
-						        		'<div class="controls">'+
-							        		'<select id="sltcVisibility" name="visibilidad">'+
-							        			'<option>Público</option>'+
-						                		'<option>DIRANDRO</option>'+
-						                		'<option>Ministerio Públic</option>'+
-						                		'<option>Solo Yo</option>'+
-						              		'</select>'+
-						        		'</div>'+	
+						        	'<div class="form-group">'+
+						        		'<label>Visibilidad:</label>'+
+						        		'<select id="sltcVisibility" name="visibilidad" class="form-control">'+
+						        			'<option>Público</option>'+
+					                		'<option>DIRANDRO</option>'+
+					                		'<option>Ministerio Públic</option>'+
+					                		'<option>Solo Yo</option>'+
+					              		'</select>'+
 						        	'</div>'+
 						        	
 						        	'<input type="hidden" id="hdnTipoEntidadCommentario_'+comentario.idComentario+'" name="tipoEntidadCommentario" value="'+tipoEntidad+'">'+
 						        	'<input type="hidden" id="hdnIdEntidadCommentario_'+comentario.idComentario+'" name="idEntidadCommentario">'+
 								    '<div class="form-actions">'+
-							        	'<button type="button" class="btn btn-success comentario" id="respuesta_'+comentario.idComentario+'"><i class="icon-comment icon-white"></i> Guardar Comentario</button>'+
-							        	' <button type="reset" class="btn btn-danger" id="guardarArchivos"><i class="icon-refresh icon-white"></i> Reset</button>'+
-							        	' <button type="button" class="btn btn-warning comentario" id="cancel_'+comentario.idComentario+'"><i class="icon-arrow-left icon-white"></i> Cancel</button>'+
+							        	'<button type="button" class="btn btn-outline btn-success btn-circle comentario" id="respuesta_'+comentario.idComentario+'"><i class="fa fa-envelope fa-fw"></i></button>'+
+							        	' <button type="reset" class="btn btn-outline btn-danger btn-circle" id="guardarArchivos"><i class="fa fa-refresh fa-fw"></i></button>'+
+							        	' <button type="button" class="btn btn-outline btn-warning btn-circle comentario" id="cancel_'+comentario.idComentario+'"><i class="fa fa-arrow-left"></i></button>'+
 							        '</div>'+
 							        '</form>'+
 			        		'</td>'+			
@@ -73,7 +71,7 @@ function initRespuestas(respuestas){
 				url += respuesta.urlUsuario;
 			}
 			$("#respuestas_"+respuesta.idComentarioPadre).append(
-					'<table class="table table-bordered table-condensed offset1 span10">'+
+					'<table class="table table-bordered table-hover">'+
 						'<tbody>'+
 							'<tr>'+
 								'<td rowspan="3" style="width: 90px; height: 100px;"><img src="'+url+'" alt="logo" style="width: 90px; height: 120px;"></td>'+
@@ -227,36 +225,40 @@ $(document).ready(function(){
 <div id="alertasComentario" style="display: none;">
 </div>
 <div id="divComentarios">
-	<div id="divGuardarArchivo">
-		<form:form method="post" action="newComentario" id="formComentarios">
-			<legend>
-				<span class="colored">///</span> Dejar Comentarios: 
-			</legend>
-			<div id="formularioGuardarComentario">
-		        	<textarea class="span8" name="comentario" id="txtComentario" data-rule-required="true" data-msg-required="*"></textarea>
-		        	
-		        	<div class="control-group">
-		        		<label class="control-label">Visibilidad:</label>
-		        		<div class="controls">
-			        		<select id="sltcVisibility" name="visibilidad">
-			        			<option>Público</option>
-		                		<option>DIRANDRO</option>
-		                		<option>Ministerio Públic</option>
-		                		<option>Solo Yo</option>
-		              		</select>
-		        		</div> 		        		
-		        	</div>
-		        	
-		        	<input type="hidden" id="hdnTipoEntidadCommentario" name="tipoEntidadCommentario">
-		        	<input type="hidden" id="hdnIdEntidadCommentario" name="idEntidadCommentario">
-			    <div class="form-actions">
-		        	<button type="submit" class="btn btn-success" id="guardarArchivos"><i class="icon-comment icon-white"></i> Guardar Comentario</button>
-		        	<button type="reset" class="btn btn-danger" id="guardarArchivos"><i class="icon-refresh icon-white"></i> Reset</button>
-		        </div>
+	<div class="panel panel-default">
+		<div class="panel-heading">
+			/// Notas o Comentarios: 
+		</div>
+		<div class="panel-body">
+			<div id="divGuardarArchivo">
+				<form:form method="post" action="newComentario" id="formComentarios">
+					<div id="formularioGuardarComentario">
+				        	<textarea class="form-control" name="comentario" id="txtComentario" data-rule-required="true" data-msg-required="*"></textarea>
+				        	
+				        	<div class="form-group">
+				        		<label>Visibilidad:</label>
+				        		<select id="sltcVisibility" name="visibilidad" class="form-control">
+				        			<option>Público</option>
+			                		<option>DIRANDRO</option>
+			                		<option>Ministerio Públic</option>
+			                		<option>Solo Yo</option>
+			              		</select>        		
+				        	</div>
+				        	
+				        	<input type="hidden" id="hdnTipoEntidadCommentario" name="tipoEntidadCommentario">
+				        	<input type="hidden" id="hdnIdEntidadCommentario" name="idEntidadCommentario">
+					    <div class="form-actions">
+				        	<button type="submit" class="btn btn-outline btn-success" id="guardarArchivos"><i class="fa fa-envelope fa-fw"></i> Guardar Comentario</button>
+				        	<button type="reset" class="btn btn-outline btn-danger" id="guardarArchivos"><i class="fa fa-refresh fa-fw"></i> Reset</button>
+				        </div>
+					</div>
+				</form:form>
 			</div>
-		</form:form>
+			<hr>
+			<div id="divMostrarComentarios">
+			
+			</div>
+		</div>
 	</div>
-	<div id="divMostrarComentarios">
 	
-	</div>
 </div>

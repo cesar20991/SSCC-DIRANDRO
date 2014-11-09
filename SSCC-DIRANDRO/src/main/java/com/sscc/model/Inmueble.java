@@ -48,6 +48,8 @@ public class Inmueble {
 	@Column(nullable = false)
 	private Integer antiguedad;
 	
+	@Column(nullable = true)	
+	private String urlInmueble;
 	//TODO falta poner ubigeo
 	
 	@OneToOne
@@ -159,5 +161,13 @@ public class Inmueble {
 
 	public void setArchivos(Collection<Archivo> archivos) {
 		this.archivos = archivos;
+	}
+
+	public String getUrlInmueble() {
+		return urlInmueble;
+	}
+
+	public void setUrlInmueble(String urlInmueble) {
+		this.urlInmueble = urlInmueble;
 	}
 }

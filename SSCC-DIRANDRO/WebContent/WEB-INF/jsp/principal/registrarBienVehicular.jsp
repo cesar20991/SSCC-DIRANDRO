@@ -10,33 +10,25 @@
 <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<!-- para que funcione el jquery -->
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-<!-- para que funcione el jquery de la plantilla -->
-<script src="js/jquery.js"></script>
-<!-- datepicker librerias -->
-<script src="js/jquery-ui.js"></script>
-<link href="css/smoothness/jquery-ui.css" rel="stylesheet">
-<!-- <link rel="stylesheet" href="//code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">
-<script src="//code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
-<link rel="stylesheet" href="/resources/demos/style.css"> -->
-<!-- para el menu -->
-<script src="js/bootstrap-collapse.js"></script>
+<!-- styles -->
+<link href="css/bootstrap.min.css" rel="stylesheet">
+<link href="css/datepicker.css" rel="stylesheet">
+<link href="css/plugins/metisMenu/metisMenu.min.css" rel="stylesheet">
+<link href="css/plugins/timeline.css" rel="stylesheet">
+<link href="css/sb-admin-2.css" rel="stylesheet">
+<link href="css/plugins/morris.css" rel="stylesheet">
+<link href="font-awesome-4.1.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+<!-- js -->
+<script src="js/jquery-1.11.0.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/bootstrap-datepicker.js"></script>
+<script src="js/bootstrap-datepicker.es.js"></script>
+<script src="js/plugins/metisMenu/metisMenu.min.js"></script>
+<script src="js/sb-admin-2.js"></script>
 <script src="js/jquery.validate.min.js"></script>
 <script src="js/validateFecha.js"></script>
-<!-- alertas de colores -->
-<script src="js/bootstrap-alert.js"></script>
-<!-- styles -->
-<link href="css/bootstrap.css" rel="stylesheet">
-<link href="css/bootstrap-responsive.css" rel="stylesheet">
-<link href="css/docs.css" rel="stylesheet">
-<link href="js/google-code-prettify/prettify.css" rel="stylesheet">
-<link rel="stylesheet" href="css/prettyPhoto.css" type="text/css" media="screen" title="prettyPhoto main stylesheet" charset="utf-8" />
-<style>
-.error{
-	color: rgb(255, 0, 0);
-}
-</style>
+
 <script>
 $(document).on('change','#txtFecFabricacion', function(e){
 	if($("#txtFecFabricacion").val() != ''){
@@ -49,7 +41,15 @@ $(document).on('change','#txtFecFabricacion', function(e){
 var flag = true;
 var flag2= true;
 $(document).ready(function() {
-	$( ".datepicker" ).datepicker({ dateFormat: 'dd/mm/yy' });
+	
+	$('#sandbox-container .input-group.date').datepicker({
+		format: "dd/mm/yyyy",
+		language: "es",
+	    autoclose: true,
+	    todayHighlight: true
+	});
+	
+	//$( ".datepicker" ).datepicker({ dateFormat: 'dd/mm/yy' });
 	
 	$("#formRegistrarBien").validate({
 		rules:{
@@ -151,177 +151,158 @@ $(document).on('change','#txtPlaca', function(e){
 </head>
 <body>
 <!--HEADER-->
-<jsp:include page="../componentes/header.jsp"/>
+<jsp:include page="../componentes/newHeader.jsp"/>
 <!--/HEADER-->
+	<div id="page-wrapper" style="min-height: 393px;">
+		<div class="row">
+		
+			<div class="col-lg-12" id="titulo">
+				<h2 class="page-header">Sistema de Seguimiento de Casos Criminales para la DIRANDRO</h2>
+			</div>
+			
+			<div class="panel panel-default col-md-6 col-md-offset-1">
+				<div class="panel-heading">
+					/// Bien:
+				</div>
+				<div class="panel-body">
+				<div id="alertasBienNuevo" style="display: none;">
+				</div>
+				<div id="alertasBienNuevo2" style="display: none;">
+				</div>
+				<form:form class="form-horizontal" id="formRegistrarBien" action="registrarVehiculo" commandName="bien">
+					<div class="form-group">
+		          		<label>Partida Registral: </label>
+		          		<input class="form-control" type="text" name="partidaRegistral" id="txtPartida" data-rule-required="true" data-msg-required="*">
+		       		</div>
+		       		<div class="form-group">
+		          		<label>Valor Monetario: </label>
+	          			<div class="input-prepend input-group">
+		          			<span class="input-group-addon">S/.</span>
+	          				<input class="form-control" type="text" name="valor"  id="txtValor" data-rule-required="true" data-msg-required="*">
+	          			</div>
+		       		</div>	   
+		       		<div class="form-group">
+		          		<label>Descripcion: </label>
+		          		<textarea class="form-control" name="descripcion" id="txtDescripcion" rows="3" data-rule-required="true" data-msg-required="*"></textarea>
+		       		</div>		       		
+		       		<!-- Bien del tipo vehiculo -->
+		       		<div class="form-group">
+		          		<label>Marca: </label>
+		          		<input class="form-control" type="text" name="marca" id="txtMarca" data-rule-required="true" data-msg-required="*">
+		       		</div>
+		       		<div class="form-group">
+		          		<label>Modelo: </label>
+		          		<input class="form-control" type="text" name="modelo" id="txtModelo" data-rule-required="false">
+		       		</div>
+		       		<div class="form-group">
+		          		<label>Color: </label>
+		          		<input class="form-control" type="text" name="color" id="txtColor" data-rule-required="true" data-msg-required="*">
+		       		</div>
+		       		
+		       		<div class="form-group">
+		          		<label>Placa: </label>
+		          		<input class="form-control" type="text" name="placa" id="txtPlaca" data-rule-required="true" data-msg-required="*">
+		       		</div>
+		       		<div class="form-group">
+		          		<label>Chasis: </label>
+		          		<input class="form-control" type="text" name="chasis" id="txtChasis" data-rule-required="false">
+		       		</div>
+		       		
+		       		<div class="form-group">
+		          		<label>Motor: </label>
+		          		<input class="form-control" type="text" name="motor" id="txtMotor" data-rule-required="false">
+		       		</div>
+		       		
+		       		<div class="form-group">
+		          		<label>Altura: </label>
+	          			<div class="input-append input-group">
+	          				<input class="form-control" type="text" name="altura" id="txtAltura" data-rule-required="true" data-msg-required="*">
+	          				<span class="input-group-addon">m</span>
+	          			</div>
+		       		</div>
+		       		<div class="form-group">
+		          		<label>Longitud: </label>
+	          			<div class="input-append input-group">
+		          			<input class="form-control" type="text" name="longitud" id="txtLongitud" data-rule-required="true" data-msg-required="*">
+		          			<span class="input-group-addon">m</span>
+		          		</div>
+		       		</div>
+		       		<div class="form-group">
+		          		<label>Ancho: </label>
+	          			<div class="input-append input-group">
+		          			<input class="form-control" type="text" name="ancho" id="txtAncho" data-rule-required="true" data-msg-required="*">
+		          			<span class="input-group-addon">m</span>
+	          			</div>
+		       		</div>
+		       		
+		       		
+		       		<div class="form-group">
+		          		<label>Peso Bruto: </label>
+	          			<div class="input-append input-group">
+	          				<input class="form-control" type="text" name=pesoBruto id="txtPesoBruto" data-rule-required="false">
+	          				<span class="input-group-addon">Kg</span>
+	          			</div>
+		       		</div>
+		       		<div class="form-group">
+		          		<label>Peso Neto: </label>
+	          			<div class="input-append input-group">
+		          			<input class="form-control" type="text" name="pesoNeto" id="txtPesoNeto" data-rule-required="false">
+		          			<span class="input-group-addon">Kg</span>
+	          			</div>
+		       		</div>
+		       		
+		       		<div class="form-group">
+		          		<label>Ruedas: </label>
+		          		<input class="form-control" type="text" name="ruedas" id="txtRuedas" data-rule-required="false">
+		       		</div>
+		       		<div class="form-group">
+		          		<label>Ejes: </label>
+		          		<input class="form-control" type="text" name="ejes" id="txtEjes" data-rule-required="false">
+		       		</div>
+		       		
+		       		<div class="form-group">
+		          		<label>Pasajeros: </label>
+		          		<input class="form-control" type="text" name="pasajeros" id="txtPasajeros" data-rule-required="false">
+		       		</div>
+		       		<div class="form-group">
+		          		<label>Asientos: </label>
+		          		<input class="form-control" type="text" name="asientos" id="txtAsientos" data-rule-required="false">
+		       		</div>
+		       		<div class="form-group">
+		          		<label>Fecha de Fabricación: </label>
+		          		<div id="sandbox-container">
+		          			<div class="input-group date">
+			          			<input class="form-control" type="text" name="txtFecFabricacion" id="txtFecFabricacion" data-rule-required="true" data-msg-required="*">
+			          			<span class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>
+		          			</div>
+	          			</div>
+	          			<input class="span2" type="hidden" name="fecFabricacion" id="hdnFecFab">
+		          	</div>
+		          	<hr class="">			
+		       		<div class="well">
+			       		<button class="btn btn-outline btn-success" id="btnRegistrar" type="submit"><i class="icon-ok icon-white"></i> Registrar Bien</button>
+			        	<button class="btn btn-outline btn-danger" type="reset"><i class="icon-refresh icon-white"></i> Reset</button>
+		       		</div>
+				</form:form>
+				</div>
+			</div>
+		</div>
+	</div>
 <!--CENTRO-->
-<!--MENU-->
-<jsp:include page="../componentes/menu.jsp"/>
-<!--/MENU-->
-<div class="container inner_content">
+<!-- <div class="container inner_content">
 	<section class="span9" style="margin-left: 80px;">
 		<fieldset class="well">
-		<div id="alertasBienNuevo" style="display: none;">
-		</div>
-		<div id="alertasBienNuevo2" style="display: none;">
-		</div>
-			<form:form class="form-horizontal" id="formRegistrarBien" action="registrarVehiculo" commandName="bien">
+		
+			
 		       	<legend><span class="colored">///</span> Bien:</legend>
-	       		<div class="control-group">
-	          		<label class="control-label">Partida Registral: </label>
-	          		<div class="controls">
-	          			<input class="span3" type="text" name="partidaRegistral" id="txtPartida" data-rule-required="true" data-msg-required="*">
-	          		</div>
-	       		</div>
-	       		<div class="control-group">
-	          		<label class="control-label">Valor Monetario: </label>
-	          		<div class="controls">
-	          			<div class="input-prepend">
-		          			<span class="add-on">S/.</span>
-	          				<input class="span3" type="text" name="valor"  id="txtValor" data-rule-required="true" data-msg-required="*">
-	          			</div>
-	          		</div>
-	       		</div>	   
-	       		<div class="control-group">
-	          		<label class="control-label">Descripcion: </label>
-	          		<div class="controls">
-	          			<textarea class="input-xlarge" name="descripcion" id="txtDescripcion" rows="3" style="width: 400px" data-rule-required="true" data-msg-required="*"></textarea>
-	          		</div>
-	       		</div>
-	       		<hr>
 	       		
-	       		<!-- Bien del tipo vehiculo -->
-	       		<div class="control-group">
-	          		<label class="control-label">Marca: </label>
-	          		<div class="controls">
-	          			<input class="span3" type="text" name="marca" id="txtMarca" data-rule-required="true" data-msg-required="*">
-	          		</div>
-	       		</div>
-	       		<div class="control-group">
-	          		<label class="control-label">Modelo: </label>
-	          		<div class="controls">
-	          			<input class="span3" type="text" name="modelo" id="txtModelo" data-rule-required="false">
-	          		</div>
-	       		</div>
-	       		<div class="control-group">
-	          		<label class="control-label">Color: </label>
-	          		<div class="controls">
-	          			<input class="span2" type="text" name="color" id="txtColor" data-rule-required="true" data-msg-required="*">
-	          		</div>
-	       		</div>
-	       		
-	       		<div class="control-group">
-	          		<label class="control-label">Placa: </label>
-	          		<div class="controls">
-	          			<input class="span3" type="text" name="placa" id="txtPlaca" data-rule-required="true" data-msg-required="*">
-	          		</div>
-	       		</div>
-	       		<div class="control-group">
-	          		<label class="control-label">Chasis: </label>
-	          		<div class="controls">
-	          			<input class="span3" type="text" name="chasis" id="txtChasis" data-rule-required="false">
-	          		</div>
-	       		</div>
-	       		
-	       		<div class="control-group">
-	          		<label class="control-label">Motor: </label>
-	          		<div class="controls">
-	          			<input class="span3" type="text" name="motor" id="txtMotor" data-rule-required="false">
-	          		</div>
-	       		</div>
-	       		
-	       		
-	       		<div class="control-group">
-	          		<label class="control-label">Altura: </label>
-	          		<div class="controls">
-	          			<div class="input-append">
-	          				<input class="span2" type="text" name="altura" id="txtAltura" data-rule-required="true" data-msg-required="*">
-	          				<span class="add-on">m</span>
-	          			</div>
-	          		</div>
-	       		</div>
-	       		<div class="control-group">
-	          		<label class="control-label">Longitud: </label>
-	          		<div class="controls">
-	          			<div class="input-append">
-		          			<input class="span2" type="text" name="longitud" id="txtLongitud" data-rule-required="true" data-msg-required="*">
-		          			<span class="add-on">m</span>
-		          		</div>
-	          		</div>
-	       		</div>
-	       		<div class="control-group">
-	          		<label class="control-label">Ancho: </label>
-	          		<div class="controls">
-	          			<div class="input-append">
-		          			<input class="span2" type="text" name="ancho" id="txtAncho" data-rule-required="true" data-msg-required="*">
-		          			<span class="add-on">m</span>
-	          			</div>
-	          		</div>
-	       		</div>
-	       		
-	       		
-	       		<div class="control-group">
-	          		<label class="control-label">Peso Bruto: </label>
-	          		<div class="controls">
-	          			<div class="input-append">
-	          				<input class="span2" type="text" name=pesoBruto id="txtPesoBruto" data-rule-required="false">
-	          				<span class="add-on">Kg</span>
-	          			</div>
-	          		</div>
-	       		</div>
-	       		<div class="control-group">
-	          		<label class="control-label">Peso Neto: </label>
-	          		<div class="controls">
-	          			<div class="input-append">
-		          			<input class="span2" type="text" name="pesoNeto" id="txtPesoNeto" data-rule-required="false">
-		          			<span class="add-on">Kg</span>
-	          			</div>
-	          		</div>
-	       		</div>
-	       		
-	       		<div class="control-group">
-	          		<label class="control-label">Ruedas: </label>
-	          		<div class="controls">
-	          			<input class="span1" type="text" name="ruedas" id="txtRuedas" data-rule-required="false">
-	          		</div>
-	       		</div>
-	       		<div class="control-group">
-	          		<label class="control-label">Ejes: </label>
-	          		<div class="controls">
-	          			<input class="span1" type="text" name="ejes" id="txtEjes" data-rule-required="false">
-	          		</div>
-	       		</div>
-	       		
-	       		<div class="control-group">
-	          		<label class="control-label">Pasajeros: </label>
-	          		<div class="controls">
-	          			<input class="span1" type="text" name="pasajeros" id="txtPasajeros" data-rule-required="false">
-	          		</div>
-	       		</div>
-	       		<div class="control-group">
-	          		<label class="control-label">Asientos: </label>
-	          		<div class="controls">
-	          			<input class="span1" type="text" name="asientos" id="txtAsientos" data-rule-required="false">
-	          		</div>
-	       		</div>
-	       		<div class="control-group">
-	          		<label class="control-label">Fecha de Fabricación: </label>
-	          		<div class="controls">
-	          			<input class="span2 datepicker" type="text" name="txtFecFabricacion" id="txtFecFabricacion" data-rule-required="true" data-msg-required="*">
-	          			<input class="span2" type="hidden" name="fecFabricacion" id="hdnFecFab">
-	          		</div>
-	       		</div>
 	       		
 	       		<div class="form-actions">
-		        	<button class="btn btn-success" id="btnRegistrar" type="submit"><i class="icon-ok icon-white"></i> Registrar Bien</button>
-		        	<button class="btn btn-danger" type="reset"><i class="icon-refresh icon-white"></i> Reset</button>
-		        </div> 		       		 
-			</form:form>
+		        	<
+		        </div> 		   
 		</fieldset>
 	</section>
-</div>
+</div> -->
 <!--/CENTRO-->
-<!-- sticky footer -->
-<jsp:include page="../componentes/footer.jsp"/>
-<!-- /sticky footer -->
 </body>
 </html>

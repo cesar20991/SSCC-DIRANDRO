@@ -29,6 +29,16 @@ public class BienController {
 	@Autowired
 	BienService bienServ;
 	
+	@RequestMapping("toBuscarInmueble")
+	public String toBuscarInmueble() {
+		return "principal/buscarInmueble";
+	}
+	
+	@RequestMapping("toBuscarVehiculo")
+	public String toBuscarVehiculo() {
+		return "principal/buscarVehiculo";
+	}
+	
 	@RequestMapping("popUpAsignarBien-{idSospechoso}")
 	public String toBuscarBien(@PathVariable("idSospechoso")Integer idSospechoso, Model model ) {
 		List<SospechosoBean> sospechosoList = new ArrayList<SospechosoBean>();
@@ -177,5 +187,21 @@ public class BienController {
 		}else{
 			return false;
 		}
+	}
+	//buscar
+	@RequestMapping(value = "getInmueblesBuscar", method = RequestMethod.POST)
+	@ResponseBody
+	public List<InmuebleBean> getInmueblesBuscar(){
+		List<InmuebleBean> inmuebleB = new ArrayList<InmuebleBean>();
+		inmuebleB = bienServ.getInmueblesBuscar();
+		return inmuebleB;
+	}
+	//buscar
+	@RequestMapping(value = "getVehiculosBuscar", method = RequestMethod.POST)
+	@ResponseBody
+	public List<VehiculoBean> getVehiculosBuscar(){
+		List<VehiculoBean> vehiculoB = new ArrayList<VehiculoBean>();
+		vehiculoB = bienServ.getVehiculosBuscar();
+		return vehiculoB;
 	}
 }

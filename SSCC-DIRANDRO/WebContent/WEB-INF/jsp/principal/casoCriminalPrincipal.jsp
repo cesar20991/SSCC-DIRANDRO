@@ -9,38 +9,31 @@
 <title>SSCC - DIRANDRO - Caso Criminal</title>
 <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<link href="css/bootstrap.min.css" rel="stylesheet">
+<link href="css/datepicker.css" rel="stylesheet">
+<link href="css/plugins/metisMenu/metisMenu.min.css" rel="stylesheet">
+<link href="css/plugins/timeline.css" rel="stylesheet">
+<link href="css/sb-admin-2.css" rel="stylesheet">
+<link href="css/plugins/morris.css" rel="stylesheet">
+<link href="font-awesome-4.1.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+<!-- js -->
 <!-- mapas -->
- <script src="http://maps.google.com/maps/api/js?sensor=false"></script>
-<!-- para que funcione el jquery -->
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-<!-- para que funcione el jquery de la plantilla -->
-<script src="js/jquery.js"></script>
-<!-- para el menu -->
-<script src="js/bootstrap-collapse.js"></script>
-<!-- tabs -->
-<script src="js/bootstrap-tab.js"></script>
-<!-- datepicker librerias -->
-<script src="js/jquery-ui.js"></script>
-<link href="css/smoothness/jquery-ui.css" rel="stylesheet">
-<!-- <link rel="stylesheet" href="//code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">
-<script src="//code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
-<link rel="stylesheet" href="/resources/demos/style.css"> -->
-<script src="http://malsup.github.com/jquery.form.js"></script>
-<!-- validacion -->
+<script src="http://maps.google.com/maps/api/js?sensor=false"></script>
+<script src="js/jquery-1.11.0.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/bootstrap-datepicker.js"></script>
+<script src="js/bootstrap-datepicker.es.js"></script>
+<script src="js/plugins/metisMenu/metisMenu.min.js"></script>
+<script src="js/sb-admin-2.js"></script>
 <script src="js/jquery.validate.min.js"></script>
 <script src="js/validateFecha.js"></script>
 <script src="js/formatDates.js"></script>
-<!-- alertas de colores -->
-<script src="js/bootstrap-alert.js"></script>
- 
-<!-- modal -->
-<script src="js/bootstrap-modal.js"></script>
-<!-- styles -->
-<link href="css/bootstrap.css" rel="stylesheet">
-<link href="css/bootstrap-responsive.css" rel="stylesheet">
-<link href="css/docs.css" rel="stylesheet">
-<link href="js/google-code-prettify/prettify.css" rel="stylesheet">
-<link rel="stylesheet" href="css/prettyPhoto.css" type="text/css" media="screen" title="prettyPhoto main stylesheet" charset="utf-8" />
+<script src="http://malsup.github.com/jquery.form.js"></script>
+<script src="js/plugins/dataTables/jquery.dataTables.js"></script>
+<script src="js/plugins/dataTables/dataTables.bootstrap.js"></script>
+
 </head>
 <script type="text/javascript">
 var tipoEntidad = "casoCriminal";
@@ -169,81 +162,119 @@ $(document).on('click','#btnComentarioCerrarCaso', function(e){
 }
 </style>
 <body>
-
+<div id="wrapper">
 	<!--HEADER-->
-	<jsp:include page="../componentes/header.jsp" />
+	<jsp:include page="../componentes/newHeader.jsp" />
 	<!--/HEADER-->
 	<!--CENTRO-->
-	<!--MENU-->
-	<jsp:include page="../componentes/menu.jsp" />
-	<!--/MENU-->
-	<div class="container inner_content">
-		<section class="span9" style="margin-left: 7%;">
+	<div id="page-wrapper" style="min-height: 393px;">
+		<div class="row">
 			<c:forEach items="${casoList}" var="caso">
 				<span id="hdnIdCaso" style="display: none;"><c:out value="${caso.idCasoCriminal}" /></span>
 			</c:forEach>
-			<div id="divAlertarCasoCriminal" style="display: none;">
+			<div class="col-lg-12" id="titulo">
+				<h2 class="page-header">Sistema de Seguimiento de Casos Criminales para la DIRANDRO</h2>
 			</div>
-			<table class="table table-bordered table-condensed">
-				<tbody>
-					<tr>
-						<td>Informe:</td>
-						<td align="center"><span id="hdrCodigoCaso">&nbsp;</span></td>
-						<td>Estado:</td>
-						<td align="center"><span id="hdrEstado">&nbsp;</span></td>
-					</tr>
-					<tr>
-						<td>Referencia:</td>
-						<td><span id="hdrReferencia">&nbsp;</span></td>
-						<td>Fecha de Creacion:</td>
-						<td><span id="hdrFecCreacion">&nbsp;</span></td>
-					</tr>
-					<tr>
-						<td>Creado por:</td>
-						<td colspan="3"><span id="hdrCreador">&nbsp;</span></td>						
-					</tr>
-				</tbody>
-			</table>
-		</section>
-		<!-- Acciones -->
-		<section class="span9" style="margin-left: 7%; height: 1px;">
-			<table class="table table-bordered table-condensed" style="margin-top: -6%;">
-				<tbody>
-					<tr>
-						<td>Acciones:</td>
-						<td id="tdBotones">
-							
-						</td>
-					</tr>
-				</tbody>
-			</table>
-		</section>
-		<!-- /Acciones -->
+			<div id="divAlertarCasoCriminal" class="col-lg-12" style="display: none;">
+			</div>
+			<div class="col-lg-12">
+				<table class="table table-striped table-bordered table-hover">
+					<tbody>
+						<tr>
+							<td>Informe:</td>
+							<td><span id="hdrCodigoCaso">&nbsp;</span></td>
+							<td>Estado:</td>
+							<td><span id="hdrEstado">&nbsp;</span></td>
+						</tr>
+						<tr>
+							<td>Referencia:</td>
+							<td><span id="hdrReferencia">&nbsp;</span></td>
+							<td>Fecha de Creacion:</td>
+							<td><span id="hdrFecCreacion">&nbsp;</span></td>
+						</tr>
+						<tr>
+							<td>Creado por:</td>
+							<td colspan="3"><span id="hdrCreador">&nbsp;</span></td>						
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			<div class="col-lg-12">
+				<table class="table table-striped table-bordered table-hover">
+					<tbody>
+						<tr>
+							<td>Acciones:</td>
+							<td id="tdBotones">
+								
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			<div class="col-lg-12">
+				<ul class="nav nav-tabs">
+					<li class="active"><a href="#liPrincipal" data-toggle="tab">Principal</a></li>
+					<li class=""><a href="#liPersonalAsignado" data-toggle="tab">Personal Asignado</a></li>
+					<li class=""><a href="#liSospechosos" data-toggle="tab">Sospechosos</a></li>
+					<li class=""><a href="#liRutas" data-toggle="tab">Rutas</a></li>
+					<li class=""><a href="#liArchivosAdjuntos" data-toggle="tab">Archivos Adjuntos</a></li>
+					<li class=""><a href="#liComentarios" data-toggle="tab">Comentarios</a></li>
+					<li class=""><a href="#liAuditoria" data-toggle="tab">Auditoría</a></li>
+				</ul>
+				<div class="tab-content">
+					<div class="tab-pane fade active in" id="liPrincipal">
+						<jsp:include page="casoCriminal/tabPrincipalCasoCriminal.jsp" />
+					</div>
+					<div class="tab-pane fade" id="liPersonalAsignado">
+						<jsp:include page="casoCriminal/tabPersonalAsignado.jsp" />
+					</div>
+					<div class="tab-pane fade" id="liSospechosos">
+						<jsp:include page="casoCriminal/tabSospechososAsignados.jsp" />
+					</div>
+					<div class="tab-pane fade" id="liRutas">
+						<jsp:include page="casoCriminal/tabRutas.jsp" />
+					</div>
+					<div class="tab-pane fade" id="liArchivosAdjuntos">
+						<jsp:include page="../componentes/archivos.jsp" />
+					</div>
+					<div class="tab-pane fade" id="liComentarios">
+						<jsp:include page="../componentes/tabComentarios.jsp" />
+					</div>
+					<div class="tab-pane fade" id="liAuditoria">
+						<p>Auditoria.</p>
+					</div>
+				</div>
+			</div>
+		</div>
 		<!-- MODAL -->
-		<div id="myModal" class="modal hide fade" style="display: none;">
-	        <div class="modal-header">
-		        <a class="close" data-dismiss="modal">×</a>
-		        <h3>Seleccionar dias para las diligencias preliminares</h3>
-	        </div>
-	        <form:form id="editarCaso">
-		        <div class="modal-body">
-	            	<label class="control-label">Seleccione la cantidad de dias:</label>
-	            	<div class="controls inline">
-	            		<select class="span2" name="diasDiligenciasPreliminares">
-		                	<option>20</option>
-		                	<option>40</option>
-		                	<option>60</option>
-		                	<option>80</option>
-		                	<option>100</option>
-		              	</select>
-	            	</div>            	
-	            </div>
-	        </form:form>
-          <div class="modal-footer">
-	          <a id="btnAsignarDiligencias" class="btn btn-success" data-dismiss="modal">Asignar dias</a>
-	          <a class="btn" data-dismiss="modal">Cancelar</a>
-          </div>
-        </div>
+		<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+       		<div class="modal-dialog">
+       			<div class="modal-content">
+	       			<div class="modal-header">
+	       				<a class="close" data-dismiss="modal">×</a>
+		        		<h3>Seleccionar dias para las diligencias preliminares</h3>
+	       			</div>
+	       			<div class="modal-body">
+	       				<form:form id="editarCaso">
+	       					<label>Seleccione la cantidad de dias:</label>
+			            	<div class="radio-inline">
+			            		<select class="form-control" name="diasDiligenciasPreliminares">
+				                	<option>20</option>
+				                	<option>40</option>
+				                	<option>60</option>
+				                	<option>80</option>
+				                	<option>100</option>
+				              	</select>
+			            	</div>
+	       				</form:form>
+	       			</div>
+	       			<div class="modal-footer">
+				          <a id="btnAsignarDiligencias" class="btn btn-outline btn-success" data-dismiss="modal">Asignar dias</a>
+				          <a class="btn btn-outline btn-default" data-dismiss="modal">Cancelar</a>
+			          </div>
+       			</div>
+       		</div>
+       	</div>
         <!-- /MODAL -->
         <!-- MODAL PAUSA -->
 		<div id="myModalPausaDoc" class="modal hide fade" style="display: none;">
@@ -305,47 +336,8 @@ $(document).on('click','#btnComentarioCerrarCaso', function(e){
           </div>
         </div>
         <!-- /MODAL PAUSA NUEVO CASO  -->
-        <!-- TABS -->
-		<section class="span9" style="margin-left: 7%;">
-			<div class="tabbable" style="margin-top: -6%;">
-				<ul class="nav nav-tabs">
-					<li class="active"><a href="#1" data-toggle="tab">Principal</a></li>
-					<li class=""><a href="#2" data-toggle="tab">Personal Asignado</a></li>
-					<li class=""><a href="#3" data-toggle="tab">Sospechosos</a></li>
-					<li class=""><a href="#4" data-toggle="tab">Archivos Adjuntos</a></li>
-					<li class=""><a href="#5" data-toggle="tab">Comentarios</a></li>
-					<li class=""><a href="#6" data-toggle="tab">Auditoría</a></li>
-					<li class=""><a href="#7" data-toggle="tab">Rutas</a></li>
-				</ul>
-				<div class="tab-content">
-					<div class="tab-pane active" id="1">
-						<jsp:include page="casoCriminal/tabPrincipalCasoCriminal.jsp" />
-					</div>
-					<div class="tab-pane" id="2">
-						<jsp:include page="casoCriminal/tabPersonalAsignado.jsp" />
-					</div>
-					<div class="tab-pane" id="3">
-						<jsp:include page="casoCriminal/tabSospechososAsignados.jsp" />
-					</div>
-					<div class="tab-pane" id="4">
-						<jsp:include page="../componentes/archivos.jsp" />
-					</div>
-					<div class="tab-pane" id="5">
-						<jsp:include page="../componentes/tabComentarios.jsp" />
-					</div>
-					<div class="tab-pane" id="6">
-						<p>Seccion 7.</p>
-					</div>
-					<div class="tab-pane" id="7">
-						<jsp:include page="casoCriminal/tabRutas.jsp" />
-					</div>
-				</div>
-			</div>
-		</section>
 	</div>
 	<!--/CENTRO-->
-	<!-- sticky footer -->
-	<jsp:include page="../componentes/footer.jsp" />
-	<!-- /sticky footer -->
+</div>
 </body>
 </html>

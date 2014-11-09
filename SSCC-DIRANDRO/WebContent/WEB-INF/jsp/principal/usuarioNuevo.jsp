@@ -10,24 +10,21 @@
 <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<!-- para que funcione el jquery -->
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-<!-- para que funcione el jquery de la plantilla -->
-<script src="js/jquery.js"></script>
-<!-- para el menu -->
-<script src="js/bootstrap-collapse.js"></script>
-<script src="js/jquery.validate.min.js"></script>
 <!-- styles -->
-<link href="css/bootstrap.css" rel="stylesheet">
-<link href="css/bootstrap-responsive.css" rel="stylesheet">
-<link href="css/docs.css" rel="stylesheet">
-<link href="js/google-code-prettify/prettify.css" rel="stylesheet">
-<link rel="stylesheet" href="css/prettyPhoto.css" type="text/css" media="screen" title="prettyPhoto main stylesheet" charset="utf-8" />
-<style>
-.error {
-	color: rgb(255, 0, 0);
-}
-</style>
+<link href="css/bootstrap.min.css" rel="stylesheet">
+<link href="css/plugins/metisMenu/metisMenu.min.css" rel="stylesheet">
+<link href="css/plugins/timeline.css" rel="stylesheet">
+<link href="css/sb-admin-2.css" rel="stylesheet">
+<link href="css/plugins/morris.css" rel="stylesheet">
+<link href="font-awesome-4.1.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+<!-- js -->
+<script src="js/jquery-1.11.0.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/plugins/metisMenu/metisMenu.min.js"></script>
+<script src="js/sb-admin-2.js"></script>
+<script src="js/jquery.validate.min.js"></script>
+
 <script>
 $(document).on('click','#rangoOficial', function(e){
 	$("#sltcGrado").empty();
@@ -90,7 +87,7 @@ $(document).ready(function() {
 	
 	$("#formCrearUsuario").validate({
 		rules:{
-			txtNumeroDeCarnet:  {required: true, number: true, minlength: 8, maxlength: 8},
+			txtNumeroDeCarnet:  {required: true, number: true, minlength: 6, maxlength: 8},
 			txtCorreo: {required: true, email:true},
 			txtDni: {required: true, number: true, minlength: 8, maxlength: 8}
 		},
@@ -182,107 +179,88 @@ $(document).on('change','#txtCorreo', function(e){
 </script>
 </head>
 <body>
+<div id="wrapper">
+
 	<!--HEADER-->
-	<jsp:include page="../componentes/header.jsp" />
+	<jsp:include page="../componentes/newHeader.jsp" />
 	<!--/HEADER-->
 	<!--CENTRO-->
-	<!--MENU-->
-	<jsp:include page="../componentes/menu.jsp" />
-	<!--/MENU-->
-	<div class="container inner_content">
-		<section class="span9" style="margin-left: 80px;">
-			<fieldset class="well">
-			<div id="alertasDniNuevo" style="display: none;">
-			</div>
-			<div id="alertasCarnetNuevo" style="display: none;">
-			</div>
-			<div id="alertasCorreoNuevo" style="display: none;">
-			</div>
-				<form:form class="form-horizontal" id="formCrearUsuario"
-					action="crearUsuario" commandName="perfil">
-					<legend>
-						<span class="colored">///</span> Datos Personales:
-					</legend>
-					<div class="control-group">
-						<label class="control-label">Primer Nombre: </label>
-						<div class="controls">
-							<input class="span2" type="text" name="primerNombre" data-rule-required="true" data-msg-required="*">
+	<div id="page-wrapper" style="min-height: 393px;">
+		<div class="row">
+				<div class="col-lg-12" id="titulo">
+					<h2 class="page-header">Sistema de Seguimiento de Casos Criminales para la DIRANDRO</h2>
+				</div>
+				<div id="alertasDniNuevo" style="display: none;">
+				</div>
+				<div id="alertasCarnetNuevo" style="display: none;">
+				</div>
+				<div id="alertasCorreoNuevo" style="display: none;">
+				</div>			
+			<div class="panel panel-default col-md-6 col-md-offset-1">
+				<div class="panel-heading">
+					Datos Personales:
+				</div>			
+				<div class="panel-body">
+					<form:form class="form-horizontal" id="formCrearUsuario" action="crearUsuario" commandName="perfil">
+						<div class="form-group">
+							<label>Primer Nombre: </label>
+							<input type="text" name="primerNombre" data-rule-required="true" data-msg-required="*" class="form-control">
 						</div>
-					</div>
-					<div class="control-group">
-						<label class="control-label">Segundo Nombre: </label>
-						<div class="controls">
-							<input class="span2" type="text" name="segundoNombre">
+						<div class="form-group">
+							<label>Segundo Nombre: </label>
+							<input type="text" name="segundoNombre" class="form-control">
 						</div>
-					</div>
-					<hr>
-					<div class="control-group">
-						<label class="control-label">Apellido Paterno: </label>
-						<div class="controls">
-							<input class="span2" type="text" name="apePaterno" data-rule-required="true" data-msg-required="*">
+						<div class="form-group">
+							<label>Apellido Paterno: </label>
+							<input type="text" name="apePaterno" data-rule-required="true" data-msg-required="*" class="form-control">
 						</div>
-					</div>
-					<div class="control-group">
-						<label class="control-label">Apellidos Materno: </label>
-						<div class="controls">
-							<input class="span2" type="text" name="apeMaterno" data-rule-required="true" data-msg-required="*">
+						<div class="form-group">
+							<label>Apellidos Materno: </label>
+							<input type="text" name="apeMaterno" data-rule-required="true" data-msg-required="*" class="form-control">
 						</div>
-					</div>
-					<hr>
-					<div class="control-group">
-						<label class="control-label">DNI: </label>
-						<div class="controls">
-							<input class="span2" type="text" name="txtDni" id="txtDni">
+						<div class="form-group">
+							<label>DNI: </label>
+							<input type="text" name="txtDni" id="txtDni"  class="form-control">
 							<input class="span2" type="hidden" name="dni" id="hdnDni">
 						</div>
-					</div>
-					<hr>
-					<div class="control-group">
-						<label class="control-label">Entidad: </label> 
-						<label class="checkbox inline"> 
-							<input type="radio" name="entidadPerteneciente" id="radioD" value="D" checked>DIRANDRO
-						</label> 
-						<label class="checkbox inline"> 
-						<input type="radio" name="entidadPerteneciente" id="radioM" value="M">Ministerio Público
-						</label>
-					</div>
-					<hr>
-					<div class="control-group" id="divFiscal" style="display: none;">
-						<label class="control-label">Tipo Fiscal: </label> 
-						<label class="checkbox inline"> 
-							<input type="radio" name="tipoFiscal" id="chkFiscal" value="Fiscal" checked>Fiscal
-						</label> 
-						<label class="checkbox inline"> 
-						<input type="radio" name="tipoFiscal" id="chkFiscalSup" value="Fiscal Superior">Fiscal Superior
-						</label>
-					</div>
-					<hr id="hrFiscal" style="display: none;">
-					<div class="control-group" id="divCargo">
-						<label class="control-label">Cargo: </label>
-						<div class="controls">
-							<select class="span2" name="cargo" data-rule-required="true" data-msg-required="*">
+						<div class="form-group">
+							<label>Entidad: </label> 
+							<label class="radio-inline"> 
+								<input type="radio" name="entidadPerteneciente" id="radioD" value="D" checked>DIRANDRO
+							</label>
+							<label class="radio-inline">
+								<input type="radio" name="entidadPerteneciente" id="radioM" value="M">Ministerio Público
+							</label>
+						</div>
+						<div class="form-group" id="divFiscal" style="display: none;">
+							<label>Tipo Fiscal: </label> 
+							<label class="radio-inline"> 
+								<input type="radio" name="tipoFiscal" id="chkFiscal" value="Fiscal" checked>Fiscal
+							</label> 
+							<label class="radio-inline"> 
+								<input type="radio" name="tipoFiscal" id="chkFiscalSup" value="Fiscal Superior">Fiscal Superior
+							</label>
+						</div>
+						<div class="form-group" id="divCargo">
+							<label>Cargo: </label>
+							<select name="cargo" data-rule-required="true" data-msg-required="*" class="form-control">
 								<option>Jefe de Unidad</option>
 								<option>Superior</option>
 								<option>Investigador</option>
 							</select>
 						</div>
-					</div>
-					<hr id="hrCargo">
-					<div class="control-group" id="divRango">
-						<label class="control-label">Rango: </label> 
-						<label class="checkbox inline"> 
-							<input type="radio" name="rango" id="rangoOficial" value="Oficial" checked>Oficial
-						</label> 
-						<label class="checkbox inline"> 
-							<input type="radio" name="rango" id="rangoSubOficial" value="Sub Oficial">Sub Oficial
-						</label>
-					</div>
-					<hr id="hrRango">
-					<div class="control-group" id="divGrado">
-						<label class="control-label">Grado: </label>
-						<div class="controls">
-							<select class="span2" name="grado" id="sltcGrado"
-								data-rule-required="true" data-msg-required="*">
+						<div class="form-group" id="divRango">
+							<label>Jerarquía: </label> 
+							<label class="radio-inline">  
+								<input type="radio" name="rango" id="rangoOficial" value="Oficial" checked>Oficial
+							</label> 
+							<label class="radio-inline">  
+								<input type="radio" name="rango" id="rangoSubOficial" value="Sub Oficial">Sub Oficial
+							</label>
+						</div>
+						<div class="form-group" id="divGrado">
+							<label>Grado: </label>
+							<select name="grado" id="sltcGrado" data-rule-required="true" data-msg-required="*" class="form-control">
 								<option>Alfz. PNP</option>
 								<option>Tnte. PNP</option>
 								<option>Cap. PNP</option>
@@ -292,53 +270,48 @@ $(document).on('change','#txtCorreo', function(e){
 								<option>Gral. PNP</option>
 							</select>
 						</div>
-					</div>
-					<hr id="hrGrado">
-					<div class="control-group" id="divNCarnet">
-						<label class="control-label">Numero de Carnet: </label>
-						<div class="input-prepend" style="margin-left: 20px;">
-							<span class="add-on">CIP N°</span>
-							<input class="input-small" type="text" id="txtNumeroDeCarnet" name="txtNumeroDeCarnet" style="width: 110px;"> 
-							<input class="input-small" type="hidden" name="numeroDeCarnet" id="hdnNumeroDeCarnet" style="width: 110px;">
+						<div class="form-group" id="divNCarnet">
+							<label>Numero de Carnet: </label>
+							<div class="form-group input-group">
+								<span class="input-group-addon">CIP N°</span>
+								<input class="form-control" type="text" id="txtNumeroDeCarnet" name="txtNumeroDeCarnet"> 							
+							</div>
+							<input type="hidden" name="numeroDeCarnet" id="hdnNumeroDeCarnet">
 						</div>
-					</div>
-					<hr id="hrNCarnet">
-					<div class="control-group">
-						<label class="control-label">Telefono: </label>
-						<div class="controls">
-							<input class="span2" type="text" name="telefono">
+						<div class="form-group">
+							<label>Telefono: </label>
+							<input type="text" name="telefono" class="form-control">
 						</div>
-					</div>
-					<hr>
-					<div class="control-group">
-						<label class="control-label">Corre Electrónico: </label>
-						<div class="input-prepend" style="margin-left: 20px;">
-							<span class="add-on">@</span>
-							<input class="input-medium" type="text" id="txtCorreo" name="txtCorreo"style="width: 135px;"> 
-							<input class="input-medium" type="hidden" id="hdnCorreo" name="correo">
+						<div class="form-group">
+							<label>Corre Electrónico: </label>
+							<div class="form-group input-group">
+								<span class="input-group-addon">@</span>
+								<input class="form-control" type="text" id="txtCorreo" name="txtCorreo"> 							
+							</div>
+							<input class="form-control" type="hidden" id="hdnCorreo" name="correo">
 						</div>
-					</div>
-					<hr>
-					<div class="control-group">
-						<label class="control-label">Sexo: </label> 
-						<label class="checkbox inline"> 
-							<input type="radio" name="sexo" id="" value="M" checked>Masculino
-						</label> 
-						<label class="checkbox inline"> 
-							<input type="radio" name="sexo" id="" value="F">Femenino
-						</label>
-					</div>
-					<div class="form-actions">
-						<button class="btn btn-success" id="btnGuardar" type="submit"><i class="icon-ok icon-white"></i> Guardar Usuario </button>
-						<button class="btn btn-danger" type="reset"><i class="icon-refresh icon-white"></i> Reset</button>
-					</div>
-				</form:form>
-			</fieldset>
-		</section>
+						<div class="form-group">
+							<label>Sexo: </label> 
+							<label class="radio-inline"> 
+								<input type="radio" name="sexo" id="" value="M" checked>Masculino
+							</label> 
+							<label class="radio-inline"> 
+								<input type="radio" name="sexo" id="" value="F">Femenino
+							</label>
+						</div>
+						<hr>
+						<div class="well">
+							<button class="btn btn-outline btn-success" id="btnGuardar" type="submit"><i class="fa fa-check"></i> Guardar Usuario </button>
+							<button class="btn btn-outline btn-danger" type="reset"><i class="fa fa-refresh fa-fw"></i> Reset</button>
+						</div>
+					</form:form>		
+				</div>			
+			</div>
+			
+			
+		</div>
 	</div>
-	<!--/CENTRO-->
-	<!-- sticky footer -->
-	<jsp:include page="../componentes/footer.jsp" />
-	<!-- /sticky footer -->
+</div>
+
 </body>
 </html>

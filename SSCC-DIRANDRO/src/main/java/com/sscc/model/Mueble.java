@@ -23,11 +23,14 @@ public class Mueble {
 	@Column(nullable=true, length=250)
 	private String descripcion;
 	
-	@Column(nullable=false)
-	private Integer tipo;
+	/*@Column(nullable=false)
+	private Integer tipo;*/
 	
 	@Column(nullable=true, length=30)
 	private String nombreTipo;
+	
+	@Column(nullable=true, length=180)
+	private String estadoDeConservasion;//bueno, regular, inservible o inoperativo
 	
 	@Column(nullable=false)
 	private Double valor;
@@ -81,7 +84,7 @@ public class Mueble {
 	public void setDescripcion(String descripcion) {
 		this.descripcion = descripcion;
 	}
-
+/*
 	public Integer getTipo() {
 		return tipo;
 	}
@@ -89,7 +92,7 @@ public class Mueble {
 	public void setTipo(Integer tipo) {
 		this.tipo = tipo;
 	}
-
+*/
 	public String getNombreTipo() {
 		return nombreTipo;
 	}
@@ -112,6 +115,14 @@ public class Mueble {
 
 	public void setEstado(String estado) {
 		this.estado = estado;
+	}
+
+	public String getEstadoDeConservasion() {
+		return estadoDeConservasion;
+	}
+
+	public void setEstadoDeConservasion(String estadoDeConservasion) {
+		this.estadoDeConservasion = estadoDeConservasion;
 	}
 	
 	

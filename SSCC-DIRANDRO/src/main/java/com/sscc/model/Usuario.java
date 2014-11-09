@@ -31,10 +31,10 @@ public class Usuario {
 	@OneToOne
 	@JoinColumn(name = "idPerfil")	
 	private Perfil perfil;	
-	
+	//crear
 	@OneToMany(mappedBy = "usuario")
 	private Collection<CasoCriminal> casos;
-	
+	//asignados
 	@OneToMany(mappedBy = "usuario")
 	private Collection<CasoPorAgente> cpa;
 	

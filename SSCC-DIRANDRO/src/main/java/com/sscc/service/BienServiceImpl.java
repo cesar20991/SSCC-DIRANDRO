@@ -15,7 +15,6 @@ import com.sscc.form.InmuebleBean;
 import com.sscc.form.VehiculoBean;
 import com.sscc.model.Bien;
 import com.sscc.model.BienPorSospechoso;
-import com.sscc.model.CasoPorSospechoso;
 import com.sscc.model.Inmueble;
 import com.sscc.model.Perfil;
 import com.sscc.model.Sospechoso;
@@ -328,18 +327,17 @@ public class BienServiceImpl implements BienService {
 
 	//
 	public Boolean getPlaca(String placa) {
-		Query queryCont = em
-				.createQuery("SELECT COUNT(v) FROM Vehiculo v WHERE v.placa LIKE:placa");
+		Query queryCont = em.createQuery("SELECT COUNT(v) FROM Vehiculo v WHERE v.placa LIKE:placa");
 		queryCont.setParameter("placa", placa);
 		Integer cont = Integer.parseInt(queryCont.getSingleResult().toString());
 		return cont > 0 ? true : false;
 	}
 
+	@SuppressWarnings("unchecked")
 	public List<BienBean> getBienesPorSopechoso(Integer idSospechoso) {
 		List<BienBean> lBb = new ArrayList<BienBean>();
 		System.out.println("Bienes");
-		Query qBienes = em
-				.createQuery("SELECT b FROM BienPorSospechoso bps JOIN bps.bien b JOIN bps.sospechoso s WHERE bps.estado='habilitado' AND s.idSospechoso=:idSospechoso ORDER BY  b.fecCreacion DESC");
+		Query qBienes = em .createQuery("SELECT b FROM BienPorSospechoso bps JOIN bps.bien b JOIN bps.sospechoso s WHERE bps.estado='habilitado' AND s.idSospechoso=:idSospechoso ORDER BY  b.fecCreacion DESC");
 		qBienes.setParameter("idSospechoso", idSospechoso);
 
 		List<Bien> lB = qBienes.getResultList();
@@ -366,11 +364,9 @@ public class BienServiceImpl implements BienService {
 	}
 
 	@Transactional
-	public Boolean desAsignarBienToSospechoso(Integer idSospechoso,
-			Integer idBien) {
+	public Boolean desAsignarBienToSospechoso(Integer idSospechoso, Integer idBien) {
 		try {
-			Query q = em
-					.createQuery("SELECT bps FROM BienPorSospechoso bps JOIN bps.bien b JOIN bps.sospechoso s WHERE bps.estado='habilitado' AND b.idBien="
+			Query q = em.createQuery("SELECT bps FROM BienPorSospechoso bps JOIN bps.bien b JOIN bps.sospechoso s WHERE bps.estado='habilitado' AND b.idBien="
 							+ idBien + " AND s.idSospechoso=" + idSospechoso);
 			BienPorSospechoso bps = (BienPorSospechoso) q.getSingleResult();
 			BienPorSospechoso bpsEditado = em.merge(bps);
@@ -379,5 +375,78 @@ public class BienServiceImpl implements BienService {
 		} catch (Exception e) {
 			return false;
 		}
+	}
+
+	@SuppressWarnings("unchecked")
+	public List<InmuebleBean> getInmueblesBuscar() {
+		List<InmuebleBean> lib = new ArrayList<InmuebleBean>();
+		Query qBienes = em.createQuery("SELECT b FROM Bien b JOIN b.inmueble i ORDER BY b.fecCreacion DESC");
+		List<Bien> lB = qBienes.getResultList();
+		
+		for(int i=0;i<lB.size();i++){
+			InmuebleBean ib = new InmuebleBean();
+			Bien b =  lB.get(i);
+			Inmueble in =  b.getInmueble();
+			
+			ib.setAmbientes(in.getAmbientes());
+			ib.setAntiguedad(in.getAntiguedad());
+			ib.setAreaCercado(in.getAreaCercado());
+			ib.setAreaConstruido(in.getAreaConstruido());
+			ib.setAreaTotal(in.getAreaTotal());
+			ib.setCodigo(in.getCodigo());
+			ib.setDescripcion(b.getDescripcion());
+			ib.setDireccion(in.getDireccion());
+			ib.setIdBien(b.getIdBien());
+			ib.setIdInmueble(in.getIdInmueble());
+			ib.setLatitud(in.getLatitud());
+			ib.setLongitud(in.getLongitud());
+			ib.setPartidaRegistral(b.getPartidaRegistral());
+			ib.setPisos(in.getPisos());
+			ib.setValor(b.getValor());
+			
+			lib.add(ib);
+		}		
+		
+		return lib;
+	}
+	
+	@SuppressWarnings("unchecked")
+	public List<VehiculoBean> getVehiculosBuscar() {
+		List<VehiculoBean> lvb = new ArrayList<VehiculoBean>();
+		Query qBienes = em.createQuery("SELECT b FROM Bien b JOIN b.vehiculo v ORDER BY b.fecCreacion DESC");
+		List<Bien> lB = qBienes.getResultList();
+		
+		for(int i=0;i<lB.size();i++){
+			VehiculoBean vb = new VehiculoBean();
+			Bien b =  lB.get(i);
+			Vehiculo v =  b.getVehiculo();
+			
+			vb.setAltura(v.getAltura());
+			vb.setAncho(v.getAncho());
+			vb.setAsientos(v.getAsientos());
+			vb.setChasis(v.getChasis());
+			vb.setCodigo(v.getCodigo());
+			vb.setColor(v.getColor());
+			vb.setDescripcion(b.getDescripcion());
+			vb.setEjes(v.getEjes());
+			vb.setFecFabricacion(v.getFecFabricacion());
+			vb.setIdBien(b.getIdBien());
+			vb.setIdVehiculo(v.getIdVehiculo());
+			vb.setLongitud(v.getLongitud());
+			vb.setMarca(v.getMarca());
+			vb.setModelo(v.getModelo());
+			vb.setMotor(v.getMotor());
+			vb.setPartidaRegistral(b.getPartidaRegistral());
+			vb.setPasajeros(v.getPasajeros());
+			vb.setPesoBruto(v.getPesoBruto());
+			vb.setPesoNeto(v.getPesoNeto());
+			vb.setPlaca(v.getPlaca());
+			vb.setRuedas(v.getRuedas());
+			vb.setValor(b.getValor());
+			
+			lvb.add(vb);
+		}		
+		
+		return lvb;
 	}
 }

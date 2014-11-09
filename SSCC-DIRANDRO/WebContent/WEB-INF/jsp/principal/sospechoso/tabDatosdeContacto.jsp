@@ -75,59 +75,55 @@ $(document).ready(function(){
 $(document).on('click','#btnEditarContacto', function(e){
 	//TABS A OCULTAR Y MOSTRAR
 	var correo = $("#spnCorreos").text().split(", ");
+	$("#camposCorreo").empty();
+	$("#txtCorreo_0").val(correo[0]);
 	if((totalCorreos+1) >= 2){
-		$("#camposCorreo").empty();
-		$("#txtCorreo_0").val(correo[0]);
 		for(var numCorreos = 1; numCorreos < totalCorreos; numCorreos++){
-			$("#camposCorreo").append('<div class="control-group" id="campoCorreo_'+numCorreos+'">'+
-				      		'<label class="control-label">Correo Electrónico: </label>'+
-				      		'<div class="controls">'+
-				      			'<input class="span2" type="text" name="txtCorreo" value="'+correo[numCorreos]+'" id="txtCorreo_'+numCorreos+'" data-rule-email="true" data-msg-email="Debe ingresar un correo electronico válido."> <button class="btn btn-danger eliminarCamposCorreo" id="btnEliminarCampos_'+num+'" type="button"><i class="icon-minus icon-white"></i></button>'+
-				      		'</div>'+
-				   		'</div>');
+			$("#camposCorreo").append('<div class="form-group input-group" id="campoCorreo_'+numCorreos+'">'+
+							      			'<span class="input-group-addon">Correo Electrónico: </span>'+
+							      			'<input class="form-control" type="text" name="txtCorreo" value="'+correo[numCorreos]+'" id="txtCorreo_'+numCorreos+'" data-rule-email="true" data-msg-email="Debe ingresar un correo electronico válido." >'+
+							      			'<span class="input-group-btn"><button class="btn btn-outline btn-danger eliminarCamposCorreo" id="btnEliminarCampos_'+num+'" type="button"><i class="fa fa-minus"></i></button></span>'+
+							   		'</div>');
 		}
 	}
 	
 	var tel = $("#spnTelefonos").text().split(", ");
+	$("#camposTelefonos").empty();
+	$("#txtTelefonos_0").val(tel[0]);
 	if(totalTelefonos >= 2){
-		$("#camposTelefonos").empty();
-		$("#txtTelefonos_0").val(tel[0]);
 		for(var numTelefonos = 1; numTelefonos < totalTelefonos; numTelefonos++){
-			$("#camposTelefonos").append('<div class="control-group" id="campoTelefono_'+numTelefonos+'">'+
-		      		'<label class="control-label">Teléfonos: </label>'+
-		      		'<div class="controls">'+
-		      			'<input class="span2" type="text" name="txtTelefonos" value="'+tel[numTelefonos]+'" id="txtTelefonos_'+numTelefonos+'" data-rule-number="true" data-rule-minlength="7" data-rule-maxlength="7" data-msg-number="Debe ingresar un número de teléfono válido."> <button class="btn btn-danger eliminarCamposTelefonos" id="btnEliminarTelefonos_'+x+'" type="button"><i class="icon-minus icon-white"></i></button>'+
-		      		'</div>'+
-		   		'</div>');
+			$("#camposTelefonos").append('<div class="form-group input-group" id="campoTelefono_'+numTelefonos+'">'+
+								      		'<span class="input-group-addon">Teléfonos: </span>'+
+								      		'<input class="form-control" type="text" name="txtTelefonos" value="'+tel[numTelefonos]+'" id="txtTelefonos_'+numTelefonos+'" data-rule-number="true" data-rule-minlength="7" data-rule-maxlength="7" data-msg-number="Debe ingresar un número de teléfono válido." >'+
+								      		'<span class="input-group-btn"><button class="btn btn-outline btn-danger eliminarCamposTelefonos" id="btnEliminarTelefonos_'+x+'" type="button"><i class="fa fa-minus"></i></button></span>'+
+   										'</div>');
 		}
-		x = totalTelefonos;
+		//x = totalTelefonos;
 	}
 	
 	var cel = $("#spnCelulares").text().split(", ");
+	$("#camposCelulares").empty();
+	$("#txtCelulares_0").val(cel[0]);
 	if(totalCelulares >= 2){
-		$("#camposCelulares").empty();
-		$("#txtCelulares_0").val(cel[0]);
 		for(var numCelulares = 1; numCelulares < totalCelulares; numCelulares++){
-			$("#camposCelulares").append('<div class="control-group" id="campoCelulares_'+numCelulares+'">'+
-		      		'<label class="control-label">Celulares: </label>'+
-		      		'<div class="controls">'+
-		      			'<input class="span2" type="text" name="txtCelulares" value="'+cel[numCelulares]+'" id="txtCelulares_'+numCelulares+'" data-rule-number="true"  data-rule-minlength="9" data-rule-maxlength="9" data-msg-number="Debe ingresar un número de celular válido."> <button class="btn btn-danger eliminarCamposCelulares" id="btnEliminarCelulares_'+y+'" type="button"><i class="icon-minus icon-white"></i></button>'+
-		      		'</div>'+
-		   		'</div>');
+			$("#camposCelulares").append('<div class="form-group input-group" id="campoCelulares_'+numCelulares+'">'+
+								      		'<span class="input-group-addon">Celulares: </span>'+
+								      		'<input class="form-control" type="text" name="txtCelulares" value="'+cel[numCelulares]+'" id="txtCelulares_'+numCelulares+'" data-rule-number="true"  data-rule-minlength="9" data-rule-maxlength="9" data-msg-number="Debe ingresar un número de celular válido." >'+
+								      		'<span class="input-group-btn"><button class="btn btn-outline btn-danger eliminarCamposCelulares" id="btnEliminarCelulares_'+y+'" type="button"><i class="fa fa-minus"></i></button></span>'+
+								   		'</div>');
 		}
 	}
 	
 	var direc = $("#spnDirecciones").text().split(", ");
+	$("#camposDirecciones").empty();
+	$("#txtDirecciones_0").val(direc[0]);
 	if(totalDirecciones >= 2){
-		$("#camposDirecciones").empty();
-		$("#txtDirecciones_0").val(direc[0]);
 		for(var numDirecciones = 1; numDirecciones < totalDirecciones; numDirecciones++){
-			$("#camposDirecciones").append('<div class="control-group" id="campoDirecciones_'+numDirecciones+'">'+
-		      		'<label class="control-label">Direcciones: </label>'+
-		      		'<div class="controls">'+
-		      			'<input class="span2" type="text" name="txtDirecciones" value="'+direc[numDirecciones]+'" id="txtDirecciones_'+numDirecciones+'"> <button class="btn btn-danger eliminarCamposDirecciones" id="btnEliminarDirecciones_'+z+'" type="button"><i class="icon-minus icon-white"></i></button>'+
-		      		'</div>'+
-		   		'</div>');
+			$("#camposDirecciones").append('<div class="form-group input-group" id="campoDirecciones_'+numDirecciones+'">'+
+								      		'<span class="input-group-addon">Direcciones: </span>'+
+								      		'<input class="form-control" type="text" name="txtDirecciones" value="'+direc[numDirecciones]+'" id="txtDirecciones_'+numDirecciones+'" >'+
+								      		'<span class="input-group-btn"><button class="btn btn-outline btn-danger eliminarCamposDirecciones" id="btnEliminarDirecciones_'+z+'" type="button"><i class="fa fa-minus"></i></button></span>'+
+								   		'</div>');
 		}
 	}
 	
@@ -142,11 +138,10 @@ $(document).on('click','#btnCancelEditar', function(e){
 var num=1;
 //METODOS PARA GENERAR Y ELIMINAR COMPONENTES
 $(document).on('click','#btnGeneraCampos', function(e){
-	$("#camposCorreo").append('<div class="control-group" id="campoCorreo_'+num+'">'+
-					      		'<label class="control-label">Correo Electrónico: </label>'+
-					      		'<div class="controls">'+
-					      			'<input class="span2" type="text" name="txtCorreo" id="txtCorreo_'+num+'" data-rule-email="true" data-msg-email="Debe ingresar un correo electronico válido."> <button class="btn btn-danger eliminarCamposCorreo" id="btnEliminarCampos_'+num+'" type="button"><i class="icon-minus icon-white"></i></button>'+
-					      		'</div>'+
+	$("#camposCorreo").append('<div class="form-group input-group" id="campoCorreo_'+num+'">'+
+					      		'<span class="input-group-addon">Correo Electrónico: </span>'+
+					      		'<input class="form-control" type="text" name="txtCorreo" id="txtCorreo_'+num+'" data-rule-email="true" data-msg-email="Debe ingresar un correo electronico válido." >'+
+					      		'<span class="input-group-btn"><button class="btn btn-outline btn-danger eliminarCamposCorreo" id="btnEliminarCampos_'+num+'" type="button"><i class="fa fa-minus"></i></button></span>'+
 					   		'</div>');
 	num++;
 });
@@ -157,11 +152,10 @@ $(document).on('click','.eliminarCamposCorreo', function(e){
 });
 var x=1;
 $(document).on('click','#btnGenerarTelefonos', function(e){
-	$("#camposTelefonos").append('<div class="control-group" id="campoTelefono_'+x+'">'+
-					      		'<label class="control-label">Teléfonos: </label>'+
-					      		'<div class="controls">'+
-					      			'<input class="span2" type="text" name="txtTelefonos" id="txtTelefonos_'+x+'" data-rule-number="true" data-rule-minlength="7" data-rule-maxlength="7" data-msg-number="Debe ingresar un número de teléfono válido."> <button class="btn btn-danger eliminarCamposTelefonos" id="btnEliminarTelefonos_'+x+'" type="button"><i class="icon-minus icon-white"></i></button>'+
-					      		'</div>'+
+	$("#camposTelefonos").append('<div class="form-group input-group" id="campoTelefono_'+x+'">'+
+					      		'<span class="input-group-addon">Teléfonos: </span>'+
+					      		'<input class="form-control" type="text" name="txtTelefonos" id="txtTelefonos_'+x+'" data-rule-number="true" data-rule-minlength="7" data-rule-maxlength="7" data-msg-number="Debe ingresar un número de teléfono válido." >'+
+					      		'<span class="input-group-btn"><button class="btn btn-outline btn-danger eliminarCamposTelefonos" id="btnEliminarTelefonos_'+x+'" type="button"><i class="fa fa-minus"></i></button></span>'+
 					   		'</div>');
 	x++;
 });
@@ -172,11 +166,10 @@ $(document).on('click','.eliminarCamposTelefonos', function(e){
 });
 var y=1;
 $(document).on('click','#btnGenerarCelulares', function(e){
-	$("#camposCelulares").append('<div class="control-group" id="campoCelulares_'+y+'">'+
-					      		'<label class="control-label">Celulares: </label>'+
-					      		'<div class="controls">'+
-					      			'<input class="span2" type="text" name="txtCelulares" id="txtCelulares_'+y+'" data-rule-number="true"  data-rule-minlength="9" data-rule-maxlength="9" data-msg-number="Debe ingresar un número de celular válido."> <button class="btn btn-danger eliminarCamposCelulares" id="btnEliminarCelulares_'+y+'" type="button"><i class="icon-minus icon-white"></i></button>'+
-					      		'</div>'+
+	$("#camposCelulares").append('<div class="form-group input-group" id="campoCelulares_'+y+'">'+
+					      		'<span class="input-group-addon">Celulares: </span>'+
+					      		'<input class="form-control" type="text" name="txtCelulares" id="txtCelulares_'+y+'" data-rule-number="true"  data-rule-minlength="9" data-rule-maxlength="9" data-msg-number="Debe ingresar un número de celular válido." >'+
+					      		'<span class="input-group-btn"><button class="btn btn-outline btn-danger eliminarCamposCelulares" id="btnEliminarCelulares_'+y+'" type="button"><i class="fa fa-minus"></i></button></span>'+
 					   		'</div>');
 	y++;
 });
@@ -187,11 +180,10 @@ $(document).on('click','.eliminarCamposCelulares', function(e){
 });
 var z=1;
 $(document).on('click','#btnGenerarDirecciones', function(e){
-	$("#camposDirecciones").append('<div class="control-group" id="campoDirecciones_'+z+'">'+
-					      		'<label class="control-label">Direcciones: </label>'+
-					      		'<div class="controls">'+
-					      			'<input class="span2" type="text" name="txtDirecciones" id="txtDirecciones_'+z+'"> <button class="btn btn-danger eliminarCamposDirecciones" id="btnEliminarDirecciones_'+z+'" type="button"><i class="icon-minus icon-white"></i></button>'+
-					      		'</div>'+
+	$("#camposDirecciones").append('<div class="form-group input-group" id="campoDirecciones_'+z+'">'+
+					      		'<span class="input-group-addon">Direcciones: </span>'+
+					      		'<input class="form-control" type="text" name="txtDirecciones" id="txtDirecciones_'+z+'" >'+
+					      		'<span class="input-group-btn"><button class="btn btn-outline btn-danger eliminarCamposDirecciones" id="btnEliminarDirecciones_'+z+'" type="button"><i class="fa fa-minus"></i></button></span>'+
 					   		'</div>');
 	z++;
 });
@@ -204,82 +196,88 @@ $(document).on('click','.eliminarCamposDirecciones', function(e){
 <!-- MOSTRAR DATOS DE CONTACTO -->
 <div id="divMostrarDatosContacto">
 	<div id="divMostrarContacto">
-		<form:form class="form-horizontal">
-			<legend>
-	       		<span class=""><span class="colored">///</span> Datos de Contacto del Sospechoso:</span>
-	       		<span class="offset3"><button class="btn btn-primary" type="button" id="btnEditarContacto"><i class="icon-edit"></i> Editar</button></span>
-       		</legend>
-       		<div class="control-group">
-          		<label class="control-label">Correo Electrónicos: </label>
-          		<div class="controls">
-          			<span id="spnCorreos">&nbsp;</span>
-          		</div>
-       		</div>
-       		<div class="control-group">
-          		<label class="control-label">Teléfonos: </label>
-          		<div class="controls">
-          			<span id="spnTelefonos">&nbsp;</span>
-          		</div>
-       		</div>
-       		<div class="control-group">
-          		<label class="control-label">Celulares: </label>
-          		<div class="controls">
-          			<span id="spnCelulares">&nbsp;</span>
-          		</div>
-       		</div>
-       		<div class="control-group">
-          		<label class="control-label">Direcciones: </label>
-          		<div class="controls">
-          			<span id="spnDirecciones">&nbsp;</span>
-          		</div>
-       		</div>
-		</form:form>
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<span>/// Datos de Contacto del Sospechoso:</span>
+				<div class="pull-right">
+					<div class="btn-group">
+						<button class="btn btn-outline btn-primary btn-sm" type="button" id="btnEditarContacto"><i class="fa fa-edit fa-fw"></i> Editar</button>
+					</div>
+				</div>
+			</div>
+			<div class="panel-body" id="divPerfilMostrar">
+				<div class="form-group">
+	          		<label>Correo Electrónicos: </label>
+	          		<span id="spnCorreos">&nbsp;</span>
+	       		</div>
+	       		<div class="form-group">
+	          		<label>Teléfonos: </label>
+	          		<span id="spnTelefonos">&nbsp;</span>
+	       		</div>
+	       		<div class="form-group">
+	          		<label>Celulares: </label>
+	          		<span id="spnCelulares">&nbsp;</span>
+	       		</div>
+	       		<div class="form-group">
+	          		<label>Direcciones: </label>
+	          		<span id="spnDirecciones">&nbsp;</span>
+	       		</div>
+			</div>
+		</div>
 	</div>
 	<!-- EDITAR DATOS DE CONTACTO -->
-	<fieldset class="well" style="display: none;" id="divEditarContacto">
-		<form:form class="form-horizontal" id="formEditarContacto" action="editarContacto" commandName="sospechoso">
-			<input type="hidden" name="idSospechoso" id="hdnIdSospechosoDatos">
-			<legend>
-		       	<span class="colored">///</span> Datos de Contacto del Sospechoso:
-	       	</legend>
-	       	<div class="control-group">
-          		<label class="control-label">Correo Electrónico: </label>
-          		<div class="controls">
-          			<input class="span2" type="text" name="txtCorreo" id="txtCorreo_0" data-rule-email="true" data-msg-email="Debe ingresar un correo electronico válido."> <button class="btn btn-success" id="btnGeneraCampos" type="button"><i class="icon-plus icon-white"></i></button>
-          		</div>
-       		</div>
-       		<div id="camposCorreo">
-       		</div>
-       		<div class="control-group">
-          		<label class="control-label">Teléfonos: </label>
-          		<div class="controls">
-          			<input class="span2" type="text" name="txtTelefonos" id="txtTelefonos_0" data-rule-number="true" data-rule-minlength="7" data-rule-maxlength="7" data-msg-number="Debe ingresar un número de teléfono válido."> <button class="btn btn-success" id="btnGenerarTelefonos" type="button"><i class="icon-plus icon-white"></i></button>
-          		</div>
-       		</div>
-       		<div id="camposTelefonos">
-       		</div>
-       		<div class="control-group">
-          		<label class="control-label">Celulares: </label>
-          		<div class="controls">
-          			<input class="span2" type="text" name="txtCelulares" id="txtCelulares_0" data-rule-number="true"  data-rule-minlength="9" data-rule-maxlength="9" data-msg-number="Debe ingresar un número de celular válido."> <button class="btn btn-success" id="btnGenerarCelulares" type="button"><i class="icon-plus icon-white"></i></button>
-          		</div>
-       		</div>
-       		<div id="camposCelulares">
-       		</div>
-       		<div class="control-group">
-          		<label class="control-label">Direcciones: </label>
-          		<div class="controls">
-          			<input class="span2" type="text" name="txtDirecciones" id="txtDirecciones_0"> <button class="btn btn-success" id="btnGenerarDirecciones" type="button"><i class="icon-plus icon-white"></i></button>
-          		</div>
-       		</div>
-       		<div id="camposDirecciones">
-       		</div>
-			<!-- BOTONES -->
-			<div class="form-actions">
-				<button class="btn btn-success" id="btnGuardar" type="submit"><i class="icon-ok icon-white"></i> Guardar</button>
-		        <button class="btn btn-danger" type="reset"><i class="icon-refresh icon-white"></i> Reset</button>
-		        <button class="btn btn-warning" type="button" id="btnCancelEditar"><i class="icon-arrow-left icon-white"></i> Cancel</button>
-		    </div>
-		</form:form>
-	</fieldset>
+	<div style="display: none;" id="divEditarContacto">
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<span>/// Datos de Contacto del Sospechoso:</span>
+			</div>
+			<div class="panel-body" id="divPerfilMostrar">
+				<form:form class="form-horizontal" id="formEditarContacto" action="editarContacto" commandName="sospechoso">
+					<input type="hidden" name="idSospechoso" id="hdnIdSospechosoDatos">
+					<div class="form-group input-group">
+						<span class="input-group-addon">Correo Electrónico: </span>
+		          		<input class="form-control" type="text" name="txtCorreo" id="txtCorreo_0" data-rule-email="true" data-msg-email="Debe ingresar un correo electronico válido." > 
+		          		<span class="input-group-btn">
+		          			<button class="btn btn-outline btn-success" id="btnGeneraCampos" type="button"><i class="fa fa-plus"></i></button>
+		          		</span>
+		       		</div>
+		       		<div id="camposCorreo">
+		       		</div>
+		       		<div class="form-group input-group">
+		          		<span class="input-group-addon">Teléfonos: </span>
+		          		<input class="form-control" type="text" name="txtTelefonos" id="txtTelefonos_0" data-rule-number="true" data-rule-minlength="7" data-rule-maxlength="7" data-msg-number="Debe ingresar un número de teléfono válido." > 
+		          		<span class="input-group-btn">
+		          			<button class="btn btn-outline btn-success" id="btnGenerarTelefonos" type="button"><i class="fa fa-plus"></i></button>
+		          		</span>
+		       		</div>
+		       		<div id="camposTelefonos">
+		       		</div>
+		       		<div class="form-group input-group">
+		       			<span class="input-group-addon">Celulares: </span>
+		          		<input class="form-control" type="text" name="txtCelulares" id="txtCelulares_0" data-rule-number="true"  data-rule-minlength="9" data-rule-maxlength="9" data-msg-number="Debe ingresar un número de celular válido."  >
+		          		<span class="input-group-btn">
+		          			<button class="btn btn-outline btn-success" id="btnGenerarCelulares" type="button"><i class="fa fa-plus"></i></button>
+		          		</span>
+		       		</div>
+		       		<div id="camposCelulares">
+		       		</div>
+		       		<div class="form-group input-group">
+		          		<span class="input-group-addon">Direcciones: </span>
+		          		<input class="form-control" type="text" name="txtDirecciones" id="txtDirecciones_0"  > 
+		          		<span class="input-group-btn">
+                        	<button class="btn btn-outline btn-success" id="btnGenerarDirecciones" type="button"><i class="fa fa-plus"></i></button>
+                        </span>
+		       		</div>
+		       		<div id="camposDirecciones">
+		       		</div>
+		       		<hr>
+		       		<div class="well">
+			       		<button class="btn btn-outline btn-success" id="btnGuardar" type="submit"><i class="fa fa-check"></i> Guardar</button>
+				        <button class="btn btn-outline btn-danger" type="reset"><i class="fa fa-refresh fa-fw"></i> Reset</button>
+				        <button class="btn btn-outline btn-warning" type="button" id="btnCancelEditar"><i class="fa fa-arrow-left"></i> Cancel</button>
+		       		</div>
+		       	</form:form>
+			</div>
+		</div>
+	</div>
 </div>
