@@ -35,20 +35,30 @@ var flag = false;
 function initAsignaCasos(casos){
 	indiceCaso = 0;
 	totalCasos = casos.length;
+	$("#divResultadoSearch").empty();
 	var resultado = '';
-	$("#tblBodyCasos").empty();
-		//$("#tblBody").empty();
+	resultado += '<table class="table table-striped table-bordered table-hover dataTable" id="tblCasos">'+
+						'<thead>'+
+							'<tr>'+
+								'<th style="width: 400px;">Caso Criminal</th>'+
+								'<th>Jefe De Unidad</th>'+
+								'<th>Asignar</th>'+
+							'</tr>'+
+						'</thead>'+
+						'<tbody id="tblBodyCasos">';
 		$.each(casos, function(i, caso) {
 			resultado += '<tr>';
-			resultado += '<td>'+caso.codigo+' ('+caso.referencia+')'+'<input type="hidden" name="idCaso" id="hdnCaso_'+indiceCaso+'" value="'+caso.idCasoCriminal+'"></td>';
-			resultado += '<td id="spnJefeDeUnidad_'+indiceCaso+'"></td>';
-			resultado += '<td id="btnAsignar_'+indiceCaso+'">'+
-						'<button class="btn btn-outline btn-info asignar" id="asignar_'+indiceCaso+'" data-toggle="modal" data-target="#myModal">Buscar</button>'+
-						'</td>';
+				resultado += '<td>'+caso.codigo+' ('+caso.referencia+')'+'<input type="hidden" name="idCaso" id="hdnCaso_'+indiceCaso+'" value="'+caso.idCasoCriminal+'"></td>';
+				resultado += '<td id="spnJefeDeUnidad_'+indiceCaso+'"></td>';
+				resultado += '<td>'+
+							'<button class="btn btn-outline btn-info asignar" id="asignar_'+indiceCaso+'" data-toggle="modal" data-target="#myModal">Buscar</button>'+
+							'</td>';
 			resultado += '</tr>';
 			indiceCaso++;
 		});
-		$("#tblBodyCasos").append(resultado);
+		resultado+='</tbody></table>';
+		
+		$("#divResultadoSearch").append(resultado);
 		$("#tblCasos").dataTable(); 
 }
 
@@ -129,7 +139,9 @@ $(document).ready(function(){
 			 		dataType: 'json',
 			 		data: '',
 			 		success: function(casos){
+			 			
 			 			getCasosInit();
+			 			
 			 			$("#alertasAsignarCaso").show();
 			 			$("#alertasAsignarCaso").append('<div class="alert alert-success" id="alertaVerde">'+
 								 			        '<a class="close" data-dismiss="alert">×</a>'+
@@ -161,17 +173,8 @@ $(document).ready(function(){
 			</div>
 			<div class="table-responsive">
 	       		<div id="divResultadoSearch" class="dataTables_wrapper form-inline" role="grid">
-					<table class="table table-striped table-bordered table-hover dataTable" id="tblCasos">
-						<thead>
-							<tr>
-								<th style="width: 400px;">Caso Criminal</th>
-								<th>Jefe De Unidad</th>
-								<th>Asignar</th>
-							</tr>
-						</thead>
-						<tbody id="tblBodyCasos">
-						</tbody> 
-					</table>
+					
+						
 				</div>
 			</div>
 		</div>

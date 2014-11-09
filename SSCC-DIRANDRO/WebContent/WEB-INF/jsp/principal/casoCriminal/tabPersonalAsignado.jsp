@@ -92,7 +92,7 @@ $(document).ready(function(){
 var jefeDeUnidad = 0;
 var policiasInv = 0;
 function iniPersonalAsignadoPorCaso(idCaso){
-	$("#cuerpoTable").empty();
+	$("#divResultadoSearch").empty();
 	$.ajax({
  		url: 'getPersonalAsignado-'+idCaso,
  		type: 'post',
@@ -100,6 +100,21 @@ function iniPersonalAsignadoPorCaso(idCaso){
  		data: '',
  		success: function(policias){
  			 var resultado = '';
+ 			 resultado += '<table class="table table-striped table-bordered table-hover dataTable" id="dataTablesPersonal">'+
+							'<thead>'+
+								'<tr>'+
+									'<td>Imagen</td>'+
+									'<td>Nombre Completo</td>'+
+									'<td>Cargo</td>'+
+									'<td>Jerarquía</td>'+
+									'<td>Grado</td>'+
+									'<td>N° Carnet</td>'+
+									'<td>Entidad</td>'+
+									'<td>Correo Electrónico</td>'+
+									'<td>Acción</td>'+
+								'</tr>'+
+							'</thead>'+
+							'<tbody id="cuerpoTable">';
 			//$("#divMostrarPersonal").empty();
 			$.each(policias, function(i, policia){
 				if(policia.cargo != 'Jefe de Unidad'){
@@ -122,8 +137,10 @@ function iniPersonalAsignadoPorCaso(idCaso){
 							'</tr>';
 				botonQuitar = '';
 			});
-			$("#cuerpoTable").append(resultado);
+			resultado += '</tbody></table>';
+			$("#divResultadoSearch").append(resultado);
 	  		$('#dataTablesPersonal').dataTable();
+	  		
 			if((jefeDeUnidad == 0 && policiasInv == 0) || (jefeDeUnidad == 0) || (policiasInv == 0)){
 				$("#alertasTab2").show();
 	 			$("#alertasTab2").append('<div class="alert alert-info" id="alertaVerde">'+
@@ -133,6 +150,7 @@ function iniPersonalAsignadoPorCaso(idCaso){
 			}else if(jefeDeUnidad > 0 && policiasInv > 0){
 				$("#alertasTab2").empty();
 			}
+			
  		}
  	});
 }
@@ -154,23 +172,8 @@ function iniPersonalAsignadoPorCaso(idCaso){
 		    	<div id="divMostrarPersonal">
 					<div class="table-responsive">
 			       		<div id="divResultadoSearch" class="dataTables_wrapper form-inline" role="grid">
-			       			<table class="table table-striped table-bordered table-hover dataTable" id="dataTablesPersonal">
-				  					<thead>
-					  					<tr>
-					  						<td>Imagen</td>
-					  						<td>Nombre Completo</td>
-					  						<td>Cargo</td>
-					  						<td>Jerarquía</td>
-					  						<td>Grado</td>
-					  						<td>N° Carnet</td>
-					  						<td>Entidad</td>
-					  						<td>Correo Electrónico</td>
-					  						<td>Acción</td>
-					  					</tr>
-		  							</thead>
-				  					<tbody id="cuerpoTable">
-				  					</tbody>
-	           				</table>
+			       			
+	           				
 	       				</div>
 	       			</div> 
 				</div>

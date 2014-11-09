@@ -36,26 +36,30 @@ var indicePol = 0;
 function initAsignaCasos(casos){
 	indiceCaso = 0;
 	totalCasos = casos.length;
-		$("#tblBody").empty();
+		$("#divResultadoSearch").empty();
 		var resultado ='';
+		resultado += '<table class="table table-striped table-bordered table-hover dataTable" id="tblCasos">'+
+						'<thead>'+
+							'<tr>'+
+								'<th style="width: 400px;">Caso Criminal</th>'+
+								'<th>Personal Policial</th>'+
+								'<th>Asignar</th>'+
+							'</tr>'+
+						'</thead>'+
+						'<tbody id="tblBody">';
 		$.each(casos, function(i, caso) {
 			resultado += '<tr>';
 			resultado += '<td>'+caso.codigo+' ('+caso.referencia+')'+'<input type="hidden" name="idCaso" id="hdnCaso_'+indiceCaso+'" value="'+caso.idCasoCriminal+'"></td>';
-				/*$("#tblBody").append('<td id="jefeDeUnidadCombo_'+indiceCaso+'"><select name="jefeDeUnidad" id="slctPol_'+indiceCaso+'"></select> <button class="btn btn-success btn-mini asignar" id="GuardarAsigna_'+indiceCaso+'" type="button"><i class="icon-plus icon-white"></i></button>'+
-											'<div id="divAsignadorAgregar_'+indiceCaso+'">'+
-								          	'</div></td>');*/
 			resultado += '<td id="tdAsignadorAgregar_'+indiceCaso+'"></td>'+
-		          	'<td><button class="btn btn-outline btn-info asignar" id="buscarPersonal_'+indiceCaso+'" type="button" data-toggle="modal" data-target="#modalPersonalPolicial">Buscar</td>';
+		          			'<td><button class="btn btn-outline btn-info asignar" id="buscarPersonal_'+indiceCaso+'" type="button" data-toggle="modal" data-target="#modalPersonalPolicial">Buscar</td>';
 		    resultado += '</tr>';
-
-			/*$("#slctPol_"+indiceCaso).empty();
-			$("#slctPol_"+indiceCaso).append(llenarCombo);*/
 			
 			indiceCaso++;
 		});
-		$("#tblBody").append(resultado);
+		resultado += '</tbody></table>';
+		$("#divResultadoSearch").append(resultado);
 
-			$("#tblCasos").dataTable(); 
+		$("#tblCasos").dataTable(); 
 }
 
 function traerCasos(){
@@ -200,17 +204,8 @@ $(document).on('click','.asignar', function(e){
 			</div>
 			<div class="table-responsive">
 	       		<div id="divResultadoSearch" class="dataTables_wrapper form-inline" role="grid">
-	       			<table class="table table-striped table-bordered table-hover dataTable" id="tblCasos">
-						<thead>
-							<tr>
-								<th style="width: 400px;">Caso Criminal</th>
-								<th>Personal Policial</th>
-								<th>Asignar</th>
-							</tr>
-						</thead>
-						<tbody id="tblBody">
-						</tbody>						
-					</table>
+	       			
+						
 	       		</div>
 	       	</div>			
 		</div>

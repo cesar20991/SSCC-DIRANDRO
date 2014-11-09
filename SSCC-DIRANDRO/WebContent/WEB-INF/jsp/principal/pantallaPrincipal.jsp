@@ -69,7 +69,7 @@ $(document).ready(function(e){
  					$('.CRLink'+i).attr('href', 'toCasoCriminal-'+CRs[i].split('-')[0]); //cambiar Link
  				}else{
  					$('#CRNumber'+i).text(CRs[i]);
- 					$('.CRLink'+i).attr('href', 'toSearchCR-'+CRStates[i]); // Cambiar Link
+ 					$('.CRLink'+i).attr('href', 'toBuscarCaso-'+CRStates[i]); // Cambiar Link
  				}
  				
  			}
