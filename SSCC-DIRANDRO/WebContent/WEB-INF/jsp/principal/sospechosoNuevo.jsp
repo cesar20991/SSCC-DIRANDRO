@@ -216,35 +216,23 @@ $(document).on('change','#txtCodUnico', function(e){
 			       		<input class="span2" type="hidden" name="fechaDeNacimiento" id="hdnFecNac">
 			       		<div class="form-group">
 			          		<label class="control-label">Departamento de Nacimiento: </label>
-			          		<input class="form-control" type="text" name="departamentoDeNacimiento">
+			          		<select class="form-control" name="departamentoDeNacimiento">
+			          			<jsp:include page="../componentes/selectDepartamento.jsp" />
+			          		</select>
 			       		</div>
 			       		<div class="form-group">
 			          		<label>Provincia de Nacimiento: </label>
-				          	<input class="form-control" type="text" name="provinciaDeNacimiento">
+			          		<select class="form-control" name="provinciaDeNacimiento">
+			          			<jsp:include page="../componentes/selectProvincia.jsp" />
+			          		</select>
+				          	<!-- <input class="form-control" type="text" name="provinciaDeNacimiento"> -->
 			       		</div>
 			       		<div class="form-group">
 			          		<label>Distrito de Nacimiento: </label>
-			          		<input class="form-control" type="text" name="distritoDeNacimiento">
-			       		</div>
-			       		<div class="form-group">
-			          		<label>Grado de Instrucción: </label>
-		          			<select class="form-control" name="gradoDeInstruccion">
-		          				<option value="">No Precisa</option>
-		          				<option>Preescolar</option>
-		          				<option>Primaria</option>
-		          				<option>Secundaria</option>
-		          				<option>Superior</option>
-				            </select>
-			       		</div>
-			       		<div class="form-group">
-			          		<label>Estado Civil: </label>
-		          			<select class="form-control" name="estadoCivil" id="sltcEstadoCivil">
-		          				<option value="">No Precisa</option>
-		          				<option>Casado</option>
-		          				<option>Divorciado</option>
-		          				<option>Soltero</option>
-		          				<option>Viudo</option>
-				            </select>
+			          		<select class="form-control" name="provinciaDistrito">
+			          			<jsp:include page="../componentes/selectDistrito.jsp" />
+			          		</select>
+			          		<!-- <input class="form-control" type="text" name="distritoDeNacimiento"> -->
 			       		</div>
 					</div>
 					<div class="col-lg-5 col-md-offset-1">
@@ -291,19 +279,45 @@ $(document).on('change','#txtCodUnico', function(e){
 			       		</div>
 			       		<div class="form-group">
 			          		<label>Departamento de Domicilio: </label>
-			          		<input class="form-control" type="text" name="departamentoDeDomicilio">
+			          		<select class="form-control" name="departamentoDeDomicilio">
+			          			<jsp:include page="../componentes/selectDepartamento.jsp" />
+			          		</select>
 			       		</div>
 			       		<div class="form-group">
 			          		<label>Provincia de Domicilio: </label>
-			          		<input class="form-control" type="text" name="provinciaDeDomicilio">
+			          		<select class="form-control" name="provinciaDeDomicilio">
+			          			<jsp:include page="../componentes/selectProvincia.jsp" />
+			          		</select>
 			       		</div>
 			       		<div class="form-group">
 			          		<label>Distrito de Domicilio: </label>
-			          			<input class="form-control" type="text" name="distritoDeDomicilio">
+			          		<select class="form-control" name="distritoDeDomicilio">
+			          			<jsp:include page="../componentes/selectDistrito.jsp" />
+			          		</select>
 			       		</div>
-			       		<div class="form-group">
+			       		<!-- <div class="form-group">
 			          		<label>Multas Electorales: </label>
 			          		<input class="form-control" type="text" name="multasElectoraleso">
+			       		</div> -->
+			       		<div class="form-group">
+			          		<label>Grado de Instrucción: </label>
+		          			<select class="form-control" name="gradoDeInstruccion">
+		          				<option value="">No Precisa</option>
+		          				<option>Preescolar</option>
+		          				<option>Primaria</option>
+		          				<option>Secundaria</option>
+		          				<option>Superior</option>
+				            </select>
+			       		</div>
+			       		<div class="form-group">
+			          		<label>Estado Civil: </label>
+		          			<select class="form-control" name="estadoCivil" id="sltcEstadoCivil">
+		          				<option value="">No Precisa</option>
+		          				<option>Casado</option>
+		          				<option>Divorciado</option>
+		          				<option>Soltero</option>
+		          				<option>Viudo</option>
+				            </select>
 			       		</div>
 					</div>		
 					<hr class="col-lg-12">			
