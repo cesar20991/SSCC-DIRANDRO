@@ -23,8 +23,8 @@ public class Mueble {
 	@Column(nullable=true, length=250)
 	private String descripcion;
 	
-	/*@Column(nullable=false)
-	private Integer tipo;*/
+	@Column(nullable=false)
+	private Integer tipo;
 	
 	@Column(nullable=true, length=30)
 	private String nombreTipo;
@@ -123,5 +123,13 @@ public class Mueble {
 
 	public void setEstadoDeConservasion(String estadoDeConservasion) {
 		this.estadoDeConservasion = estadoDeConservasion;
+	}
+
+	public Integer getTipo() {
+		return tipo;
+	}
+
+	public void setTipo(Integer tipo) {
+		this.tipo = tipo;
 	}
 }
