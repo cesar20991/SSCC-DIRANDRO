@@ -16,11 +16,14 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.sscc.form.ArchivoBean;
+import com.sscc.form.InmuebleBean;
 import com.sscc.form.PerfilBean;
 import com.sscc.form.SospechosoBean;
+import com.sscc.form.VehiculoBean;
 import com.sscc.form.adjuntoBean;
 import com.sscc.model.Archivo;
 import com.sscc.service.ArchivosService;
+import com.sscc.service.BienService;
 import com.sscc.service.PerfilService;
 import com.sscc.service.SospechosoService;
 
@@ -35,6 +38,9 @@ public class ArchivosController {
 	
 	@Autowired
 	SospechosoService sospechosoServ;
+	
+	@Autowired
+	BienService bienserv;
 
 	@RequestMapping(value="newArchivo", method= RequestMethod.POST)
 	@ResponseBody
@@ -106,6 +112,30 @@ public class ArchivosController {
 
 		if(archivoServ.asignarArchivoSospechoso(archivo.getUrl(), idEntidad, session)){
 			return sospechosoServ.getSospechosoBean(idEntidad);
+		}else{
+			return null;
+		}
+		
+	}
+	
+	@RequestMapping(value="asignarArchivoInmueble-{idEntidad}", method= RequestMethod.POST)
+	@ResponseBody
+	public InmuebleBean asignarArchivoInmueble(@ModelAttribute Archivo archivo, @PathVariable("idEntidad") Integer idEntidad, HttpServletRequest request, HttpServletResponse res, HttpSession session){
+
+		if(archivoServ.asignarArchivoInmueble(archivo.getUrl(), idEntidad, session)){
+			return bienserv.getInmuebleBean(idEntidad);
+		}else{
+			return null;
+		}
+		
+	}
+	
+	@RequestMapping(value="asignarArchivoVehiculo-{idEntidad}", method= RequestMethod.POST)
+	@ResponseBody
+	public VehiculoBean asignarArchivoVehiculo(@ModelAttribute Archivo archivo, @PathVariable("idEntidad") Integer idEntidad, HttpServletRequest request, HttpServletResponse res, HttpSession session){
+
+		if(archivoServ.asignarArchivoVehiculo(archivo.getUrl(), idEntidad, session)){
+			return bienserv.getVehiculoBean(idEntidad);
 		}else{
 			return null;
 		}

@@ -30,6 +30,7 @@ public class VehiculoBean {
 	private Integer pasajeros;
 	private Integer asientos;
 	private Date fecFabricacion;
+	private String urlVehiculo;
 
 	// usuario
 	private String correoElectronico;
@@ -227,5 +228,11 @@ public class VehiculoBean {
 	}
 	public void setValor(Double valor) {
 		this.valor = valor;
+	}
+	public String getUrlVehiculo() {
+		return urlVehiculo;
+	}
+	public void setUrlVehiculo(String urlVehiculo) {
+		this.urlVehiculo = urlVehiculo;
 	}
 }

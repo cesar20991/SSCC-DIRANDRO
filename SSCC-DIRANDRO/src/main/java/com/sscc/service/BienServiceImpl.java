@@ -114,6 +114,7 @@ public class BienServiceImpl implements BienService {
 		vb.setAsientos(v.getAsientos());
 		vb.setColor(v.getColor());
 		vb.setFecFabricacion(v.getFecFabricacion());
+		vb.setUrlVehiculo(v.getUrlVehiculo());
 
 		return vb;
 	}
@@ -219,6 +220,7 @@ public class BienServiceImpl implements BienService {
 		ib.setLatitud(i.getLatitud());
 		ib.setLongitud(i.getLongitud());
 		ib.setAntiguedad(i.getAntiguedad());
+		ib.setUrlInmueble(i.getUrlInmueble());
 		System.out.println("IdInmueble = " + ib.getIdInmueble());
 		return ib;
 	}
@@ -403,6 +405,11 @@ public class BienServiceImpl implements BienService {
 			ib.setPartidaRegistral(b.getPartidaRegistral());
 			ib.setPisos(in.getPisos());
 			ib.setValor(b.getValor());
+			if(in.getUrlInmueble().equals(null)){
+				ib.setUrlInmueble("img/casaVerde.jpg");
+			}else{
+				ib.setUrlInmueble(in.getUrlInmueble());
+			}
 			
 			lib.add(ib);
 		}		
@@ -443,6 +450,11 @@ public class BienServiceImpl implements BienService {
 			vb.setPlaca(v.getPlaca());
 			vb.setRuedas(v.getRuedas());
 			vb.setValor(b.getValor());
+			if(v.getUrlVehiculo().equals(null)){
+				vb.setUrlVehiculo("img/timon.jpg");
+			}else{
+				vb.setUrlVehiculo(v.getUrlVehiculo());
+			}			
 			
 			lvb.add(vb);
 		}		

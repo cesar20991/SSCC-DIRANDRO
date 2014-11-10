@@ -23,4 +23,8 @@ public interface ArchivosService {
 	Boolean asignarArchivo(String url, Integer idEntidad, HttpSession session);
 	
 	Boolean asignarArchivoSospechoso(String url, Integer idEntidad, HttpSession session);
+	
+	Boolean asignarArchivoInmueble(String url, Integer idEntidad, HttpSession session);
+	
+	Boolean asignarArchivoVehiculo(String url, Integer idEntidad, HttpSession session);
 }

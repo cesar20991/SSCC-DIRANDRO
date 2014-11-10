@@ -42,7 +42,7 @@ $(document).ready(function(e){
 			 
 	  			$.each(inmuebles, function(i, inmueble){
 	  				resultado += '<tr>'+
-				                    '<td><a href="toInmueble-'+inmueble.idInmueble+'"><img src="img/casaVerde.jpg" alt="foto" style="width: 90px; height: 120px;"/></a></td>'+
+				                    '<td><a href="toInmueble-'+inmueble.idInmueble+'"><img src="'+inmueble.urlInmueble+'" alt="foto" style="width: 90px; height: 120px;"/></a></td>'+
 				                    '<td>'+inmueble.codigo+'</td>'+
 				                    '<td>'+inmueble.partidaRegistral+'</td>'+
 				                    '<td>'+inmueble.valor+'</td>'+

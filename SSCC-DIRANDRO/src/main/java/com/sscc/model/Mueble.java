@@ -124,8 +124,4 @@ public class Mueble {
 	public void setEstadoDeConservasion(String estadoDeConservasion) {
 		this.estadoDeConservasion = estadoDeConservasion;
 	}
-	
-	
-	
-	
 }

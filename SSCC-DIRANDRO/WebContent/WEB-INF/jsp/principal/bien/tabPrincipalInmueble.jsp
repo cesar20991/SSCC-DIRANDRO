@@ -18,6 +18,10 @@ function initInmueble(inmueble){
 	$("#hdrPartida").append(inmueble.partidaRegistral);
 	$("#hdrValor").append(inmueble.valor);
 	$("#hdrCreador").append('<a href="toPerfil-'+inmueble.idPerfil+'">'+inmueble.primerNombre+ ' ' +inmueble.segundoNombre+ ' ' +inmueble.apePaterno+ ' ' +inmueble.apeMaterno+ '</a>');
+	if(inmueble.urlInmueble != null){
+		$("#tdImagen").empty();
+		$("#tdImagen").append('<img src="'+inmueble.urlInmueble+'" alt="foto" style="width: 90px; height: 120px;"/>');
+	}
 	
 	// Cuerpo
 	$("#spnCodigo").empty();

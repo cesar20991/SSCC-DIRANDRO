@@ -20,6 +20,7 @@ public class InmuebleBean {
 	private Double latitud;
 	private Double longitud;
 	private Integer antiguedad;
+	private String urlInmueble;
 
 	// usuario
 	private String correoElectronico;
@@ -233,6 +234,14 @@ public class InmuebleBean {
 
 	public void setIdSospechoso(Integer idSospechoso) {
 		this.idSospechoso = idSospechoso;
+	}
+
+	public String getUrlInmueble() {
+		return urlInmueble;
+	}
+
+	public void setUrlInmueble(String urlInmueble) {
+		this.urlInmueble = urlInmueble;
 	}
 
 }

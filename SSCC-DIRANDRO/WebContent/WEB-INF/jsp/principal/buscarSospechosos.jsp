@@ -69,9 +69,7 @@ $(document).ready(function(e){
 				                '</tr>';		            	
 	  			});
 	  		$("#dataTablesPersonal").append(resultado);
-	  		$('#dataTablesPersonal').dataTable({
-  				"scrollX": true
-  			});
+	  		$('#dataTablesPersonal').dataTable();
   		}
   	});  	
 	
@@ -91,7 +89,7 @@ $(document).ready(function(e){
 	    	<div class="col-lg-12" id="titulo">
 	        	<h2 class="page-header">Sistema de Seguimiento de Casos Criminales para la DIRANDRO</h2>
 	       	</div>
-	       	<div id="divScroll">
+	       	<div id="divScroll" style="overflow-x: scroll; width: 98%;">
 	       		<div class="table-responsive">
 		       		<div id="divResultadoSearch" class="dataTables_wrapper form-inline" role="grid">
 		       			<table class="table table-striped table-bordered table-hover dataTable" id="dataTablesPersonal">

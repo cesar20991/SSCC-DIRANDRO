@@ -202,7 +202,39 @@ public class ArchivosServiceImpl implements ArchivosService{
 
 		return result;
 	}
-	/*else if(tipoEntidad == "sospechoso"){
+	
+	@Transactional
+	public Boolean asignarArchivoInmueble(String url, Integer idEntidad, HttpSession session) {
+		boolean result = false;
+
+		try{
+			Inmueble s = em.find(Inmueble.class, idEntidad);
+			Inmueble sEdit = em.merge(s);
 			
-		}*/
+			sEdit.setUrlInmueble(url);
+			result = true;
+		}catch(Exception e){
+			result = false;
+		}	
+
+		return result;
+	}
+	
+	@Transactional
+	public Boolean asignarArchivoVehiculo(String url, Integer idEntidad, HttpSession session) {
+		boolean result = false;
+
+		try{
+			Vehiculo s = em.find(Vehiculo.class, idEntidad);
+			Vehiculo sEdit = em.merge(s);
+			
+			sEdit.setUrlVehiculo(url);
+			result = true;
+		}catch(Exception e){
+			result = false;
+		}	
+
+		return result;
+	}
+	
 }

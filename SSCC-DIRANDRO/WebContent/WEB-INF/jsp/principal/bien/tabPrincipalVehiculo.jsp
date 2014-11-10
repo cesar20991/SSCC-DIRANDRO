@@ -24,6 +24,10 @@ function initVehiculo(vehiculo){
 	$("#hdrDescripcion").append(vehiculo.descripcion);
 	$("#hdrValor").append(vehiculo.valor);
 	$("#hdrCreador").append('<a href="toPerfil-'+vehiculo.idPerfil+'">'+vehiculo.primerNombre+ ' ' +vehiculo.segundoNombre+ ' ' +vehiculo.apePaterno+ ' ' +vehiculo.apeMaterno+'</a>');
+	if(vehiculo.urlVehiculo != null){
+		$("#tdImagen").empty();
+		$("#tdImagen").append('<img src="'+vehiculo.urlVehiculo+'" alt="foto" style="width: 90px; height: 120px;"/>');
+	}
 	
 	// Cuerpo
 	$("#spnCodigo").empty();

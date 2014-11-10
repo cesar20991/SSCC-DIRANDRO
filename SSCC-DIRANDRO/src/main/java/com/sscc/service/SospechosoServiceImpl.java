@@ -364,7 +364,11 @@ public class SospechosoServiceImpl implements SospechosoService{
 			sb.setSexo(s.getSexo());
 			sb.setTatuaje(rp.getTatuaje());
 			sb.setTelefonos(s.getTelefonos());
-			sb.setUrlSospechoso(s.getUrlSospechoso());
+			if(s.getUrlSospechoso() == null){
+				sb.setUrlSospechoso("img/skills.png");				
+			}else{
+				sb.setUrlSospechoso(s.getUrlSospechoso());
+			}
 			sb.setNombreCompleto(s.getPreNombres()+" "+s.getPrimerApellido()+" "+s.getSegundoApellido());
 			sbl.add(sb);
 		}

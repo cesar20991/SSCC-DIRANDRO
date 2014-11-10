@@ -24,6 +24,10 @@ function initArchivos(archivos){
 				btnUsar = btnUsar + '<button class="btn btn-outline btn-primary btn-circle accion" type="button" id="usarS_'+archivo.idArchivo+'"><i class="fa fa-user fa-fw"></i></button>';
 			}else if(tipoEntidad == 'usuario'){
 				btnUsar = btnUsar + '<button class="btn btn-outline btn-primary btn-circle accion" type="button" id="usarU_'+archivo.idArchivo+'"><i class="fa fa-user fa-fw"></i></button>';
+			}else if(tipoEntidad == 'inmueble'){
+				btnUsar = btnUsar + '<button class="btn btn-outline btn-primary btn-circle accion" type="button" id="usarI_'+archivo.idArchivo+'"><i class="fa fa-user fa-fw"></i></button>';
+			}else if(tipoEntidad == 'vehiculo'){
+				btnUsar = btnUsar + '<button class="btn btn-outline btn-primary btn-circle accion" type="button" id="usarV_'+archivo.idArchivo+'"><i class="fa fa-user fa-fw"></i></button>';
 			}
 			
 			if(archivo.tipoArchivo == "image/jpeg" | archivo.tipoArchivo == "image/png"){
@@ -176,6 +180,54 @@ $(document).on('click','.accion', function(e){
 				 			        '<strong id="msgVerde">No es posible asignar el archivo.</strong>'+
 				 			    '</div>');
 			}			
+		break;
+		case "usarI":
+			if($("#tblTipoArchivo_"+id1).text() == 'image/jpeg' | $("#tblTipoArchivo_"+id1).text() == 'image/png' | $("#tblTipoArchivo_"+id1).text() == 'image/gif'){
+				$.ajax({
+					url: 'asignarArchivoInmueble-'+idEntidad,
+			 		type: 'post',
+			 		dataType: 'json',
+			 		data: $("#formEditarArchivo_"+id1).serialize(),
+			 		success: function(inmueble){
+			 			$("#alertasArchivos").show();
+						$("#alertasArchivos").append('<div class="alert alert-success" id="alertaVerde">'+
+						 			        '<a class="close" data-dismiss="alert">×</a>'+
+						 			        '<strong id="msgVerde">Imagen asignada correctamente.</strong>'+
+						 			    '</div>');
+						initInmueble(inmueble);	
+			 		}
+				});
+			}else{
+				$("#alertasArchivos").show();
+				$("#alertasArchivos").append('<div class="alert alert-danger" id="alertaVerde">'+
+				 			        '<a class="close" data-dismiss="alert">×</a>'+
+				 			        '<strong id="msgVerde">No es posible asignar el archivo.</strong>'+
+				 			    '</div>');
+			}
+		break;
+		case "usarV":
+			if($("#tblTipoArchivo_"+id1).text() == 'image/jpeg' | $("#tblTipoArchivo_"+id1).text() == 'image/png' | $("#tblTipoArchivo_"+id1).text() == 'image/gif'){
+				$.ajax({
+					url: 'asignarArchivoVehiculo-'+idEntidad,
+			 		type: 'post',
+			 		dataType: 'json',
+			 		data: $("#formEditarArchivo_"+id1).serialize(),
+			 		success: function(vehiculo){
+			 			$("#alertasArchivos").show();
+						$("#alertasArchivos").append('<div class="alert alert-success" id="alertaVerde">'+
+						 			        '<a class="close" data-dismiss="alert">×</a>'+
+						 			        '<strong id="msgVerde">Imagen asignada correctamente.</strong>'+
+						 			    '</div>');
+						initVehiculo(vehiculo);	
+			 		}
+				});
+			}else{
+				$("#alertasArchivos").show();
+				$("#alertasArchivos").append('<div class="alert alert-danger" id="alertaVerde">'+
+				 			        '<a class="close" data-dismiss="alert">×</a>'+
+				 			        '<strong id="msgVerde">No es posible asignar el archivo.</strong>'+
+				 			    '</div>');
+			}
 		break;
 	}
 	

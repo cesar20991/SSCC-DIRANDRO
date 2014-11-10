@@ -38,15 +38,13 @@ $(document).ready(function(e){
   		data: '',
   		success: function(vehiculos){
 			 var resultado = '';
-			 
 	  			$.each(vehiculos, function(i, vehiculo){
 	  				 resultado += '<tr>'+
-				                    '<td><a href="toVehiculo-'+vehiculo.idVehiculo+'"><img src="img/timon.jpg" alt="foto" style="width: 90px; height: 120px;"/></a></td>'+
+				                    '<td><a href="toVehiculo-'+vehiculo.idVehiculo+'"><img src="'+vehiculo.urlVehiculo+'" alt="foto" style="width: 90px; height: 120px;"/></a></td>'+
 				                    '<td>'+vehiculo.codigo+'</td>'+
 				                    '<td>'+vehiculo.partidaRegistral+'</td>'+
 				                    '<td>'+vehiculo.valor+'</td>'+
 				                    '<td>'+vehiculo.descripcion+'</td>'+
-				                    
 				                    '<td>'+vehiculo.altura+'</td>'+
 				                    '<td>'+vehiculo.ancho+'</td>'+
 				                    '<td>'+vehiculo.longitud+'</td>'+
@@ -67,9 +65,7 @@ $(document).ready(function(e){
 	  				
 	  			});
 	  			$("#dataTablesPersonal").append(resultado);
-	  			$('#dataTablesPersonal').dataTable({
-	  				"scrollX": true
-	  			});
+	  			$('#dataTablesPersonal').dataTable();
   		}
   	});   	
 	
@@ -89,7 +85,7 @@ $(document).ready(function(e){
 	    	<div class="col-lg-12" id="titulo">
 	        	<h2 class="page-header">Sistema de Seguimiento de Casos Criminales para la DIRANDRO</h2>
 	       	</div>
-	       	<div id="divScroll">
+	       	<div id="divScroll" style="overflow-x: scroll; width: 98%;">
 		       	<div class="table-responsive">
 		       		<div id="divResultadoSearch" class="dataTables_wrapper form-inline" role="grid">
 		       			<table class="table table-striped table-bordered table-hover dataTable" id="dataTablesPersonal">
@@ -98,24 +94,24 @@ $(document).ready(function(e){
 				  						<th>Imagen</th>
 				  						<th>Código</th>
 				  						<th>partida Registral</th>
-				  						<th>valor</th>
-				  						<th>descripcion</th>
-				  						<th>altura</th>
-				  						<th>ancho</th>
-				  						<th>longitud</th>
-				  						<th>peso Bruto</th>
-				  						<th>pesoNeto</th>
-				  						<th>placa</th>
-				  						<th>marca</th>
-				  						<th>modelo</th>
-				  						<th>chasis</th>
-				  						<th>motor</th>
-				  						<th>ruedas</th>
-				  						<th>ejes</th>
-				  						<th>pasajeros</th>
-				  						<th>asientos</th>
-				  						<th>color</th>
-				  						<th>fecha de Fabricacion</th>
+				  						<th>(S/.) Valor</th>
+				  						<th>Descripcion</th>
+				  						<th>Altura</th>
+				  						<th>Ancho</th>
+				  						<th>Longitud</th>
+				  						<th>Peso Bruto</th>
+				  						<th>Peso Neto</th>
+				  						<th>Placa</th>
+				  						<th>Marca</th>
+				  						<th>Modelo</th>
+				  						<th>Chasis</th>
+				  						<th>Motor</th>
+				  						<th># Ruedas</th>
+				  						<th># Ejes</th>
+				  						<th># Pasajeros</th>
+				  						<th># Asientos</th>
+				  						<th>Color</th>
+				  						<th>Fecha de Fabricacion</th>
 				  					</tr>
 			  					</thead>
 		           		</table>
