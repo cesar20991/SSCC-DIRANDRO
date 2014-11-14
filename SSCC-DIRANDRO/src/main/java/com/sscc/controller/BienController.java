@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.sscc.form.BienBean;
 import com.sscc.form.CasoCriminalBean;
 import com.sscc.form.InmuebleBean;
+import com.sscc.form.MuebleBean;
 import com.sscc.form.SospechosoBean;
 import com.sscc.form.VehiculoBean;
 import com.sscc.model.Sospechoso;
@@ -57,7 +58,7 @@ public class BienController {
 	}
 
 	
-	@RequestMapping(value ="asignarBienToSospechoso-{idBien}-{idSospechoso}",method= RequestMethod.POST)
+	/*@RequestMapping(value ="asignarBienToSospechoso-{idBien}-{idSospechoso}",method= RequestMethod.POST)
 	@ResponseBody
 	public List<BienBean> toBuscarBien(@PathVariable("idBien")Integer idBien,@PathVariable("idSospechoso")Integer idSospechoso) {
 		if(bienServ.asignarBienToSospechoso(idBien, idSospechoso)){
@@ -65,7 +66,7 @@ public class BienController {
 		}
 		return null;
 	}
-	
+	*/
 	@RequestMapping(value = "desAsignarBienToSospechoso-{idSospechoso}-{idBien}", method = RequestMethod.POST)
 	@ResponseBody
 	public List<BienBean> desAsignarBienToSospechoso(@PathVariable("idSospechoso") Integer idSospechoso,@PathVariable("idBien") Integer idBien){
@@ -161,14 +162,6 @@ public class BienController {
 		return vehiculoBean;
 	}
 	
-	// BIENES
-	@RequestMapping(value = "getBienes", method = RequestMethod.POST)
-	@ResponseBody
-	public List<BienBean> getBienes(){
-		List<BienBean> bienes=new ArrayList<BienBean>();
-		bienes = bienServ.getBienesBean();
-		return bienes;
-	}
 	//Validaciones_Bienes:
 	@RequestMapping(value = "getPartidaRegistral-{partidaRegistral}", method = RequestMethod.POST)
 	@ResponseBody
@@ -192,16 +185,66 @@ public class BienController {
 	@RequestMapping(value = "getInmueblesBuscar", method = RequestMethod.POST)
 	@ResponseBody
 	public List<InmuebleBean> getInmueblesBuscar(){
-		List<InmuebleBean> inmuebleB = new ArrayList<InmuebleBean>();
-		inmuebleB = bienServ.getInmueblesBuscar();
-		return inmuebleB;
+		List<InmuebleBean> bienes = new ArrayList<InmuebleBean>();
+		bienes = bienServ.getInmueblesBuscar();
+		return bienes;
 	}
 	//buscar
 	@RequestMapping(value = "getVehiculosBuscar", method = RequestMethod.POST)
 	@ResponseBody
 	public List<VehiculoBean> getVehiculosBuscar(){
-		List<VehiculoBean> vehiculoB = new ArrayList<VehiculoBean>();
-		vehiculoB = bienServ.getVehiculosBuscar();
-		return vehiculoB;
+		List<VehiculoBean> bienes = new ArrayList<VehiculoBean>();
+		bienes = bienServ.getVehiculosBuscar();
+		return bienes;
 	}
+	
+	// BIENES mueble
+	@RequestMapping(value = "getBienesMuebles-{idSospechoso}", method = RequestMethod.POST)
+	@ResponseBody
+	public List<MuebleBean> getBienesMuebles(@PathVariable("idSospechoso") Integer idSospechoso){
+		List<MuebleBean> bienes=new ArrayList<MuebleBean>();
+		bienes = bienServ.getBienesMuebles(idSospechoso);
+		return bienes;
+	}
+	// BIENES inmueble
+	@RequestMapping(value = "asignarInmuebleToSospechoso-{idSospechoso}-{idBien}", method = RequestMethod.POST)
+	@ResponseBody
+	public Boolean asignarInmuebleToSospechoso(@PathVariable("idSospechoso") Integer idSospechoso,@PathVariable("idBien") Integer idBien){
+		//List<InmuebleBean> bienes=new ArrayList<InmuebleBean>();
+		if(bienServ.asignarInmueble(idSospechoso,idBien)){
+			return true;
+		}else{
+			return false;
+		}		
+	}
+	
+	// BIENES vehiculo
+	@RequestMapping(value = "asignarVehiculoToSospechoso-{idSospechoso}-{idBien}", method = RequestMethod.POST)
+	@ResponseBody
+	public Boolean asignarVehiculoToSospechoso(@PathVariable("idSospechoso") Integer idSospechoso,@PathVariable("idBien") Integer idBien){
+		//List<VehiculoBean> bienes=new ArrayList<VehiculoBean>();
+		if(bienServ.asignarInmueble(idSospechoso,idBien)){
+			return true;
+		}else{
+			return false;
+		}
+	}
+	
+	//buscar
+	@RequestMapping(value = "getInmueblesPorSospechoso-{idSospechoso}", method = RequestMethod.POST)
+	@ResponseBody
+	public List<InmuebleBean> getInmueblesPorSospechoso(@PathVariable("idSospechoso") Integer idSospechoso){
+		List<InmuebleBean> bienes = new ArrayList<InmuebleBean>();
+		bienes = bienServ.getInmueblesBuscarPorSospechoso(idSospechoso);
+		return bienes;
+	}
+	//buscar
+	@RequestMapping(value = "getVehiculosPorSospechoso-{idSospechoso}", method = RequestMethod.POST)
+	@ResponseBody
+	public List<VehiculoBean> getVehiculosPorSospechoso(@PathVariable("idSospechoso") Integer idSospechoso){
+		List<VehiculoBean> bienes = new ArrayList<VehiculoBean>();
+		bienes = bienServ.getVehiculosBuscarPorSospechoso(idSospechoso);
+		return bienes;
+	}
+	
 }

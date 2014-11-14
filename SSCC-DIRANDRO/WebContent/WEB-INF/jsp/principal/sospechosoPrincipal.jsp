@@ -13,6 +13,7 @@
 <link href="css/bootstrap.min.css" rel="stylesheet">
 <link href="css/datepicker.css" rel="stylesheet">
 <link href="css/plugins/metisMenu/metisMenu.min.css" rel="stylesheet">
+<link href="css/plugins/dataTables.bootstrap.css" rel="stylesheet">
 <link href="css/plugins/timeline.css" rel="stylesheet">
 <link href="css/sb-admin-2.css" rel="stylesheet">
 <link href="css/plugins/morris.css" rel="stylesheet">
@@ -22,6 +23,8 @@
 <script src="js/bootstrap.min.js"></script>
 <script src="js/bootstrap-datepicker.js"></script>
 <script src="js/bootstrap-datepicker.es.js"></script>
+<script src="js/plugins/dataTables/jquery.dataTables.js"></script>
+<script src="js/plugins/dataTables/dataTables.bootstrap.js"></script>
 <script src="js/plugins/metisMenu/metisMenu.min.js"></script>
 <script src="js/sb-admin-2.js"></script>
 <script src="js/jquery.validate.min.js"></script>

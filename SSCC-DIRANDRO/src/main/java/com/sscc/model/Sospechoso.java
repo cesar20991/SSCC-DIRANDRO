@@ -94,8 +94,17 @@ public class Sospechoso {
 	
 	@OneToMany(mappedBy = "sospechoso")
 	private Collection<Archivo> archivos;
+	
+	@OneToMany(mappedBy = "sospechoso")
+	private Collection<Mueble> muebles;
 
 	
+	public Collection<Mueble> getMuebles() {
+		return muebles;
+	}
+	public void setMuebles(Collection<Mueble> muebles) {
+		this.muebles = muebles;
+	}
 	public Integer getIdSospechoso() {
 		return idSospechoso;
 	}

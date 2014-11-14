@@ -23,11 +23,11 @@ public class Mueble {
 	@Column(nullable=true, length=250)
 	private String descripcion;
 	
-	@Column(nullable=false)
-	private Integer tipo;
+	@Column(nullable=true, length=90)
+	private String tipo;
 	
-	@Column(nullable=true, length=30)
-	private String nombreTipo;
+	@Column(nullable=true, length=90)
+	private String especificarTipo;
 	
 	@Column(nullable=true, length=180)
 	private String estadoDeConservasion;//bueno, regular, inservible o inoperativo
@@ -37,22 +37,22 @@ public class Mueble {
 
 	@Column(nullable=false)
 	private String estado;
-	
-	@ManyToOne
-	@JoinColumn(name = "idUsuario")
-	private Usuario usuario;
-	
+
 	@Column(nullable = false)
 	private Timestamp fecCreacion;
 	
-	public Usuario getUsuario() {
-		return usuario;
+	@ManyToOne
+	@JoinColumn(name = "idSospechoso")
+	private Sospechoso sospechoso;
+	
+	public Sospechoso getSospechoso() {
+		return sospechoso;
 	}
 
-	public void setUsuario(Usuario usuario) {
-		this.usuario = usuario;
+	public void setSospechoso(Sospechoso sospechoso) {
+		this.sospechoso = sospechoso;
 	}
-
+	
 	public Timestamp getFecCreacion() {
 		return fecCreacion;
 	}
@@ -84,22 +84,6 @@ public class Mueble {
 	public void setDescripcion(String descripcion) {
 		this.descripcion = descripcion;
 	}
-/*
-	public Integer getTipo() {
-		return tipo;
-	}
-
-	public void setTipo(Integer tipo) {
-		this.tipo = tipo;
-	}
-*/
-	public String getNombreTipo() {
-		return nombreTipo;
-	}
-
-	public void setNombreTipo(String nombreTipo) {
-		this.nombreTipo = nombreTipo;
-	}
 
 	public Double getValor() {
 		return valor;
@@ -125,11 +109,19 @@ public class Mueble {
 		this.estadoDeConservasion = estadoDeConservasion;
 	}
 
-	public Integer getTipo() {
+	public String getTipo() {
 		return tipo;
 	}
 
-	public void setTipo(Integer tipo) {
+	public void setTipo(String tipo) {
 		this.tipo = tipo;
+	}
+
+	public String getEspecificarTipo() {
+		return especificarTipo;
+	}
+
+	public void setEspecificarTipo(String especificarTipo) {
+		this.especificarTipo = especificarTipo;
 	}
 }

@@ -2,62 +2,11 @@
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <script type="text/javascript">
-	function showPopup() {
-		var idSospechoso = $("#hdnIdSospechoso").text();
-		var w = window.innerWidth;
-		var h = window.innerHeight;
-		var width = 800;
-		var height = 500;
-		var top = (h - height) / 2;
-		var left = (w - width) / 2;
-		window.open("popUpAsignarBien-" + idSospechoso, "_blank",
-				"directories=no, status=no, menubar=no,scrollbars=yes, resizable=no,width="
-						+ width + ", height=" + height + ", top=" + top
-						+ ", left=" + left);
-		return false;
-	}
-	
 
-	function initBienesAsignado(bienes){
-		$("#divMostrarBienes").empty();
-		$.each(bienes, function(i,bien){
-
-			var imagen ='';
-			imagen = '<img src="img/skills.png" alt="logo" style="width: 90px; height: 120px;" />';
-			$("#divMostrarBienes").append(
-					'<table class="table table-bordered table-condensed">'+
- 					'<tbody>'+
-					'<tr>'+
-						'<td rowspan="5" align="center" style="width: 90px; height: 100px;" id="tdImagen">'+imagen+'</td>'+
-						'<td>Código:</td>'+
-						'<td><span id="hdrCodigo">'+bien.codigo+'</span></td>'+
-						'<td>Acción:</td>'+
-						'<td><button class="btn btn-danger btn-mini asignar" id="cancelarAsignaBien_'+bien.idBien+'" type="button"><i class="icon-minus icon-white"></i></button></td>'+
-					'</tr>'+
-					'<tr>'+
-						'<td>Partida Registral:</td>'+
-						'<td colspan="3"><span id="hdrPartidaRegistral">'+bien.partidaRegistral+'</span></td>'+
-					'</tr>'+
-					'<tr>'+
-						'<td>Tipo Bien:</td>'+
-						'<td colspan="3"><span id="hdrTipo">'+bien.tipo+'</span></a></td>'+
-					'</tr>'+
-					'<tr>'+
-						'<td>Valor Monetario:</td>'+
-						'<td colspan="3"><span id="hdrValor">S/.'+bien.valor+'</span></td>'+
-					'</tr>'+
-					'<tr>'+
-						'<td>Descripcion:</td>'+
-						'<td colspan="3"><span id="hdrDescripcion">'+bien.descripcion+'</span></td>'+
-					'</tr>'+
-				'</tbody>'+
-			'</table>');
-		});
-	}
-	
 	$(document).on('click','.asignar', function(e){
 		var id1 = (this.id).split("_")[0];
 		var id2 = (this.id).split("_")[1];
+		var id3 = (this.id).split("_")[2];
 		
 		switch(id1){
 			case 'cancelarAsignaBien':
@@ -74,44 +23,356 @@
 				 	});
 				}			
 			break;
+			case 'guardarAsigna':
+				if(id2 == 'In'){
+					$.ajax({
+				 		url: 'asignarInmuebleToSospechoso-'+$("#hdnIdSospechoso").text()+"-"+id3,
+				 		type: 'post',
+				 		dataType: 'json',
+				 		data: '',
+				 		success: function(bienes){
+				 			if(bienes == true){
+					 			initInmuebles();				 				
+				 			}
+				 		}
+				 	});
+	 			}else if(id2 == 'Ve'){
+	 				$.ajax({
+				 		url: 'asignarVehiculoToSospechoso-'+$("#hdnIdSospechoso").text()+"-"+id3,
+				 		type: 'post',
+				 		dataType: 'json',
+				 		data: '',
+				 		success: function(bienes){
+				 			if(bienes == true){
+					 			initVehiculos();
+				 			}
+				 		}
+				 	});
+	 			}
+				
+			break;
 		}
 		
 	});
 	
-	$(document).ready(function(){
+	function initInmuebles(){
 		$.ajax({
-	 		url: 'getBienesPorSospechoso-'+$("#hdnIdSospechoso").text(),
+	 		url: 'getInmueblesPorSospechoso-'+$("#hdnIdSospechoso").text(),
 	 		type: 'post',
 	 		dataType: 'json',
 	 		data: '',
 	 		success: function(bienes){
-	 			initBienesAsignado(bienes);
+	 			var resultado = '';
+	 				resultado +='<table class="table table-striped table-bordered table-hover dataTable" id="tblIniInmueble">'+
+	 								'<thead>'+
+		 								'<tr>'+
+		 									'<th>foto</th>'+
+		 									'<th>Código</th>'+
+		 									'<th>Partida Registral</th>'+
+		 									'<th>Descripción</th>'+
+		 									'<th>Valor</th>'+
+		 									'<th>AreaTotal</th>'+
+		 									'<th>Asignar</th>'+
+		 								'</tr>'+
+		 							'</thead>';
+	 			$.each(bienes, function(i, bien){
+	 				resultado +='<tr>'+
+	 		  						'<td><a href="toInmueble-'+bien.idInmueble+'"><img src="'+bien.urlInmueble+'" style="width: 90px; height: 120px;" alt="foto Inmueble"/></a></td>'+
+	 		  						'<td><a href="toInmueble-'+bien.idInmueble+'">'+bien.codigo+'</a></td>'+
+	 		  						'<td>'+bien.partidaRegistral+'</td>'+
+	 		  						'<td>'+bien.descripcion+'</td>'+
+	 		  						'<td>'+bien.valor+'</td>'+
+	 		  						'<td>'+bien.areaTotal+'</td>'+
+	 		  						'<td><button type="button" class="btn btn-outline btn-danger btn-xs btn-circle asignar" id="guardarAsigna_In_'+bien.idBien+'"><i class="fa fa-check"></i></button></td>'+
+	 		  					'</tr>';
+	 			});
+	 			
+	 			resultado +='</table>';
+	 			$("#divResultadoInmueble").append(resultado);
+	 			$('#tblIniInmueble').dataTable();  				
 	 		}
 	 	});
+	}
+	
+	function initVehiculos(){
+		$.ajax({
+	 		url: 'getVehiculosPorSospechoso-'+$("#hdnIdSospechoso").text(),
+	 		type: 'post',
+	 		dataType: 'json',
+	 		data: '',
+	 		success: function(bienes){
+	 			var resultado = '';
+	 			
+	 				resultado +='<table class="table table-striped table-bordered table-hover dataTable" id="tblIniVehiculo">'+
+	 					  					'<thead>'+
+	 						  					'<tr>'+
+	 						  						'<th>foto</th>'+
+	 						  						'<th>Código</th>'+
+	 						  						'<th>Partida Registral</th>'+
+	 						  						'<th>Marca</th>'+
+	 						  						'<th>Modelo</th>'+
+	 						  						'<th>Descripción</th>'+
+	 						  						'<th>Valor</th>'+
+	 						  						'<th>Asignar</th>'+
+	 						  					'</tr>'+
+	 					  					'</thead>';
+	 			$.each(bienes, function(i, bien){
+	 				resultado +='<tr>'+
+	 		  						'<td><a href="toVehiculo-'+bien.idVehiculo+'"><img style="width: 90px; height: 120px;" src="'+bien.urlVehiculo+'" alt="foto Vehiculo"/></a></td>'+
+	 		  						'<td><a href="toVehiculo-'+bien.idVehiculo+'">'+bien.codigo+'</a></td>'+
+	 		  						'<td>'+bien.partidaRegistral+'</td>'+
+	 		  						'<td>'+bien.marca+'</td>'+
+	 		  						'<td>'+bien.modelo+'</td>'+
+	 		  						'<td>'+bien.descripcion+'</td>'+
+	 		  						'<td>'+bien.valor+'</td>'+
+	 		  						'<td><button type="button" class="btn btn-outline btn-danger btn-xs btn-circle asignar" id="guardarAsigna_Ve_'+bien.idBien+'"><i class="fa fa-times"></i></button></td>'+
+	 		  					'</tr>';
+	 			});
+	 			resultado +='</table>';
+	 			$("#divResultadoVehiculo").append(resultado);
+	 			$('#tblIniVehiculo').dataTable(); 
+	 		}
+	 	});
+	}
+	
+	$(document).ready(function(){
+		
+		initInmuebles();
+		
+		initVehiculos();
+		
+		$.ajax({
+			url : 'getInmueblesBuscar',
+			type : 'post',
+			dataType : 'json',
+			data : '',
+			success : function(bienes) {
+				initAsignaIBienes(bienes);
+			}
+		});
+		
+		$.ajax({
+			url : 'getVehiculosBuscar',
+			type : 'post',
+			dataType : 'json',
+			data : '',
+			success : function(bienes) {
+				initAsignaVBienes(bienes);
+			}
+		});
+		
+		initMuebles();
+		
 	});
 	
+	function initMuebles(){
+		$.ajax({
+			url : 'getBienesMuebles-'+$("#hdnIdSospechoso").text(),
+			type : 'post',
+			dataType : 'json',
+			data : '',
+			success : function(bienes) {
+				var resultado = '';
+				resultado +='<table class="table table-striped table-bordered table-hover dataTable" id="tblIniMueble">'+
+								'<thead>'+
+			  					'<tr>'+
+			  						'<th>Código</th>'+
+			  						'<th>Descripción</th>'+
+			  						'<th>Valor</th>'+
+			  						'<th>Tipo</th>'+
+			  						'<th>Especificación Tipo</th>'+
+			  						'<th>Estado Conservación</th>'+
+			  					'</tr>'+
+								'</thead><tbody>';
+								$.each(bienes, function(i, bien){
+									resultado +='<tr>'+
+													'<th>'+bien.codigo+'</th>'+
+							  						'<th>'+bien.descripcion+'</th>'+
+							  						'<th>'+bien.valor+'</th>'+
+							  						'<th>'+bien.Tipo+'</th>'+
+							  						'<th>'+bien.especificarTipo+'</th>'+
+							  						'<th>'+bien.estadoDeConservasion+'</th>'+
+							  					'</tr>';
+								});
+								resultado +='</tbody></table>';
+								$("#divResultadoMueble").append(resultado);
+								$("#tblIniMueble").dataTable();
+			}
+		});
+	}
+	
+
+	function initAsignaIBienes(bienes,opcion){
+		
+		var resultado = '';
+		$.each(bienes, function(i, bien){
+			resultado +='<tr>'+
+	  						'<td><a href="toInmueble-'+bien.idInmueble+'"><img src="'+bien.urlInmueble+'" style="width: 90px; height: 120px;" alt="foto Inmueble"/></a></td>'+
+	  						'<td><a href="toInmueble-'+bien.idInmueble+'">'+bien.codigo+'</a></td>'+
+	  						'<td>'+bien.partidaRegistral+'</td>'+
+	  						'<td>'+bien.descripcion+'</td>'+
+	  						'<td>'+bien.valor+'</td>'+
+	  						'<td>'+bien.areaTotal+'</td>'+
+	  						'<td><button type="button" class="btn btn-outline btn-primary btn-circle asignar" id="guardarAsigna_In_'+bien.idBien+'" data-dismiss="modal"><i class="fa fa-check"></i></button></td>'+
+	  					'</tr>';
+		});
+		
+		$("#tblInmueble").append(resultado);
+		$('#tblInmueble').dataTable(); 
+	}
+	
+	function initAsignaVBienes(bienes,opcion){
+		var resultado = '';
+		$.each(bienes, function(i, bien){
+			resultado +='<tr>'+
+	  						'<td><a href="toVehiculo-'+bien.idVehiculo+'"><img style="width: 90px; height: 120px;" src="'+bien.urlVehiculo+'" alt="foto Vehiculo"/></a></td>'+
+	  						'<td><a href="toVehiculo-'+bien.idVehiculo+'">'+bien.codigo+'</a></td>'+
+	  						'<td>'+bien.partidaRegistral+'</td>'+
+	  						'<td>'+bien.marca+'</td>'+
+	  						'<td>'+bien.modelo+'</td>'+
+	  						'<td>'+bien.descripcion+'</td>'+
+	  						'<td>'+bien.valor+'</td>'+
+	  						'<td><button type="button" class="btn btn-outline btn-primary btn-circle asignar" id="guardarAsigna_Ve_'+bien.idBien+'" data-dismiss="modal"><i class="fa fa-check"></i></button></td>'+
+	  					'</tr>';
+		});
+		$("#tblVehiculo").append(resultado);
+		$('#tblVehiculo').dataTable(); 
+	}
 	
 </script>
-	<!-- MOSTRAR RASGOS PARTICULARES -->
+	<!-- Bienes Asignados -->
 	<div id="divBienesAsignados">
 		<div id="alertasMostrarBien" style="display: none;"></div>
 		<div id="divMostrarBienesAsignados">
-			<form:form class="form-horizontal">
-				<fieldset>
-					<legend>
-						<span class=""><span class="colored">///</span> Bienes asignados al sospechoso:</span> 
-						<span class="offset3"><button
-								class="btn btn-primary btn-small asignar" type="button" onclick="showPopup()"
-								id="btnAsignarBien">
-								<i class="icon-edit icon-white"></i> Asignar Bien
-							</button></span>
-					</legend>
-					<div id="divMostrarBienes">
-					
+			<div class="panel panel-default">
+				<div class="panel-heading">
+		          /// Bienes asignados al sospechoso:
+		          	<div class="pull-right">
+						<div class="btn-group">
+							<button class="btn btn-outline btn-primary btn-sm asignar" data-toggle="modal" data-target="#modalInmueble" type="button"><i class="fa fa-edit fa-fw"></i> Asignar Bien Inmueble</button>
+							<button class="btn btn-outline btn-primary btn-sm asignar" data-toggle="modal" data-target="#modalVehiculo" type="button"><i class="fa fa-edit fa-fw"></i> Asignar Bien Vehicular</button>
+							<!-- <button class="btn btn-outline btn-primary btn-sm asignar" data-toggle="modal" data-target="#modalBienes" type="button" id="btnAsignarBien"><i class="fa fa-edit fa-fw"></i> Asignar Bien Mueble</button> -->
+							<button class="btn btn-outline btn-primary btn-sm asignar" data-toggle="modal" data-target="#modalCrearMueble" type="button"><i class="fa fa-edit fa-fw"></i> Crear Bien Mueble</button>
+						</div>
 					</div>
-				</fieldset>
-			</form:form>
+		      </div>
+		      <div class="panel-body">
+		      		<div id="divMostrarBienes">
+						<div class="panel panel-default">
+							<div class="panel-heading">
+								/// Bienes Inmuebles
+							</div>
+							<div class="panel-body" id="mostrarInmuebles">
+								<div class="table-responsive">
+			       					<div id="divResultadoInmueble" class="dataTables_wrapper form-inline" role="grid">
+			       					
+			       					</div>
+			       				</div>
+							</div>
+						</div>
+						<div class="panel panel-default">
+							<div class="panel-heading">
+								/// Bienes Vehiculares
+							</div>
+							<div class="panel-body" id="mostrarVehiculos">
+								<div class="table-responsive">
+			       					<div id="divResultadoVehiculo" class="dataTables_wrapper form-inline" role="grid">
+			       					
+			       					</div>
+			       				</div>
+							</div>
+						</div>
+						<div class="panel panel-default">
+							<div class="panel-heading">
+								/// Bienes Muebles
+							</div>
+							<div class="panel-body" id="mostrarMuebles">
+								<div class="table-responsive">
+						       		<div id="divResultadoMueble" class="dataTables_wrapper form-inline" role="grid">
+						       			
+						       		</div>
+						       	</div>
+							</div>
+						</div>
+					</div>
+		      </div>
+			</div>
 		</div>
 	</div>
+	
+	<!-- MODAL -->
+	<div class="modal fade" id="modalInmueble" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+       <div class="modal-dialog">
+           <div class="modal-content" style="width: 200%; margin-left: -50%;">
+               <div class="modal-header">
+                   <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                   <h4 class="modal-title" id="myModalLabel">Bienes</h4>
+                   <input type="hidden" id="hdnIdCasoSeleccionado"/>
+               </div>
+               <div class="modal-body">
+                   <div class="table-responsive">
+			       		<div id="divResultadoInmueble" class="dataTables_wrapper form-inline" role="grid">
+			       			<table class="table table-striped table-bordered table-hover dataTable" id="tblInmueble">
+				  					<thead>
+					  					<tr>
+					  						<th>foto</th>
+					  						<th>Código</th>
+					  						<th>Partida Registral</th>
+					  						<th>Descripción</th>
+					  						<th>Valor</th>
+					  						<th>AreaTotal</th>
+					  						<th>Asignar</th>
+					  					</tr>
+				  					</thead>
+			           		</table>
+			       		</div>
+			       	</div>
+               </div>
+               <div class="modal-footer">
+                   <button type="button" class="btn btn-outline btn-default" data-dismiss="modal">Close</button>
+               </div>
+           </div>
+           <!-- /.modal-content -->
+       </div>
+       <!-- /.modal-dialog -->
+   	</div>
+	<!-- / MODAL -->
 
-
+<!-- MODAL Vehiculo -->
+	<div class="modal fade" id="modalVehiculo" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+       <div class="modal-dialog">
+           <div class="modal-content" style="width: 200%; margin-left: -50%;">
+               <div class="modal-header">
+                   <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                   <h4 class="modal-title" id="myModalLabel">Bienes</h4>
+                   <input type="hidden" id="hdnIdCasoSeleccionado"/>
+               </div>
+               <div class="modal-body">
+                   <div class="table-responsive">
+			       		<div id="divResultadoInmueble" class="dataTables_wrapper form-inline" role="grid">
+			       			<table class="table table-striped table-bordered table-hover dataTable" id="tblVehiculo">
+				  					<thead>
+					  					<tr>
+					  						<th>foto</th>
+					  						<th>Código</th>
+					  						<th>Partida Registral</th>
+					  						<th>Marca</th>
+					  						<th>Modelo</th>
+					  						<th>Descripción</th>
+					  						<th>Valor</th>
+					  						<th>Asignar</th>
+					  					</tr>
+				  					</thead>
+			           		</table>
+			       		</div>
+			       	</div>
+               </div>
+               <div class="modal-footer">
+                   <button type="button" class="btn btn-outline btn-default" data-dismiss="modal">Close</button>
+               </div>
+           </div>
+           <!-- /.modal-content -->
+       </div>
+       <!-- /.modal-dialog -->
+   	</div>
+	<!-- / MODAL -->

@@ -28,10 +28,10 @@ public class MuebleServiceImpl implements MuebleService{
 		usuario.setIdUsuario(IdUsuario);
 		
 		Mueble m = new Mueble();
-		m.setUsuario(usuario);
+		//m.setUsuario(usuario);
 		m.setDescripcion(get(mb.getDescripcion()));
 		//m.setTipo(get(mb.getTipo()));
-		m.setNombreTipo(get(mb.getNombreTipo()));
+		//m.setNombreTipo(get(mb.getNombreTipo()));
 		m.setValor(get(mb.getValor()));
 		m.setEstado("habilitado");
 		
@@ -52,18 +52,18 @@ public class MuebleServiceImpl implements MuebleService{
 		mb.setDescripcion(m.getDescripcion());
 		mb.setCodigo(m.getCodigo());
 		mb.setValor(m.getValor());
-		mb.setNombreTipo(m.getNombreTipo());
+		//mb.setNombreTipo(m.getNombreTipo());
 		//mb.setTipo(m.getTipo());
 		
-		Usuario u = m.getUsuario();
-		Perfil p = u.getPerfil();
+		/*//Usuario u = m.getUsuario();
+		//Perfil p = u.getPerfil();
 		mb.setApeMaterno(p.getApeMaterno());
 		mb.setApePaterno(p.getApePaterno());
 		mb.setSegundoNombre(p.getSegundoNombre());
 		mb.setPrimerNombre(p.getPrimerNombre());
-		mb.setCorreoElectronico(u.getCorreoElectronico());
+		//mb.setCorreoElectronico(u.getCorreoElectronico());
 		mb.setTipoFiscal(p.getTipoFiscal());
-		mb.setIdPerfil(p.getIdPerfil());
+		mb.setIdPerfil(p.getIdPerfil());*/
 		return mb;
 	}
 
@@ -74,7 +74,7 @@ public class MuebleServiceImpl implements MuebleService{
 		
 		m.setDescripcion(get(mb.getDescripcion()));
 		//m.setTipo(get(mb.getTipo()));
-		m.setNombreTipo(get(mb.getNombreTipo()));
+		//m.setNombreTipo(get(mb.getNombreTipo()));
 		m.setValor(get(mb.getValor()));
 		m.setEstado(get(mb.getEstado()));
 		
@@ -92,10 +92,10 @@ public class MuebleServiceImpl implements MuebleService{
 			mb.setDescripcion(m.getDescripcion());
 			mb.setCodigo(m.getCodigo());
 			mb.setValor(m.getValor());
-			mb.setNombreTipo(m.getNombreTipo());
+			//mb.setNombreTipo(m.getNombreTipo());
 			//mb.setTipo(m.getTipo());
 			
-			Usuario u = m.getUsuario();
+			/*Usuario u = m.getUsuario();
 			Perfil p = u.getPerfil();
 			mb.setApeMaterno(p.getApeMaterno());
 			mb.setApePaterno(p.getApePaterno());
@@ -103,7 +103,7 @@ public class MuebleServiceImpl implements MuebleService{
 			mb.setPrimerNombre(p.getPrimerNombre());
 			mb.setCorreoElectronico(u.getCorreoElectronico());
 			mb.setTipoFiscal(p.getTipoFiscal());
-			mb.setIdPerfil(p.getIdPerfil());
+			mb.setIdPerfil(p.getIdPerfil());*/
 			
 			lista.add(mb);
 		}

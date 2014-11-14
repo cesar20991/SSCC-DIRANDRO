@@ -1,15 +1,18 @@
 package com.sscc.form;
 
+import javax.persistence.Column;
+
 
 public class MuebleBean {
 
 	private Integer idMueble;
 	private String codigo;
 	private String descripcion;
-	private Integer tipo;
-	private String nombreTipo;
+	private String tipo;
+	private String especificarTipo;
 	private Double valor;
 	private String estado;
+	private String estadoDeConservasion;
 
 	// usuario
 	private String correoElectronico;
@@ -48,18 +51,6 @@ public class MuebleBean {
 	}
 	public void setDescripcion(String descripcion) {
 		this.descripcion = descripcion;
-	}
-	public Integer getTipo() {
-		return tipo;
-	}
-	public void setTipo(Integer tipo) {
-		this.tipo = tipo;
-	}
-	public String getNombreTipo() {
-		return nombreTipo;
-	}
-	public void setNombreTipo(String nombreTipo) {
-		this.nombreTipo = nombreTipo;
 	}
 	public Double getValor() {
 		return valor;
@@ -120,6 +111,24 @@ public class MuebleBean {
 	}
 	public void setNombreCompleto(String nombreCompleto) {
 		this.nombreCompleto = nombreCompleto;
+	}
+	public String getTipo() {
+		return tipo;
+	}
+	public void setTipo(String tipo) {
+		this.tipo = tipo;
+	}
+	public String getEspecificarTipo() {
+		return especificarTipo;
+	}
+	public void setEspecificarTipo(String especificarTipo) {
+		this.especificarTipo = especificarTipo;
+	}
+	public String getEstadoDeConservasion() {
+		return estadoDeConservasion;
+	}
+	public void setEstadoDeConservasion(String estadoDeConservasion) {
+		this.estadoDeConservasion = estadoDeConservasion;
 	}
 	
 	

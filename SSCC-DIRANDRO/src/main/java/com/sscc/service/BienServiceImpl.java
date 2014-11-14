@@ -12,10 +12,14 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.sscc.form.BienBean;
 import com.sscc.form.InmuebleBean;
+import com.sscc.form.MuebleBean;
 import com.sscc.form.VehiculoBean;
 import com.sscc.model.Bien;
 import com.sscc.model.BienPorSospechoso;
+import com.sscc.model.CasoCriminal;
+import com.sscc.model.CasoPorAgente;
 import com.sscc.model.Inmueble;
+import com.sscc.model.Mueble;
 import com.sscc.model.Perfil;
 import com.sscc.model.Sospechoso;
 import com.sscc.model.Usuario;
@@ -247,7 +251,7 @@ public class BienServiceImpl implements BienService {
 	}
 
 	// obtener listado de bienes
-	@SuppressWarnings("unchecked")
+	/*@SuppressWarnings("unchecked")
 	public List<BienBean> getBienesBean() {
 		List<BienBean> lBien = new ArrayList<BienBean>();
 		Query qBienes = em.createQuery("SELECT b.idBien FROM Bien b");
@@ -272,8 +276,84 @@ public class BienServiceImpl implements BienService {
 			lBien.add(bb);
 		}
 		return lBien;
-	}
+	}*/
+	@SuppressWarnings("unchecked")
+	public List<InmuebleBean> getBienesInmueble() {
+		List<InmuebleBean> lBien = new ArrayList<InmuebleBean>();
+		Query qBienes = em.createQuery("SELECT b FROM Bien b JOIN b.inmueble i");
+		List<Bien> lista = qBienes.getResultList();
 
+		for (int i = 0; i < lista.size(); i++) {
+			InmuebleBean bb = new InmuebleBean();
+			Bien b = lista.get(i);
+			Inmueble in =  b.getInmueble();
+			
+			bb.setIdBien(b.getIdBien());
+			bb.setUrlInmueble(in.getUrlInmueble());
+			bb.setIdInmueble(in.getIdInmueble());
+			bb.setPartidaRegistral(b.getPartidaRegistral());
+			bb.setValor(b.getValor());
+			bb.setDescripcion(in.getDireccion());
+			bb.setCodigo(in.getCodigo());
+			bb.setAreaTotal(in.getAreaTotal());
+				
+			lBien.add(bb);
+		}
+		return lBien;
+	}
+	@SuppressWarnings("unchecked")
+	public List<VehiculoBean> getBienesVehiculos() {
+		List<VehiculoBean> lBien = new ArrayList<VehiculoBean>();
+		Query qBienes = em.createQuery("SELECT b FROM Bien b JOIN b.vehiculo v");
+		List<Bien> lista = qBienes.getResultList();
+
+		for (int i = 0; i < lista.size(); i++) {
+			VehiculoBean bb = new VehiculoBean();
+			Bien b = lista.get(i);
+			Vehiculo v =  b.getVehiculo();
+			
+			bb.setIdBien(b.getIdBien());
+			bb.setUrlVehiculo(v.getUrlVehiculo());
+			bb.setCodigo(v.getCodigo());
+			bb.setPartidaRegistral(b.getPartidaRegistral());
+			bb.setIdVehiculo(v.getIdVehiculo());
+			bb.setValor(b.getValor());
+			bb.setDescripcion(b.getDescripcion());
+			bb.setMarca(v.getMarca());
+			bb.setModelo(v.getModelo());
+				
+			lBien.add(bb);
+		}
+		return lBien;
+	}
+	
+	@SuppressWarnings("unchecked")
+	public List<MuebleBean> getBienesMuebles(Integer idSospechoso) {
+		List<MuebleBean> lBien = new ArrayList<MuebleBean>();
+		Query qBienes = em.createQuery("SELECT m FROM Sospechoso s JOIN s.muebles m WHERE s.idSospechoso = "+idSospechoso);
+		List<Mueble> lista = qBienes.getResultList();
+
+		for (int i = 0; i < lista.size(); i++) {
+			MuebleBean bb = new MuebleBean();
+			Mueble b =  lista.get(i);
+			
+			bb.setIdMueble(b.getIdMueble());
+			bb.setCodigo(b.getCodigo());
+			bb.setDescripcion(b.getDescripcion());
+			bb.setValor(b.getValor());
+			bb.setTipo(b.getTipo());
+			bb.setEspecificarTipo(b.getEspecificarTipo());
+			bb.setEstadoDeConservasion(b.getEstadoDeConservasion());
+				
+			lBien.add(bb);
+		}
+		return lBien;
+	}
+/*else if (bien.getVehiculo() != null) {
+				bb.setTipoBien(2);
+				bb.setCodigo(bien.getVehiculo().getCodigo());
+				bb.setTipo("Vehiculo");
+			}*/
 	// Metodos reutilizables
 	public String texto(String texto) {
 		if (texto == null) {
@@ -304,13 +384,12 @@ public class BienServiceImpl implements BienService {
 		return cont > 0 ? true : false;
 	}
 
-	@Transactional
+	/*@Transactional
 	public boolean asignarBienToSospechoso(Integer idBien, Integer idSospechoso) {
 		
 		try {
 			Query q = em
-					.createQuery("SELECT bps FROM BienPorSospechoso bps JOIN bps.bien b JOIN bps.sospechoso s WHERE bps.estado='deshabilitado' AND b.idBien="
-							+ idBien + " AND s.idSospechoso=" + idSospechoso);
+					.createQuery("SELECT bps FROM BienPorSospechoso bps JOIN bps.bien b JOIN bps.sospechoso s WHERE bps.estado='deshabilitado' AND b.idBien="+ idBien + " AND s.idSospechoso=" + idSospechoso);
 			BienPorSospechoso bps = (BienPorSospechoso) q.getSingleResult();
 			BienPorSospechoso bpsEditado = em.merge(bps);
 			bpsEditado.setEstado("habilitado");
@@ -325,8 +404,60 @@ public class BienServiceImpl implements BienService {
 			em.persist(bs);
 		}
 		return true;
+	}*/
+	
+	@Transactional
+	public Boolean asignarInmueble(Integer idSospechoso, Integer idBien) {
+		Query q = em.createQuery("SELECT bps FROM BienPorSospechoso bps JOIN bps.bien b JOIN bps.sospechoso s WHERE bps.estado='habilitado' AND b.idBien="+ idBien + " AND s.idSospechoso=" + idSospechoso);
+		try{
+			BienPorSospechoso bps = (BienPorSospechoso) q.getSingleResult();			
+			
+			return false;
+		}catch(Exception e){
+			Query q1 = em.createQuery("SELECT bps FROM BienPorSospechoso bps JOIN bps.bien b JOIN bps.sospechoso s WHERE bps.estado='habilitado' AND b.idBien="+ idBien + " AND s.idSospechoso=" + idSospechoso);
+			try{
+				BienPorSospechoso cpa1 = (BienPorSospechoso) q1.getSingleResult();
+				BienPorSospechoso cpaEdit = em.merge(cpa1);
+				
+				cpaEdit.setEstado("habilitado");
+				return true;
+			}catch(Exception e1){
+				BienPorSospechoso cpa = new BienPorSospechoso();
+				cpa.setEstado("habilitado");
+				
+				Sospechoso c = new Sospechoso();
+				c.setIdSospechoso(idSospechoso);
+				Bien u = new Bien();
+				u.setIdBien(idBien);
+				
+				cpa.setSospechoso(c);
+				cpa.setBien(u);
+				
+				em.persist(cpa);
+			
+				return true;
+			}
+		}
 	}
-
+	//deshabilitar
+	@Transactional
+	public Boolean reAsignarInmueble(Integer idSospechoso, Integer idBien, String estado) {
+		Query qCasos = em.createQuery("SELECT bps FROM BienPorSospechoso bps JOIN bps.bien b JOIN bps.sospechoso s WHERE bps.estado='habilitado' AND b.idBien="+ idBien + " AND s.idSospechoso=" + idSospechoso);
+		
+		try{
+			//System.err.println("Actualizar");
+			BienPorSospechoso cpa = (BienPorSospechoso) qCasos.getSingleResult();
+			BienPorSospechoso cpaEdit = em.merge(cpa);
+			
+			cpaEdit.setEstado(estado);
+			return true;
+		}catch (Exception e) {
+			return false;
+		}
+		
+	}
+	
+	
 	//
 	public Boolean getPlaca(String placa) {
 		Query queryCont = em.createQuery("SELECT COUNT(v) FROM Vehiculo v WHERE v.placa LIKE:placa");
@@ -418,9 +549,92 @@ public class BienServiceImpl implements BienService {
 	}
 	
 	@SuppressWarnings("unchecked")
+	public List<InmuebleBean> getInmueblesBuscarPorSospechoso(Integer idSospechoso) {
+		List<InmuebleBean> lib = new ArrayList<InmuebleBean>();
+		Query qBienes = em.createQuery("SELECT b FROM BienPorSospechoso bps JOIN bps.bien b JOIN bps.sospechoso s WHERE s.idSospechoso ="+idSospechoso+" ORDER BY b.fecCreacion DESC");
+		List<Bien> lB = qBienes.getResultList();
+		System.err.println("tmañao lista"+lB.size());
+		for(int i=0;i<lB.size();i++){
+			InmuebleBean ib = new InmuebleBean();
+			Bien b =  lB.get(i);
+			Inmueble in =  b.getInmueble();
+
+			ib.setAmbientes(in.getAmbientes());
+			ib.setAntiguedad(in.getAntiguedad());
+			ib.setAreaCercado(in.getAreaCercado());
+			ib.setAreaConstruido(in.getAreaConstruido());
+			ib.setAreaTotal(in.getAreaTotal());
+			ib.setCodigo(in.getCodigo());
+			ib.setDescripcion(b.getDescripcion());
+			ib.setDireccion(in.getDireccion());
+			ib.setIdBien(b.getIdBien());
+			ib.setIdInmueble(in.getIdInmueble());
+			ib.setLatitud(in.getLatitud());
+			ib.setLongitud(in.getLongitud());
+			ib.setPartidaRegistral(b.getPartidaRegistral());
+			ib.setPisos(in.getPisos());
+			ib.setValor(b.getValor());
+			if(in.getUrlInmueble().equals(null)){
+				ib.setUrlInmueble("img/casaVerde.jpg");
+			}else{
+				ib.setUrlInmueble(in.getUrlInmueble());
+			}
+			
+			lib.add(ib);
+		}		
+		
+		return lib;
+	}
+	
+	@SuppressWarnings("unchecked")
 	public List<VehiculoBean> getVehiculosBuscar() {
 		List<VehiculoBean> lvb = new ArrayList<VehiculoBean>();
 		Query qBienes = em.createQuery("SELECT b FROM Bien b JOIN b.vehiculo v ORDER BY b.fecCreacion DESC");
+		List<Bien> lB = qBienes.getResultList();
+		
+		for(int i=0;i<lB.size();i++){
+			VehiculoBean vb = new VehiculoBean();
+			Bien b =  lB.get(i);
+			Vehiculo v =  b.getVehiculo();
+			
+			vb.setAltura(v.getAltura());
+			vb.setAncho(v.getAncho());
+			vb.setAsientos(v.getAsientos());
+			vb.setChasis(v.getChasis());
+			vb.setCodigo(v.getCodigo());
+			vb.setColor(v.getColor());
+			vb.setDescripcion(b.getDescripcion());
+			vb.setEjes(v.getEjes());
+			vb.setFecFabricacion(v.getFecFabricacion());
+			vb.setIdBien(b.getIdBien());
+			vb.setIdVehiculo(v.getIdVehiculo());
+			vb.setLongitud(v.getLongitud());
+			vb.setMarca(v.getMarca());
+			vb.setModelo(v.getModelo());
+			vb.setMotor(v.getMotor());
+			vb.setPartidaRegistral(b.getPartidaRegistral());
+			vb.setPasajeros(v.getPasajeros());
+			vb.setPesoBruto(v.getPesoBruto());
+			vb.setPesoNeto(v.getPesoNeto());
+			vb.setPlaca(v.getPlaca());
+			vb.setRuedas(v.getRuedas());
+			vb.setValor(b.getValor());
+			if(v.getUrlVehiculo().equals(null)){
+				vb.setUrlVehiculo("img/timon.jpg");
+			}else{
+				vb.setUrlVehiculo(v.getUrlVehiculo());
+			}			
+			
+			lvb.add(vb);
+		}		
+		
+		return lvb;
+	}
+	
+	@SuppressWarnings("unchecked")
+	public List<VehiculoBean> getVehiculosBuscarPorSospechoso(Integer idSospechoso) {
+		List<VehiculoBean> lvb = new ArrayList<VehiculoBean>();
+		Query qBienes = em.createQuery("SELECT b FROM BienPorSospechoso bps JOIN bps.bien b JOIN bps.sospechoso s WHERE s.idSospechoso ="+idSospechoso+" ORDER BY b.fecCreacion DESC");
 		List<Bien> lB = qBienes.getResultList();
 		
 		for(int i=0;i<lB.size();i++){

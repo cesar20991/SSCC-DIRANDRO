@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.sscc.form.BienBean;
 import com.sscc.form.InmuebleBean;
+import com.sscc.form.MuebleBean;
 import com.sscc.form.SospechosoBean;
 import com.sscc.form.VehiculoBean;
 import com.sscc.model.Bien;
@@ -21,9 +22,11 @@ public interface BienService {
 	InmuebleBean getInmuebleBean(Integer idInmueble);
 	InmuebleBean editInmuebleBean(InmuebleBean inmuebleBean);
 	
-	List<BienBean> getBienesBean();
+	//List<BienBean> getBienesBean();
 	
-	boolean asignarBienToSospechoso(Integer idBien , Integer idSospechoso);
+	//boolean asignarBienToSospechoso(Integer idBien , Integer idSospechoso);
+	Boolean asignarInmueble(Integer idSospechoso, Integer idBien);
+	Boolean reAsignarInmueble(Integer idSospechoso, Integer idBien, String estado);
 	
 	Boolean getPartidaRegistral (String partidaRegistral);
 	//Vehicular:
@@ -35,5 +38,15 @@ public interface BienService {
 	
 	List<InmuebleBean> getInmueblesBuscar();
 	
+	List<InmuebleBean> getInmueblesBuscarPorSospechoso(Integer idSospechoso);
+	
 	List<VehiculoBean> getVehiculosBuscar();
+	
+	List<VehiculoBean> getVehiculosBuscarPorSospechoso(Integer idSospechoso);
+	
+	List<MuebleBean> getBienesMuebles(Integer idSospechoso);
+	
+	List<InmuebleBean> getBienesInmueble();
+	
+	List<VehiculoBean> getBienesVehiculos();
 }
