@@ -25,6 +25,16 @@ public class Mueble {
 	
 	@Column(nullable=true, length=90)
 	private String tipo;
+	/*joyas
+	 * electrodomesticos
+	 * maquinarias y equipos industriales
+	 * articulos del hogas
+	 * equipos de computo
+	 * equipos de comunicacion
+	 * obras de arte
+	 * piedras y metales preciosos
+	 * articulos de coleccion
+	 * otros (en otros aparece un campo de texto en donde se llena "private String especificarTipo")*/
 	
 	@Column(nullable=true, length=90)
 	private String especificarTipo;
