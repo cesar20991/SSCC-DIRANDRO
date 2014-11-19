@@ -551,12 +551,13 @@ public class BienServiceImpl implements BienService {
 	@SuppressWarnings("unchecked")
 	public List<InmuebleBean> getInmueblesBuscarPorSospechoso(Integer idSospechoso) {
 		List<InmuebleBean> lib = new ArrayList<InmuebleBean>();
-		Query qBienes = em.createQuery("SELECT b FROM BienPorSospechoso bps JOIN bps.bien b JOIN bps.sospechoso s WHERE s.idSospechoso ="+idSospechoso+" ORDER BY b.fecCreacion DESC");
+		Query qBienes = em.createQuery("SELECT b FROM BienPorSospechoso bps JOIN bps.bien b JOIN b.inmueble i JOIN bps.sospechoso s WHERE s.idSospechoso ="+idSospechoso+" ORDER BY b.fecCreacion DESC");
 		List<Bien> lB = qBienes.getResultList();
 		System.err.println("tmañao lista"+lB.size());
 		for(int i=0;i<lB.size();i++){
 			InmuebleBean ib = new InmuebleBean();
 			Bien b =  lB.get(i);
+			System.err.println("id"+b.getIdBien());
 			Inmueble in =  b.getInmueble();
 
 			ib.setAmbientes(in.getAmbientes());
@@ -634,7 +635,7 @@ public class BienServiceImpl implements BienService {
 	@SuppressWarnings("unchecked")
 	public List<VehiculoBean> getVehiculosBuscarPorSospechoso(Integer idSospechoso) {
 		List<VehiculoBean> lvb = new ArrayList<VehiculoBean>();
-		Query qBienes = em.createQuery("SELECT b FROM BienPorSospechoso bps JOIN bps.bien b JOIN bps.sospechoso s WHERE s.idSospechoso ="+idSospechoso+" ORDER BY b.fecCreacion DESC");
+		Query qBienes = em.createQuery("SELECT b FROM BienPorSospechoso bps JOIN bps.bien b JOIN b.vehiculo v JOIN bps.sospechoso s WHERE s.idSospechoso ="+idSospechoso+" ORDER BY b.fecCreacion DESC");
 		List<Bien> lB = qBienes.getResultList();
 		
 		for(int i=0;i<lB.size();i++){
