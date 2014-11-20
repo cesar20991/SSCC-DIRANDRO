@@ -32,6 +32,7 @@
 				 		data: '',
 				 		success: function(bienes){
 				 			if(bienes == true){
+				 				$("#divResultadoInmueble").empty();
 					 			initInmuebles();				 				
 				 			}
 				 		}
@@ -44,6 +45,7 @@
 				 		data: '',
 				 		success: function(bienes){
 				 			if(bienes == true){
+				 				$("#divResultadoVehiculo").empty();
 					 			initVehiculos();
 				 			}
 				 		}
@@ -54,6 +56,59 @@
 		}
 		
 	});
+	$(document).on('click','.asignarMueble', function(e){
+		$.ajax({
+	 		url: 'registrarMueble-'+$("#hdnIdSospechoso").text(),
+	 		type: 'post',
+	 		dataType: 'json',
+	 		data: $('#formRegistrarMueble').serialize(),
+	 		success: function(bienes){
+	 			$("#divResultadoMueble").empty();
+	 			initMuebles();
+	 			
+	 		}
+	 	});
+	})
+	
+	
+	$(document).on('click','.desasignar', function(e){
+		var id2 = (this.id).split("_")[1];
+		var id3 = (this.id).split("_")[2];
+		if(id2 == 'Mue'){
+			$.ajax({
+		 		url: 'desasignarMuebleToSospechoso-'+$("#hdnIdSospechoso").text()+"-"+id3,
+		 		type: 'post',
+		 		dataType: 'json',
+		 		data: '',
+		 		success: function(bienes){
+		 			if(bienes == true){
+		 				$("#divResultadoMueble").empty();
+		 				initMuebles();		
+		 			}
+		 		}
+		 	});
+		}else{
+			$.ajax({
+		 		url: 'desasignarInmuebleToSospechoso-'+$("#hdnIdSospechoso").text()+"-"+id3,
+		 		type: 'post',
+		 		dataType: 'json',
+		 		data: '',
+		 		success: function(bienes){
+		 			if(bienes == true){
+		 				if(id2 == 'In'){
+		 					$("#divResultadoInmueble").empty();
+		 					initInmuebles();
+		 				}else if(id2 == 'Ve'){
+		 					$("#divResultadoVehiculo").empty();
+		 					initVehiculos();
+		 				}
+			 							 				
+		 			}
+		 		}
+		 	});
+		}
+		
+	})
 	
 	function initInmuebles(){
 		$.ajax({
@@ -72,7 +127,7 @@
 		 									'<th>Descripción</th>'+
 		 									'<th>Valor</th>'+
 		 									'<th>AreaTotal</th>'+
-		 									'<th>Asignar</th>'+
+		 									'<th>Acción</th>'+
 		 								'</tr>'+
 		 							'</thead>';
 	 			$.each(bienes, function(i, bien){
@@ -83,7 +138,7 @@
 	 		  						'<td>'+bien.descripcion+'</td>'+
 	 		  						'<td>'+bien.valor+'</td>'+
 	 		  						'<td>'+bien.areaTotal+'</td>'+
-	 		  						'<td><button type="button" class="btn btn-outline btn-danger btn-xs btn-circle asignar" id="guardarAsigna_In_'+bien.idBien+'"><i class="fa fa-check"></i></button></td>'+
+	 		  						'<td><button type="button" class="btn btn-outline btn-danger btn-xs btn-circle desasignar" id="desasignar_In_'+bien.idBien+'"><i class="fa fa-minus"></i></button></td>'+
 	 		  					'</tr>';
 	 			});
 	 			
@@ -113,7 +168,7 @@
 	 						  						'<th>Modelo</th>'+
 	 						  						'<th>Descripción</th>'+
 	 						  						'<th>Valor</th>'+
-	 						  						'<th>Asignar</th>'+
+	 						  						'<th>Acción</th>'+
 	 						  					'</tr>'+
 	 					  					'</thead>';
 	 			$.each(bienes, function(i, bien){
@@ -125,7 +180,7 @@
 	 		  						'<td>'+bien.modelo+'</td>'+
 	 		  						'<td>'+bien.descripcion+'</td>'+
 	 		  						'<td>'+bien.valor+'</td>'+
-	 		  						'<td><button type="button" class="btn btn-outline btn-danger btn-xs btn-circle asignar" id="guardarAsigna_Ve_'+bien.idBien+'"><i class="fa fa-times"></i></button></td>'+
+	 		  						'<td><button type="button" class="btn btn-outline btn-danger btn-xs btn-circle desasignar" id="desasignar_Ve_'+bien.idBien+'"><i class="fa fa-minus"></i></button></td>'+
 	 		  					'</tr>';
 	 			});
 	 			resultado +='</table>';
@@ -163,6 +218,8 @@
 		
 		initMuebles();
 		
+		$("#hdnIdSospechoso_").val($("#hdnIdSospechoso").text());
+		
 	});
 	
 	function initMuebles(){
@@ -182,6 +239,7 @@
 			  						'<th>Tipo</th>'+
 			  						'<th>Especificación Tipo</th>'+
 			  						'<th>Estado Conservación</th>'+
+			  						'<th>Acción</th>'+
 			  					'</tr>'+
 								'</thead><tbody>';
 								$.each(bienes, function(i, bien){
@@ -189,10 +247,11 @@
 													'<th>'+bien.codigo+'</th>'+
 							  						'<th>'+bien.descripcion+'</th>'+
 							  						'<th>'+bien.valor+'</th>'+
-							  						'<th>'+bien.Tipo+'</th>'+
+							  						'<th>'+bien.tipo+'</th>'+
 							  						'<th>'+bien.especificarTipo+'</th>'+
 							  						'<th>'+bien.estadoDeConservasion+'</th>'+
-							  					'</tr>';
+							  						'<td><button type="button" class="btn btn-outline btn-danger btn-xs btn-circle desasignar" id="desasignar_Mue_'+bien.idMueble+'"><i class="fa fa-minus"></i></button></td>'+
+						 		  				'</tr>';
 								});
 								resultado +='</tbody></table>';
 								$("#divResultadoMueble").append(resultado);
@@ -376,3 +435,78 @@
        <!-- /.modal-dialog -->
    	</div>
 	<!-- / MODAL -->
+	
+	
+		<!-- MODAL BIEN MUEBLE-->
+	<div class="modal fade" id="modalCrearMueble" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+		<div class="modal-dialog">
+			<div class="modal-content" style="width: 200%; margin-left: -50%;">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-hidden="true">×</button>
+					<h4 class="modal-title" id="myModalLabel">Bien Mueble</h4>
+					<input type="hidden" id="hdnIdCasoSeleccionado" />
+				</div>
+				<div class="modal-body">
+					<div class="panel-body">
+						<form:form class="form-horizontal" id="formRegistrarMueble" commandName="mueble">
+							<div class="form-group">
+								<label>Tipo: </label> <select name="tipo" id="txtTipo" class="form-control">
+									<option value="">Seleccione</option>
+									<option value="Joyas">Joyas</option>
+									<option value="Electrodomesticos">Electrodomesticos</option>
+									<option value="Máquinarias y Equipos Industriales">Máquinarias y Equipos Industriales</option>
+									<option value="Árticulos de hogas">Árticulos de hogas</option>
+									<option value="Equipos de Cómputo">Equipos de Cómputo</option>
+									<option value="Equipos de Comunicación">Equipos de Comunicación</option>
+									<option value="Obras de Arte">Obras de Arte</option>
+									<option value="Piedras y metales preciosos">Piedras y metales preciosos</option>
+								</select>	
+							</div>	
+							<div class="form-group">
+				          		<label >Valor Monetario: </label>
+			          			<div class="input-prepend input-group">
+				          			<span class="input-group-addon">S/.</span>
+			          				<input class="form-control" type="text" name="valor"  id="txtValor" >
+			          			</div>
+				       		</div>	       		
+				       		<div class="form-group">
+				          		<label >Descripcion: </label>
+				          		<textarea class="form-control" rows="3" name="descripcion" id="txtDescripcion" maxlength="250" ></textarea>
+				       		</div>
+				       		<div class="form-group" id="divATotal">
+				          		<label >Especificar Tipo: </label>
+			          			<div class="input-append input-group">
+			          				<input class="form-control" type="text" name="especificarTipo" id="txtEspecificarTipo" >
+			          			</div>
+				       		</div>
+				       		<div class="form-group" id="divACercado">
+				          		<label >Estado de conservación: </label>
+			          			<select name="estadoDeConservasion" id="txtestadoDeConservasion" data-rule-required="true" >
+									<option value="Bueno">Bueno</option>
+									<option value="Regular">Regular</option>
+									<option value="Inservible">Inservible</option>
+									<option value="Inoperativo">Inoperativo</option>
+								</select>
+				       		</div>	
+							<hr class="">
+							<div class="well">
+								<button class="btn btn-outline btn-success asignarMueble" id="btnRegistrarMueble" type="button">
+									<i class="fa fa-check"></i> Registrar Mueble
+								</button>
+								<button class="btn btn-outline btn-danger" type="reset">
+									<i class="fa fa-refresh fa-fw"></i> Reset
+								</button>
+							</div>
+						</form:form>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-outline btn-default" data-dismiss="modal">Close</button>
+				</div>
+			</div>
+			<!-- /.modal-content -->
+		</div>
+		<!-- /.modal-dialog -->
+	</div>
+<!-- / MODAL -->

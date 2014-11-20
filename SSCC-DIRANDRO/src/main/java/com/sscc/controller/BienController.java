@@ -23,6 +23,7 @@ import com.sscc.form.SospechosoBean;
 import com.sscc.form.VehiculoBean;
 import com.sscc.model.Sospechoso;
 import com.sscc.service.BienService;
+import com.sscc.service.MuebleService;
 
 @Controller
 public class BienController {
@@ -216,6 +217,45 @@ public class BienController {
 		}else{
 			return false;
 		}		
+	}
+	
+	@RequestMapping(value = "desasignarInmuebleToSospechoso-{idSospechoso}-{idBien}", method = RequestMethod.POST)
+	@ResponseBody
+	public Boolean desasignarInmuebleToSospechoso(@PathVariable("idSospechoso") Integer idSospechoso,@PathVariable("idBien") Integer idBien){
+		//List<InmuebleBean> bienes=new ArrayList<InmuebleBean>();
+		
+		if(bienServ.reAsignarInmueble(idSospechoso, idBien, "deshabilitado")){
+			return true;
+		}else{
+			return false;
+		}		
+	}
+	
+	@Autowired
+	MuebleService muebleServ;
+	
+	@RequestMapping(value = "desasignarMuebleToSospechoso-{idSospechoso}-{idMueble}", method = RequestMethod.POST)
+	@ResponseBody
+	public Boolean desasignarMuebleToSospechoso(@PathVariable("idSospechoso") Integer idSospechoso,@PathVariable("idMueble") Integer idBien){
+		//List<InmuebleBean> bienes=new ArrayList<InmuebleBean>();
+		
+		if(muebleServ.reAsignarMuebleTOSospechoso(idSospechoso, idBien, "deshabilitado")){
+			return true;
+		}else{
+			return false;
+		}		
+	}
+	
+	@RequestMapping(value = "registrarMueble-{idSospechoso}", method = RequestMethod.POST)
+	@ResponseBody
+	public Boolean registrarMueble(@ModelAttribute MuebleBean muebleBean,@PathVariable("idSospechoso")Integer idSospechoso, HttpServletRequest req, HttpSession session, Model model){
+		
+		Integer idMueble = muebleServ.registrarMueble(muebleBean, idSospechoso);		
+		if(idMueble != 0){
+			return true;
+		}else{
+			return false;
+		}
 	}
 	
 	// BIENES vehiculo

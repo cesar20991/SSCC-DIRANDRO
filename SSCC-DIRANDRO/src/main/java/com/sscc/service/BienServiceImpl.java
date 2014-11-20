@@ -330,7 +330,7 @@ public class BienServiceImpl implements BienService {
 	@SuppressWarnings("unchecked")
 	public List<MuebleBean> getBienesMuebles(Integer idSospechoso) {
 		List<MuebleBean> lBien = new ArrayList<MuebleBean>();
-		Query qBienes = em.createQuery("SELECT m FROM Sospechoso s JOIN s.muebles m WHERE s.idSospechoso = "+idSospechoso);
+		Query qBienes = em.createQuery("SELECT m FROM Sospechoso s JOIN s.muebles m WHERE m.estado='habilitado' AND s.idSospechoso = "+idSospechoso);
 		List<Mueble> lista = qBienes.getResultList();
 
 		for (int i = 0; i < lista.size(); i++) {
@@ -536,7 +536,7 @@ public class BienServiceImpl implements BienService {
 			ib.setPartidaRegistral(b.getPartidaRegistral());
 			ib.setPisos(in.getPisos());
 			ib.setValor(b.getValor());
-			if(in.getUrlInmueble().equals(null)){
+			if(in.getUrlInmueble() == null){
 				ib.setUrlInmueble("img/casaVerde.jpg");
 			}else{
 				ib.setUrlInmueble(in.getUrlInmueble());
@@ -551,7 +551,7 @@ public class BienServiceImpl implements BienService {
 	@SuppressWarnings("unchecked")
 	public List<InmuebleBean> getInmueblesBuscarPorSospechoso(Integer idSospechoso) {
 		List<InmuebleBean> lib = new ArrayList<InmuebleBean>();
-		Query qBienes = em.createQuery("SELECT b FROM BienPorSospechoso bps JOIN bps.bien b JOIN b.inmueble i JOIN bps.sospechoso s WHERE s.idSospechoso ="+idSospechoso+" ORDER BY b.fecCreacion DESC");
+		Query qBienes = em.createQuery("SELECT b FROM BienPorSospechoso bps JOIN bps.bien b JOIN b.inmueble i JOIN bps.sospechoso s WHERE s.idSospechoso ="+idSospechoso+" AND bps.estado='habilitado' ORDER BY b.fecCreacion DESC");
 		List<Bien> lB = qBienes.getResultList();
 		System.err.println("tmañao lista"+lB.size());
 		for(int i=0;i<lB.size();i++){
@@ -575,7 +575,7 @@ public class BienServiceImpl implements BienService {
 			ib.setPartidaRegistral(b.getPartidaRegistral());
 			ib.setPisos(in.getPisos());
 			ib.setValor(b.getValor());
-			if(in.getUrlInmueble().equals(null)){
+			if(in.getUrlInmueble()==null){
 				ib.setUrlInmueble("img/casaVerde.jpg");
 			}else{
 				ib.setUrlInmueble(in.getUrlInmueble());
@@ -620,7 +620,7 @@ public class BienServiceImpl implements BienService {
 			vb.setPlaca(v.getPlaca());
 			vb.setRuedas(v.getRuedas());
 			vb.setValor(b.getValor());
-			if(v.getUrlVehiculo().equals(null)){
+			if(v.getUrlVehiculo() == null){
 				vb.setUrlVehiculo("img/timon.jpg");
 			}else{
 				vb.setUrlVehiculo(v.getUrlVehiculo());
@@ -635,7 +635,7 @@ public class BienServiceImpl implements BienService {
 	@SuppressWarnings("unchecked")
 	public List<VehiculoBean> getVehiculosBuscarPorSospechoso(Integer idSospechoso) {
 		List<VehiculoBean> lvb = new ArrayList<VehiculoBean>();
-		Query qBienes = em.createQuery("SELECT b FROM BienPorSospechoso bps JOIN bps.bien b JOIN b.vehiculo v JOIN bps.sospechoso s WHERE s.idSospechoso ="+idSospechoso+" ORDER BY b.fecCreacion DESC");
+		Query qBienes = em.createQuery("SELECT b FROM BienPorSospechoso bps JOIN bps.bien b JOIN b.vehiculo v JOIN bps.sospechoso s WHERE s.idSospechoso ="+idSospechoso+" AND bps.estado='habilitado' ORDER BY b.fecCreacion DESC");
 		List<Bien> lB = qBienes.getResultList();
 		
 		for(int i=0;i<lB.size();i++){
@@ -665,7 +665,7 @@ public class BienServiceImpl implements BienService {
 			vb.setPlaca(v.getPlaca());
 			vb.setRuedas(v.getRuedas());
 			vb.setValor(b.getValor());
-			if(v.getUrlVehiculo().equals(null)){
+			if(v.getUrlVehiculo()==null){
 				vb.setUrlVehiculo("img/timon.jpg");
 			}else{
 				vb.setUrlVehiculo(v.getUrlVehiculo());

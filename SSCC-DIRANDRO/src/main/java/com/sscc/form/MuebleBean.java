@@ -26,6 +26,7 @@ public class MuebleBean {
 	private Integer idUsuario;
 	private String nombreCompleto;
 	
+	private Integer idsospechoso;
 	
 	
 	public String getEstado() {
@@ -129,6 +130,12 @@ public class MuebleBean {
 	}
 	public void setEstadoDeConservasion(String estadoDeConservasion) {
 		this.estadoDeConservasion = estadoDeConservasion;
+	}
+	public Integer getIdsospechoso() {
+		return idsospechoso;
+	}
+	public void setIdsospechoso(Integer idsospechoso) {
+		this.idsospechoso = idsospechoso;
 	}
 	
 	
