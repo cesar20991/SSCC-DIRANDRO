@@ -198,7 +198,7 @@ $(document).on('click','.eliminarCamposDirecciones', function(e){
 	<div id="divMostrarContacto">
 		<div class="panel panel-default">
 			<div class="panel-heading">
-				<span>/// Datos de Contacto del Sospechoso:</span>
+				<span>/// Datos de Contacto del Investigado:</span>
 				<div class="pull-right">
 					<div class="btn-group">
 						<button class="btn btn-outline btn-primary btn-sm" type="button" id="btnEditarContacto"><i class="fa fa-edit fa-fw"></i> Editar</button>
@@ -229,7 +229,7 @@ $(document).on('click','.eliminarCamposDirecciones', function(e){
 	<div style="display: none;" id="divEditarContacto">
 		<div class="panel panel-default">
 			<div class="panel-heading">
-				<span>/// Datos de Contacto del Sospechoso:</span>
+				<span>/// Datos de Contacto del Investigado:</span>
 			</div>
 			<div class="panel-body" id="divPerfilMostrar">
 				<form:form class="form-horizontal" id="formEditarContacto" action="editarContacto" commandName="sospechoso">

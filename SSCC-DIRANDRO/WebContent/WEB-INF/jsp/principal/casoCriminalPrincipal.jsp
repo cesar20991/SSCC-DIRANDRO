@@ -215,7 +215,7 @@ $(document).on('click','#btnComentarioCerrarCaso', function(e){
 				<ul class="nav nav-tabs">
 					<li class="active"><a href="#liPrincipal" data-toggle="tab">Principal</a></li>
 					<li class=""><a href="#liPersonalAsignado" data-toggle="tab">Personal Asignado</a></li>
-					<li class=""><a href="#liSospechosos" data-toggle="tab">Sospechosos</a></li>
+					<li class=""><a href="#liSospechosos" data-toggle="tab">Investigados</a></li>
 					<li class=""><a href="#liRutas" data-toggle="tab">Rutas</a></li>
 					<li class=""><a href="#liArchivosAdjuntos" data-toggle="tab">Archivos Adjuntos</a></li>
 					<li class=""><a href="#liComentarios" data-toggle="tab">Comentarios</a></li>

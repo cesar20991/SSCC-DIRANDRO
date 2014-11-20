@@ -9,6 +9,8 @@ public class SospechosoBean {
 
 	private Integer idSospechoso;
 	
+	private Integer homonimo;
+	private String tipodocumento;
 	private String codigoUnicoDeIdentificacion;
 	private String primerApellido;
 	private String segundoApellido;
@@ -320,5 +322,17 @@ public class SospechosoBean {
 	}
 	public void setNombreCompleto(String nombreCompleto) {
 		this.nombreCompleto = nombreCompleto;
+	}
+	public String getTipodocumento() {
+		return tipodocumento;
+	}
+	public void setTipodocumento(String tipodocumento) {
+		this.tipodocumento = tipodocumento;
+	}
+	public Integer getHomonimo() {
+		return homonimo;
+	}
+	public void setHomonimo(Integer homonimo) {
+		this.homonimo = homonimo;
 	}
 }

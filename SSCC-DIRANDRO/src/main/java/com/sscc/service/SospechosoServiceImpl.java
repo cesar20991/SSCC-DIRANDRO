@@ -1,5 +1,6 @@
 package com.sscc.service;
 
+import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -35,6 +36,7 @@ public class SospechosoServiceImpl implements SospechosoService{
 		Sospechoso s = new Sospechoso();
 		s = (Sospechoso) qSospechoso.getSingleResult();
 		
+		sb.setTipodocumento(s.getTipodocumento());
 		sb.setCodigoUnicoDeIdentificacion(s.getCodigoUnicoDeIdentificacion());
 		sb.setPrimerApellido(s.getPrimerApellido());
 		sb.setSegundoApellido(s.getSegundoApellido());
@@ -66,6 +68,11 @@ public class SospechosoServiceImpl implements SospechosoService{
 		sb.setDirecciones(s.getDirecciones());
 		sb.setUrlSospechoso(s.getUrlSospechoso());
 		sb.setIdSospechoso(s.getIdSospechoso());
+		//
+		Query qSospechosohomonimo = em.createNativeQuery("SELECT count(s.*)-1 FROM sospechoso s WHERE (s.prenombres || ' ' || s.primerapellido LIKE '%"+s.getPreNombres()+ " " + s.getPrimerApellido() +"%' OR s.prenombres || ' ' || s.primerapellido || ' ' || s.segundoapellido = '%"+ s.getPreNombres()+ " " + s.getPrimerApellido()+ "" +s.getSegundoApellido() +"%' )");
+		BigInteger homonimo = (BigInteger) qSospechosohomonimo.getSingleResult();
+		sb.setHomonimo(homonimo.intValue());
+		//
 		return sb;
 	}
 	
@@ -144,9 +151,9 @@ public class SospechosoServiceImpl implements SospechosoService{
 		if(sospechoso.getEstatura()== null){
 			sospechoso.setEstatura(0.0);
 		}
-		if(sospechoso.getFechaDeInscripcion().toString().equals("1000-12-12")){
+		//if(sospechoso.getFechaDeInscripcion().toString().equals("1000-12-12")){
 			sospechoso.setFechaDeInscripcion(null);
-		}
+		//}
 		if(sospechoso.getNombrePadre()== null){
 			sospechoso.setNombrePadre("");
 		}
@@ -154,9 +161,9 @@ public class SospechosoServiceImpl implements SospechosoService{
 			sospechoso.setNombreMadre("");
 		}
 		
-		if(sospechoso.getFechaDeEmision().toString().equals("1000-12-12")){
+		//if(sospechoso.getFechaDeEmision().toString().equals("1000-12-12")){
 			sospechoso.setFechaDeEmision(null);
-		}
+		//}
 		if(sospechoso.getRestriccion()== null){
 			sospechoso.setRestriccion("");
 		}
@@ -191,6 +198,7 @@ public class SospechosoServiceImpl implements SospechosoService{
 		Sospechoso editado = em.merge(s);
 		
 		//no te olvides poner la validacion del 1000-12-12
+		editado.setTipodocumento(sospechoso.getTipodocumento());
 		editado.setCodigoUnicoDeIdentificacion(sospechoso.getCodigoUnicoDeIdentificacion());
 		editado.setPrimerApellido(sospechoso.getPrimerApellido());
 		editado.setSegundoApellido(sospechoso.getSegundoApellido());
@@ -209,19 +217,19 @@ public class SospechosoServiceImpl implements SospechosoService{
 		editado.setEstadoCivil(sospechoso.getEstadoCivil());
 		editado.setEstatura(sospechoso.getEstatura());
 		//editado 22/05/14
-		if(sospechoso.getFechaDeInscripcion().toString().equals("1000-12-12")){
+//		if(sospechoso.getFechaDeInscripcion().toString().equals("1000-12-12")){
 			editado.setFechaDeInscripcion(null);
-		}else{
-			editado.setFechaDeInscripcion(sospechoso.getFechaDeInscripcion());
-		}
+//		}else{
+//			editado.setFechaDeInscripcion(sospechoso.getFechaDeInscripcion());
+//		}
 		editado.setNombrePadre(sospechoso.getNombrePadre());
 		editado.setNombreMadre(sospechoso.getNombreMadre());
 		//editado.setFechaDeEmision(sospechoso.getFechaDeEmision());
-		if(sospechoso.getFechaDeEmision().toString().equals("1000-12-12")){
+//		if(sospechoso.getFechaDeEmision().toString().equals("1000-12-12")){
 			editado.setFechaDeEmision(null);
-		}else{
-			editado.setFechaDeEmision(sospechoso.getFechaDeEmision());
-		}
+//		}else{
+//			editado.setFechaDeEmision(sospechoso.getFechaDeEmision());
+//		}
 		editado.setRestriccion(sospechoso.getRestriccion());
 		editado.setDomicilio(sospechoso.getDomicilio());
 		editado.setDepartamentoDeDomicilio(sospechoso.getDepartamentoDeDomicilio());

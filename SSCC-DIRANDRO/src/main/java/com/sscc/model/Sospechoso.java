@@ -18,7 +18,8 @@ public class Sospechoso {
 
 	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer idSospechoso;
-	
+	@Column(length = 50, nullable = true)
+	private String tipodocumento;	
 	@Column(length = 20, nullable = true)
 	private String codigoUnicoDeIdentificacion;
 	@Column(length = 50, nullable = true)
@@ -314,5 +315,11 @@ public class Sospechoso {
 	}
 	public void setUrlSospechoso(String urlSospechoso) {
 		this.urlSospechoso = urlSospechoso;
+	}
+	public String getTipodocumento() {
+		return tipodocumento;
+	}
+	public void setTipodocumento(String tipodocumento) {
+		this.tipodocumento = tipodocumento;
 	}
 }

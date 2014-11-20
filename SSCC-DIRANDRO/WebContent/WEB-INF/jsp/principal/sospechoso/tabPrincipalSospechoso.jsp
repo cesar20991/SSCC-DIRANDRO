@@ -15,12 +15,14 @@ function initSospechoso(sospechoso){
 	$("#hdrPrenombres").empty();
 	$("#hdrAlias").empty();
 	$("#hdrSexo").empty();
+	$("#hdrhomonimo").empty();
 	//
 	$("#hdrCodigoUnicoDeIdentificacion").append(sospechoso.codigoUnicoDeIdentificacion);
 	$("#hdrPrimerApellido").append(sospechoso.primerApellido);
 	$("#hdrSegundoApellido").append(sospechoso.segundoApellido+",");
 	$("#hdrPrenombres").append(sospechoso.preNombres);
 	$("#hdrAlias").append(sospechoso.alias);
+	$("#hdrhomonimo").append(sospechoso.homonimo);
 	//...FINAL CABECERA
 	if(sospechoso.sexo == 'F'){
 		$("#hdrSexo").append("Femenino");
@@ -29,6 +31,7 @@ function initSospechoso(sospechoso){
 	}
 	//TAB PRINCIPAL
 	$("#spnCodigoUnicoDeIdentificacion").empty();
+	$("#spnTipoDocumento").empty();
 	$("#spnPrimerApellido").empty();
 	$("#spnSegundoApellido").empty();
 	$("#spnPrenombres").empty();
@@ -41,23 +44,21 @@ function initSospechoso(sospechoso){
 	$("#spnGradoInstruccion").empty();
 	$("#spnEstadoCivil").empty();
 	$("#spnEstatura").empty();
-	$("#spnInscripcion").empty();
 	$("#spnNombrePadre").empty();
 	$("#spnNombreMadre").empty();
-	$("#spnEmision").empty();
 	$("#spnRestriccion").empty();
 	$("#spnDomicilio").empty();
 	$("#spnDepartamentoDeNacimiento").empty();
 	$("#spnProvinciaDeNacimiento").empty();
 	$("#spnDistritoDeNacimiento").empty();
-	$("#spnMultasElectorales").empty();
 	$("#tdImagen").empty();
 	
 	if(sospechoso.urlSospechoso == null){
 		$("#tdImagen").append('<img src="img/skills.png" alt="foto" style="width: 90px; height: 120px;" />');
 	}else{
 		$("#tdImagen").append('<img src="'+sospechoso.urlSospechoso+'" alt="logo" style="width: 90px; height: 120px;" />');
-	}
+	}	
+	$("#spnTipoDocumento").append(sospechoso.tipodocumento);
 	$("#spnCodigoUnicoDeIdentificacion").append(sospechoso.codigoUnicoDeIdentificacion);
 	$("#spnPrimerApellido").append(sospechoso.primerApellido);
 	$("#spnSegundoApellido").append(sospechoso.segundoApellido);
@@ -82,26 +83,13 @@ function initSospechoso(sospechoso){
 	$("#spnGradoInstruccion").append(sospechoso.gradoDeInstruccion);
 	$("#spnEstadoCivil").append(sospechoso.estadoCivil);
 	$("#spnEstatura").append(sospechoso.estatura);
-	if(sospechoso.fechaDeInscripcion != null){
-		var fec  = sospechoso.fechaDeInscripcion;
-		$("#spnInscripcion").append(fec.split("-")[2]+"/"+fec.split("-")[1]+"/"+fec.split("-")[0]);
-	}else{
-		$("#spnInscripcion").append('');
-	}
 	$("#spnNombrePadre").append(sospechoso.nombrePadre);
 	$("#spnNombreMadre").append(sospechoso.nombreMadre);
-	if(sospechoso.fechaDeEmision != null){
-		var fec  = sospechoso.fechaDeEmision;
-		$("#spnEmision").append(fec.split("-")[2]+"/"+fec.split("-")[1]+"/"+fec.split("-")[0]);
-	}else{
-		$("#spnEmision").append('');
-	}
 	$("#spnRestriccion").append(sospechoso.restriccion);
 	$("#spnDomicilio").append(sospechoso.domicilio);
 	$("#spnDepartamentoDeDomicilio").append(sospechoso.departamentoDeDomicilio);
 	$("#spnProvinciaDeDomicilio").append(sospechoso.provinciaDeDomicilio);
 	$("#spnDistritoDeDomicilio").append(sospechoso.distritoDeDomicilio);
-	$("#spnMultasElectorales").append(sospechoso.multasElectorales);
 	//$("#spnFecNac").append(sospechoso.fechaDeNacimiento);
 	//$("#spnGradoInstruccion").append(sospechoso.gradoDeInstruccion);
 }
@@ -211,6 +199,7 @@ $(document).on('change','#txtEmision', function(e){
 
 $(document).on('click','#btnEditarSopechoso', function(e){
 	$("#txtCodUnico").val($("#spnCodigoUnicoDeIdentificacion").text());
+	$("#txtTipoDocumento").val($("#spnTipoDocumento").text());
 	$("#txtPrimerApellido").val($("#spnPrimerApellido").text());
 	$("#txtSegundoApellido").val($("#spnSegundoApellido").text());
 	$("#txtPrenombres").val($("#spnPrenombres").text());
@@ -229,16 +218,13 @@ $(document).on('click','#btnEditarSopechoso', function(e){
 	$("#selectGradoInstruccion").val($("#spnGradoInstruccion").text());
 	$("#sltcEstadoCivil").val($("#spnEstadoCivil").text());
 	$("#txtEstatura").val($("#spnEstatura").text());
-	$("#txtInscripcion").val($("#spnInscripcion").text());
 	$("#txtNombrePadre").val($("#spnNombrePadre").text());
 	$("#txtNombreMadre").val($("#spnNombreMadre").text());
-	$("#txtEmision").val($("#spnEmision").text());
 	$("#txtRestriccion").val($("#spnRestriccion").text());
 	$("#txtDomicilio").val($("#spnDomicilio").text());
 	$("#txtDepartamentoDeDomicilio").val($("#spnDepartamentoDeDomicilio").text());
 	$("#txtProvinciaDeDomicilio").val($("#spnProvinciaDeDomicilio").text());
 	$("#txtDistritoDeDomicilio").val($("#spnDistritoDeDomicilio").text());
-	$("#txtMultasElectorales").val($("#spnMultasElectorales").text());
 	/// ID SOSPECHOSO en ventana
 	$("#hdnIdSospechosoEdit").val($("#hdnIdSospechoso").text());
 	// LOS TABS
@@ -262,7 +248,7 @@ $(document).on('change','#txtAlias', function(e){
 				$("#alertasSospechosoNuevo").empty();
 				$("#alertasSospechosoNuevo").append('<div class="alert alert-error" id="alertaVerde">'+
 	 			        '<a class="close" data-dismiss="alert">×</a>'+
-	 			        '<strong id="msgVerde">El Alias usado ya existe en otro sospechoso.</strong>'+
+	 			        '<strong id="msgVerde">El Alias usado ya existe en otro investigado.</strong>'+
 	 			    '</div>');
 				flag = false;
 			}else{
@@ -283,7 +269,7 @@ $(document).on('change','#txtCodUnico', function(e){
 				$("#alertasSospechosoNuevo2").empty();
 				$("#alertasSospechosoNuevo2").append('<div class="alert alert-error" id="alertaVerde">'+
 	 			        '<a class="close" data-dismiss="alert">×</a>'+
-	 			        '<strong id="msgVerde">El Código Único de Identificación usado ya existe en otro sospechoso.</strong>'+
+	 			        '<strong id="msgVerde">El Código Único de Identificación usado ya existe en otro investigado.</strong>'+
 	 			    '</div>');
 				flag2 = false;
 			}else{
@@ -297,7 +283,7 @@ $(document).on('change','#txtCodUnico', function(e){
 	<div id="divMostrarSospechoso">
 		<div class="panel panel-default">
 			<div class="panel-heading">
-				<span>/// Datos del Sospechoso:</span>
+				<span>/// Datos del Investigado:</span>
 				<div class="pull-right">
 					<div class="btn-group">
 						<button class="btn btn-outline btn-primary btn-sm" type="button" id="btnEditarSopechoso"><i class="fa fa-edit fa-fw"></i> Editar</button>
@@ -307,7 +293,13 @@ $(document).on('change','#txtCodUnico', function(e){
 			<div class="panel-body" id="divPerfilMostrar">
 				<div class="col-lg-6">
 					<div class="form-group">
-		          		<label title="código único de identificación">C.U.I: </label>
+						<label >Tipo de Documento: </label> 
+						<label class="radio-inline">
+		          			<span id="spnTipoDocumento">&nbsp;</span>
+		          		</label>
+					</div>
+					<div class="form-group">
+		          		<label title="código único de identificación">Número de Documento: </label>
 		          		<label class="radio-inline">
 		          			<span id="spnCodigoUnicoDeIdentificacion">&nbsp;</span>
 		          		</label>
@@ -360,7 +352,10 @@ $(document).on('change','#txtCodUnico', function(e){
 		       				<span  id="spnDistritoNacimiento"></span>
 		       			</label>
 			       	</div>
-			       	<div class="form-group">
+			       
+				</div>
+				<div class="col-lg-6">
+					<div class="form-group">
 			       		<label>Grado de Instrucción: </label>
 		       			<label class="radio-inline">
 		       				<span  id="spnGradoInstruccion"></span>
@@ -372,18 +367,10 @@ $(document).on('change','#txtCodUnico', function(e){
 	          				<span  id="spnEstadoCivil"></span>
 		          		</label>
 			       	</div>
-				</div>
-				<div class="col-lg-6">
-						<div class="form-group">
+					<div class="form-group">
 		          		<label>Estatura: </label>
 		          		<label class="radio-inline">
 		          			<span id="spnEstatura"></span>
-		          		</label>
-			       	</div>
-		       		<div class="form-group">
-		          		<label>Fecha de Inscripción: </label>
-		          		<label class="radio-inline">
-		          			<span id="spnInscripcion"></span>
 		          		</label>
 			       	</div>
 			       	<div class="form-group">
@@ -396,12 +383,6 @@ $(document).on('change','#txtCodUnico', function(e){
 		          		<label>Nombre de la Madre: </label>
 		          		<label class="radio-inline">
 		          			<span id="spnNombreMadre"></span>
-		          		</label>
-		       		</div>
-		       		<div class="form-group">
-		          		<label>Fecha de Emisión: </label>
-		          		<label class="radio-inline">
-		          			<span id="spnEmision"></span>
 		          		</label>
 		       		</div>
 		       		<div class="form-group">
@@ -433,13 +414,7 @@ $(document).on('change','#txtCodUnico', function(e){
 		          		<label class="radio-inline">
 		          			<span id="spnDistritoDeDomicilio"></span>
 		          		</label>
-		       		</div>
-		       		<div class="form-group">
-		          		<label>Multas Electorales: </label>
-		          		<label class="radio-inline">
-		          			<span id="spnMultasElectorales"></span>
-		          		</label>
-		       		</div>
+		       		</div>		       		
 				</div>
 			</div>
 		</div>
@@ -453,14 +428,23 @@ $(document).on('change','#txtCodUnico', function(e){
 		</div>
 		<div class="panel panel-default">
 			<div class="panel-heading">
-				<span>/// Editar Datos Personales del Sospechoso:</span>
+				<span>/// Editar Datos Personales del Investigado:</span>
 			</div>
 			<div class="panel-body" id="divPerfilMostrar">
 			<form:form class="form-horizontal" id="formEditarSospechoso" action="editarSospechoso" commandName="sospechoso">
 				<input type="hidden" name="idSospechoso" id="hdnIdSospechosoEdit">
 				<div class="col-lg-5">
 					<div class="form-group">
-		          		<label title="Código Único de Identificación">C.U.I: </label>
+			          	<label title="Tipo de documento">Tipo de Documento: </label>
+		          		<select class="form-control" name="tipodocumento" id="txtTipoDocumento">
+		          			<option value="DNI">DNI</option>
+		          			<option value="Carnet Extranjeria">CARNET DE EXTRANJERIA</option>
+		          			<option value="Pasaporte">Pasaporte</option>
+		          			<option value="Otros">Otros</option>		          				
+		          		</select>
+			       	</div>
+					<div class="form-group">
+		          		<label title="Código Único de Identificación">Número de Documento: </label>
 	          			<input class="form-control" type="text" name="txtCodUnico" id="txtCodUnico">	          			
 		       		</div>
 		       		<input class="span2" type="hidden" name="codigoUnicoDeIdentificacion" id="hdnCodUnico">
@@ -594,7 +578,7 @@ $(document).on('change','#txtCodUnico', function(e){
 				</div>
 				<hr class="col-lg-12">
 	       		<div class="well col-lg-12">
-		       		<button class="btn btn-outline btn-success" id="btnGuardar" type="submit"><i class="fa fa-check"></i> Guardar Sospechoso</button>
+		       		<button class="btn btn-outline btn-success" id="btnGuardar" type="submit"><i class="fa fa-check"></i> Guardar Investigado</button>
 		        	<button class="btn btn-outline btn-danger" type="reset"><i class="fa fa-refresh fa-fw"></i> Reset</button>
 		        	<button class="btn btn-outline btn-warning" type="button" id="btnCancelEditar"><i class="fa fa-arrow-left"></i> Cancel</button>
 	       		</div>

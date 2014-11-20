@@ -80,7 +80,7 @@ var idEntidad = '';
 			<div class="col-lg-12">
 				<ul class="nav nav-tabs">
 					<li class="active"><a href="#liPrincipal" data-toggle="tab">Principal</a></li>
-					<li class=""><a href="#liSospechoso" data-toggle="tab">Sospechoso</a></li>
+					<li class=""><a href="#liSospechoso" data-toggle="tab">Investigado</a></li>
 					<li class=""><a href="#liArchivosAdjuntos" data-toggle="tab">Archivos Adjuntos</a></li>
 					<li class=""><a href="#liComentarios" data-toggle="tab">Comentario</a></li>
 					<li class=""><a href="#liAuditoria" data-toggle="tab">Auditoria</a></li>
@@ -90,7 +90,7 @@ var idEntidad = '';
 	            		<jsp:include page="bien/tabPrincipalVehiculo.jsp" />
 	            	</div>
 	            	<div class="tab-pane fade" id="liSospechoso">
-	            		<p>Sospechoso.</p>
+	            		<p>Investigado.</p>
 	            	</div>
 	            	<div class="tab-pane fade" id="liArchivosAdjuntos">
 	            		<jsp:include page="../componentes/archivos.jsp" />

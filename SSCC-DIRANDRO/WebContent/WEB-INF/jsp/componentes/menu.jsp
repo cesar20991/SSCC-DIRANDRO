@@ -61,9 +61,9 @@
 			<div id="collapseFive" class="accordion-body collapse"
 				style="height: 0px;">
 				<div class="accordion-inner">
-					<a href="toCrearSospechoso"><i class="icon-pencil"></i>Crear Perfil de Sospechoso</a>
+					<a href="toCrearSospechoso"><i class="icon-pencil"></i>Crear Perfil de Investigado</a>
 				</div>
-				<div class="accordion-inner"><i class="icon-search"></i> Buscar Sospechosos</div>
+				<div class="accordion-inner"><i class="icon-search"></i> Buscar Investigados</div>
 			</div>
 		</div>
 		<div class="accordion-group">

@@ -28,13 +28,13 @@ $(document).ready(function(){
 			$("#rowWelcome").removeClass('welcome');
 			$("#rowWelcome").addClass('welcome_inner');
 			$("#titulo").empty();
-			$("#titulo").append('<h1 class="page-header"><span class="colored">///</span> Crear Perfil del Sospechoso</h1>');
+			$("#titulo").append('<h1 class="page-header"><span class="colored">///</span> Crear Perfil del Investigado</h1>');
 		break;
 		case 'sospechosoPrincipal':
 			$("#rowWelcome").removeClass('welcome');
 			$("#rowWelcome").addClass('welcome_inner');
 			$("#titulo").empty();
-			$("#titulo").append('<h1 class="page-header"><span class="colored">///</span> Perfil Sospechoso</h1>');
+			$("#titulo").append('<h1 class="page-header"><span class="colored">///</span> Perfil Investigado</h1>');
 		break;
 		case 'cambiarClave':
 			$("#rowWelcome").removeClass('welcome');
@@ -88,7 +88,7 @@ $(document).ready(function(){
 			$("#rowWelcome").removeClass('welcome');
 			$("#rowWelcome").addClass('welcome_inner');
 			$("#titulo").empty();
-			$("#titulo").append('<h1 class="page-header"><span class="colored">///</span> Buscar Sospechosos</h1>');
+			$("#titulo").append('<h1 class="page-header"><span class="colored">///</span> Buscar Investigado</h1>');
 		break;
 	}
 });
@@ -182,13 +182,13 @@ $(document).ready(function(){
                     <!-- /.nav-second-level -->
                 </li>
                 <li>
-                    <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Sospechoso<span class="fa arrow"></span></a>
+                    <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Investigado<span class="fa arrow"></span></a>
                     <ul class="nav nav-second-level collapse">
                         <li>
-                            <a href="toCrearSospechoso">Crear Perfil de Sospechoso</a>
+                            <a href="toCrearSospechoso">Crear Perfil de Investigado</a>
                         </li>
                         <li>
-                            <a href="toBuscarSospechosos">Buscar Sospechosos</a>
+                            <a href="toBuscarSospechosos">Buscar Investigados</a>
                         </li>
                     </ul>
                     <!-- /.nav-second-level -->

@@ -55,7 +55,7 @@ $(document).on('click','.asignar', function(e){
 	
 	switch(id1){
 		case 'cancelarAsigna':
-			var respuesta = confirm('¿Esta seguro que desea quitar a este sospechoso?');
+			var respuesta = confirm('¿Esta seguro que desea quitar a este investigado?');
 			if(respuesta){
 				$.ajax({
 			 		url: 'deshasignarCasoDelSospechoso-'+id2+"-"+$("#hdnIdSospechoso").text(),
@@ -93,7 +93,7 @@ $(document).ready(function(){
 	<div id="divMostrarCasos">
 		<form:form class="form-horizontal">
 	       	<legend>
-		       	<span class=""><span class="colored">///</span> Casos Relacionados al Sospechoso:</span>
+		       	<span class=""><span class="colored">///</span> Casos Relacionados al Investigado:</span>
 		       	<!-- <span class="offset3"><button class="btn btn-primary" type="button" id="btnEditarSopechoso"><i class="icon-edit"></i> Editar</button></span> -->
 	       	</legend>
 	       	<div id="casoRelacionados">

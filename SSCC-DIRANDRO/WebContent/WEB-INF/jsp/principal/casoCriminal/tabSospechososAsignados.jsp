@@ -52,7 +52,7 @@ $(document).on('click','.asignar', function(e){
 	
 	switch(id1){
 		case 'cancelarAsigna':
-			var respuesta = confirm('¿Esta seguro que desea quitar a este sospechoso?');
+			var respuesta = confirm('¿Esta seguro que desea quitar a este Investigado?');
 			if(respuesta){
 				$.ajax({
 			 		url: 'deshasignarSospechoso-'+$("#hdnIdCaso").text()+"-"+id2,
@@ -136,7 +136,7 @@ $(document).ready(function(){
 				 			$("#alertasMostrarSospechoso").show();
 				 			$("#alertasMostrarSospechoso").append('<div class="alert alert-success" id="alertaError">'+
 				 					'<a class="close" data-dismiss="alert">×</a>'+
-				 					'<strong>Se creo y asigno correctamente el sospechoso.</strong>'+
+				 					'<strong>Se creo y asigno correctamente el investigado.</strong>'+
 				 				'</div>');
 				 			vaciarFormulario();
 				 			initSospechososAsignado(sospechosos);
@@ -153,7 +153,7 @@ $(document).ready(function(){
 				 				$("#alertasMostrarSospechoso").show();
 					 			$("#alertasMostrarSospechoso").append('<div class="alert alert-error" id="alertaError">'+
 					 					'<a class="close" data-dismiss="alert">×</a>'+
-					 					'<strong>Ya esta asignado este sospechoso.</strong>'+
+					 					'<strong>Ya esta asignado este investigado.</strong>'+
 					 				'</div>');
 				 			}else{
 				 				$("#divMostrarSospechosoAsignado").show();
@@ -161,7 +161,7 @@ $(document).ready(function(){
 					 			$("#alertasMostrarSospechoso").show();
 					 			$("#alertasMostrarSospechoso").append('<div class="alert alert-success" id="alertaError">'+
 					 					'<a class="close" data-dismiss="alert">×</a>'+
-					 					'<strong>Se asigno correctamente el sospechoso.</strong>'+
+					 					'<strong>Se asigno correctamente el investigado.</strong>'+
 					 				'</div>');
 					 			vaciarFormulario();
 					 			initSospechososAsignado(sospechosos);	
@@ -207,7 +207,7 @@ $(document).on('click','#btnAgregarSospechosoNuevo', function(e){
 	$("#alertasAgregarSospechoso").show();
 	$("#alertasAgregarSospechoso").append('<div class="alert alert-error" id="alertaError">'+
 			'<a class="close" data-dismiss="alert">×</a>'+
-			'<strong>Dejar en blanco el codigo de sospechoso si quiere agregar un sospechoso nuevo.</strong>'+
+			'<strong>Dejar en blanco el codigo de investigado si quiere agregar uno nuevo.</strong>'+
 		'</div>');
 });
 
@@ -258,8 +258,8 @@ function popUp(){
 		<form:form class="form-horizontal">
 			<fieldset>
 				<legend>
-					<span class=""><span class="colored">///</span> Sospechosos Asignados al caso:</span>
-					<span class="offset3"><button class="btn btn-primary btn-small asignar" type="button" id="btnAgregarSospechosoNuevo"><i class="icon-edit icon-white"></i> Agregar Sospechoso Nuevo</button></span>
+					<span class=""><span class="colored">///</span> Investigados Asignados al caso:</span>
+					<span class="offset3"><button class="btn btn-primary btn-small asignar" type="button" id="btnAgregarSospechosoNuevo"><i class="icon-edit icon-white"></i> Agregar Investigado Nuevo</button></span>
 				</legend>
 				<div id="divMostrarSospechosos">
 				
@@ -273,11 +273,11 @@ function popUp(){
 		<fieldset class="well">
 			<form:form class="form-horizontal span9" id="formAgregarSospechoso" action="agregarSospechoso" commandName="sospechoso">
 		       	<legend class="span8">
-			       	<span class="colored">///</span> Agregar Sospechoso Nuevo:
+			       	<span class="colored">///</span> Agregar Investigado Nuevo:
 		       	</legend>
 		       	<div class="span4">
 		       		<div class="control-group">
-		          		<label class="control-label">Código de Sospechoso: </label>
+		          		<label class="control-label">Código de Investigado: </label>
 		          		<div class="controls">
 		          			<input class="span2" type="text" name="codigo" id="txtCodigo"> <button class="btn btn-primary btn-mini asignar" type="button" id="btnBuscarSospechoso" onclick="popUp()"><i class="icon-search icon-white"></i></button>
 		          			<input type="hidden" id="txtIdSospechosoAux">
@@ -469,7 +469,7 @@ function popUp(){
 		       		</div>
 		       	</div>
 	       		<div class="form-actions span6">
-		        	<button class="btn btn-success" id="btnGuardar" type="submit"><i class="icon-ok icon-white"></i> Guardar Sospechoso</button>
+		        	<button class="btn btn-success" id="btnGuardar" type="submit"><i class="icon-ok icon-white"></i> Guardar Investigado</button>
 		        	<button class="btn btn-danger" type="reset"><i class="icon-refresh icon-white"></i> Reset</button>
 		        	<button class="btn btn-warning" type="button" id="btnCancelAgregarSospechoso"><i class="icon-arrow-left icon-white"></i> Cancel</button>
 		        </div>  

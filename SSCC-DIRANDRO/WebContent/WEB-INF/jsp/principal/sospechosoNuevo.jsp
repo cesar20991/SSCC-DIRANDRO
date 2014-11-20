@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="utf-8">
-<title>SSCC - DIRANDRO - Crear Sospechoso</title>
+<title>SSCC - DIRANDRO - Crear Investigado</title>
 <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -94,9 +94,9 @@ $(document).ready(function() {
 			$("#hdnEstatura").val($("#txtEstatura").val());
 			$("#hdnCodUnico").val($("#txtCodUnico").val());
 			
-			if($("#txtEmision").val() == ''){
-				$("#hdnFecEmi").val('1000-12-12');
-			}
+// 			if($("#txtEmision").val() == ''){
+// 				$("#hdnFecEmi").val('1000-12-12');
+// 			}
 			if(flag == true && flag2 == true){
 				form.submit();
 			}else if($("#txtCodUnico").val() == ''){
@@ -119,7 +119,7 @@ $(document).on('change','#txtAlias', function(e){
 				$("#alertasSospechosoNuevo").empty();
 				$("#alertasSospechosoNuevo").append('<div class="alert alert-error" id="alertaVerde">'+
 	 			        '<a class="close" data-dismiss="alert">×</a>'+
-	 			        '<strong id="msgVerde">El Alias usado ya existe en otro sospechoso.</strong>'+
+	 			        '<strong id="msgVerde">El Alias usado ya existe en otro Investigado.</strong>'+
 	 			    '</div>');
 				flag = false;
 			}else{
@@ -140,7 +140,7 @@ $(document).on('change','#txtCodUnico', function(e){
 				$("#alertasSospechosoNuevo2").empty();
 				$("#alertasSospechosoNuevo2").append('<div class="alert alert-error" id="alertaVerde">'+
 	 			        '<a class="close" data-dismiss="alert">×</a>'+
-	 			        '<strong id="msgVerde">El Código Único de Identificación usado ya existe en otro sospechoso.</strong>'+
+	 			        '<strong id="msgVerde">El Código Único de Identificación usado ya existe en otro Investigado.</strong>'+
 	 			    '</div>');
 				flag2 = false;
 			}else{
@@ -175,7 +175,16 @@ $(document).on('change','#txtCodUnico', function(e){
 				<form:form class="form-horizontal" id="formCrearSospechoso" action="crearSospechoso" commandName="sospechoso">
 					<div class="col-lg-5">
 						<div class="form-group">
-			          		<label title="Código Único de Identificación">C.U.I: </label>
+			          		<label title="Tipo de documento">Tipo de Documento: </label>
+		          			<select class="form-control" name="tipodocumento">
+		          				<option value="DNI">DNI</option>
+		          				<option value="Carnet Extranjeria">CARNET DE EXTRANJERIA</option>
+		          				<option value="Pasaporte">Pasaporte</option>
+		          				<option value="Otros">Otros</option>		          				
+		          			</select>
+			       		</div>
+						<div class="form-group">
+			          		<label title="Código Único de Identificación">Número de Documento: </label>
 		          			<input class="form-control" type="text" name="txtCodUnico" id="txtCodUnico">
 			       		</div>
 			       		<input class="span2" type="hidden" name="codigoUnicoDeIdentificacion" id="hdnCodUnico">
@@ -322,7 +331,7 @@ $(document).on('change','#txtCodUnico', function(e){
 					</div>		
 					<hr class="col-lg-12">			
 		       		<div class="well col-lg-12">		       		
-		       			<button class="btn btn-outline btn-success" id="btnGuardar" type="submit"><i class="fa fa-check"></i> Guardar Sospechoso</button>
+		       			<button class="btn btn-outline btn-success" id="btnGuardar" type="submit"><i class="fa fa-check"></i> Guardar Investigado</button>
 		        		<button class="btn btn-outline btn-danger" type="reset"><i class="fa fa-refresh fa-fw"></i> Reset</button>
 		       		</div>
 				</form:form>				

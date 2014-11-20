@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="utf-8">
-<title>SSCC - DIRANDRO - Sospechoso</title>
+<title>SSCC - DIRANDRO - Investigado</title>
 <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -70,6 +70,10 @@ var idEntidad = '';
 					<tr>
 						<td>Sexo:</td>
 						<td><span id="hdrSexo">&nbsp;</span></td>
+					</tr>
+					<tr>
+						<td>Homónimo:</td>
+						<td><span id="hdrhomonimo">&nbsp;</span></td>
 					</tr>
 				</tbody>
 			</table>
