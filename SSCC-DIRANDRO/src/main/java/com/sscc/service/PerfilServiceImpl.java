@@ -319,4 +319,49 @@ public class PerfilServiceImpl implements PerfilService {
 		Integer cont = Integer.parseInt(queryCont.getSingleResult().toString());
 		return cont > 0 ? true : false;
 	}
+	
+	@SuppressWarnings("unchecked")
+	public List<PerfilBean> getPersonalPolicialModal() {
+		List<PerfilBean> pbl = new ArrayList<PerfilBean>();
+		List<Perfil> p = new ArrayList<Perfil>();
+		Query qPersonal = em.createQuery("SELECT " +
+										"u.idUsuario, p.idPerfil, p.primerNombre, p.segundoNombre, p.apePaterno, p.apeMaterno, " +
+										"u.correoElectronico, p.cargo, p.dni, p.numeroDeCarnet, p.entidadPerteneciente, " +
+										"p.grado, p.rango, p.sexo, p.telefono, p.urlPerfil " +
+				" FROM Perfil p JOIN p.usuario u WHERE p.estado='habilitado')");
+		List<Object[]> rows = qPersonal.getResultList();
+		//p = qCasos.getResultList();
+		
+		//for(int i = 0; i < p.size(); i++){
+		for (int x = 0; x < rows.size(); x++) {
+			Object[] obj = rows.get(x);
+			PerfilBean pb = new PerfilBean();
+			
+			pb.setIdUsuario((Integer)obj[0]);			
+			pb.setIdPerfil((Integer)obj[1]);
+			
+			pb.setNombreCompleto((String)obj[2]+" "+(String)obj[3]+" "+(String)obj[4]+" "+(String)obj[5]);
+			pb.setCorreoElectronico((String)obj[6]);
+			pb.setCargo((String)obj[7]);
+			pb.setDni((Integer)obj[8]);
+			pb.setNumeroDeCarnet((Integer)obj[9]);
+			if(((String)obj[10]).equals("D")){
+				pb.setEntidadPerteneciente("DIRANDRO");
+			}else{
+				pb.setEntidadPerteneciente("Ministerio Público");
+			}
+			pb.setGrado((String)obj[11]);
+			pb.setRango((String)obj[12]);
+			pb.setSexo((String)obj[13]);
+			pb.setTelefono((String)obj[14]);
+			if((String)obj[15] == null){
+				pb.setUrlPerfil("img/skills.png");
+			}else{
+				pb.setUrlPerfil((String)obj[15]);				
+			}
+			pbl.add(pb);
+		}
+		
+		return pbl;
+	}
 }

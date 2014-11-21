@@ -378,6 +378,9 @@ public class SospechosoServiceImpl implements SospechosoService{
 				sb.setUrlSospechoso(s.getUrlSospechoso());
 			}
 			sb.setNombreCompleto(s.getPreNombres()+" "+s.getPrimerApellido()+" "+s.getSegundoApellido());
+			sb.setPreNombres(s.getPreNombres());
+			sb.setPrimerApellido(s.getPrimerApellido());
+			sb.setSegundoApellido(s.getSegundoApellido());
 			sbl.add(sb);
 		}
 		return sbl;

@@ -125,7 +125,7 @@ function iniPersonalAsignadoPorCaso(idCaso){
 				}
 				
 				resultado += '<tr id="tblAsignado_'+policia.idUsuario+'">'+
-								'<td><a href="toPerfil-'+policia.idPerfil+'"><img src="'+policia.urlPerfil+'" alt="logo"/></a></td>'+
+								'<td><a href="toPerfil-'+policia.idPerfil+'"><img src="'+policia.urlPerfil+'" alt="logo" style="width: 100%; height: 100%;"/></a></td>'+
 								'<td><a href="toPerfil-'+policia.idPerfil+'"><span id="hdrApePaterno_'+i+'">'+policia.apePaterno+'</span>&nbsp;<span id="hdrApeMaterno_'+i+'">'+policia.apeMaterno+'</span>&nbsp;<span id="hdrPrimerNombe_'+i+'">'+policia.primerNombre+'</span>&nbsp;<span id="hdrSegundoNombe_'+i+'">'+policia.segundoNombre+'</span>&nbsp;(<span id="hdrCodigo_'+i+'">'+policia.codigoPerfil+'</span>)</a></td>'+
 								'<td>'+policia.cargo+'</td>'+
 								'<td>'+policia.rango+'</td>'+

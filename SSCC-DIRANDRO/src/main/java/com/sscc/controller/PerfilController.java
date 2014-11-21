@@ -151,4 +151,13 @@ public class PerfilController {
 			return false;
 		}
 	}
+	
+	@RequestMapping(value = "getPersonalPolicialModal", method = RequestMethod.POST)
+	@ResponseBody
+	public List<PerfilBean> getPersonalPolicialModal(){
+		List<PerfilBean> perfilbean = new ArrayList<PerfilBean>();
+		perfilbean = perfilServ.getPersonalPolicialModal();
+		//perfilbean.addAll(perfilServ.getJefesDeUnidad());
+		return perfilbean;
+	}
 }

@@ -155,17 +155,17 @@ public class CasoCriminalController {
 	
 	@RequestMapping(value = "crearSospechosoExistenteAlCaso-{idCaso}-{idSospechoso}", method = RequestMethod.POST)
 	@ResponseBody
-	public List<SospechosoBean> crearSospechosoExistenteAlCaso(@PathVariable("idSospechoso") Integer idSospechoso, @PathVariable("idCaso") Integer idCaso){
+	public Boolean crearSospechosoExistenteAlCaso(@PathVariable("idSospechoso") Integer idSospechoso, @PathVariable("idCaso") Integer idCaso){
 		if(casoServ.crearSospechosoExistenteAlCaso(idCaso, idSospechoso)){
-			return casoServ.getSospechosoPorCaso(idCaso);
+			return true;
 		}else{
-			return null;
+			return false;
 		}		
 	}
 	
 	@RequestMapping(value = "toDiligenciasPre-{idCaso}", method = RequestMethod.POST)
 	@ResponseBody
-	public CasoCriminalBean crearSospechosoExistenteAlCaso(@ModelAttribute CasoCriminal casoCriminal, @PathVariable("idCaso") Integer idCaso){
+	public CasoCriminalBean toDiligenciasPre(@ModelAttribute CasoCriminal casoCriminal, @PathVariable("idCaso") Integer idCaso){
 		if(casoServ.toDiligenciasPre(casoCriminal, idCaso)){
 			return casoServ.getCasoCriminalBean(idCaso);
 		}else{

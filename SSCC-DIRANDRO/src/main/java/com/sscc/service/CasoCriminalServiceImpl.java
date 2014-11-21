@@ -374,7 +374,11 @@ public class CasoCriminalServiceImpl implements CasoCriminalService{
 			sb.setTelefonos(s.getTelefonos());
 			sb.setCorreos(s.getCorreos());
 			sb.setDirecciones(s.getDirecciones());
-			sb.setUrlSospechoso(s.getUrlSospechoso());
+			if(s.getUrlSospechoso() == null){
+				sb.setUrlSospechoso("img/skills.png");	
+			}else{
+				sb.setUrlSospechoso(s.getUrlSospechoso());				
+			}
 			sb.setIdSospechoso(s.getIdSospechoso());
 			sbl.add(sb);
 		}

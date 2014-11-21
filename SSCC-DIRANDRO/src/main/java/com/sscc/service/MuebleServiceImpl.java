@@ -150,7 +150,6 @@ public class MuebleServiceImpl implements MuebleService{
 		}
 	}
 
-	@Override
 	@SuppressWarnings("unchecked")
 	public List<MuebleBean> getMueblePorSopechoso(Integer idSospechoso) {
 		List<MuebleBean> lBb = new ArrayList<MuebleBean>();
