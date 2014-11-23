@@ -676,4 +676,27 @@ public class BienServiceImpl implements BienService {
 		
 		return lvb;
 	}
+
+	@Override
+	public List<MuebleBean> getMueblesBuscar() {
+		List<MuebleBean> lBien = new ArrayList<MuebleBean>();
+		Query qBienes = em.createQuery("SELECT m FROM Mueble m WHERE m.estado='habilitado' ");
+		List<Mueble> lista = qBienes.getResultList();
+
+		for (int i = 0; i < lista.size(); i++) {
+			MuebleBean bb = new MuebleBean();
+			Mueble b =  lista.get(i);
+			
+			bb.setIdMueble(b.getIdMueble());
+			bb.setCodigo(b.getCodigo());
+			bb.setDescripcion(b.getDescripcion());
+			bb.setValor(b.getValor());
+			bb.setTipo(b.getTipo());
+			bb.setEspecificarTipo(b.getEspecificarTipo());
+			bb.setEstadoDeConservasion(b.getEstadoDeConservasion());
+				
+			lBien.add(bb);
+		}
+		return lBien;
+	}
 }

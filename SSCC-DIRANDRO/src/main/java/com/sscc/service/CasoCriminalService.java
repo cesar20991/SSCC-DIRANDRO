@@ -56,4 +56,6 @@ public interface CasoCriminalService {
 	
 	List<CasoCriminalBean> getCasoCriminalBuscar();
 	
+	Boolean asignarCasoporSospechoso(Integer idSospechoso, Integer idCaso);
+	
 }

@@ -41,6 +41,11 @@ public class BienController {
 		return "principal/buscarVehiculo";
 	}
 	
+	@RequestMapping("toBuscarMueble")
+	public String toBuscarMueble() {
+		return "principal/buscarMueble";
+	}
+	
 	@RequestMapping("popUpAsignarBien-{idSospechoso}")
 	public String toBuscarBien(@PathVariable("idSospechoso")Integer idSospechoso, Model model ) {
 		List<SospechosoBean> sospechosoList = new ArrayList<SospechosoBean>();
@@ -207,6 +212,14 @@ public class BienController {
 		bienes = bienServ.getBienesMuebles(idSospechoso);
 		return bienes;
 	}
+	
+	@RequestMapping(value = "getMueblesBuscar", method = RequestMethod.POST)
+	@ResponseBody
+	public List<MuebleBean> getMueblesBuscar(){
+		List<MuebleBean> bienes=new ArrayList<MuebleBean>();
+		bienes = bienServ.getMueblesBuscar();
+		return bienes;
+	}
 	// BIENES inmueble
 	@RequestMapping(value = "asignarInmuebleToSospechoso-{idSospechoso}-{idBien}", method = RequestMethod.POST)
 	@ResponseBody
@@ -240,6 +253,16 @@ public class BienController {
 		//List<InmuebleBean> bienes=new ArrayList<InmuebleBean>();
 		
 		if(muebleServ.reAsignarMuebleTOSospechoso(idSospechoso, idBien, "deshabilitado")){
+			return true;
+		}else{
+			return false;
+		}		
+	}
+	
+	@RequestMapping(value = "desasignarCasoToSospechoso-{idSospechoso}-{idCaso}", method = RequestMethod.POST)
+	@ResponseBody
+	public Boolean desasignarCasoToSospechoso(@PathVariable("idSospechoso") Integer idSospechoso,@PathVariable("idCaso") Integer idCaso){
+		if(muebleServ.reAsignarCasoTOSospechoso(idSospechoso, idCaso, "deshabilitado")){
 			return true;
 		}else{
 			return false;

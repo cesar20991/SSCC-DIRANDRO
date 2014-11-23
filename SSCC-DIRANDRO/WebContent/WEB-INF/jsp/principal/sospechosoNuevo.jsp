@@ -328,6 +328,10 @@ $(document).on('change','#txtCodUnico', function(e){
 		          				<option>Viudo</option>
 				            </select>
 			       		</div>
+			       		<div class="form-group">
+			          		<label>Peligrosidad: </label>
+		          			<input class="form-control" type="text" name="peligrosidad" id="txtPeligrosidad">
+			       		</div>
 					</div>		
 					<hr class="col-lg-12">			
 		       		<div class="well col-lg-12">		       		

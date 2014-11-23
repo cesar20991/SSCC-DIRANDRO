@@ -39,6 +39,8 @@ public class SospechosoBean {
 	private Timestamp fecCreacionSospechoso;
 	private String urlSospechoso;
 	private String nombreCompleto;
+	private String peligrosidad;
+	private String rol;
 	
 	///Rasgos Particulares
 	private Integer idRasgosParticulares;
@@ -334,5 +336,17 @@ public class SospechosoBean {
 	}
 	public void setHomonimo(Integer homonimo) {
 		this.homonimo = homonimo;
+	}
+	public String getPeligrosidad() {
+		return peligrosidad;
+	}
+	public void setPeligrosidad(String peligrosidad) {
+		this.peligrosidad = peligrosidad;
+	}
+	public String getRol() {
+		return rol;
+	}
+	public void setRol(String rol) {
+		this.rol = rol;
 	}
 }

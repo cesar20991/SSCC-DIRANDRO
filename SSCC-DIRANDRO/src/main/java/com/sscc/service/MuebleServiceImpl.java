@@ -14,6 +14,8 @@ import com.sscc.form.BienBean;
 import com.sscc.form.MuebleBean;
 import com.sscc.model.Bien;
 import com.sscc.model.BienPorSospechoso;
+import com.sscc.model.CasoCriminal;
+import com.sscc.model.CasoPorSospechoso;
 import com.sscc.model.Mueble;
 import com.sscc.model.Perfil;
 import com.sscc.model.Sospechoso;
@@ -171,6 +173,21 @@ public class MuebleServiceImpl implements MuebleService{
 		}
 
 		return lBb;
+	}
+
+	@Transactional
+	public Boolean reAsignarCasoTOSospechoso(Integer idSospechoso, Integer idCaso, String estado) {
+		Query qCasos = em.createQuery("SELECT cps FROM CasoPorSospechoso cps JOIN cps.casoCriminal cc JOIN cps.sospechoso s WHERE cps.estado='habilitado' AND cc.idCasoCriminal="+ idCaso + " AND s.idSospechoso=" + idSospechoso);
+		
+		try{
+			CasoPorSospechoso cps = (CasoPorSospechoso) qCasos.getSingleResult();
+			CasoPorSospechoso cpsEdit = em.merge(cps);
+			
+			cpsEdit.setEstado(estado);
+			return true;
+		}catch (Exception e) {
+			return false;
+		}
 	}
 	
 }
