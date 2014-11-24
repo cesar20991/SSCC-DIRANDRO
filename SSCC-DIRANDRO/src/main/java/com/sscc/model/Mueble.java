@@ -23,7 +23,7 @@ public class Mueble {
 	@Column(nullable=true, length=250)
 	private String descripcion;
 	
-	@Column(nullable=true, length=90)
+	@Column(nullable=true, length=150)
 	private String tipo;
 	/*joyas
 	 * electrodomesticos

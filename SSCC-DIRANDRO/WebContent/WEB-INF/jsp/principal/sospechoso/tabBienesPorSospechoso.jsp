@@ -63,51 +63,56 @@
 	 		data: $('#formRegistrarMueble').serialize(),
 	 		success: function(bienes){
 	 			$("#divResultadoMueble").empty();
-	 			initMuebles();
-	 			
+	 			initMuebles();	 			
 	 		}
 	 	});
-	})
+	});
 	
 	
-	$(document).on('click','.desasignar', function(e){
+	$(document).on('click','.desasignar1', function(e){
 		var id2 = (this.id).split("_")[1];
 		var id3 = (this.id).split("_")[2];
 		if(id2 == 'Mue'){
-			$.ajax({
-		 		url: 'desasignarMuebleToSospechoso-'+$("#hdnIdSospechoso").text()+"-"+id3,
-		 		type: 'post',
-		 		dataType: 'json',
-		 		data: '',
-		 		success: function(bienes){
-		 			if(bienes == true){
-		 				$("#divResultadoMueble").empty();
-		 				initMuebles();		
-		 			}
-		 		}
-		 	});
+			var respuesta = confirm('¿Esta seguro que desea quitar este bien?');
+			if(respuesta){
+				$.ajax({
+			 		url: 'desasignarMuebleToSospechoso-'+$("#hdnIdSospechoso").text()+"-"+id3,
+			 		type: 'post',
+			 		dataType: 'json',
+			 		data: '',
+			 		success: function(bienes){
+			 			if(bienes == true){
+			 				$("#divResultadoMueble").empty();
+			 				initMuebles();		
+			 			}
+			 		}
+			 	});
+			}			
 		}else{
-			$.ajax({
-		 		url: 'desasignarInmuebleToSospechoso-'+$("#hdnIdSospechoso").text()+"-"+id3,
-		 		type: 'post',
-		 		dataType: 'json',
-		 		data: '',
-		 		success: function(bienes){
-		 			if(bienes == true){
-		 				if(id2 == 'In'){
-		 					$("#divResultadoInmueble").empty();
-		 					initInmuebles();
-		 				}else if(id2 == 'Ve'){
-		 					$("#divResultadoVehiculo").empty();
-		 					initVehiculos();
-		 				}
-			 							 				
-		 			}
-		 		}
-		 	});
+			var respuesta = confirm('¿Esta seguro que desea quitar este bien?');
+			if(respuesta){
+				$.ajax({
+			 		url: 'desasignarInmuebleToSospechoso-'+$("#hdnIdSospechoso").text()+"-"+id3,
+			 		type: 'post',
+			 		dataType: 'json',
+			 		data: '',
+			 		success: function(bienes){
+			 			if(bienes == true){
+			 				if(id2 == 'In'){
+			 					$("#divResultadoInmueble").empty();
+			 					initInmuebles();
+			 				}else if(id2 == 'Ve'){
+			 					$("#divResultadoVehiculo").empty();
+			 					initVehiculos();
+			 				}
+				 							 				
+			 			}
+			 		}
+			 	});
+			}			
 		}
 		
-	})
+	});
 	
 	function initInmuebles(){
 		$.ajax({
@@ -137,7 +142,7 @@
 	 		  						'<td>'+bien.descripcion+'</td>'+
 	 		  						'<td>'+bien.valor+'</td>'+
 	 		  						'<td>'+bien.areaTotal+'</td>'+
-	 		  						'<td><button type="button" class="btn btn-outline btn-danger btn-xs btn-circle desasignar" id="desasignar_In_'+bien.idBien+'"><i class="fa fa-minus"></i></button></td>'+
+	 		  						'<td><button type="button" class="btn btn-outline btn-danger btn-xs btn-circle desasignar1" id="desasignar_In_'+bien.idBien+'"><i class="fa fa-minus"></i></button></td>'+
 	 		  					'</tr>';
 	 			});
 	 			
@@ -179,7 +184,7 @@
 	 		  						'<td>'+bien.modelo+'</td>'+
 	 		  						'<td>'+bien.descripcion+'</td>'+
 	 		  						'<td>'+bien.valor+'</td>'+
-	 		  						'<td><button type="button" class="btn btn-outline btn-danger btn-xs btn-circle desasignar" id="desasignar_Ve_'+bien.idBien+'"><i class="fa fa-minus"></i></button></td>'+
+	 		  						'<td><button type="button" class="btn btn-outline btn-danger btn-xs btn-circle desasignar1" id="desasignar_Ve_'+bien.idBien+'"><i class="fa fa-minus"></i></button></td>'+
 	 		  					'</tr>';
 	 			});
 	 			resultado +='</table>';
@@ -249,7 +254,7 @@
 							  						'<td>'+bien.tipo+'</td>'+
 							  						'<td>'+bien.especificarTipo+'</td>'+
 							  						'<td>'+bien.estadoDeConservasion+'</td>'+
-							  						'<td><button type="button" class="btn btn-outline btn-danger btn-xs btn-circle desasignar" id="desasignar_Mue_'+bien.idMueble+'"><i class="fa fa-minus"></i></button></td>'+
+							  						'<td><button type="button" class="btn btn-outline btn-danger btn-xs btn-circle desasignar1" id="desasignar_Mue_'+bien.idMueble+'"><i class="fa fa-minus"></i></button></td>'+
 						 		  				'</tr>';
 								});
 								resultado +='</tbody></table>';
@@ -450,7 +455,8 @@
 					<div class="panel-body">
 						<form:form class="form-horizontal" id="formRegistrarMueble" commandName="mueble">
 							<div class="form-group">
-								<label>Tipo: </label> <select name="tipo" id="txtTipo" class="form-control">
+								<label>Tipo: </label> 
+								<select name="tipo" id="txtTipo" class="form-control" data-rule-required="true" data-msg-required="*">
 									<option value="">Seleccione</option>
 									<option value="Joyas">Joyas</option>
 									<option value="Electrodomesticos">Electrodomesticos</option>
@@ -462,22 +468,20 @@
 									<option value="Piedras y metales preciosos">Piedras y metales preciosos</option>
 								</select>	
 							</div>	
+				       		<div class="form-group" id="divATotal">
+				          		<label >Especificar Tipo: </label>
+			          			<input class="form-control" type="text" name="especificarTipo" id="txtEspecificarTipo" >
+				       		</div>
 							<div class="form-group">
 				          		<label >Valor Monetario: </label>
 			          			<div class="input-prepend input-group">
 				          			<span class="input-group-addon">S/.</span>
-			          				<input class="form-control" type="text" name="valor"  id="txtValor" >
+			          				<input class="form-control" type="text" name="valor"  id="txtValor"  data-rule-required="true" data-msg-required="*">
 			          			</div>
 				       		</div>	       		
 				       		<div class="form-group">
 				          		<label >Descripcion: </label>
 				          		<textarea class="form-control" rows="3" name="descripcion" id="txtDescripcion" maxlength="250" ></textarea>
-				       		</div>
-				       		<div class="form-group" id="divATotal">
-				          		<label >Especificar Tipo: </label>
-			          			<div class="input-append input-group">
-			          				<input class="form-control" type="text" name="especificarTipo" id="txtEspecificarTipo" >
-			          			</div>
 				       		</div>
 				       		<div class="form-group" id="divACercado">
 				          		<label >Estado de conservación: </label>

@@ -67,6 +67,11 @@ $(document).ready(function(){
 		 			$('#txtCorreo_0').val("");
 		 			$('#txtCelulares_0').val("");
 		 			$('#txtDirecciones_0').val("");
+		 			$("#divMensajes").show();
+		 			$("#divMensajes").append('<div class="alert alert-success alert-dismissable">'+
+					                            '<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>'+
+					                           '<a href="#" class="alert-link">Editado Correctamente</a>.'+
+					                        '</div>');
 		 		}
 			});
 		}
@@ -193,59 +198,164 @@ $(document).on('click','.eliminarCamposDirecciones', function(e){
 	$("#campoDirecciones_"+id1).remove();
 });
 //////////////////////////CONTACTOS
+$(document).ready(function(){
+	initContactos();
+
+	$("#hdnIdSospechosoContacto").val($("#hdnIdSospechoso").text());
+	
+	$("#formRegistrarContacto").validate({
+		submitHandler: function(form){
+			if($("#hdnTipoOperacion").val() == 'crear'){
+				$.ajax({
+					url : 'crearContacto',
+					type : 'post',
+					dataType : 'json',
+					data : $("#formRegistrarContacto").serialize(),
+					success : function(contactos) {
+						initLlenarTabla(contactos);
+						$("#divMensajes").show();
+			 			$("#divMensajes").append('<div class="alert alert-success alert-dismissable">'+
+						                            '<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>'+
+						                           '<a href="#" class="alert-link">Contacto creado correctamente</a>.'+
+						                        '</div>');
+					}
+				});
+			}else if($("#hdnTipoOperacion").val() == 'editar'){
+				$.ajax({
+					url : 'editarContacto',
+					type : 'post',
+					dataType : 'json',
+					data : $("#formRegistrarContacto").serialize(),
+					success : function(contactos) {
+						initLlenarTabla(contactos);
+						$("#divMensajes").show();
+			 			$("#divMensajes").append('<div class="alert alert-success alert-dismissable">'+
+						                            '<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>'+
+						                           '<a href="#" class="alert-link">Contacto editado correctamente</a>.'+
+						                        '</div>');
+					}
+				});
+			}
+		}
+	});
+	
+});
+function initLlenarTabla(contactos){
+	$("#divResultadoContactos").empty();
+	var resultado = '';
+	resultado +='<table class="table table-striped table-bordered table-hover dataTable" id="tblContactos">'+
+					'<thead>'+
+  					'<tr>'+
+  						'<th>Código</th>'+
+  						'<th>Nombres</th>'+
+  						'<th>Apellido Paterno</th>'+
+  						'<th>Apellido Materno</th>'+
+  						'<th>Teléfono</th>'+
+  						'<th>Celular</th>'+
+  						'<th>Correo Electrónico</th>'+
+  						'<th>Dirección</th>'+
+  						'<th>Departamente</th>'+
+  						'<th>Provincia</th>'+
+  						'<th>Distrito</th>'+
+  						'<th>Acción Editar</th>'+
+  						'<th>Acción Quitar</th>'+
+  					'</tr>'+
+					'</thead><tbody>';
+					$.each(contactos, function(i, contacto){
+						resultado +='<tr>'+
+										'<td id="codigo_'+contacto.idContacto+'">'+contacto.codigo+'</td>'+
+				  						'<td id="nombres_'+contacto.idContacto+'">'+contacto.nombres+'</td>'+
+				  						'<td id="apePaterno_'+contacto.idContacto+'">'+contacto.apellidoPaterno+'</td>'+
+				  						'<td id="apeMaterno_'+contacto.idContacto+'">'+contacto.apellidoMaterno+'</td>'+
+				  						'<td id="telefono_'+contacto.idContacto+'">'+contacto.telefono+'</td>'+
+				  						'<td id="celular_'+contacto.idContacto+'">'+contacto.celular+'</td>'+
+				  						'<td id="correo_'+contacto.idContacto+'">'+contacto.correoElectronico+'</td>'+
+				  						'<td id="direccion_'+contacto.idContacto+'">'+contacto.direccion+'</td>'+
+				  						'<td id="departamento_'+contacto.idContacto+'">'+contacto.departamento+'</td>'+
+				  						'<td id="provincia_'+contacto.idContacto+'">'+contacto.provincia+'</td>'+
+				  						'<td id="distrito_'+contacto.idContacto+'">'+contacto.distrito+'</td>'+
+				  						'<td><button type="button" class="btn btn-outline btn-primary btn-xs btn-circle contactos" id="editar_'+contacto.idContacto+'" data-toggle="modal" data-target="#modalContactos"><i class="fa fa-edit fa-fw"></i></button></td>'+
+				  						'<td><button type="button" class="btn btn-outline btn-danger btn-xs btn-circle contactos" id="desasignar_'+contacto.idContacto+'"><i class="fa fa-minus"></i></button></td>'+
+			 		  				'</tr>';
+					});
+					resultado +='</tbody></table>';
+					$("#divResultadoContactos").append(resultado);
+					$("#tblContactos").dataTable();
+}
+$(document).on('click','.contactos', function(e){
+	var id = this.id;
+	var idA = id.split("_")[0];
+	var idN = id.split("_")[1];
+	switch(idA){
+		case 'editar':
+			$("#txtIdContacto").val(idN);
+			$("#hdnTipoOperacion").val("editar");
+			$("#divCodContacto").show();
+			$("#spnCodigoContacto").empty();
+			$("#spnCodigoContacto").append($("#codigo_"+idN).text());
+			$("#txtNombres").val($("#nombres_"+idN).text());
+			$("#txtApePaterno").val($("#apePaterno_"+idN).text());
+			$("#txtApeMaterno").val($("#apeMaterno_"+idN).text());
+			$("#txtTelefono").val($("#telefono_"+idN).text());
+			$("#txtCelular").val($("#celular_"+idN).text());
+			$("#txtCorreoElectronico").val($("#correo_"+idN).text());
+			$("#txtDireccion").val($("#direccion_"+idN).text());
+			$("#txtDepartamento").val($("#departamento_"+idN).text());
+			$("#txtProvincia").val($("#provincia_"+idN).text());
+			$("#txtDistrito").val($("#distrito_"+idN).text());
+		break;
+		case 'desasignar':
+			var respuesta = confirm('¿Esta seguro que desea quitar este contacto?');
+			if(respuesta){
+				$.ajax({
+					url : 'quitarContacto-'+$("#hdnIdSospechoso").text()+'-'+idN,
+					type : 'post',
+					dataType : 'json',
+					data : '',
+					success : function(contactos) {
+						initLlenarTabla(contactos);
+						$("#divMensajes").show();
+			 			$("#divMensajes").append('<div class="alert alert-danger alert-dismissable">'+
+						                            '<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>'+
+						                           '<a href="#" class="alert-link">Contacto eliminado correctamente</a>.'+
+						                        '</div>');
+					}
+				});
+			}			
+		break;
+	}
+});
 function initContactos(){
 		$.ajax({
-			url : 'getContacots-'+$("#hdnIdSospechoso").text(),
+			url : 'getContactos-'+$("#hdnIdSospechoso").text(),
 			type : 'post',
 			dataType : 'json',
 			data : '',
-			success : function(bienes) {
-				var resultado = '';
-				resultado +='<table class="table table-striped table-bordered table-hover dataTable" id="tblIniMueble">'+
-								'<thead>'+
-			  					'<tr>'+
-			  						'<th>Código</th>'+
-			  						'<th>Nombres</th>'+
-			  						'<th>Apellido Paterno</th>'+
-			  						'<th>Apellido Materno</th>'+
-			  						'<th>Teléfono</th>'+
-			  						'<th>Celular</th>'+
-			  						'<th>Correo Electrónico</th>'+
-			  						'<th>Dirección</th>'+
-			  						'<th>Departamente</th>'+
-			  						'<th>Provincia</th>'+
-			  						'<th>Distrito</th>'+
-			  						'<th>Acción</th>'+
-			  					'</tr>'+
-								'</thead><tbody>';
-								$.each(contactos, function(i, contacto){
-									resultado +='<tr>'+
-													'<td>'+contacto.codigo+'</td>'+
-							  						'<td>'+contacto.nombres+'</td>'+
-							  						'<td>'+contacto.apellidoPaterno+'</td>'+
-							  						'<td>'+contacto.apellidoMaterno+'</td>'+
-							  						'<td>'+contacto.telefono+'</td>'+
-							  						'<td>'+contacto.celular+'</td>'+
-							  						'<td>'+contacto.correoElectronico+'</td>'+
-							  						'<td>'+contacto.direccion+'</td>'+
-							  						'<td>'+contacto.departamento+'</td>'+
-							  						'<td>'+contacto.provincia+'</td>'+
-							  						'<td>'+contacto.distrito+'</td>'+
-							  						'<td><button type="button" class="btn btn-outline btn-danger btn-xs btn-circle desasignar" id="desasignar_Mue_'+bien.idMueble+'"><i class="fa fa-minus"></i></button></td>'+
-						 		  				'</tr>';
-								});
-								resultado +='</tbody></table>';
-								$("#divResultadoMueble").append(resultado);
-								$("#tblIniMueble").dataTable();
+			success : function(contactos) {
+				initLlenarTabla(contactos);
 			}
 		});
 	}
-$(document).on('click','.eliminarCamposDirecciones', function(e){
+$(document).on('click','#btnCrearContacto', function(e){
 	$("#hdnTipoOperacion").val("crear");
-	$("#hdnIdSospechoso").val($("#hdnIdSospechoso").text());
-});	
+	$("#divCodContacto").hide();
+	limpiarFormContactos();
+});
+function limpiarFormContactos(){
+	$("#txtNombres").val("");
+	$("#txtApePaterno").val("");
+	$("#txtApeMaterno").val("");
+	$("#txtTelefono").val("");
+	$("#txtCelular").val("");
+	$("#txtCorreoElectronico").val("");
+	$("#txtDireccion").val("");
+	$("#txtDepartamento").val("");
+	$("#txtProvincia").val("");
+	$("#txtDistrito").val("");
+}
 </script>
 <!-- MOSTRAR DATOS DE CONTACTO -->
+<div id="divMensajes" style="display: none;"></div>
 <div id="divMostrarDatosContacto">
 	<div id="divMostrarContacto">
 		<div class="panel panel-default">
@@ -345,7 +455,7 @@ $(document).on('click','.eliminarCamposDirecciones', function(e){
 			</div>
 			<div class="panel-body" id="divPerfilMostrar">
 				<div class="table-responsive">
-   					<div id="divResultadoContactos" class="dataTables_wrapper form-inline" role="grid">
+   					<div id="divResultadoContactos" class="dataTables_wrapper form-inline" role="grid" style="overflow-x: scroll; width: 99%;">
    					
    					</div>
    				</div>
@@ -359,15 +469,20 @@ $(document).on('click','.eliminarCamposDirecciones', function(e){
                <div class="modal-header">
                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
                    <h4 class="modal-title" id="myModalLabel">Agregar Contacto</h4>
-                   <input type="hidden" id="hdnIdSospechoso"/>
-                   <input type="hidden" id="hdnTipoOperacion"/>
                </div>
                <div class="modal-body">
 					<div class="panel-body">
-						<form:form class="form-horizontal" id="formRegistrarMueble" commandName="mueble">
+						<form:form class="form-horizontal" id="formRegistrarContacto" commandName="contacto">
+	                   <input type="hidden" id="hdnIdSospechosoContacto" name="idSospechosoAux"/>
+	                   <input type="hidden" id="hdnTipoOperacion"/>
+	                   <input type="hidden" name="idContacto" id="txtIdContacto"/>
+							<div class="form-group" style="display: none;" id="divCodContacto">
+								<label>Código: </label> 
+								<span id="spnCodigoContacto">&nbsp;</span>
+							</div>
 							<div class="form-group">
 								<label>nombres: </label> 
-								<input class="form-control" type="text" name="nombres"  id="txtNombres" >	
+								<input class="form-control" type="text" name="nombres"  id="txtNombres"  data-rule-required="true" data-msg-required="*">	
 							</div>	
 							<div class="form-group">
 				          		<label >Apellido Paterno: </label>
@@ -377,35 +492,35 @@ $(document).on('click','.eliminarCamposDirecciones', function(e){
 				          		<label >Apellido Materno: </label>
 				          		<input class="form-control" type="text" name="apellidoMaterno"  id="txtApeMaterno" >
 				       		</div>
-				       		<div class="form-group" id="divATotal">
+				       		<div class="form-group">
 				          		<label>Telefono: </label>
-			          			<input class="form-control" type="text" name="telefono" id="txtTelefono" >
+			          			<input class="form-control" type="text" name="telefono" id="txtTelefono"  data-rule-number="true" data-rule-minlength="7" data-rule-maxlength="7" data-msg-number="Debe ingresar un número de teléfono válido." >
 				       		</div>
-				       		<div class="form-group" id="divACercado">
+				       		<div class="form-group">
 				          		<label >Celular: </label>
-			          			<input class="form-control" type="text" name="celular" id="txtCelular" >
+			          			<input class="form-control" type="text" name="celular" id="txtCelular"  data-rule-number="true"  data-rule-minlength="9" data-rule-maxlength="9" data-msg-number="Debe ingresar un número de celular válido."  >
 				       		</div>	
-				       		<div class="form-group" id="divACercado">
+				       		<div class="form-group">
 				          		<label >Correo Electrónico: </label>
-			          			<input class="form-control" type="text" name="correoElectronico" id="txtCorreoElectronico" >
+			          			<input class="form-control" type="text" name="correoElectronico" id="txtCorreoElectronico"  data-rule-email="true" data-msg-email="Debe ingresar un correo electronico válido." >
 				       		</div>
-				       		<div class="form-group" id="divACercado">
+				       		<div class="form-group">
 				          		<label >Direccion: </label>
 			          			<input class="form-control" type="text" name="direccion" id="txtDireccion" >
 				       		</div>	
-				       		<div class="form-group" id="divACercado">
+				       		<div class="form-group">
 				          		<label >Departamento: </label>
 				          		<select class="form-control" id="txtDepartamento" name="departamento">
 				          			<jsp:include page="../../componentes/selectDepartamento.jsp" />
 				          		</select>
 				       		</div>
-				       		<div class="form-group" id="divACercado">
+				       		<div class="form-group">
 				          		<label >Provincia: </label>
 				          		<select class="form-control" id="txtProvincia" name="provincia">
 				          			<jsp:include page="../../componentes/selectProvincia.jsp" />
 				          		</select>
 				       		</div>
-				       		<div class="form-group" id="divACercado">
+				       		<div class="form-group">
 				          		<label >Distrito: </label>
 				          		<select class="form-control" name="distrito" id="txtDistrito">
 				          			<jsp:include page="../../componentes/selectDistrito.jsp" />
@@ -413,8 +528,9 @@ $(document).on('click','.eliminarCamposDirecciones', function(e){
 				       		</div>
 							<hr class="">
 							<div class="well">
-								<button class="btn btn-outline btn-success asignarMueble" id="btnRegistrarMueble" type="button">
-									<i class="fa fa-check"></i> Registrar Mueble
+								<button class="btn btn-outline btn-success" 
+								id="btnRegistrarContacto" type="submit">
+									<i class="fa fa-check"></i> Registrar Contacto
 								</button>
 								<button class="btn btn-outline btn-danger" type="reset">
 									<i class="fa fa-refresh fa-fw"></i> Reset

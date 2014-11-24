@@ -114,6 +114,8 @@ $(document).on('click','.asignar', function(e){
 
 $(document).on('click','.desasignar', function(e){
 	var id3 = (this.id).split("_")[2];
+	var respuesta = confirm('¿Esta seguro que desea quitar a este investigado?');
+	if(respuesta){
 		$.ajax({
 	 		url: 'desasignarCasoToSospechoso-'+$("#hdnIdSospechoso").text()+"-"+id3,
 	 		type: 'post',
@@ -134,9 +136,8 @@ $(document).on('click','.desasignar', function(e){
 	 			}
 	 		}
 	 	});
-
-	
-})
+	}	
+});
 
 $(document).ready(function(){
 	

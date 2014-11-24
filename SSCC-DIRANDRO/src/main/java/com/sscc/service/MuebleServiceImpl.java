@@ -37,9 +37,11 @@ public class MuebleServiceImpl implements MuebleService{
 		m.setEstadoDeConservasion(mb.getEstadoDeConservasion());
 		DateUtil d = new DateUtil();
 		m.setFecCreacion(d.hoyTimestamp());
+		
 		Sospechoso sospechoso = new Sospechoso();
 		sospechoso.setIdSospechoso(idSospechoso);
 		m.setSospechoso(sospechoso);
+		
 		m.setTipo(mb.getTipo());
 		m.setValor(mb.getValor());
 		
