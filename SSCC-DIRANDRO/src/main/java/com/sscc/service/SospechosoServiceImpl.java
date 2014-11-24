@@ -68,6 +68,8 @@ public class SospechosoServiceImpl implements SospechosoService{
 		sb.setDirecciones(s.getDirecciones());
 		sb.setUrlSospechoso(s.getUrlSospechoso());
 		sb.setIdSospechoso(s.getIdSospechoso());
+		sb.setPeligrosidad(s.getPeligrosidad());
+		sb.setRol(s.getRol());
 		//
 		Query qSospechosohomonimo = em.createNativeQuery("SELECT count(s.*)-1 FROM sospechoso s WHERE (s.prenombres || ' ' || s.primerapellido LIKE '%"+s.getPreNombres()+ " " + s.getPrimerApellido() +"%' OR s.prenombres || ' ' || s.primerapellido || ' ' || s.segundoapellido = '%"+ s.getPreNombres()+ " " + s.getPrimerApellido()+ "" +s.getSegundoApellido() +"%' )");
 		BigInteger homonimo = (BigInteger) qSospechosohomonimo.getSingleResult();
@@ -182,6 +184,9 @@ public class SospechosoServiceImpl implements SospechosoService{
 		if(sospechoso.getMultasElectorales()==null){
 			sospechoso.setMultasElectorales(0);
 		}
+		if(sospechoso.getPeligrosidad()==null){
+			sospechoso.setPeligrosidad("");
+		}
 		
 		em.persist(sospechoso);
 		sospechoso.setCodigo("SPO-"+sospechoso.getIdSospechoso());
@@ -236,6 +241,7 @@ public class SospechosoServiceImpl implements SospechosoService{
 		editado.setProvinciaDeDomicilio(sospechoso.getProvinciaDeDomicilio());
 		editado.setDistritoDeDomicilio(sospechoso.getDistritoDeDomicilio());
 		editado.setMultasElectorales(sospechoso.getMultasElectorales());
+		editado.setPeligrosidad(sospechoso.getPeligrosidad());
 		
 		return getSospechosoBean(editado.getIdSospechoso());
 	}

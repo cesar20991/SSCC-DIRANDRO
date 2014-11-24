@@ -72,6 +72,11 @@ public class Sospechoso {
 	private String estado;
 	@Column(nullable = false)
 	private Timestamp fecCreacionSospechoso;
+	@Column(length = 50, nullable = true)
+	private String peligrosidad;
+	
+	@Column(length = 50, nullable = true)
+	private String rol;
 	
 	// DATOS DE CONTACTO
 	@Column (length = 1000, nullable = true)
@@ -321,5 +326,17 @@ public class Sospechoso {
 	}
 	public void setTipodocumento(String tipodocumento) {
 		this.tipodocumento = tipodocumento;
+	}
+	public String getPeligrosidad() {
+		return peligrosidad;
+	}
+	public void setPeligrosidad(String peligrosidad) {
+		this.peligrosidad = peligrosidad;
+	}
+	public String getRol() {
+		return rol;
+	}
+	public void setRol(String rol) {
+		this.rol = rol;
 	}
 }

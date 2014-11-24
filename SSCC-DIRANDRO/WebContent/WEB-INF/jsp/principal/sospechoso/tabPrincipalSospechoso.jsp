@@ -52,6 +52,8 @@ function initSospechoso(sospechoso){
 	$("#spnProvinciaDeNacimiento").empty();
 	$("#spnDistritoDeNacimiento").empty();
 	$("#tdImagen").empty();
+	$("#spnPeligrosidad").empty();
+	$("#spnRol").empty();
 	
 	if(sospechoso.urlSospechoso == null){
 		$("#tdImagen").append('<img src="img/skills.png" alt="foto" style="width: 90px; height: 120px;" />');
@@ -90,6 +92,8 @@ function initSospechoso(sospechoso){
 	$("#spnDepartamentoDeDomicilio").append(sospechoso.departamentoDeDomicilio);
 	$("#spnProvinciaDeDomicilio").append(sospechoso.provinciaDeDomicilio);
 	$("#spnDistritoDeDomicilio").append(sospechoso.distritoDeDomicilio);
+	$("#spnPeligrosidad").append(sospechoso.peligrosidad);
+	$("#spnRol").append(sospechoso.rol);
 	//$("#spnFecNac").append(sospechoso.fechaDeNacimiento);
 	//$("#spnGradoInstruccion").append(sospechoso.gradoDeInstruccion);
 }
@@ -225,6 +229,7 @@ $(document).on('click','#btnEditarSopechoso', function(e){
 	$("#txtDepartamentoDeDomicilio").val($("#spnDepartamentoDeDomicilio").text());
 	$("#txtProvinciaDeDomicilio").val($("#spnProvinciaDeDomicilio").text());
 	$("#txtDistritoDeDomicilio").val($("#spnDistritoDeDomicilio").text());
+	$("#txtPeligrosidad").val($("#spnPeligrosidad").text());
 	/// ID SOSPECHOSO en ventana
 	$("#hdnIdSospechosoEdit").val($("#hdnIdSospechoso").text());
 	// LOS TABS
@@ -389,6 +394,18 @@ $(document).on('change','#txtCodUnico', function(e){
 		          		<label>Restricción: </label>
 		          		<label class="radio-inline">
 		          			<span id="spnRestriccion"></span>
+		          		</label>
+		       		</div>
+		       		<div class="form-group">
+		          		<label>Peligrosidad: </label>
+		          		<label class="radio-inline">
+		          			<span id="spnPeligrosidad"></span>
+		          		</label>
+		       		</div>
+		       		<div class="form-group">
+		          		<label>Rol: </label>
+		          		<label class="radio-inline">
+		          			<span id="spnRol"></span>
 		          		</label>
 		       		</div>
 		       		<div class="form-group">
@@ -574,7 +591,11 @@ $(document).on('change','#txtCodUnico', function(e){
 		          		<label>Multas Electorales: </label>
 	          			<input class="form-control" type="text" name="txtMultasElectorales" id="txtMultasElectorales">
 		       		</div>
-		       		<input class="span2" type="hidden" name="multasElectorales" id="txtMultasElectorales">		       		
+		       		<input class="span2" type="hidden" name="multasElectorales" id="txtMultasElectorales">	
+		       		<div class="form-group">
+		          		<label>peligrosidad: </label>
+	          			<input class="form-control" type="text" name="peligrosidad" id="txtPeligrosidad">
+		       		</div>	       		
 				</div>
 				<hr class="col-lg-12">
 	       		<div class="well col-lg-12">

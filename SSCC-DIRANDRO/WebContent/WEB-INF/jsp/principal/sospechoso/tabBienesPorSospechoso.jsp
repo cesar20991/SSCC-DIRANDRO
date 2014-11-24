@@ -481,7 +481,7 @@
 				       		</div>
 				       		<div class="form-group" id="divACercado">
 				          		<label >Estado de conservación: </label>
-			          			<select name="estadoDeConservasion" id="txtestadoDeConservasion" data-rule-required="true" >
+			          			<select name="estadoDeConservasion"  class="form-control" id="txtestadoDeConservasion" data-rule-required="true" >
 									<option value="Bueno">Bueno</option>
 									<option value="Regular">Regular</option>
 									<option value="Inservible">Inservible</option>

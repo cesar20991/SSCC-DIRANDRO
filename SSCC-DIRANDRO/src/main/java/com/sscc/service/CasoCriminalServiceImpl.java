@@ -13,6 +13,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.sscc.form.CasoCriminalBean;
 import com.sscc.form.SospechosoBean;
+import com.sscc.model.Bien;
+import com.sscc.model.BienPorSospechoso;
 import com.sscc.model.CasoCriminal;
 import com.sscc.model.CasoPorSospechoso;
 import com.sscc.model.Perfil;
@@ -531,5 +533,39 @@ public class CasoCriminalServiceImpl implements CasoCriminalService{
 			ccbl.add(ccb);
 		}
 		return ccbl;
+	}
+
+	@Transactional
+	public Boolean asignarCasoporSospechoso(Integer idSospechoso, Integer idCaso) {
+		Query q = em.createQuery("SELECT cps FROM CasoPorSospechoso cps JOIN cps.casoCriminal cc JOIN cps.sospechoso s WHERE cps.estado='habilitado' AND cc.idCasoCriminal="+ idCaso + " AND s.idSospechoso=" + idSospechoso);
+		try{
+			CasoPorSospechoso bps = (CasoPorSospechoso) q.getSingleResult();			
+			
+			return false;
+		}catch(Exception e){
+			Query q1 = em.createQuery("SELECT cps FROM CasoPorSospechoso cps JOIN cps.casoCriminal cc JOIN cps.sospechoso s WHERE cps.estado='habilitado' AND cc.idCasoCriminal="+ idCaso + " AND s.idSospechoso=" + idSospechoso);
+			try{
+				CasoPorSospechoso cpsa1 = (CasoPorSospechoso) q1.getSingleResult();
+				CasoPorSospechoso cpsEdit = em.merge(cpsa1);
+				
+				cpsEdit.setEstado("habilitado");
+				return true;
+			}catch(Exception e1){
+				CasoPorSospechoso cpa = new CasoPorSospechoso();
+				cpa.setEstado("habilitado");
+				
+				Sospechoso c = new Sospechoso();
+				c.setIdSospechoso(idSospechoso);
+				CasoCriminal u = new CasoCriminal();
+				u.setIdCasoCriminal(idCaso);
+				
+				cpa.setSospechoso(c);
+				cpa.setCasoCriminal(u);
+				
+				em.persist(cpa);
+			
+				return true;
+			}
+		}
 	}
 }

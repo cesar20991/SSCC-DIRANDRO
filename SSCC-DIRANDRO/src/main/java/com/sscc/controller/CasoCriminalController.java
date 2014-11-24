@@ -258,6 +258,17 @@ public class CasoCriminalController {
 	public List<SospechosoBean> getSopechososPorCaso(@PathVariable("idCaso") Integer idCaso){
 			return casoServ.getSospechosoPorCaso(idCaso);
 	}
+	
+
+	@RequestMapping(value = "asignarCasoToSospechoso-{idSospechoso}-{idCasoCriminal}", method = RequestMethod.POST)
+	@ResponseBody
+	public List<CasoCriminalBean> asignarCasoToSospechoso(@PathVariable("idSospechoso") Integer idSospechoso, @PathVariable("idCasoCriminal") Integer idCasoCriminal){
+		List<CasoCriminalBean> sospechosobean = new ArrayList<CasoCriminalBean>();
+		casoServ.asignarCasoporSospechoso(idSospechoso, idCasoCriminal);
+		
+		sospechosobean = sospechosoServ.getCasosDelSospechoso(idSospechoso);
+		return sospechosobean;
+	}
 
 	@RequestMapping(value = "deshasignarSospechoso-{idCaso}-{idSospechoso}", method = RequestMethod.POST)
 	@ResponseBody

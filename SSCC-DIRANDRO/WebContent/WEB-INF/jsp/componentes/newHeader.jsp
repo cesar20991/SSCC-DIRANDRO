@@ -229,6 +229,14 @@ $(document).ready(function(){
                             </ul>
                             <!-- /.nav-third-level -->
                         </li>
+                        <li>
+                       		 <a href="#">Mueble <span class="fa arrow"></span></a>
+                            <ul class="nav nav-third-level collapse" style="">
+                                <li>
+                                    <a href="toBuscarMueble">Buscar Mueble</a>
+                                </li>
+                            </ul>
+                        </li>
                     </ul>
                     <!-- /.nav-second-level -->
                 </li>

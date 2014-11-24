@@ -46,6 +46,8 @@ public interface BienService {
 	
 	List<MuebleBean> getBienesMuebles(Integer idSospechoso);
 	
+	List<MuebleBean> getMueblesBuscar();
+	
 	List<InmuebleBean> getBienesInmueble();
 	
 	List<VehiculoBean> getBienesVehiculos();

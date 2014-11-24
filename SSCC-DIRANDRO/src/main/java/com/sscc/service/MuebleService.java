@@ -16,6 +16,8 @@ public interface MuebleService {
 	List<MuebleBean> getMueblesBean();
 	
 	Boolean reAsignarMuebleTOSospechoso(Integer idSospechoso, Integer idMueble, String estado);
+
+	Boolean reAsignarCasoTOSospechoso(Integer idSospechoso, Integer idCaso, String estado);
 	List<MuebleBean> getMueblePorSopechoso(Integer idSospechoso);
 	
 }
