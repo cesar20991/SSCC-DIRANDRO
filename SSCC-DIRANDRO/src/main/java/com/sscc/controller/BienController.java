@@ -119,7 +119,7 @@ public class BienController {
 	
 	@RequestMapping(value = "editarInmueble", method = RequestMethod.POST)
 	@ResponseBody
-	public InmuebleBean editarSopechoso(@ModelAttribute InmuebleBean inmueble, HttpServletRequest req, HttpSession session, Model model){
+	public InmuebleBean editarInmueble(@ModelAttribute InmuebleBean inmueble, HttpServletRequest req, HttpSession session, Model model){
 		InmuebleBean inmuebleBean = new InmuebleBean();
 		inmuebleBean = bienServ.editInmuebleBean(inmueble);
 		return inmuebleBean;
@@ -164,7 +164,7 @@ public class BienController {
 	
 	@RequestMapping(value = "editarVehiculo", method = RequestMethod.POST)
 	@ResponseBody
-	public VehiculoBean editarSopechoso(@ModelAttribute VehiculoBean vehiculo, HttpServletRequest req, HttpSession session, Model model){
+	public VehiculoBean editarVehiculo(@ModelAttribute VehiculoBean vehiculo, HttpServletRequest req, HttpSession session, Model model){
 		VehiculoBean vehiculoBean = new VehiculoBean();
 		vehiculoBean = bienServ.editVehiculoBean(vehiculo);
 		return vehiculoBean;

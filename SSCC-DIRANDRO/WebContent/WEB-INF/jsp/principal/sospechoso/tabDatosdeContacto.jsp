@@ -192,6 +192,58 @@ $(document).on('click','.eliminarCamposDirecciones', function(e){
 	var id1 = (this.id).split('_')[1];
 	$("#campoDirecciones_"+id1).remove();
 });
+//////////////////////////CONTACTOS
+function initContactos(){
+		$.ajax({
+			url : 'getContacots-'+$("#hdnIdSospechoso").text(),
+			type : 'post',
+			dataType : 'json',
+			data : '',
+			success : function(bienes) {
+				var resultado = '';
+				resultado +='<table class="table table-striped table-bordered table-hover dataTable" id="tblIniMueble">'+
+								'<thead>'+
+			  					'<tr>'+
+			  						'<th>Código</th>'+
+			  						'<th>Nombres</th>'+
+			  						'<th>Apellido Paterno</th>'+
+			  						'<th>Apellido Materno</th>'+
+			  						'<th>Teléfono</th>'+
+			  						'<th>Celular</th>'+
+			  						'<th>Correo Electrónico</th>'+
+			  						'<th>Dirección</th>'+
+			  						'<th>Departamente</th>'+
+			  						'<th>Provincia</th>'+
+			  						'<th>Distrito</th>'+
+			  						'<th>Acción</th>'+
+			  					'</tr>'+
+								'</thead><tbody>';
+								$.each(contactos, function(i, contacto){
+									resultado +='<tr>'+
+													'<td>'+contacto.codigo+'</td>'+
+							  						'<td>'+contacto.nombres+'</td>'+
+							  						'<td>'+contacto.apellidoPaterno+'</td>'+
+							  						'<td>'+contacto.apellidoMaterno+'</td>'+
+							  						'<td>'+contacto.telefono+'</td>'+
+							  						'<td>'+contacto.celular+'</td>'+
+							  						'<td>'+contacto.correoElectronico+'</td>'+
+							  						'<td>'+contacto.direccion+'</td>'+
+							  						'<td>'+contacto.departamento+'</td>'+
+							  						'<td>'+contacto.provincia+'</td>'+
+							  						'<td>'+contacto.distrito+'</td>'+
+							  						'<td><button type="button" class="btn btn-outline btn-danger btn-xs btn-circle desasignar" id="desasignar_Mue_'+bien.idMueble+'"><i class="fa fa-minus"></i></button></td>'+
+						 		  				'</tr>';
+								});
+								resultado +='</tbody></table>';
+								$("#divResultadoMueble").append(resultado);
+								$("#tblIniMueble").dataTable();
+			}
+		});
+	}
+$(document).on('click','.eliminarCamposDirecciones', function(e){
+	$("#hdnTipoOperacion").val("crear");
+	$("#hdnIdSospechoso").val($("#hdnIdSospechoso").text());
+});	
 </script>
 <!-- MOSTRAR DATOS DE CONTACTO -->
 <div id="divMostrarDatosContacto">
@@ -287,13 +339,97 @@ $(document).on('click','.eliminarCamposDirecciones', function(e){
 				<span>/// Contactos:</span>
 				<div class="pull-right">
 					<div class="btn-group">
-						<button class="btn btn-outline btn-primary btn-sm" type="button" id="btnCrearContacto"><i class="fa fa-edit fa-fw"></i> Crear Contacto</button>
+						<button class="btn btn-outline btn-primary btn-sm" type="button" id="btnCrearContacto" data-toggle="modal" data-target="#modalContactos" ><i class="fa fa-edit fa-fw"></i> Crear Contacto</button>
 					</div>
 				</div>
 			</div>
 			<div class="panel-body" id="divPerfilMostrar">
-				
+				<div class="table-responsive">
+   					<div id="divResultadoContactos" class="dataTables_wrapper form-inline" role="grid">
+   					
+   					</div>
+   				</div>
 			</div>
 		</div>
 	</div>
+	<!-- MODAL -->
+	<div class="modal fade" id="modalContactos" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+       <div class="modal-dialog">
+           <div class="modal-content" style="width: 100%;">
+               <div class="modal-header">
+                   <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                   <h4 class="modal-title" id="myModalLabel">Agregar Contacto</h4>
+                   <input type="hidden" id="hdnIdSospechoso"/>
+                   <input type="hidden" id="hdnTipoOperacion"/>
+               </div>
+               <div class="modal-body">
+					<div class="panel-body">
+						<form:form class="form-horizontal" id="formRegistrarMueble" commandName="mueble">
+							<div class="form-group">
+								<label>nombres: </label> 
+								<input class="form-control" type="text" name="nombres"  id="txtNombres" >	
+							</div>	
+							<div class="form-group">
+				          		<label >Apellido Paterno: </label>
+			          			<input class="form-control" type="text" name="apellidoPaterno"  id="txtApePaterno" >
+				       		</div>	       		
+				       		<div class="form-group">
+				          		<label >Apellido Materno: </label>
+				          		<input class="form-control" type="text" name="apellidoMaterno"  id="txtApeMaterno" >
+				       		</div>
+				       		<div class="form-group" id="divATotal">
+				          		<label>Telefono: </label>
+			          			<input class="form-control" type="text" name="telefono" id="txtTelefono" >
+				       		</div>
+				       		<div class="form-group" id="divACercado">
+				          		<label >Celular: </label>
+			          			<input class="form-control" type="text" name="celular" id="txtCelular" >
+				       		</div>	
+				       		<div class="form-group" id="divACercado">
+				          		<label >Correo Electrónico: </label>
+			          			<input class="form-control" type="text" name="correoElectronico" id="txtCorreoElectronico" >
+				       		</div>
+				       		<div class="form-group" id="divACercado">
+				          		<label >Direccion: </label>
+			          			<input class="form-control" type="text" name="direccion" id="txtDireccion" >
+				       		</div>	
+				       		<div class="form-group" id="divACercado">
+				          		<label >Departamento: </label>
+				          		<select class="form-control" id="txtDepartamento" name="departamento">
+				          			<jsp:include page="../../componentes/selectDepartamento.jsp" />
+				          		</select>
+				       		</div>
+				       		<div class="form-group" id="divACercado">
+				          		<label >Provincia: </label>
+				          		<select class="form-control" id="txtProvincia" name="provincia">
+				          			<jsp:include page="../../componentes/selectProvincia.jsp" />
+				          		</select>
+				       		</div>
+				       		<div class="form-group" id="divACercado">
+				          		<label >Distrito: </label>
+				          		<select class="form-control" name="distrito" id="txtDistrito">
+				          			<jsp:include page="../../componentes/selectDistrito.jsp" />
+				          		</select>
+				       		</div>
+							<hr class="">
+							<div class="well">
+								<button class="btn btn-outline btn-success asignarMueble" id="btnRegistrarMueble" type="button">
+									<i class="fa fa-check"></i> Registrar Mueble
+								</button>
+								<button class="btn btn-outline btn-danger" type="reset">
+									<i class="fa fa-refresh fa-fw"></i> Reset
+								</button>
+							</div>
+						</form:form>
+					</div>
+               </div>
+               <div class="modal-footer">
+                   <button type="button" class="btn btn-outline btn-default" data-dismiss="modal">Close</button>
+               </div>
+           </div>
+           <!-- /.modal-content -->
+       </div>
+       <!-- /.modal-dialog -->
+   	</div>
+	<!-- / MODAL -->
 </div>

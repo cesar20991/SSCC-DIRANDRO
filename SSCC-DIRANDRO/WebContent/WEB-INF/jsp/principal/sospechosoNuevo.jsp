@@ -68,7 +68,7 @@ $(document).ready(function() {
 			txtEstatura: {doubleNumber: true},
 			txtInscripcion: {peruDate: true},
 			txtEmision: {peruDate: true},
-			txtCodUnico: {number: true, minlength: 8, maxlength: 8},
+			txtCodUnico: {number: true, minlength: 8, maxlength: 11},
 			multasElectoraleso:{number:true, maxlength:4}
 		},
 		messages:{
@@ -78,7 +78,7 @@ $(document).ready(function() {
 			txtEmision: "Debe tener formato de fecha dd/mm/aaaa",
 			multasElectoraleso:"Sólo Números",
 			txtCodUnico: "Sólo Números, 8 digitos",
-			txtCodUnico: "Código Único de Identificación ya existes."
+			txtCodUnico: "C.U.I debe tener entre 8 a 11 caracteres."
 		},
 		submitHandler: function(form){
 			//Se usa 1000-12-12 para que pase de la vista al controlador
@@ -238,7 +238,7 @@ $(document).on('change','#txtCodUnico', function(e){
 			       		</div>
 			       		<div class="form-group">
 			          		<label>Distrito de Nacimiento: </label>
-			          		<select class="form-control" name="provinciaDistrito">
+			          		<select class="form-control" name="distritoDeNacimiento">
 			          			<jsp:include page="../componentes/selectDistrito.jsp" />
 			          		</select>
 			          		<!-- <input class="form-control" type="text" name="distritoDeNacimiento"> -->
@@ -278,10 +278,10 @@ $(document).on('change','#txtCodUnico', function(e){
 		          			</div>
 			       		</div>
 			       		<input class="span2" type="hidden" name="fechaDeEmision" id="hdnFecEmi"> -->
-			       		<div class="form-group">
+			       		<!-- <div class="form-group">
 			          		<label>Restricción: </label>
 			          		<input class="form-control" type="text" name="restriccion">
-			       		</div>
+			       		</div> -->
 			       		<div class="form-group">
 			          		<label>Domicilio: </label>
 			          		<input class="form-control" type="text" name="domicilio">

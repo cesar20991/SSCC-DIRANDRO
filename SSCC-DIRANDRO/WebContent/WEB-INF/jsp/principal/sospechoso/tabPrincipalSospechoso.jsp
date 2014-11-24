@@ -81,6 +81,7 @@ function initSospechoso(sospechoso){
 	
 	$("#spnDepartamentoNacimiento").append(sospechoso.departamentoDeNacimiento);
 	$("#spnProvinciaNacimiento").append(sospechoso.provinciaDeNacimiento);
+	//alert(sospechoso.distritoDeNacimiento);
 	$("#spnDistritoNacimiento").append(sospechoso.distritoDeNacimiento);
 	$("#spnGradoInstruccion").append(sospechoso.gradoDeInstruccion);
 	$("#spnEstadoCivil").append(sospechoso.estadoCivil);
@@ -132,7 +133,7 @@ $(document).ready(function(){
 				txtEstatura: {doubleNumber: true},
 				txtInscripcion: {peruDate: true},
 				txtEmision: {peruDate: true},
-				txtCodUnico: {number: true, minlength: 8, maxlength: 8},
+				txtCodUnico: {number: true, minlength: 8, maxlength: 11},
 				txtMultasElectorales: {number: true, maxlength:4}
 			},
 			messages:{
@@ -140,7 +141,7 @@ $(document).ready(function(){
 				txtEstatura: "Solo Números",
 				txtInscripcion: "Debe tener formato de fecha dd/mm/aaaa",
 				txtEmision: "Debe tener formato de fecha dd/mm/aaaa",
-				txtCodUnico: "Sólo Números, 8 digitos",
+				txtCodUnico: "Sólo Números, rango de 8 a 11 digitos.",
 				txtMultasElectorales: "Sólo Números"
 			},
 			submitHandler: function(form){
@@ -148,6 +149,9 @@ $(document).ready(function(){
 				//y en el implements se seteara como null.
 				if($("#txtFecNac").val() == ''){
 					$("#hdnFecNac").val('1000-12-12');
+				}else{
+					var fec  = $("#txtFecNac").val();
+					$("#hdnFecNac").val(fec.split("/")[2]+"-"+fec.split("/")[1]+"-"+fec.split("/")[0]);	
 				}
 				
 				if($("#txtInscripcion").val() == ''){
@@ -216,19 +220,23 @@ $(document).on('click','#btnEditarSopechoso', function(e){
 	}
 	
 	$("#txtFecNac").val($("#spnFecNac").text());
+	
 	$("#txtDepartamentoDeNacimiento").val($("#spnDepartamentoNacimiento").text());
 	$("#txtProvinciaDeNacimiento").val($("#spnProvinciaNacimiento").text());
 	$("#txtDistritoDeNacimiento").val($("#spnDistritoNacimiento").text());
-	$("#selectGradoInstruccion").val($("#spnGradoInstruccion").text());
+	
+	//$("#selectGradoInstruccion").val($("#spnGradoInstruccion").text());
 	$("#sltcEstadoCivil").val($("#spnEstadoCivil").text());
 	$("#txtEstatura").val($("#spnEstatura").text());
 	$("#txtNombrePadre").val($("#spnNombrePadre").text());
 	$("#txtNombreMadre").val($("#spnNombreMadre").text());
 	$("#txtRestriccion").val($("#spnRestriccion").text());
 	$("#txtDomicilio").val($("#spnDomicilio").text());
+	
 	$("#txtDepartamentoDeDomicilio").val($("#spnDepartamentoDeDomicilio").text());
 	$("#txtProvinciaDeDomicilio").val($("#spnProvinciaDeDomicilio").text());
 	$("#txtDistritoDeDomicilio").val($("#spnDistritoDeDomicilio").text());
+	
 	$("#txtPeligrosidad").val($("#spnPeligrosidad").text());
 	/// ID SOSPECHOSO en ventana
 	$("#hdnIdSospechosoEdit").val($("#hdnIdSospechoso").text());
@@ -390,12 +398,12 @@ $(document).on('change','#txtCodUnico', function(e){
 		          			<span id="spnNombreMadre"></span>
 		          		</label>
 		       		</div>
-		       		<div class="form-group">
+		       		<!-- <div class="form-group">
 		          		<label>Restricción: </label>
 		          		<label class="radio-inline">
 		          			<span id="spnRestriccion"></span>
 		          		</label>
-		       		</div>
+		       		</div> -->
 		       		<div class="form-group">
 		          		<label>Peligrosidad: </label>
 		          		<label class="radio-inline">
@@ -448,7 +456,7 @@ $(document).on('change','#txtCodUnico', function(e){
 				<span>/// Editar Datos Personales del Investigado:</span>
 			</div>
 			<div class="panel-body" id="divPerfilMostrar">
-			<form:form class="form-horizontal" id="formEditarSospechoso" action="editarSospechoso" commandName="sospechoso">
+			<form:form class="form-horizontal" id="formEditarSospechoso" action="editarSopechoso" commandName="sospechoso">
 				<input type="hidden" name="idSospechoso" id="hdnIdSospechosoEdit">
 				<div class="col-lg-5">
 					<div class="form-group">
@@ -502,17 +510,23 @@ $(document).on('change','#txtCodUnico', function(e){
 		       		<input class="span2" type="hidden" name="fechaDeNacimiento" id="hdnFecNac">
 		       		<div class="form-group">
 		          		<label>Departamento de Nacimiento: </label>
-		          		<input class="form-control" type="text" name="departamentoDeNacimiento" id="txtDepartamentoDeNacimiento">
+		          		<select class="form-control" name="departamentoDeNacimiento" id="txtDepartamentoDeNacimiento">
+		          			<jsp:include page="../../componentes/selectDepartamento.jsp" />
+		          		</select>
 		       		</div>
 		       		<div class="form-group">
 		          		<label>Provincia de Nacimiento: </label>
-		          		<input class="form-control" type="text" name="provinciaDeNacimiento" id="txtProvinciaDeNacimiento">
+		          		<select class="form-control" name="provinciaDeNacimiento" id="txtProvinciaDeNacimiento">
+		          			<jsp:include page="../../componentes/selectProvincia.jsp" />
+		          		</select>
 		       		</div>
 		       		<div class="form-group">
 		          		<label>Distrito de Nacimiento: </label>
-		          		<input class="form-control" type="text" name="distritoDeNacimiento" id="txtDistritoDeNacimiento">
+		          		<select class="form-control" name="distritoDeNacimiento" id="txtDistritoDeNacimiento">
+		          			<jsp:include page="../../componentes/selectDistrito.jsp" />
+		          		</select>
 		       		</div>
-		       		<div class="form-group">
+		       		<!-- <div class="form-group">
 		          		<label>Grado de Instrucción: </label>
 	          			<select class="form-control" name="gradoDeInstruccion" id="selectGradoInstruccion">
 	          				<option value="">No Precisa</option>
@@ -521,17 +535,7 @@ $(document).on('change','#txtCodUnico', function(e){
 	          				<option>Secundaria</option>
 	          				<option>Superior</option>
 			            </select>
-		       		</div>
-		       		<div class="form-group" id="divGrado">
-		          		<label>Estado Civil: </label>
-	          			<select class="form-control" name="estadoCivil" id="sltcEstadoCivil">
-	          				<option value="">No Precisa</option>
-	          				<option>Casado</option>
-	          				<option>Divorciado</option>
-	          				<option>Soltero</option>
-	          				<option>Viudo</option>
-			            </select>
-		       		</div>
+		       		</div> -->		       		
 				</div>
 				<div class="col-lg-5 col-md-offset-1">
 					<div class="form-group">
@@ -567,31 +571,47 @@ $(document).on('change','#txtCodUnico', function(e){
 	          			</div>
 		       		</div>
 		       		<input class="span2" type="hidden" name="fechaDeEmision" id="hdnFecEmi"> -->
-		       		<div class="form-group">
+		       		<!-- <div class="form-group">
 		          		<label>Restricción: </label>
 		          		<input class="form-control" type="text" name="restriccion" id="txtRestriccion">
-		       		</div>
+		       		</div> -->
 		       		<div class="form-group">
 		          		<label>Domicilio: </label>
 		          		<input class="form-control" type="text" name="domicilio" id="txtDomicilio">
 		       		</div>
 		       		<div class="form-group">
 		          		<label>Departamento de Domicilio: </label>
-		          		<input class="form-control" type="text" name="departamentoDeDomicilio" id="txtDepartamentoDeDomicilio">
+		          		<select class="form-control" name="departamentoDeDomicilio" id="txtDepartamentoDeDomicilio">
+		          			<jsp:include page="../../componentes/selectDepartamento.jsp" />
+		          		</select>
 		       		</div>
 		       		<div class="form-group">
 		          		<label>Provincia de Domicilio: </label>
-		          		<input class="form-control" type="text" name="provinciaDeDomicilio" id="txtProvinciaDeDomicilio">
+		          		<select class="form-control" name="provinciaDeDomicilio" id="txtProvinciaDeDomicilio">
+		          			<jsp:include page="../../componentes/selectProvincia.jsp" />
+		          		</select>
 		       		</div>
 		       		<div class="form-group">
 		          		<label>Distrito de Domicilio: </label>
-		          		<input class="form-control" type="text" name="distritoDeDomicilio" id="txtDistritoDeDomicilio">
+		          		<select class="form-control" name="distritoDeDomicilio" id="txtDistritoDeDomicilio">
+		          			<jsp:include page="../../componentes/selectDistrito.jsp" />
+		          		</select>
 		       		</div>
-		       		<div class="form-group">
+		       		<!-- <div class="form-group">
 		          		<label>Multas Electorales: </label>
 	          			<input class="form-control" type="text" name="txtMultasElectorales" id="txtMultasElectorales">
-		       		</div>
-		       		<input class="span2" type="hidden" name="multasElectorales" id="txtMultasElectorales">	
+		       		</div> -->
+		       		<input class="span2" type="hidden" name="multasElectorales" id="txtMultasElectorales">
+		       		<div class="form-group" id="divGrado">
+		          		<label>Estado Civil: </label>
+	          			<select class="form-control" name="estadoCivil" id="sltcEstadoCivil">
+	          				<option value="">No Precisa</option>
+	          				<option>Casado</option>
+	          				<option>Divorciado</option>
+	          				<option>Soltero</option>
+	          				<option>Viudo</option>
+			            </select>
+		       		</div>	
 		       		<div class="form-group">
 		          		<label>peligrosidad: </label>
 	          			<input class="form-control" type="text" name="peligrosidad" id="txtPeligrosidad">

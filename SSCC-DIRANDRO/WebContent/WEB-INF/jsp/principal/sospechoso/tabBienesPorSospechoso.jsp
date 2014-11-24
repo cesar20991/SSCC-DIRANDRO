@@ -243,12 +243,12 @@
 								'</thead><tbody>';
 								$.each(bienes, function(i, bien){
 									resultado +='<tr>'+
-													'<th>'+bien.codigo+'</th>'+
-							  						'<th>'+bien.descripcion+'</th>'+
-							  						'<th>'+bien.valor+'</th>'+
-							  						'<th>'+bien.tipo+'</th>'+
-							  						'<th>'+bien.especificarTipo+'</th>'+
-							  						'<th>'+bien.estadoDeConservasion+'</th>'+
+													'<td>'+bien.codigo+'</td>'+
+							  						'<td>'+bien.descripcion+'</td>'+
+							  						'<td>'+bien.valor+'</td>'+
+							  						'<td>'+bien.tipo+'</td>'+
+							  						'<td>'+bien.especificarTipo+'</td>'+
+							  						'<td>'+bien.estadoDeConservasion+'</td>'+
 							  						'<td><button type="button" class="btn btn-outline btn-danger btn-xs btn-circle desasignar" id="desasignar_Mue_'+bien.idMueble+'"><i class="fa fa-minus"></i></button></td>'+
 						 		  				'</tr>';
 								});
