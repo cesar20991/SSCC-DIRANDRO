@@ -280,4 +280,20 @@ $(document).on('click','.eliminarCamposDirecciones', function(e){
 			</div>
 		</div>
 	</div>
+	<!-- CONTACTOS -->
+	<div id="divMostrarContacto">
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<span>/// Contactos:</span>
+				<div class="pull-right">
+					<div class="btn-group">
+						<button class="btn btn-outline btn-primary btn-sm" type="button" id="btnCrearContacto"><i class="fa fa-edit fa-fw"></i> Crear Contacto</button>
+					</div>
+				</div>
+			</div>
+			<div class="panel-body" id="divPerfilMostrar">
+				
+			</div>
+		</div>
+	</div>
 </div>

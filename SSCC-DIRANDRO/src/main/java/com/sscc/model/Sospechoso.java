@@ -103,7 +103,9 @@ public class Sospechoso {
 	
 	@OneToMany(mappedBy = "sospechoso")
 	private Collection<Mueble> muebles;
-
+	
+	@OneToMany(mappedBy = "sospechoso")
+	private Collection<Contactos> contactos;	
 	
 	public Collection<Mueble> getMuebles() {
 		return muebles;
@@ -338,5 +340,11 @@ public class Sospechoso {
 	}
 	public void setRol(String rol) {
 		this.rol = rol;
+	}
+	public Collection<Contactos> getContactos() {
+		return contactos;
+	}
+	public void setContactos(Collection<Contactos> contactos) {
+		this.contactos = contactos;
 	}
 }

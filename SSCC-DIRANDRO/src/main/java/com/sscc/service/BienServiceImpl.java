@@ -677,7 +677,7 @@ public class BienServiceImpl implements BienService {
 		return lvb;
 	}
 
-	@Override
+
 	public List<MuebleBean> getMueblesBuscar() {
 		List<MuebleBean> lBien = new ArrayList<MuebleBean>();
 		Query qBienes = em.createQuery("SELECT m FROM Mueble m WHERE m.estado='habilitado' ");

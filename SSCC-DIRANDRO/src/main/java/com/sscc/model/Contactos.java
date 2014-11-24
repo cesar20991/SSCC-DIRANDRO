@@ -3,9 +3,13 @@ package com.sscc.model;
 import java.sql.Timestamp;
 
 import javax.persistence.Column;
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
+@Entity
 public class Contactos {
 	@Id @GeneratedValue
 	private Integer idContacto;
@@ -38,6 +42,11 @@ public class Contactos {
 	private Timestamp fecCreacion;
 	@Column(length = 30, nullable = false)
 	private String estado;
+	
+	@ManyToOne
+	@JoinColumn(name = "idSospechoso")
+	private Sospechoso sospechoso;				
+	
 	public Integer getIdContacto() {
 		return idContacto;
 	}
@@ -121,6 +130,12 @@ public class Contactos {
 	}
 	public void setEstado(String estado) {
 		this.estado = estado;
+	}
+	public Sospechoso getSospechoso() {
+		return sospechoso;
+	}
+	public void setSospechoso(Sospechoso sospechoso) {
+		this.sospechoso = sospechoso;
 	}
 	
 }
