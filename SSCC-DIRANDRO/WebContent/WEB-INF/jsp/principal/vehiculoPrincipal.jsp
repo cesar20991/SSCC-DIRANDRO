@@ -50,6 +50,7 @@ var idEntidad = '';
 		<div class="row">
 			<c:forEach items="${vehiculoList}" var="vehiculo">
 				<span id="hdnIdVehiculo" style="display: none;"><c:out value="${vehiculo.idVehiculo}" /></span>
+				<span id="hdnIdBien" style="display: none;"><c:out value="${vehiculo.idBien}" /></span>
 			</c:forEach>
 			<div class="col-lg-12" id="titulo">
 				<h2 class="page-header">Sistema de Seguimiento de Casos Criminales para la DIRANDRO</h2>
@@ -90,7 +91,7 @@ var idEntidad = '';
 	            		<jsp:include page="bien/tabPrincipalVehiculo.jsp" />
 	            	</div>
 	            	<div class="tab-pane fade" id="liSospechoso">
-	            		<p>Investigado.</p>
+	            		<jsp:include page="bien/tabSospechososPorBien.jsp" />
 	            	</div>
 	            	<div class="tab-pane fade" id="liArchivosAdjuntos">
 	            		<jsp:include page="../componentes/archivos.jsp" />

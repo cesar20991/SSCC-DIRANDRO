@@ -96,7 +96,8 @@ public class BienController {
 	public String toInmueble(@PathVariable("idInmueble")Integer idInmueble, Model model ){
 		List<InmuebleBean> i = new ArrayList<InmuebleBean>();
 		InmuebleBean ib = new InmuebleBean();
-		ib.setIdInmueble(idInmueble);
+		//ib.setIdInmueble(idInmueble);
+		ib = getInmueble(idInmueble);
 		i.add(ib);		
 		model.addAttribute("inmuebleList", i);
 		return "principal/inmueblePrincipal";
@@ -139,7 +140,8 @@ public class BienController {
 	public String toVehiculo(@PathVariable("idVehiculo")Integer idVehiculo, Model model ){
 		List<VehiculoBean> v = new ArrayList<VehiculoBean>();
 		VehiculoBean vb = new VehiculoBean();
-		vb.setIdVehiculo(idVehiculo);
+		//vb.setIdVehiculo(idVehiculo);
+		vb = getVehiculo(idVehiculo);
 		v.add(vb);		
 		model.addAttribute("vehiculoList", v);
 		return "principal/vehiculoPrincipal";

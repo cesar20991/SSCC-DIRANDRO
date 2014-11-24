@@ -328,7 +328,7 @@ function vaciarFormulario(){
 	<div id="divMostrarSospechosoAsignado">
 		<div class="panel panel-default">
 			<div class="panel-heading">
-			/// Sospechosos Asignados al caso:
+			/// Investigados Asignados al caso:
 				<div class="pull-right">
 					<div class="btn-group">
 						<button class="btn btn-outline btn-primary btn-sm asignar1" type="button" id="btnAgregarSospechosoNuevo" data-toggle="modal" data-target="#modalSospechoso"><i class="fa fa-edit fa-fw"></i> Agregar Sospechoso Nuevo</button>
