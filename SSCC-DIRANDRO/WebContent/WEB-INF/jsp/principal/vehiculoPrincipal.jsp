@@ -25,6 +25,8 @@
 <script src="js/bootstrap-datepicker.es.js"></script>
 <script src="js/plugins/metisMenu/metisMenu.min.js"></script>
 <script src="js/sb-admin-2.js"></script>
+<script src="js/plugins/dataTables/jquery.dataTables.js"></script>
+<script src="js/plugins/dataTables/dataTables.bootstrap.js"></script>
 <script src="js/jquery.validate.min.js"></script>
 <script src="js/validateFecha.js"></script>
 <script src="js/formatDates.js"></script>

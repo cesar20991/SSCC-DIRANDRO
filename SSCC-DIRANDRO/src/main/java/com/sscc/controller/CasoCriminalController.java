@@ -173,6 +173,17 @@ public class CasoCriminalController {
 		}		
 	}
 	
+	@RequestMapping(value = "toDiligenciasInv-{idCaso}", method = RequestMethod.POST)
+	@ResponseBody
+	public CasoCriminalBean toDiligenciasInv(@ModelAttribute CasoCriminal casoCriminal, @PathVariable("idCaso") Integer idCaso){
+		System.err.println(casoCriminal.getDiasDiligenciasInvestigacion());
+		if(casoServ.toDiligenciasInv(casoCriminal, idCaso)){
+			return casoServ.getCasoCriminalBean(idCaso);
+		}else{
+			return null;
+		}		
+	}
+	
 	@RequestMapping(value = "calificacionFiscal-{idCaso}", method = RequestMethod.POST)
 	@ResponseBody
 	public CasoCriminalBean calificacionFiscal(@PathVariable("idCaso") Integer idCaso){
@@ -186,7 +197,28 @@ public class CasoCriminalController {
 	@RequestMapping(value = "cerrarCaso-{idCaso}", method = RequestMethod.POST)
 	@ResponseBody
 	public CasoCriminalBean cerrarCaso(@PathVariable("idCaso") Integer idCaso){
-		if(casoServ.toCalificacionFiscal(idCaso)){
+		if(casoServ.toCerrarCaso(idCaso)){
+			return casoServ.getCasoCriminalBean(idCaso);
+		}else{
+			return null;
+		}		
+	}
+	
+	@RequestMapping(value = "formalizarCaso-{idCaso}", method = RequestMethod.POST)
+	@ResponseBody
+	public CasoCriminalBean formalizarCaso(@PathVariable("idCaso") Integer idCaso){
+		if(casoServ.toFormalizarCaso(idCaso)){
+			return casoServ.getCasoCriminalBean(idCaso);
+		}else{
+			return null;
+		}		
+	}
+	
+	@RequestMapping(value = "dejarComentarioFormalizarCaso-{idCaso}", method = RequestMethod.POST)
+	@ResponseBody
+	public CasoCriminalBean dejarComentarioFormalizarCaso(@ModelAttribute CasoCriminal casoCriminal, @PathVariable("idCaso") Integer idCaso){
+		System.err.println(casoCriminal.getCometarioFormalizar());
+		if(casoServ.comentarioFormalizarCaso(casoCriminal, idCaso)){
 			return casoServ.getCasoCriminalBean(idCaso);
 		}else{
 			return null;
@@ -196,7 +228,7 @@ public class CasoCriminalController {
 	@RequestMapping(value = "dejarComentarioCerrarCaso-{idCaso}", method = RequestMethod.POST)
 	@ResponseBody
 	public CasoCriminalBean dejarComentarioCerrarCaso(@ModelAttribute CasoCriminal casoCriminal, @PathVariable("idCaso") Integer idCaso){
-		if(casoServ.comentarioPausaDoc(casoCriminal, idCaso)){
+		if(casoServ.comentarioCerrarCaso(casoCriminal, idCaso)){
 			return casoServ.getCasoCriminalBean(idCaso);
 		}else{
 			return null;
@@ -298,10 +330,19 @@ public class CasoCriminalController {
 	//buscar
 	@RequestMapping(value = "getCasosCriminales", method = RequestMethod.POST)
 	@ResponseBody
-	public List<CasoCriminalBean> getCasosCriminales(){
+	public List<CasoCriminalBean> getCasosCriminales(HttpSession session){
 		List<CasoCriminalBean> casoB = new ArrayList<CasoCriminalBean>();
-		casoB = casoServ.getCasoCriminalBuscar();
+		casoB = casoServ.getCasoCriminalBuscar(session);
 		return casoB;
+	}
+	
+	//buscar
+	@RequestMapping(value = "getCasosCriminales-{estado}")
+	public String getCasosCriminalesEstado(@PathVariable("estado") String estado, HttpSession session){
+		session.setAttribute("casoEstado", estado);
+		/*List<CasoCriminalBean> casoB = new ArrayList<CasoCriminalBean>();
+		casoB = casoServ.getCasoCriminalBuscar(estado);*/
+		return "principal/buscarCasoCriminal";
 	}
 	
 }

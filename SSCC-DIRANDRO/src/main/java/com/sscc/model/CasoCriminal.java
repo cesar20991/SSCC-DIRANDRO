@@ -28,20 +28,26 @@ public class CasoCriminal {
 	private String descripcion;
 	@Column(length = 90, nullable = true)
 	private String importancia;
-	@Column(length = 30, nullable = false)
+	@Column(length = 100, nullable = false)
 	private String estado;
 	@Column(nullable = false)
 	private Timestamp fecCreacion;
 	@Column(nullable = true)
 	private Integer diasDiligenciasPreliminares;
 	@Column(nullable = true)
+	private Integer diasDiligenciasInvestigacion;
+	@Column(nullable = true)
 	private Timestamp fecDiligenciasPre;
+	@Column(nullable = true)
+	private Timestamp fecDiligenciasInv;
 	@Column(length = 1000, nullable = true)
 	private String cometarioPausaDoc;
 	@Column(length = 1000, nullable = true)
 	private String cometarioPausaNCaso;
 	@Column(length = 1000, nullable = true)
 	private String cometarioCerrarCaso;
+	@Column(length = 1000, nullable = true)
+	private String cometarioFormalizar;
 	@Column(length = 30, nullable = true)
 	private String estadoAnterior;
 	
@@ -185,5 +191,23 @@ public class CasoCriminal {
 	}
 	public void setCometarioCerrarCaso(String cometarioCerrarCaso) {
 		this.cometarioCerrarCaso = cometarioCerrarCaso;
+	}
+	public String getCometarioFormalizar() {
+		return cometarioFormalizar;
+	}
+	public void setCometarioFormalizar(String cometarioFormalizar) {
+		this.cometarioFormalizar = cometarioFormalizar;
+	}
+	public Integer getDiasDiligenciasInvestigacion() {
+		return diasDiligenciasInvestigacion;
+	}
+	public void setDiasDiligenciasInvestigacion(Integer diasDiligenciasInvestigacion) {
+		this.diasDiligenciasInvestigacion = diasDiligenciasInvestigacion;
+	}
+	public Timestamp getFecDiligenciasInv() {
+		return fecDiligenciasInv;
+	}
+	public void setFecDiligenciasInv(Timestamp fecDiligenciasInv) {
+		this.fecDiligenciasInv = fecDiligenciasInv;
 	}
 }

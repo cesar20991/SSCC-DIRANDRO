@@ -24,12 +24,16 @@ import com.sscc.form.VehiculoBean;
 import com.sscc.model.Sospechoso;
 import com.sscc.service.BienService;
 import com.sscc.service.MuebleService;
+import com.sscc.service.SospechosoService;
 
 @Controller
 public class BienController {
 
 	@Autowired
 	BienService bienServ;
+	
+	@Autowired
+	SospechosoService sosServ;
 	
 	@RequestMapping("toBuscarInmueble")
 	public String toBuscarInmueble() {
@@ -310,6 +314,15 @@ public class BienController {
 		List<VehiculoBean> bienes = new ArrayList<VehiculoBean>();
 		bienes = bienServ.getVehiculosBuscarPorSospechoso(idSospechoso);
 		return bienes;
+	}
+	
+	//sospechosos bien
+	@RequestMapping(value = "sospechososBien-{idBien}", method = RequestMethod.POST)
+	@ResponseBody
+	public List<SospechosoBean> sospechososBien(@PathVariable("idBien") Integer idBien){
+		List<SospechosoBean> sos = new ArrayList<SospechosoBean>();
+		sos = sosServ.getSospechososBien(idBien);
+		return sos;
 	}
 	
 }

@@ -130,7 +130,7 @@ $(document).on('click','#btnCalificacionFiscal', function(e){
 			 			    '</div>');
 	}
 });
-//para dejar el comentario de pausa por docs
+//para cerrar caso
 $(document).on('click','#btnCerrarCaso', function(e){
 	$.ajax({
  		url: 'cerrarCaso-'+$("#hdnIdCaso").text(),
@@ -150,6 +150,43 @@ $(document).on('click','#btnComentarioCerrarCaso', function(e){
  		type: 'post',
  		dataType: 'json',
  		data: $("#editarComentarioCerrarCaso").serialize(),
+ 		success: function(caso){
+ 			initCasoCriminal(caso);
+ 		}
+ 	});
+});
+
+//para formalizar
+$(document).on('click','#btnFormalizar', function(e){
+	$.ajax({
+ 		url: 'formalizarCaso-'+$("#hdnIdCaso").text(),
+ 		type: 'post',
+ 		dataType: 'json',
+ 		data: '',
+ 		success: function(caso){
+ 			initCasoCriminal(caso);
+ 		}
+ 	});
+});
+
+//para dejar el comentario de formalizar
+$(document).on('click','#btnComentarioFormalizar', function(e){
+	$.ajax({
+ 		url: 'dejarComentarioFormalizarCaso-'+$("#hdnIdCaso").text(),
+ 		type: 'post',
+ 		dataType: 'json',
+ 		data: $("#editarComentarioFormalizar").serialize(),
+ 		success: function(caso){
+ 			initCasoCriminal(caso);
+ 		}
+ 	});
+});
+$(document).on('click','#btnAsignarDiligenciasInv', function(e){
+	$.ajax({
+ 		url: 'toDiligenciasInv-'+$("#hdnIdCaso").text(),
+ 		type: 'post',
+ 		dataType: 'json',
+ 		data: $("#editarCasoInv").serialize(),
  		success: function(caso){
  			initCasoCriminal(caso);
  		}
@@ -276,66 +313,149 @@ $(document).on('click','#btnComentarioCerrarCaso', function(e){
        		</div>
        	</div>
         <!-- /MODAL -->
-        <!-- MODAL PAUSA -->
-		<div id="myModalPausaDoc" class="modal hide fade" style="display: none;">
-	        <div class="modal-header">
-		        <a class="close" data-dismiss="modal">×</a>
-		        <h3>¿Desea Dejar un comentario?</h3>
-	        </div>
-	        <form:form id="editarComentario">
-		        <div class="modal-body">
-	            	<label class="control-label">Comentario:</label>
-	            	<div class="controls inline">
-	            		<textarea class="input-xlarge span3" name="cometarioPausaDoc" id="txtCometarioPausaDoc" rows="8" style="width: 90%;"></textarea>
-	            	</div>            	
-	            </div>
-	        </form:form>
-          <div class="modal-footer">
-	          <a id="btnComentarioPausaDoc" class="btn btn-success" data-dismiss="modal">Guardar Comentario</a>
-	          <a class="btn" data-dismiss="modal">Cancelar</a>
-          </div>
-        </div>
-        <!-- /MODAL PAUSA -->
-        <!-- MODAL PAUSA -->
-		<div id="myModalCerrarCaso" class="modal hide fade" style="display: none;">
-	        <div class="modal-header">
-		        <a class="close" data-dismiss="modal">×</a>
-		        <h3>¿Desea Dejar un comentario?</h3>
-	        </div>
-	        <form:form id="editarComentarioCerrarCaso">
-		        <div class="modal-body">
-	            	<label class="control-label">Comentario:</label>
-	            	<div class="controls inline">
-	            		<textarea class="input-xlarge span3" name="cometarioPausaDoc" id="txtCometarioPausaDoc" rows="8" style="width: 90%;"></textarea>
-	            	</div>            	
-	            </div>
-	        </form:form>
-          <div class="modal-footer">
-	          <a id="btnComentarioCerrarCaso" class="btn btn-success" data-dismiss="modal">Guardar Comentario</a>
-	          <a class="btn" data-dismiss="modal">Cancelar</a>
-          </div>
-        </div>
-        <!-- /MODAL PAUSA -->
-        <!-- MODAL PAUSA NUEVO CASO -->
-		<div id="myModalPausaNCaso" class="modal hide fade" style="display: none;">
-	        <div class="modal-header">
-		        <a class="close" data-dismiss="modal">×</a>
-		        <h3>¿Desea Dejar un comentario?</h3>
-	        </div>
-	        <form:form id="editarComentarioNCaso">
-		        <div class="modal-body">
-	            	<label class="control-label">Comentario:</label>
-	            	<div class="controls inline">
-	            		<textarea class="input-xlarge span3" name="cometarioPausaNCaso" id="txtCometarioPausaNCaso" rows="8" style="width: 90%;"></textarea>
-	            	</div>            	
-	            </div>
-	        </form:form>
-          <div class="modal-footer">
-	          <a id="btnComentarioPausaNCaso" class="btn btn-success" data-dismiss="modal">Guardar Comentario</a>
-	          <a class="btn" data-dismiss="modal">Cancelar</a>
-          </div>
-        </div>
-        <!-- /MODAL PAUSA NUEVO CASO  -->
+        <!-- MODAL PAUSA Doc -->
+		<div class="modal fade" id="myModalPausaDoc" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+	       <div class="modal-dialog">
+	           <div class="modal-content" style="width: 100%;">
+	               <div class="modal-header">
+	                   <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+	                   <h4 class="modal-title" id="myModalLabel">¿Desea Dejar un comentario?</h4>
+	                   <input type="hidden" id="hdnIdCasoSeleccionado"/>
+	               </div>
+	               <div class="modal-body">
+		               <form:form id="editarComentario">
+					        <div class="modal-body">
+				            	<label class="control-label">Comentario:</label>
+				            	<div class="controls inline">
+				            		<textarea class="form-control" name="cometarioPausaDoc" id="txtCometarioPausaDoc" rows="8" style="width: 90%;"></textarea>
+				            	</div>            	
+				            </div>
+				        </form:form>
+	               </div>
+	               <div class="modal-footer">
+	               		<a id="btnComentarioPausaDoc" class="btn btn-outline btn-success" data-dismiss="modal">Guardar Comentario</a>
+	                   <button type="button" class="btn btn-outline btn-default" data-dismiss="modal">Close</button>
+	               </div>
+	           </div>
+	           <!-- /.modal-content -->
+	       </div>
+	       <!-- /.modal-dialog -->
+	   	</div>
+		<!-- / MODAL PAUSA Doc -->
+		<!-- MODAL Cerrar caso -->
+		<div class="modal fade" id="myModalCerrarCaso" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+	       <div class="modal-dialog">
+	           <div class="modal-content" style="width: 100%;">
+	               <div class="modal-header">
+	                   <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+	                   <h4 class="modal-title" id="myModalLabel">¿Desea Dejar un comentario?</h4>
+	                   <input type="hidden" id="hdnIdCasoSeleccionado"/>
+	               </div>
+	               <div class="modal-body">
+		               <form:form id="editarComentarioCerrarCaso">
+					        <div class="modal-body">
+				            	<label class="control-label">Comentario:</label>
+				            	<div class="controls inline">
+				            		<textarea class="form-control" name="cometarioCerrarCaso" id="txtCometarioPausaDoc" rows="8"></textarea>
+				            	</div>            	
+				            </div>
+				        </form:form>
+	               </div>
+	               <div class="modal-footer">
+	               		<a id="btnComentarioCerrarCaso" class="btn btn-success" data-dismiss="modal">Guardar Comentario</a>
+	                   <button type="button" class="btn btn-outline btn-default" data-dismiss="modal">Close</button>
+	               </div>
+	           </div>
+	           <!-- /.modal-content -->
+	       </div>
+	       <!-- /.modal-dialog -->
+	   	</div>
+		<!-- / MODAL Cerrar caso -->
+		<!-- MODAL PAUSA NUEVO CASO  -->
+		<div class="modal fade" id="myModalPausaNCaso" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+	       <div class="modal-dialog">
+	           <div class="modal-content" style="width: 100%;">
+	               <div class="modal-header">
+	                   <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+	                   <h4 class="modal-title" id="myModalLabel">¿Desea Dejar un comentario?</h4>
+	                   <input type="hidden" id="hdnIdCasoSeleccionado"/>
+	               </div>
+	               <div class="modal-body">
+		               <form:form id="editarComentarioNCaso">
+					        <div class="modal-body">
+				            	<label class="control-label">Comentario:</label>
+				            	<div class="controls inline">
+				            		<textarea class="form-control" name="cometarioPausaNCaso" id="txtCometarioPausaNCaso" rows="8"></textarea>
+				            	</div>            	
+				            </div>
+				        </form:form>
+	               </div>
+	               <div class="modal-footer">
+	               		<a id="btnComentarioPausaNCaso" class="btn btn-outline btn-success" data-dismiss="modal">Guardar Comentario</a>
+	                    <button type="button" class="btn btn-outline btn-default" data-dismiss="modal">Close</button>
+	               </div>
+	           </div>
+	           <!-- /.modal-content -->
+	       </div>
+	       <!-- /.modal-dialog -->
+	   	</div>
+		<!-- / MODAL PAUSA NUEVO CASO  -->
+		<!-- MODAL Formalizar  -->
+		<div class="modal fade" id="myModalFormalizar" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+	       <div class="modal-dialog">
+	           <div class="modal-content" style="width: 100%;">
+	               <div class="modal-header">
+	                   <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+	                   <h4 class="modal-title" id="myModalLabel">¿Desea Dejar un comentario?</h4>
+	                   <input type="hidden" id="hdnIdCasoSeleccionado"/>
+	               </div>
+	               <div class="modal-body">
+		               <form:form id="editarComentarioFormalizar">
+					        <div class="modal-body">
+				            	<label class="control-label">Comentario:</label>
+				            	<div class="controls inline">
+				            		<textarea class="form-control" name="cometarioFormalizar" id="txtCometarioPausaNCaso" rows="8"></textarea>
+				            	</div>            	
+				            </div>
+				        </form:form>
+	               </div>
+	               <div class="modal-footer">
+	               		<a id="btnComentarioFormalizar" class="btn btn-outline btn-success" data-dismiss="modal">Guardar Comentario</a>
+	                    <button type="button" class="btn btn-outline btn-default" data-dismiss="modal">Close</button>
+	               </div>
+	           </div>
+	           <!-- /.modal-content -->
+	       </div>
+	       <!-- /.modal-dialog -->
+	   	</div>
+		<!-- / MODAL Formalizar  -->
+		<!-- MODAL Diligencias Inv -->
+		<div class="modal fade" id="myModalDilInv" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+       		<div class="modal-dialog">
+       			<div class="modal-content">
+	       			<div class="modal-header">
+	       				<a class="close" data-dismiss="modal">×</a>
+		        		<h3>Seleccionar dias para las diligencias de la investigacion</h3>
+	       			</div>
+	       			<div class="modal-body">
+	       				<form:form id="editarCasoInv">
+	       					<label>Seleccione la cantidad de dias:</label>
+			            	<div class="radio-inline">
+			            		<select class="form-control" name="diasDiligenciasInvestigacion">
+				                	<option>120</option>
+				                	<option>224</option>
+				              	</select>
+			            	</div>
+	       				</form:form>
+	       			</div>
+	       			<div class="modal-footer">
+				          <a id="btnAsignarDiligenciasInv" class="btn btn-outline btn-success" data-dismiss="modal">Asignar dias</a>
+				          <a class="btn btn-outline btn-default" data-dismiss="modal">Cancelar</a>
+			          </div>
+       			</div>
+       		</div>
+       	</div>
+        <!-- /MODAL Diligencias Inv -->
 	</div>
 	<!--/CENTRO-->
 </div>

@@ -40,7 +40,13 @@ public interface CasoCriminalService {
 	
 	Boolean toDiligenciasPre(CasoCriminal casoCriminal, Integer idCaso);
 	
+	Boolean toDiligenciasInv(CasoCriminal casoCriminal, Integer idCaso);
+	
 	Boolean toCalificacionFiscal(Integer idCaso);
+	
+	Boolean toCerrarCaso(Integer idCaso);
+	
+	Boolean toFormalizarCaso(Integer idCaso);
 	
 	Boolean toPausaDocumentacion(Integer idCaso);
 	
@@ -50,11 +56,13 @@ public interface CasoCriminalService {
 	
 	Boolean comentarioCerrarCaso(CasoCriminal casoCriminal, Integer idCaso);
 	
+	Boolean comentarioFormalizarCaso(CasoCriminal casoCriminal, Integer idCaso);
+	
 	Boolean comentarioPausaNCaso(CasoCriminal casoCriminal, Integer idCaso);
 	
 	Boolean removerPausa(Integer idCaso);
 	
-	List<CasoCriminalBean> getCasoCriminalBuscar();
+	List<CasoCriminalBean> getCasoCriminalBuscar(HttpSession session);
 	
 	Boolean asignarCasoporSospechoso(Integer idSospechoso, Integer idCaso);
 	

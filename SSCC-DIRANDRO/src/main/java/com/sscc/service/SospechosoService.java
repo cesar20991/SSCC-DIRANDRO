@@ -26,4 +26,6 @@ public interface SospechosoService {
 	Boolean getCUI(String codigoUnicoDeIdentificacion);
 	
 	List<SospechosoBean> getSospechososBuscar();
+	
+	List<SospechosoBean> getSospechososBien(Integer idBien);
 }

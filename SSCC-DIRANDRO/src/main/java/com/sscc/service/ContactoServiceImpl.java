@@ -27,7 +27,7 @@ public class ContactoServiceImpl implements ContactoService{
 	public List<ContactoBean> getContactoPorSospechoso(Integer idSospechoso) {
 		List<ContactoBean> comentariosb = new ArrayList<ContactoBean>();
 		
-		Query qComentarios = em.createQuery("SELECT c FROM Contactos c WHERE c.estado = 'habilitado'");
+		Query qComentarios = em.createQuery("SELECT c FROM Sospechoso s JOIN s.contactos c WHERE c.estado = 'habilitado' AND s.idSospechoso="+idSospechoso);
 
 		List<Contactos> a = qComentarios.getResultList();
 		

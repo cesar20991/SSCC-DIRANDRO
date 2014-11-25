@@ -19,13 +19,16 @@ function timeStampFormatted(myDate){
 		//myDay++;
 		var dateTime = "";
 			if(myMonth <= 9){
-				dateTime = "0" + myMonth + "/" + myDay + "/" + myDateF.getFullYear() + " " + hours + ":" + minutes + " " + ampm;
+				dateTime = myDay + "/" + "0" + myMonth + "/" + myDateF.getFullYear() + " " + hours + ":" + minutes + " " + ampm;
 			}
 			if(myDay <= 9){
-				dateTime = myMonth + "/" + "0" +myDay + "/" + myDateF.getFullYear() + " " + hours + ":" + minutes + " " + ampm;
+				dateTime = "0" + myDay + "/" + myMonth + "/" + myDateF.getFullYear() + " " + hours + ":" + minutes + " " + ampm;
 			}
 			if(myDay <= 9 && myMonth <= 9){
-				dateTime = "0" + myMonth + "/" + "0" +myDay + "/" + myDateF.getFullYear() + " " + hours + ":" + minutes + " " + ampm;
+				dateTime = "0" + myDay + "/" + "0" + myMonth + "/" + myDateF.getFullYear() + " " + hours + ":" + minutes + " " + ampm;
+			}
+			if(myDay >= 9 || myMonth >= 9){
+				dateTime =  myDay + "/" + myMonth + "/" + myDateF.getFullYear() + " " + hours + ":" + minutes + " " + ampm;
 			}
 		return dateTime;
 	}else{

@@ -391,4 +391,62 @@ public class SospechosoServiceImpl implements SospechosoService{
 		}
 		return sbl;
 	}
+	
+	public List<SospechosoBean> getSospechososBien(Integer idBien) {
+		List<SospechosoBean> sbl = new ArrayList<SospechosoBean>();
+		Query query = em.createQuery("SELECT s FROM BienPorSospechoso bps JOIN bps.sospechoso s JOIN bps.bien b "+
+										" WHERE s.estado='habilitado' AND bps.estado = 'habilitado' AND b.idBien="+idBien);
+		
+		List<Sospechoso> sl = query.getResultList();
+		for(int i=0;i<sl.size();i++){
+			SospechosoBean sb = new SospechosoBean();
+			Sospechoso s = sl.get(i);
+			RasgosParticulares rp = s.getRasgosParticulares();
+			sb.setAlias(s.getAlias());
+			sb.setCelulares(s.getCelulares());
+			sb.setCicatrices(rp.getCicatrices());
+			sb.setCodigo(s.getCodigo());
+			sb.setCodigoUnicoDeIdentificacion(s.getCodigoUnicoDeIdentificacion());
+			sb.setCorreos(s.getCorreos());
+			sb.setDeficiencias(rp.getDeficiencias());
+			sb.setDepartamentoDeDomicilio(s.getDepartamentoDeDomicilio());
+			sb.setDepartamentoDeNacimiento(s.getDepartamentoDeNacimiento());
+			sb.setDirecciones(s.getDirecciones());
+			sb.setDistritoDeDomicilio(s.getDistritoDeDomicilio());
+			sb.setDistritoDeNacimiento(s.getDistritoDeNacimiento());
+			sb.setDomicilio(s.getDomicilio());
+			sb.setEstadoCivil(s.getEstadoCivil());
+			sb.setEstatura(s.getEstatura());
+			sb.setFechaDeEmision(s.getFechaDeEmision());
+			sb.setFechaDeInscripcion(s.getFechaDeInscripcion());
+			sb.setFechaDeNacimiento(s.getFechaDeNacimiento());
+			sb.setGradoDeInstruccion(s.getGradoDeInstruccion());
+			sb.setIdSospechoso(s.getIdSospechoso());
+			sb.setLunares(rp.getLunares());
+			sb.setMultasElectorales(s.getMultasElectorales());
+			sb.setNombreMadre(s.getNombreMadre());
+			sb.setNombrePadre(s.getNombrePadre());
+			sb.setOtros(rp.getOtros());
+			//sb.setPreNombres(s.getPreNombres());
+			//sb.setPrimerApellido(s.getPrimerApellido());
+			sb.setProvinciaDeDomicilio(s.getProvinciaDeDomicilio());
+			sb.setProvinciaDeNacimiento(s.getProvinciaDeNacimiento());
+			sb.setRestriccion(s.getRestriccion());
+			//sb.setSegundoApellido(s.getSegundoApellido());
+			sb.setSexo(s.getSexo());
+			sb.setTatuaje(rp.getTatuaje());
+			sb.setTelefonos(s.getTelefonos());
+			if(s.getUrlSospechoso() == null){
+				sb.setUrlSospechoso("img/skills.png");				
+			}else{
+				sb.setUrlSospechoso(s.getUrlSospechoso());
+			}
+			sb.setNombreCompleto(s.getPreNombres()+" "+s.getPrimerApellido()+" "+s.getSegundoApellido());
+			sb.setPreNombres(s.getPreNombres());
+			sb.setPrimerApellido(s.getPrimerApellido());
+			sb.setSegundoApellido(s.getSegundoApellido());
+			sbl.add(sb);
+		}
+		return sbl;
+	}
 }

@@ -89,6 +89,9 @@ public class CasoCriminalServiceImpl implements CasoCriminalService{
 		cb.setDiasDiligenciasPreliminares(c.getDiasDiligenciasPreliminares());
 		cb.setCometarioPausaDoc(c.getCometarioPausaDoc());
 		cb.setCometarioPausaNCaso(c.getCometarioPausaNCaso());
+		cb.setCometarioFormalizar(c.getCometarioFormalizar());
+		cb.setDiasDiligenciasInvestigacion(c.getDiasDiligenciasInvestigacion());
+		cb.setFecDiligenciasInv(c.getFecDiligenciasInv());
 		
 		return cb;
 	}
@@ -418,12 +421,56 @@ public class CasoCriminalServiceImpl implements CasoCriminalService{
 	}
 	
 	@Transactional
+	public Boolean toDiligenciasInv(CasoCriminal casoCriminal, Integer idCaso) {
+		try{
+			CasoCriminal c = em.find(CasoCriminal.class, idCaso);
+			CasoCriminal cEdit = em.merge(c);
+
+			cEdit.setDiasDiligenciasInvestigacion(casoCriminal.getDiasDiligenciasInvestigacion());
+			cEdit.setEstado("Diligencias de la Investigacion");
+			DateUtil d = new DateUtil();
+			cEdit.setFecDiligenciasInv(d.hoyTimestamp());
+			return true;
+		}catch(Exception e){
+			return false;
+		}
+	}
+	
+	@Transactional
 	public Boolean toCalificacionFiscal(Integer idCaso) {
 		try{
 			CasoCriminal c = em.find(CasoCriminal.class, idCaso);
 			CasoCriminal cEdit = em.merge(c);
 
+			cEdit.setEstado("Calificacion Fiscal");
+
+			return true;
+		}catch(Exception e){
+			return false;
+		}
+	}
+	
+	@Transactional
+	public Boolean toCerrarCaso(Integer idCaso) {
+		try{
+			CasoCriminal c = em.find(CasoCriminal.class, idCaso);
+			CasoCriminal cEdit = em.merge(c);
+
 			cEdit.setEstado("Conclusion de la Investigacion");
+
+			return true;
+		}catch(Exception e){
+			return false;
+		}
+	}
+	
+	@Transactional
+	public Boolean toFormalizarCaso(Integer idCaso) {
+		try{
+			CasoCriminal c = em.find(CasoCriminal.class, idCaso);
+			CasoCriminal cEdit = em.merge(c);
+
+			cEdit.setEstado("Formalizacion de la Investigacion");
 
 			return true;
 		}catch(Exception e){
@@ -493,13 +540,39 @@ public class CasoCriminalServiceImpl implements CasoCriminalService{
 		try{
 			CasoCriminal c = em.find(CasoCriminal.class, idCaso);
 			CasoCriminal cEdit = em.merge(c);
-			cEdit.setCometarioCerrarCaso(casoCriminal.getCometarioPausaDoc());
+			cEdit.setCometarioCerrarCaso(casoCriminal.getCometarioCerrarCaso());
 
 			return true;
 		}catch(Exception e){
 			return false;
 		}
 	}
+	
+	@Transactional
+	public Boolean comentarioFormalizarCaso(CasoCriminal casoCriminal, Integer idCaso) {
+		try{
+			CasoCriminal c = em.find(CasoCriminal.class, idCaso);
+			CasoCriminal cEdit = em.merge(c);
+			cEdit.setCometarioFormalizar(casoCriminal.getCometarioFormalizar());
+
+			return true;
+		}catch(Exception e){
+			return false;
+		}
+	}
+	
+	/*@Transactional
+	public Boolean comentarioCerrarCaso(CasoCriminal casoCriminal, Integer idCaso) {
+		try{
+			CasoCriminal c = em.find(CasoCriminal.class, idCaso);
+			CasoCriminal cEdit = em.merge(c);
+			cEdit.setCometarioCerrarCaso(casoCriminal.getCometarioPausaDoc());
+
+			return true;
+		}catch(Exception e){
+			return false;
+		}
+	}*/
 	
 	@Transactional
 	public Boolean comentarioPausaNCaso(CasoCriminal casoCriminal, Integer idCaso) {
@@ -514,9 +587,14 @@ public class CasoCriminalServiceImpl implements CasoCriminalService{
 		}
 	}
 	
-	public List<CasoCriminalBean> getCasoCriminalBuscar() {
+	public List<CasoCriminalBean> getCasoCriminalBuscar(HttpSession session) {
 		List<CasoCriminalBean> ccbl = new ArrayList<CasoCriminalBean>();
-		Query query = em.createQuery("SELECT c FROM CasoCriminal c");
+		Query query =  null;
+		if (session.getAttribute("casoEstado") == null){
+			query = em.createQuery("SELECT c FROM CasoCriminal c");
+		}else{
+			query = em.createQuery("SELECT c FROM CasoCriminal c WHERE  c.estado = '"+session.getAttribute("casoEstado")+"'");
+		}	
 		
 		List<CasoCriminal> cl = query.getResultList();
 		for(int i=0;i<cl.size();i++){
@@ -532,8 +610,11 @@ public class CasoCriminalServiceImpl implements CasoCriminalService{
 			ccb.setFecCreacion(c.getFecCreacion());
 			ccbl.add(ccb);
 		}
+		session.setAttribute("casoEstado", null);
 		return ccbl;
 	}
+	
+
 
 	@Transactional
 	public Boolean asignarCasoporSospechoso(Integer idSospechoso, Integer idCaso) {

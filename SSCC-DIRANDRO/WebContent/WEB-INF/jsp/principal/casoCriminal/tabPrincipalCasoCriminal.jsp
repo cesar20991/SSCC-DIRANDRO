@@ -51,9 +51,9 @@ function initCasoCriminal(caso){
 			$("#alertaPausaNCaso").remove();
 			
 			$("#tdBotones").empty();
-			$("#tdBotones").append('<button class="btn btn-outline btn-success btn-sm" id="btnDiligenciasPre" href="#myModal" data-toggle="modal"><i class="icon-ok icon-white"></i> Diligencias Preliminares</button>'+
-					' <button class="btn btn-outline btn-info btn-sm" id="btnPasusaDoc" href="#myModalPausaDoc" data-toggle="modal"><i class="icon-pause icon-white"></i> Pausa por Falta de Documentos</button>'+
-					' <button class="btn btn-outline btn-info btn-sm" id="btnPasusaNCaso" href="#myModalPausaNCaso" data-toggle="modal"><i class="icon-pause icon-white"></i> Pausa por Nuevo Caso</button>');
+			$("#tdBotones").append('<button class="btn btn-outline btn-success btn-sm" id="btnDiligenciasPre" href="#myModal" data-toggle="modal"><i class="glyphicon glyphicon-ok"></i> Diligencias Preliminares</button>'+
+					' <button class="btn btn-outline btn-info btn-sm" id="btnPasusaDoc" href="#myModalPausaDoc" data-toggle="modal"><i class="glyphicon glyphicon-pause"></i> Pausa por Falta de Documentos</button>'+
+					' <button class="btn btn-outline btn-info btn-sm" id="btnPasusaNCaso" href="#myModalPausaNCaso" data-toggle="modal"><i class="glyphicon glyphicon-pause"></i> Pausa por Nuevo Caso</button>');
 
 			//la alerta celeste de personal asignado esta en el tabPersonalAsignado	
 		}else if(caso.estado == 'Diligencias Preliminares'){
@@ -66,14 +66,14 @@ function initCasoCriminal(caso){
 				 			       'Apartir de <strong>'+timeStampFormatted(caso.fecDiligenciasPre)+'.</strong>'+
 				 			    '</div>');
  			$("#tdBotones").empty();
-			$("#tdBotones").prepend(' <button class="btn btn-outline btn-success btn-sm" id="btnDiligenciasPreAmpliatorio" href="#myModalPlazoAmp" data-toggle="modal"><i class="icon-plus icon-white"></i> Plazo Ampliatorio</button>');
-			$("#tdBotones").prepend('<button class="btn btn-outline btn-success btn-sm" id="btnCalificacionFiscal" href="#myModalCalificacionFiscal" data-toggle="modal"><i class="icon-ok icon-white"></i> Calificacion Fiscal</button>');
-			$("#tdBotones").append(' <button class="btn btn-outline btn-info btn-sm" id="btnPasusaDoc" href="#myModalPausaDoc" data-toggle="modal"><i class="icon-pause icon-white"></i> Pausa por Falta de Documentos</button>');
-			$("#tdBotones").append(' <button class="btn btn-outline btn-info btn-sm" id="btnPasusaNCaso" href="#myModalPausaNCaso" data-toggle="modal"><i class="icon-pause icon-white"></i> Pausa por Nuevo Caso</button>');
+			$("#tdBotones").prepend(' <button class="btn btn-outline btn-success btn-sm" id="btnDiligenciasPreAmpliatorio" href="#myModalPlazoAmp" data-toggle="modal"><i class="glyphicon glyphicon-plus"></i> Plazo Ampliatorio</button>');
+			$("#tdBotones").prepend('<button class="btn btn-outline btn-success btn-sm" id="btnCalificacionFiscal" href="#myModalCalificacionFiscal" data-toggle="modal"><i class="glyphicon glyphicon-ok"></i> Calificacion Fiscal</button>');
+			$("#tdBotones").append(' <button class="btn btn-outline btn-info btn-sm" id="btnPasusaDoc" href="#myModalPausaDoc" data-toggle="modal"><i class="glyphicon glyphicon-pause"></i> Pausa por Falta de Documentos</button>');
+			$("#tdBotones").append(' <button class="btn btn-outline btn-info btn-sm" id="btnPasusaNCaso" href="#myModalPausaNCaso" data-toggle="modal"><i class="glyphicon glyphicon-pause"></i> Pausa por Nuevo Caso</button>');
 			
 		}else if(caso.estado == 'Pausa por Falta de Documentos'){
 			$("#tdBotones").empty();
-			$("#tdBotones").append('<button class="btn btn-outline btn-danger btn-sm" id="btnRemoverPausa"><i class="icon-remove icon-white"></i> Remover Pausa</button>');
+			$("#tdBotones").append('<button class="btn btn-outline btn-danger btn-sm" id="btnRemoverPausa"><i class="glyphicon glyphicon-remove"></i> Remover Pausa</button>');
 			if(caso.cometarioPausaDoc != null){
 				$("#divAlertarCasoCriminal").show();
 	 			$("#divAlertarCasoCriminal").append('<div class="alert alert-info" id="alertaPausaDocs">'+
@@ -83,7 +83,7 @@ function initCasoCriminal(caso){
 			}
 		}else if(caso.estado == 'Pausa por Nuevo Caso'){
 			$("#tdBotones").empty();
-			$("#tdBotones").append('<button class="btn btn-outline btn-danger btn-sm" id="btnRemoverPausa"><i class="icon-remove icon-white"></i> Remover Pausa</button>');
+			$("#tdBotones").append('<button class="btn btn-outline btn-danger btn-sm" id="btnRemoverPausa"><i class="glyphicon glyphicon-remove"></i> Remover Pausa</button>');
 			//alert(""+caso.cometarioPausaNCaso);
 			if(caso.cometarioPausaNCaso != null){
 				$("#divAlertarCasoCriminal").show();
@@ -100,36 +100,63 @@ function initCasoCriminal(caso){
 				 			    '</div>');
  			
 			$("#tdBotones").empty();
-			//$("#tdBotones").prepend(' <button class="btn btn-outline btn-success" id="btnDiligenciasPreAmpliatorio" href="#myModalPlazoAmp" data-toggle="modal"><i class="icon-exclamation-sign icon-white"></i> Aviso Fiscal Superior</button>');
-			$("#tdBotones").prepend('<button class="btn btn-outline btn-success btn-sm" id="btnCerrarCaso" href="#myModalCerrarCaso" data-toggle="modal"><i class="icon-remove icon-white"></i> Cerrar Caso</button>');
-			$("#tdBotones").append(' <button class="btn btn-outline btn-info btn-sm" id="btnPasusaDoc" href="#myModalPausaDoc" data-toggle="modal"><i class="icon-pause icon-white"></i> Pausa por Falta de Documentos</button>');
-			$("#tdBotones").append(' <button class="btn btn-outline btn-info btn-sm" id="btnPasusaNCaso" href="#myModalPausaNCaso" data-toggle="modal"><i class="icon-pause icon-white"></i> Pausa por Nuevo Caso</button>');
-		}else if(caso.estado == 'Calificacion Fiscal'){
+			//$("#tdBotones").prepend(' <button class="btn btn-outline btn-success btn-sm" id="btnDiligenciasPreAmpliatorio" href="#myModalPlazoAmp" data-toggle="modal"><i class=""></i> Plazo Ampliatorio</button>');
+			$("#tdBotones").prepend(' <button class="btn btn-outline btn-danger btn-sm" id="btnCerrarCaso" href="#myModalCerrarCaso" data-toggle="modal"><i class="glyphicon glyphicon-ban-circle"></i> Cerrar Caso</button>');
+			$("#tdBotones").prepend('<button class="btn btn-outline btn-success btn-sm" id="btnFormalizar" href="#myModalFormalizar" data-toggle="modal"><i class="glyphicon glyphicon-ok"></i> Formalizar Investigacion</button>');
+			$("#tdBotones").append(' <button class="btn btn-outline btn-info btn-sm" id="btnPasusaDoc" href="#myModalPausaDoc" data-toggle="modal"><i class="glyphicon glyphicon-pause"></i> Pausa por Falta de Documentos</button>');
+			$("#tdBotones").append(' <button class="btn btn-outline btn-info btn-sm" id="btnPasusaNCaso" href="#myModalPausaNCaso" data-toggle="modal"><i class="glyphicon glyphicon-pause"></i> Pausa por Nuevo Caso</button>');
+		}else if(caso.estado == 'Conclusion de la Investigacion'){
 			$("#divAlertarCasoCriminal").show();
+			$("#divAlertarCasoCriminal").empty();
  			$("#divAlertarCasoCriminal").append('<div class="alert alert-info" id="alertaPausaNCaso">'+
 				 			        '<a class="close" data-dismiss="alert">×</a>'+
 				 			        '<strong id="msgVerde"> '+caso.cometarioCerrarCaso+'</strong>'+
 				 			    '</div>');
  			
  			$("#tdBotones").empty();
-			$("#tdBotones").prepend(' <button class="btn btn-outline btn-success btn-sm" id="btnDiligenciasPreAmpliatorio" href="#myModalPlazoAmp" data-toggle="modal"><i class="icon-exclamation-sign icon-white"></i> Aviso Fiscal Superior</button>');
+			//$("#tdBotones").prepend(' <button class="btn btn-outline btn-success btn-sm" id="btnDiligenciasPreAmpliatorio" href="#myModalPlazoAmp" data-toggle="modal"><i class="icon-exclamation-sign icon-white"></i> Aviso Fiscal Superior</button>');
+		}else if(caso.estado == 'Formalizacion de la Investigacion'){
+			var coment = '';
+			if(caso.cometarioFormalizar != null){
+				coment = '<strong id="msgVerde"> Comentario: '+caso.cometarioFormalizar+'</strong>';
+			}
+			$("#divAlertarCasoCriminal").show();
+			$("#divAlertarCasoCriminal").empty();
+ 			$("#divAlertarCasoCriminal").append('<div class="alert alert-success" id="alertaPausaNCaso">'+
+				 			        '<a class="close" data-dismiss="alert">×</a>'+
+				 			        '<strong id="msgVerde"> Estado Cambiado a Formalizacion de la Investigacion.</strong>'+
+				 			       coment+
+				 			    '</div>');
+ 			$("#tdBotones").empty();
+ 			$("#tdBotones").prepend('<button class="btn btn-outline btn-success btn-sm" id="btnDiligenciasInv" href="#myModalDilInv" data-toggle="modal"><i class="glyphicon glyphicon-ok"></i> Diligencias de la Investigacion</button>');
+			$("#tdBotones").append(' <button class="btn btn-outline btn-info btn-sm" id="btnPasusaDoc" href="#myModalPausaDoc" data-toggle="modal"><i class="glyphicon glyphicon-pause"></i> Pausa por Falta de Documentos</button>');
+			$("#tdBotones").append(' <button class="btn btn-outline btn-info btn-sm" id="btnPasusaNCaso" href="#myModalPausaNCaso" data-toggle="modal"><i class="glyphicon glyphicon-pause"></i> Pausa por Nuevo Caso</button>');
+		}else if(caso.estado == "Diligencias de la Investigacion"){
+			$("#divAlertarCasoCriminal").show();
+			$("#divAlertarCasoCriminal").empty();
+ 			$("#divAlertarCasoCriminal").append('<div class="alert alert-success" id="alertaVerde">'+
+				 			        '<a class="close" data-dismiss="alert">×</a>'+
+				 			        'Se han asignado <strong>'+caso.diasDiligenciasInvestigacion+'</strong> dias para las diligencias preliminares.<br>'+
+				 			       'Apartir de <strong>'+timeStampFormatted(caso.fecDiligenciasInv)+'.</strong>'+
+				 			    '</div>');
+ 			$("#tdBotones").empty();
+ 			$("#tdBotones").prepend(' <button class="btn btn-outline btn-danger btn-sm" id="btnCerrarCaso" href="#myModalCerrarCaso" data-toggle="modal"><i class="glyphicon glyphicon-ban-circle"></i> Cerrar Caso</button>');
+			$("#tdBotones").append(' <button class="btn btn-outline btn-info btn-sm" id="btnPasusaDoc" href="#myModalPausaDoc" data-toggle="modal"><i class="glyphicon glyphicon-pause"></i> Pausa por Falta de Documentos</button>');
+			$("#tdBotones").append(' <button class="btn btn-outline btn-info btn-sm" id="btnPasusaNCaso" href="#myModalPausaNCaso" data-toggle="modal"><i class="glyphicon glyphicon-pause"></i> Pausa por Nuevo Caso</button>');
 		}
 		
 		///fecha de las diligencias
+		console.log(timeStampFormatted(caso.fecDiligenciasPre));
 		if(caso.fecDiligenciasPre != null){
 			$("#divDiligenciasPre").remove();
 			$("#divFecDiligenciasPre").remove();
 			$("#fsPrincipal").append('<div class="form-group" id="divFecDiligenciasPre">'+
 										'<label >Fecha Inicial de las Diligencias Preliminares: </label>'+
-										'<div class="controls" style="margin-top: 4.6%;">'+
-											'<span id="spnfecDiligenciasPre">'+timeStampFormatted(caso.fecDiligenciasPre)+'</span>'+
-										'</div>'+
+										'<span id="spnfecDiligenciasPre">'+timeStampFormatted(caso.fecDiligenciasPre)+'</span>'+
 									'</div>');
 			$("#fsPrincipal").append('<div class="form-group" id="divDiligenciasPre">'+
 										'<label >Dias para las Diligencias Preliminares: </label>'+
-										'<div class="controls" style="margin-top: 4.6%;">'+
-											'<span id="spnDiligenciasPre">'+caso.diasDiligenciasPreliminares+' dias.</span>'+
-										'</div>'+
+										'<span id="spnDiligenciasPre">'+caso.diasDiligenciasPreliminares+' dias.</span>'+
 									'</div>');
 
 		}
@@ -197,7 +224,7 @@ $(document).on('click','#btnCancelEditar', function(e){
 					</div>
 				</div>
 			</div>
-			<div class="panel-body">
+			<div class="panel-body" id="fsPrincipal">
 				<div class="form-group">
 					<label >Codigo: </label>
 					<span id="spnCodigo">&nbsp;</span>
@@ -230,41 +257,41 @@ $(document).on('click','#btnCancelEditar', function(e){
 		</div>
 </div>
 <!-- EDITAR CAOS CRIMINAL -->
-	<fieldset class="well" style="display: none;" id="divEditarCasoCriminal">
+<div class="panel panel-default" style="display: none;" id="divEditarCasoCriminal">
+	<div class="panel-heading">
+	/// Editar Caso Criminal:
+	</div>
+	<div class="panel-body">
 		<form:form class="form-horizontal" id="formEditarCasoCriminal" action="editarCasoCriminal" commandName="CasoCriminal">
-				<input type="hidden" name="idCasoCriminal" id="hdnIdCasoCriminal">
-				<legend>
-			       	<span class="colored">///</span> Editar Caso Criminal:
-		       	</legend>
-		       	<div class="form-group">
-	          		<label >Asunto: </label>
-	          		<input class="span3" type="text" name="asunto" id="txtAsunto" data-rule-required="true" data-msg-required="*">
-	       		</div>
-				<hr/>
-				<div class="form-group">
-	          		<label >Referencia: </label>
-	          		<input class="span3" type="text" name="referencia" id="txtReferencia" data-rule-required="true" data-msg-required="*">
-	       		</div>
-				<hr/>
-				<div class="form-group">
-	          		<label >Description: </label>
-	          		<textarea class="input-xlarge" name="descripcion" id="txtDescription" rows="8" data-rule-required="true" data-msg-required="*"></textarea>
-	       		</div>
-	       		<div class="form-group">
-	          		<label >Prioridad: </label>
-	          		<select class="span3" name="importancia" id="sltcImportancia">
-          				<option value="">No Precisa</option>
-          				<option>Alta</option>
-          				<option>Media</option>
-          				<option>Baja</option>
-		            </select>
-	       		</div>
-				<!-- BOTONES -->
-				<div class="form-actions">
-					<button class="btn btn-success" id="btnGuardar" type="submit"><i class="icon-ok icon-white"></i> Guardar</button>
-			        <button class="btn btn-danger" type="reset"><i class="icon-refresh icon-white"></i> Reset</button>
-			        <button class="btn btn-warning" type="button" id="btnCancelEditar"><i class="icon-arrow-left icon-white"></i> Cancel</button>
-			    </div>
-			</form:form>
-		</fieldset>
+		<input type="hidden" name="idCasoCriminal" id="hdnIdCasoCriminal">
+			<div class="form-group">
+          		<label >Asunto: </label>
+          		<input class="form-control" type="text" name="asunto" id="txtAsunto" data-rule-required="true" data-msg-required="*">
+       		</div>
+			<div class="form-group">
+          		<label >Referencia: </label>
+          		<input class="form-control" type="text" name="referencia" id="txtReferencia" data-rule-required="true" data-msg-required="*">
+       		</div>
+			<div class="form-group">
+          		<label >Description: </label>
+          		<textarea class="form-control" name="descripcion" id="txtDescription" rows="8" data-rule-required="true" data-msg-required="*"></textarea>
+       		</div>
+       		<div class="form-group">
+          		<label >Prioridad: </label>
+          		<select class="form-control" name="importancia" id="sltcImportancia">
+         				<option value="">No Precisa</option>
+         				<option>Alta</option>
+         				<option>Media</option>
+         				<option>Baja</option>
+	            </select>
+       		</div>
+       		<hr>
+			<div class="well">
+				<button class="btn btn-outline btn-success" id="btnGuardar" type="submit"><i class="fa fa-check"></i> Guardar</button>
+		        <button class="btn btn-outline btn-danger" type="reset"><i class="fa fa-refresh fa-fw"></i> Reset</button>
+		        <button class="btn btn-outline btn-warning" type="button" id="btnCancelEditar"><i class="fa fa-arrow-left"></i> Cancel</button>
+			</div>
+		</form:form>
+	</div>
+</div>
 </div>
