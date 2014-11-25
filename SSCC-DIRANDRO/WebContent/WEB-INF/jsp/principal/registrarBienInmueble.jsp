@@ -87,7 +87,7 @@ $(document).on('change','#txtPartida', function(e){
 			if(bien == true){
 				$("#alertasBienNuevo").show();
 				$("#alertasBienNuevo").empty();
-				$("#alertasBienNuevo").append('<div class="alert alert-error" id="alertaVerde">'+
+				$("#alertasBienNuevo").append('<div class="alert alert-danger" id="alertaVerde">'+
 	 			        '<a class="close" data-dismiss="alert">×</a>'+
 	 			        '<strong id="msgVerde">Partida Registral usado ya existe.</strong>'+
 	 			    '</div>');

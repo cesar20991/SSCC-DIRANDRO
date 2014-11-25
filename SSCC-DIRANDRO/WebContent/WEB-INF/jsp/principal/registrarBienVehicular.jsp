@@ -136,7 +136,7 @@ $(document).on('change','#txtPlaca', function(e){
 			if(bien == true){
 				$("#alertasBienNuevo2").show();
 				$("#alertasBienNuevo2").empty();
-				$("#alertasBienNuevo2").append('<div class="alert alert-error" id="alertaVerde">'+
+				$("#alertasBienNuevo2").append('<div class="alert alert-danger" id="alertaVerde">'+
 	 			        '<a class="close" data-dismiss="alert">×</a>'+
 	 			        '<strong id="msgVerde">Placa usada ya existe.</strong>'+
 	 			    '</div>');

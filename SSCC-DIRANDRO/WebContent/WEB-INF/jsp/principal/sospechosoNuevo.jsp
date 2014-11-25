@@ -117,7 +117,7 @@ $(document).on('change','#txtAlias', function(e){
 			if(sospechoso == true){
 				$("#alertasSospechosoNuevo").show();
 				$("#alertasSospechosoNuevo").empty();
-				$("#alertasSospechosoNuevo").append('<div class="alert alert-error" id="alertaVerde">'+
+				$("#alertasSospechosoNuevo").append('<div class="alert alert-danger" id="alertaVerde">'+
 	 			        '<a class="close" data-dismiss="alert">×</a>'+
 	 			        '<strong id="msgVerde">El Alias usado ya existe en otro Investigado.</strong>'+
 	 			    '</div>');
@@ -138,7 +138,7 @@ $(document).on('change','#txtCodUnico', function(e){
 			if(sospechoso == true){
 				$("#alertasSospechosoNuevo2").show();
 				$("#alertasSospechosoNuevo2").empty();
-				$("#alertasSospechosoNuevo2").append('<div class="alert alert-error" id="alertaVerde">'+
+				$("#alertasSospechosoNuevo2").append('<div class="alert alert-danger" id="alertaVerde">'+
 	 			        '<a class="close" data-dismiss="alert">×</a>'+
 	 			        '<strong id="msgVerde">El Código Único de Identificación usado ya existe en otro Investigado.</strong>'+
 	 			    '</div>');

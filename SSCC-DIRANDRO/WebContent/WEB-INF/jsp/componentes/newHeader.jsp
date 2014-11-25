@@ -193,15 +193,15 @@ $(document).ready(function(){
                     </ul>
                     <!-- /.nav-second-level -->
                 </li>
-                <li>
+                <!-- <li>
                     <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Graficos Estadisticos<span class="fa arrow"></span></a>
                     <ul class="nav nav-second-level collapse">
                         <li>
                             <a href="#">Consultar Graficos Estadisticos</a>
                         </li>
                     </ul>
-                    <!-- /.nav-second-level -->
-                </li>
+                    /.nav-second-level
+                </li> -->
                 <li>
                     <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Bienes<span class="fa arrow"></span></a>
                     <ul class="nav nav-second-level collapse">
