@@ -56,6 +56,9 @@ public class CasoCriminal {
 	private Usuario usuario;
 	
 	@OneToMany(mappedBy = "casoCriminal")
+	private Collection<Comiso> comiso;
+	
+	@OneToMany(mappedBy = "casoCriminal")
 	private Collection<CasoPorAgente> casopa;
 	
 	@OneToMany(mappedBy = "casoCriminal")
@@ -209,5 +212,11 @@ public class CasoCriminal {
 	}
 	public void setFecDiligenciasInv(Timestamp fecDiligenciasInv) {
 		this.fecDiligenciasInv = fecDiligenciasInv;
+	}
+	public Collection<Comiso> getComiso() {
+		return comiso;
+	}
+	public void setComiso(Collection<Comiso> comiso) {
+		this.comiso = comiso;
 	}
 }

@@ -55,19 +55,17 @@
 		}
 		
 	});
-	$(document).on('click','.asignarMueble', function(e){
-		$.ajax({
-	 		url: 'registrarMueble-'+$("#hdnIdSospechoso").text(),
-	 		type: 'post',
-	 		dataType: 'json',
-	 		data: $('#formRegistrarMueble').serialize(),
-	 		success: function(bienes){
-	 			$("#divResultadoMueble").empty();
-	 			initMuebles();	 			
-	 		}
-	 	});
-	});
+	/* $(document).on('click','.asignarMueble', function(e){
+		
+	}); */
 	
+	function limpiarMueble(){
+		$("#txtestadoDeConservasion").val("");
+		$("#txtDescripcion").val("");
+		$("#txtValor").val("");
+		$("#txtEspecificarTipo").val("");
+		$("#txtTipo").val("");
+	}
 	
 	$(document).on('click','.desasignar1', function(e){
 		var id2 = (this.id).split("_")[1];
@@ -223,6 +221,30 @@
 		initMuebles();
 		
 		$("#hdnIdSospechoso_").val($("#hdnIdSospechoso").text());
+		
+		
+		$("#formRegistrarMueble").validate({
+			submitHandler: function(form){
+				//$("#hdnIdSospechosoDatos").val($("#hdnIdSospechoso").text());
+				$.ajax({
+			 		url: 'registrarMueble-'+$("#hdnIdSospechoso").text(),
+			 		type: 'post',
+			 		dataType: 'json',
+			 		data: $('#formRegistrarMueble').serialize(),
+			 		success: function(bienes){
+			 			$("#alertasMueble").show();
+			 			$("#alertasMueble").empty();
+			 			$("#alertasMueble").append('<div class="alert alert-success alert-dismissable">'+
+						                        '<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>'+
+						                        '<a href="#" class="alert-link">Creado Correctamente.</a>.'+
+						                     '</div>');
+			 			limpiarMueble();
+			 			$("#divResultadoMueble").empty();
+			 			initMuebles();	 			
+			 		}
+			 	});
+			}
+		});
 		
 	});
 	
@@ -444,7 +466,7 @@
 		<!-- MODAL BIEN MUEBLE-->
 	<div class="modal fade" id="modalCrearMueble" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
 		<div class="modal-dialog">
-			<div class="modal-content" style="width: 200%; margin-left: -50%;">
+			<div class="modal-content" style="width: 100%;">
 				<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal"
 						aria-hidden="true">×</button>
@@ -453,11 +475,12 @@
 				</div>
 				<div class="modal-body">
 					<div class="panel-body">
+               			<div id="alertasMueble" style="display: none;"></div>
 						<form:form class="form-horizontal" id="formRegistrarMueble" commandName="mueble">
 							<div class="form-group">
 								<label>Tipo: </label> 
 								<select name="tipo" id="txtTipo" class="form-control" data-rule-required="true" data-msg-required="*">
-									<option value="">Seleccione</option>
+									<option value="">No Precisa</option>
 									<option value="Joyas">Joyas</option>
 									<option value="Electrodomesticos">Electrodomesticos</option>
 									<option value="Máquinarias y Equipos Industriales">Máquinarias y Equipos Industriales</option>
@@ -494,7 +517,7 @@
 				       		</div>	
 							<hr class="">
 							<div class="well">
-								<button class="btn btn-outline btn-success asignarMueble" id="btnRegistrarMueble" type="button">
+								<button class="btn btn-outline btn-success asignarMueble" id="btnRegistrarMueble" type="submit">
 									<i class="fa fa-check"></i> Registrar Mueble
 								</button>
 								<button class="btn btn-outline btn-danger" type="reset">

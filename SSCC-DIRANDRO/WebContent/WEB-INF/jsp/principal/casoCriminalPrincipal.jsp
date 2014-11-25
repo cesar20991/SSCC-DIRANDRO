@@ -254,6 +254,7 @@ $(document).on('click','#btnAsignarDiligenciasInv', function(e){
 					<li class=""><a href="#liPersonalAsignado" data-toggle="tab">Personal Asignado</a></li>
 					<li class=""><a href="#liSospechosos" data-toggle="tab">Investigados</a></li>
 					<li class=""><a href="#liRutas" data-toggle="tab">Rutas</a></li>
+					<li class=""><a href="#liComiso" data-toggle="tab">Comisos</a></li>
 					<li class=""><a href="#liArchivosAdjuntos" data-toggle="tab">Archivos Adjuntos</a></li>
 					<li class=""><a href="#liComentarios" data-toggle="tab">Comentarios</a></li>
 					<li class=""><a href="#liAuditoria" data-toggle="tab">Auditoría</a></li>
@@ -270,6 +271,9 @@ $(document).on('click','#btnAsignarDiligenciasInv', function(e){
 					</div>
 					<div class="tab-pane fade" id="liRutas">
 						<jsp:include page="casoCriminal/tabRutas.jsp" />
+					</div>
+					<div class="tab-pane fade" id="liComiso">
+						<jsp:include page="casoCriminal/tabComiso.jsp" />
 					</div>
 					<div class="tab-pane fade" id="liArchivosAdjuntos">
 						<jsp:include page="../componentes/archivos.jsp" />
