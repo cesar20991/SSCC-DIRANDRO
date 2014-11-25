@@ -92,6 +92,7 @@ public class CasoCriminalServiceImpl implements CasoCriminalService{
 		cb.setCometarioFormalizar(c.getCometarioFormalizar());
 		cb.setDiasDiligenciasInvestigacion(c.getDiasDiligenciasInvestigacion());
 		cb.setFecDiligenciasInv(c.getFecDiligenciasInv());
+		cb.setCometarioCerrarCaso(c.getCometarioCerrarCaso());
 		
 		return cb;
 	}
